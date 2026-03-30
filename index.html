@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תכנית הכשרה מתקדמת | פיתוח מיומנויות פיננסיות ליועכ״ל ומשרד הביטחון</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a2332;
+  --ink-soft: #2d3a4a;
+  --ink-muted: #546178;
+  --ink-light: #7a8a9e;
+  --bg: #fafbfc;
+  --bg-warm: #f5f6f8;
+  --bg-card: #ffffff;
+  --border: #e2e6ec;
+  --border-light: #edf0f4;
+  --teal: #124076; 
+  --teal-soft: #eaf1f8;
+  --teal-mid: #b8cde4;
+  --gold: #d4af37;
+  --gold-soft: #fbf8f0;
+  --gold-mid: #ebdca7;
+  --red-soft: #fbeaea;
+  --red: #c0392b;
+  --green: #1e8a5a;
+  --green-soft: #e6f5ee;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.85;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== DOCUMENT HEADER ===== */
+.doc-header {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 3rem 2rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.doc-header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.doc-logos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.doc-logo-text {
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  line-height: 1.5;
+}
+
+.doc-logo-text strong {
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.doc-ref {
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  white-space: nowrap;
+  font-family: monospace;
+}
+
+.doc-title-block {
+  border-right: 5px solid var(--teal);
+  padding-right: 2rem;
+}
+
+.doc-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+
+.doc-subtitle {
+  font-size: 1.15rem;
+  color: var(--ink-muted);
+  font-weight: 400;
+}
+
+.doc-subtitle strong {
+  color: var(--teal);
+  font-weight: 600;
+}
+
+.doc-meta-row {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+}
+
+.doc-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-warm);
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.doc-meta-item strong {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* ===== STICKY TOC ===== */
+.toc-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  overflow-x: auto;
+}
+
+.toc-bar-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+}
+
+.toc-link {
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.toc-link:hover {
+  color: var(--teal);
+  background: var(--teal-soft);
+}
+
+.toc-link.active {
+  color: var(--teal);
+  border-bottom-color: var(--teal);
+  font-weight: 700;
+}
+
+/* ===== MAIN CONTENT ===== */
+.content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ===== SECTION STRUCTURE ===== */
+.doc-section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.doc-section:last-child { border-bottom: none; }
+
+.section-number {
+  font-family: 'Rubik', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.section-heading {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+  line-height: 1.3;
+}
+
+.section-lead {
+  font-size: 1.15rem;
+  color: var(--ink-muted);
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  line-height: 1.8;
+}
+
+/* ===== PERSONAL LETTER ===== */
+.letter-box {
+  background: var(--bg-card);
+  border-right: 4px solid var(--gold);
+  padding: 2.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  border-radius: 8px 0 0 8px;
+}
+
+.letter-box p {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.2rem;
+}
+
+.letter-signoff {
+  margin-top: 2rem;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+  color: var(--teal);
+  font-size: 1.1rem;
+}
+
+/* ===== VALUE PROPOSITION CARDS ===== */
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+  .value-grid { grid-template-columns: 1fr; }
+}
+
+.value-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  border-color: var(--teal-mid);
+}
+
+.value-card-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.value-card h4 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 0.8rem;
+}
+
+.value-card p {
+  font-size: 1rem;
+  color: var(--ink-muted);
+  line-height: 1.7;
+}
+
+/* ===== DAY BLOCKS ===== */
+.day-banner {
+  display: flex;
+  align-items: stretch;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.day-banner-accent {
+  width: 8px;
+  flex-shrink: 0;
+}
+
+.day-banner-accent.day1 { background: var(--teal); }
+.day-banner-accent.day2 { background: var(--gold); }
+.day-banner-accent.day3 { background: var(--ink-soft); }
+
+.day-banner-content {
+  padding: 2rem 2.5rem;
+  flex: 1;
+}
+
+.day-banner h2 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.day-banner-subtitle {
+  font-size: 1.1rem;
+  color: var(--ink-muted);
+}
+
+/* ===== LECTURE ENTRIES ===== */
+.lecture-entry {
+  margin-bottom: 3.5rem;
+  padding-right: 1.5rem;
+  position: relative;
+}
+
+.lecture-entry::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.lecture-time-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  margin-bottom: 1rem;
+  background: var(--bg-warm);
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.lecture-time-label .part-name {
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.lecture-entry h3 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.lecture-narrative {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.topic-list {
+  list-style: none;
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.topic-list li {
+  position: relative;
+  padding: 0.6rem 0 0.6rem 2rem;
+  padding-right: 2rem;
+  font-size: 1rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.topic-list li::before {
+  content: '✓';
+  position: absolute;
+  right: 0;
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* ===== CALLOUT BOXES ===== */
+.case-study-box {
+  background: var(--teal-soft);
+  border-right: 4px solid var(--teal);
+  padding: 1.5rem 2rem;
+  border-radius: 8px 0 0 8px;
+  margin-top: 1.5rem;
+}
+
+.case-study-box h4 {
+  font-family: 'Rubik', sans-serif;
+  color: var(--teal);
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.case-study-box p {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* ===== METRICS / IMPACT ===== */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+@media (max-width: 768px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.metric-item {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.metric-num {
+  font-family: 'Rubik', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--teal);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.metric-text {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+/* ===== INTERACTIVE CVP ===== */
+.cvp-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.cvp-panel h4 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 0.5rem;
+}
+
+.cvp-panel .cvp-desc {
+  font-size: 1rem;
+  color: var(--ink-muted);
+  margin-bottom: 2rem;
+}
+
+.cvp-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.cvp-input-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
+}
+
+.cvp-input-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  font-family: 'Heebo', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+  transition: border-color 0.2s;
+}
+
+.cvp-input-group input:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+
+.cvp-results {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.cvp-result-card {
+  flex: 1;
+  min-width: 150px;
+  background: var(--bg-warm);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid var(--border-light);
+}
+
+.cvp-result-card.highlight {
+  background: var(--teal-soft);
+  border-color: var(--teal-mid);
+}
+
+.cvp-result-val {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--teal);
+  margin-bottom: 0.3rem;
+}
+
+.cvp-result-label {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.cvp-chart-container {
+  height: 350px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+/* ===== LECTURER CARD ===== */
+.lecturer-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: var(--bg-card);
+  padding: 3rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+@media (max-width: 768px) {
+  .lecturer-wrapper { flex-direction: column; text-align: center; }
+}
+
+.lecturer-avatar {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, var(--teal) 0%, #1e5a99 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Rubik', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.lecturer-content h3 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.lecturer-tagline {
+  font-size: 1.1rem;
+  color: var(--teal);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.lecturer-desc {
+  font-size: 1rem;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.lecturer-badges {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: var(--bg-warm);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+
+/* ===== ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="doc-header">
+  <div class="doc-header-inner">
+    <div class="doc-logos">
+      <div class="doc-logo-text">
+        <strong>אוניברסיטת בר-אילן</strong><br>
+        היחידה ללימודי תעודה - תכניות מנהלים באוריינטציה ממשלתית
+      </div>
+      <div class="doc-ref">סימוכין: מכרז 4441510299</div>
+    </div>
+    <div class="doc-title-block">
+      <h1 class="doc-title">כלכלה וחשבונאות מתקדמת בסביבה ביטחונית</h1>
+      <p class="doc-subtitle">
+        הכשרה ייעודית מורחבת עבור <strong>היועץ הכספי לרמטכ״ל ואגף התקציבים במשרד הביטחון</strong>
+      </p>
+      <div class="doc-meta-row">
+        <div class="doc-meta-item">⏱ <strong>היקף:</strong> 3 ימי עיון מרוכזים</div>
+        <div class="doc-meta-item">🎯 <strong>קהל יעד:</strong> כלכלנים, רואי חשבון וקציני תקציב</div>
+        <div class="doc-meta-item">👨‍🏫 <strong>מרצה מוביל:</strong> ד״ר שי צבאן</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STICKY TOC -->
+<nav class="toc-bar" id="tocBar">
+  <div class="toc-bar-inner">
+    <a href="#intro" class="toc-link active">חיבור לשטח</a>
+    <a href="#value" class="toc-link">הצעת הערך</a>
+    <a href="#day1" class="toc-link">יום 1: ניתוח המידע של ספקים</a>
+    <a href="#day2" class="toc-link">יום 2: תמחיר והחלטות כלכליות</a>
+    <a href="#day3" class="toc-link">יום 3: אנליזה ומשא ומתן</a>
+    <a href="#simulator" class="toc-link">סימולטור פעיל</a>
+  </div>
+</nav>
+
+<main class="content">
+
+<!-- INTRO / LETTER -->
+<section class="doc-section reveal" id="intro">
+  <div class="section-number">01 - דבר המרצה</div>
+  <h2 class="section-heading">לנווט את תקציב הביטחון באופן מושכל</h2>
+  
+  <div class="letter-box">
+    <p>צוות היועכ"ל היקר,</p>
+    <p>העבודה מול התעשיות הביטחוניות (החברות הממשלתיות והציבוריות כאחד) דורשת הרבה מעבר לבקרת תקציב רגילה. כשאתם בוחנים התקשרות חדשה לפיתוח מערכת הגנה או רוכשים שירותי תחזוקה לשנים ארוכות, אתם ניצבים מול ספקים בעלי יכולות פיננסיות. חשוב לדעת שמאחורי כל דרישת תשלום ישנם אנשי כספים שממקסמים את הרווח עבור החברה שלהם.</p>
+    <p>תעשיית הביטחון נמצאת בתנופה גדולה. הדוחות הכספיים של הספקים הגדולים מציגים לעיתים צמיחה חסרת תקדים. אך האם שורת הרווח שכולם קוראים בעיתונות הכלכלית מספרת את כל האמת? כיצד עדכוני תקינה בינלאומיים מאפשרים לחברות "לשחק" עם מועד ההכרה בהכנסה ולשנות את האופן שבו הן מציגות את הביצועים שלהן כלפי חוץ?</p>
+    <p>תכנית זו נבנתה במיוחד עבורכם. המטרה היא לתת לכם כלים ברורים ופשוטים כדי להבין את האינטרסים של הצד השני. נלמד איך לנטרל רעשים של "קוסמטיקה חשבונאית" ונדבר במושגים פשוטים - כדי לסייע לכם לנהל משא ומתן חכם יותר ולהקצות את התקציב למקום הנכון.</p>
+    <div class="letter-signoff">בברכה,<br>ד״ר שי צבאן</div>
+  </div>
+</section>
+
+<!-- VALUE PROPOSITION -->
+<section class="doc-section reveal" id="value">
+  <div class="section-number">02 - במרכז העשייה</div>
+  <h2 class="section-heading">ארגז כלים תכל'סי וברור</h2>
+  <p class="section-lead">ההכשרה מדברת בשפה היומיומית של משרד הביטחון. נבין מה קורה מאחורי הקלעים אצל הספקים, נלמד טריקים של תמחיר ונרכוש ניסיון מעשי בניתוח דוחות של חברות מהתעשייה.</p>
+
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="value-card-icon">📊</div>
+      <h4>פענוח מדדי ביצוע</h4>
+      <p>חברות אוהבות להמציא מדדים משלהן כדי להיוותה להיראות טוב יותר למשקיעים. נלמד איך לפרק את המדדים האלו (כמו Adjusted EBITDA) ולהבין את הרווח האמיתי. מדדים אלו חשובים להבנה כדי לדעת אם רשת הביטחון הפיננסית של הספק אמיתית או רק ניירית.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-card-icon">🛡️</div>
+      <h4>הכרה בהכנסה ויציבות הספק</h4>
+      <p>כשמדובר בחוזים ארוכי טווח (פרויקטים שנמשכים על פני מספר שנים רבות), הספק צריך לבחור מתי להכיר ברווח. להכיר במרבית הרווח בדוח הכספי מוקדם יותר זה אולי מרשים, אבל זה עלול להצביע על כך שבהמשך הפרויקט לא יישאר לספק תקציב להשלימו. לכן זה חייב לעניין אותנו כאנשי בקרה.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-card-icon">🎯</div>
+      <h4>בחינת המרווח של הספק</h4>
+      <p>בעזרת כלים של מיקרו-כלכלה נלמד כיצד ספקים מחשבים את נקודת האיזון שלהם. זהו כלי המרתק ביותר – אם אנו יודעים באיזה מחיר הספק יוצא מרווח, קל לנו יותר לגשת למשא ומתן ולדרוש הוזלות במחיר (הנחת כמות).</p>
+    </div>
+    <div class="value-card">
+      <div class="value-card-icon">💡</div>
+      <h4>עלויות אלטרנטיביות</h4>
+      <p>כל תקציב שאנחנו מקצים לסעיף א' חסר באופן טבעי לסעיף ב'. נלמד את עקרון "מחיר הצל" ואיך לחשב עלויות של הזדמנות שפספסנו. נדבר במונחים פשוטים: מתי נכון להשקיע בקו ייצור ושאילו פרויקטים אחרים אנו מוותרים בדרך.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 1: IFRS -->
+<section class="doc-section reveal" id="day1">
+  <div class="section-number">03 - יום עיון ראשון</div>
+  <h2 class="section-heading">תופסים שליטה: ניתוח תקינה חשבונאית מנקודת מבט תקציבית</h2>
+
+  <div class="day-banner">
+    <div class="day-banner-accent day1"></div>
+    <div class="day-banner-content">
+      <h2>קריאה ביקורתית של דוחות הספקים</h2>
+      <p class="day-banner-subtitle">איך לזהות את ההתאמות בדוחות הספקים שעובדים מול משרד הביטחון</p>
+    </div>
+  </div>
+
+  <div class="lecture-entry">
+    <div class="lecture-time-label">
+      <span class="part-name">חלק א' (09:00 - 11:30)</span> תקן IFRS 18: חושפים את מדדי הביצוע הניהוליים
+    </div>
+    <h3>מדדי ביצוע ומניעת מצג שווא</h3>
+    <p class="lecture-narrative">
+      חברות משתמשות רבות במדדי ביצוע ניהוליים (באנגלית: Management Performance Measures או בקצרה MPM). אלו מדדים שהנהלת החברה בונה בעצמה, ולא מבוססים על כללי חשבונאות מחייבים, כדי לספק למשקיעים מבט "נקי" כביכול. 
+    </p>
+    <ul class="topic-list">
+      <li><strong>מה זה בכלל Adjusted EBITDA?</strong> רווח תפעולי בנטרול פחת והפחתות (EBITDA), שבוצעו בו התאמות (Adjusted). חברות "מנקות" הוצאות שלטענתן הן "חד פעמיות" או "לא מייצגות", על מנת להציג רווחיות גבוהה יותר.</li>
+      <li>מדי פעם ניתן לקרוא בעיתונות הכלכלית שכאשר פרויקטים טכנולוגיים מתעכבים, חברות ביטחוניות מרוקנות הוצאות פיתוח חריגות וקוראות להן "עלויות התארגנות מחודשת". למה חשוב לדעת זאת? מפני שכשאנחנו באים כנציגי המדינה לאשר תוספות לפרויקט, עלינו לדעת אם הספק באמת נמצא בקושי, או רק "מייפה" את הדוחות שלו מול המשקיעים.</li>
+      <li>התקן החדש (IFRS 18) יחייב את החברות להסביר כל שקל שהן "ניקו" מאותו מדד מיוחד. נלמד לקרוא את הביאורים האלו בסבלנות וזהירות.</li>
+    </ul>
+    
+    <div class="case-study-box">
+      <h4><span style="font-size:1.4em;">📝</span> מקרה בוחן: קריאת דוח התאמה של ספק (מבוסס על מצבי אמת בתעשייה)</h4>
+      <p>ננתח נתונים פיקטיביים אך מציאותיים לחלוטין שמבוססים על דוחות אמיתיים של ספקי מערכות ביטחוניות. נראה חברה המדווחת על עלייה ברווחיות. אולם, כשנבחן מקרוב את הסעיפים השונים שנוכו מהחישוב (Adjusted), נגלה הוצאות הנדסיות מהותיות שקוזזו באופן בעייתי. זאת נקודת תורפה נוחה למשא ומתן.</p>
+    </div>
+  </div>
+
+  <div class="lecture-entry">
+    <div class="lecture-time-label">
+      <span class="part-name">חלק ב' (12:00 - 14:30)</span> תקן IFRS 15: מתי ובאיזה קצב מכירים ברווחים?
+    </div>
+    <h3>חוזים ארוכי טווח - בנייה, פיתוח וקליטה של מערכות מעל שנה</h3>
+    <p class="lecture-narrative">
+      חוזים ארוכי טווח הם פרויקטים שנמשכים מספר שנים, לדוגמה פיתוח מערכת תקשורת, בניית רכבים משוריינים או אספקת מיירטים. השאלה המרכזית עבור הספק היא מתי הוא יכול להציג את הרווח מהפרויקט בדוחות החברה.
+    </p>
+    <ul class="topic-list">
+      <li><strong>מה זה PO (Performance Obligation)?</strong> פירושו "מחויבות ביצוע" בהגדרות התקן. כשמשרד הביטחון חותם מול ספק על פיתוח, ייצור ותחזוקה - האם זו משימה אחת גדולה או מפוצלת לשלוש? נסביר למה לספק יש אינטרס לפצל ולרשום רווחים מיד כשהפיתוח מסתיים, עוד לפני שהמסירות מתחילות.</li>
+      <li><strong>הסכנה בתמונה אופטימית מדי:</strong> אם ספק מזהה רווח מהיר מדי כבר בשנה הראשונה מתוך חוזה של חמש שנים, אנחנו צריכים לדאוג. המשמעות היא שהספק מותיר לשנים הנותרות מעט מאוד הון וישנה סכנה שייתקע בלי יכולת לסיים את הפיתוח. זה מעניין כל בקר וכל איש תקציב שעוקב אחר מימוש החוזה.</li>
+      <li><strong>שינויים בהיקף חוזה (Change Orders):</strong> כל חוזה ביטחוני עובר שינויים - דרישות משתנות, הוספת יכולות. מדוע זה מעניין? מפני שברגע שהפרויקט כבר אצל ספק יחיד, קשה להחליפו. הספק יודע זאת ועלול להשתמש בשינויים כדי לדרוש תוספות תקציב חריגות (מה שנקרא "סחטנות מחירים"). נלמד לראות כיצד שינויים אלו מטופלים בדוחות שלו.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- DAY 2: COST MANAGEMENT & CVP -->
+<section class="doc-section reveal" id="day2">
+  <div class="section-number">04 - יום עיון שני</div>
+  <h2 class="section-heading">כלים פשוטים בתמחיר: החלטות ניהוליות</h2>
+
+  <div class="day-banner">
+    <div class="day-banner-accent day2"></div>
+    <div class="day-banner-content">
+      <h2>ניהול עלויות וקבלת החלטות במשא ומתן</h2>
+      <p class="day-banner-subtitle">לדעת לתמחר, לבדוק רגישויות ולהבין עד כמה כדאי להתעקש על מחיר</p>
+    </div>
+  </div>
+
+  <div class="lecture-entry">
+    <div class="lecture-time-label">
+      <span class="part-name">חלק א' (09:00 - 11:30)</span> סוגי הוצאות וקבלת החלטות
+    </div>
+    <h3>לחשוב עלויות בצורה שונה</h3>
+    <p class="lecture-narrative">
+      נדגיש: כל הדוגמאות שנציג בפרק זה מבוססות על מספרים פיקטיביים לחלוטין כדי ללמוד בנחת את העקרונות הכלכליים ואת כלי הניתוח, אשר לאחר מכן תוכלו ליישם בסביבת העבודה שלכם.
+    </p>
+    <ul class="topic-list">
+      <li><strong>מחיר הצל (Shadow Price) ואלטרנטיבות פנויות:</strong> נניח שיש לנו קו ייצור של רכבים משוריינים. מה קורה אם אנחנו משתמשים בו גם למשהו אחר? מחיר הצל עונה לשאלה החשובה - מה הרווח או מהו החיסכון שאנחנו מוותרים עליו בכך שבחרנו להשתמש בקו ייצור למטרה א' ולא למטרה ב'.</li>
+      <li>הבחנה ברורה בין כסף שכבר הושקע ולעולם לא יחזור (עלות שקועה) לבין כסף שעוד אפשר לחסוך הלאה. נלמד להפסיק להציל פרויקטים כושלים רק כי "כבר שמנו עליהם חמישה מיליון דולר".</li>
+    </ul>
+  </div>
+
+  <div class="lecture-entry">
+    <div class="lecture-time-label">
+      <span class="part-name">חלק ב' (12:00 - 14:30)</span> ניתוחים כלכליים למשא ומתן (CVP)
+    </div>
+    <h3>כמה פשרות הספק יכול לספוג?</h3>
+    <p class="lecture-narrative">
+      נלמד כיצד ספקים מחלצים נקודת איזון מרוכזת בפרויקטים ובחיקובים שונים. בירור פשוט עוזר לגלות מה כיוון המיקוח שכדאי לנקוט.
+    </p>
+    <ul class="topic-list">
+      <li><strong>תרומה שולית (Contribution Margin):</strong> זהו ההפרש שבין המחיר הנדרש עבור המוצר לבין ההוצאות ההכרחיות לייצור מוצר נוסף כזה (עלויות משתנות). הסכום הזה הוא סכום ש"תורם" לכיסוי ההוצאות הקבועות ולהגדלת הרווח של הספק.</li>
+      <li><strong>ניתוח רגישות:</strong> כלי בסיסי בו נמדוד עד כמה רווחיות הפרויקט משתנה אם מתרחשים שינויים קטנים בחיים האמיתיים (למשל אם עלות חומרי הגלם פתאום מטפסת ב-10% או ששער הדולר קופץ).</li>
+      <li><strong>נקודת סגירה (Shutdown Point):</strong> המחיר הנמוך ביותר בו הספק אפילו לא מצליח לכסות את ההוצאות המשתנות. מתחת למחיר הזה עדיף לקבלן לסגור את המפעל מאשר להמשיך עבודה בייצור. כשאנחנו במו"מ, כדאי להיזהר שלא ללחוץ את הספק למחיר שיקרוס.</li>
+    </ul>
+    <div class="case-study-box">
+      <h4><span style="font-size:1.4em;">📝</span> תרגול מספרים פיקטיביים: רכבים משוריינים</h4>
+      <p>ננתח מצב בו נדרשת אספקה של 100 רכבים משוריינים בשנה. בעזרת ניתוח נקודת איזון (מרווח הביטחון החבוי של הקבלן), נוכיח שגם אם נחליט להזמין השנה רק 60 כלי רכב, הפרויקט עדיין שומר באופן מובהק על תרומה שולית חיובית ומשאיר את הקבלן במקום בטוח. זו תובנה קארדינלית בעת דיון על דרישות לפיצוי מלקוח.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 3: ADVANCED ANALYSIS -->
+<section class="doc-section reveal" id="day3">
+  <div class="section-number">05 - יום עיון שלישי (חדש)</div>
+  <h2 class="section-heading">מהנייר לשטח: תרגול אנליזה משותפת</h2>
+
+  <div class="day-banner">
+    <div class="day-banner-accent day3"></div>
+    <div class="day-banner-content">
+      <h2>קריאת דוחות של חברות ותסריטי אמת</h2>
+      <p class="day-banner-subtitle">זיהוי מוקדם של קשיים וניהול נכון של תקציב הרכש וההתקשרויות</p>
+    </div>
+  </div>
+
+  <div class="lecture-entry">
+    <div class="lecture-time-label">
+      <span class="part-name">חלק מעשי מרוכז (09:00 - 13:00)</span> קריאה מודרכת בדוחות ובמאזנים
+    </div>
+    <p class="lecture-narrative">
+      ביום האחרון נתרגם את כל המושגים לניירות עבודה חיים. נעבוד על דוחות חצי-שנתיים ושנתיים של ספקים אמינים וממשיים (כאשר שמות ופרטים עסקיים חסויים ישונו על מנת לשמור על סודיות), ונערוך ניתוח מעמיק של התוצאות ביחד בכיתה.
+    </p>
+    <ul class="topic-list">
+      <li><strong>הדיסוננס הקוגניטיבי התזרימי:</strong> רווחים גבוהים מול תזרים שלילי. מקרים מדאיגים בהם הספק חייב לייצר הכנסות יפות בדוח הרווח, אבל הבנק לא רואה שקל. נתרגל כיצד לאבחן מוקדם שהספק נקלע למצוקה אמיתית, ונזהה מהר מצבים שהוא עומד להקפיא עבודות רכש מהעדר חמצן בבנק.</li>
+      <li>פירוק סעיף "מלאי", ובייחוד מלאי שבתהליך ייצור או "מוצרים בהרכבה" - המקום הנפוץ שבו נדחפות רוב חריגות התקציב עד יעבור זעם. למעשה, במקום מחיקה של הוצאות פגומות, הן שוכבות בסעיף מלאי. </li>
+      <li>איך לשבת מול אנשי כספים של הספק ולשדר שאתם מבינים כל מה יצא מתוך הדוחות בפירוט וללא סיסמאות.</li>
+    </ul>
+    
+    <div class="case-study-box" style="border-color:var(--gold); background:var(--gold-soft);">
+      <h4 style="color:var(--gold);"><span style="font-size:1.4em;">💡</span> אלמנט אקטיבי בכיתה</h4>
+      <p>נחלק את הקבוצה לשניים. קבוצה אחת תייצג אנשי כספים של יצרן ציוד תעופה. קבוצה שנייה את אנשי משרד הביטחון. כל קבוצה תקבל בדיוק את אותו דוח כספי כבסיס לדבר, ונבצע דיבייט קצר על מחירי השירות לחוזה החדש. דרך נהדרת לראות היכן מסתתר אינטרס שני הצדדים.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CVP SIMULATOR -->
+<section class="doc-section reveal" id="simulator">
+  <div class="section-number">06 - ארגז כלים אישי שייבנה בקורס</div>
+  <h2 class="section-heading">סימולטור כדאיות פרויקט וחישוב נקודות איזון</h2>
+  <p class="section-lead">תשומת לב: בפרק זה בהכשרה לא תסתפקו ב"לשחק" בסימולטור טמפלייט. המטרה היא שכל משתתף <strong>ילמד כיצד לבנות באקסל</strong> מודל משלו, צעד אחר צעד, אשר דומה לסימולטור שמוצג לפניכם כאן להתרשמות.</p>
+
+  <div class="cvp-panel">
+    <h4>מודל (פיקטיבי) לבחינת הצעת מחיר מספק</h4>
+    <p class="cvp-desc">הזינו בצורה פשוטה את הנתונים, וקבלו תשובה מהירה באיזה שלב פרויקט מתחיל להרוויח או עד איזה סף ניתן קבלן לספוג הנחה. ככה עונים לספק בתשובות מספרים ברורים ולא בתחושות בטן.</p>
+    
+    <div class="cvp-controls">
+      <div class="cvp-input-group">
+        <label>מחיר יחידה (₪)</label>
+        <input type="number" id="p_price" value="2500000" step="50000">
+      </div>
+      <div class="cvp-input-group">
+        <label>הוצאות משתנות דרושות (₪) למשל: חומרי גלם</label>
+        <input type="number" id="p_vc" value="1600000" step="50000">
+      </div>
+      <div class="cvp-input-group">
+        <label>השקעות קבועות תשתית (₪) למשל: שכר בסיס ומפעל</label>
+        <input type="number" id="p_fc" value="18000000" step="500000">
+      </div>
+      <div class="cvp-input-group">
+        <label>כמות שידועה על-פי התקציב המאושר שלנו</label>
+        <input type="number" id="p_qty" value="45" step="1">
+      </div>
+    </div>
+
+    <div class="cvp-results">
+      <div class="cvp-result-card highlight">
+        <div class="cvp-result-val" id="res_bep">20</div>
+        <div class="cvp-result-label">מעל איזו כמות הספק מתחיל להרוויח? (נקודת איזון) </div>
+      </div>
+      <div class="cvp-result-card">
+        <div class="cvp-result-val" id="res_cmr">36%</div>
+        <div class="cvp-result-label">יחס רווח שולי - הנתח מההכנסה שעובר כתרומה אמיתית לרווח הנקי</div>
+      </div>
+      <div class="cvp-result-card">
+        <div class="cvp-result-val" id="res_mos">55.5%</div>
+        <div class="cvp-result-label">מרווח ביטחון לספק - כמה אחוזים בכמות ניתן לרדת ועדיין לא להפסיד</div>
+      </div>
+      <div class="cvp-result-card highlight">
+        <div class="cvp-result-val" id="res_prof">₪22.5M</div>
+        <div class="cvp-result-label">רווח חשבונאי בתום הפרויקט</div>
+      </div>
+    </div>
+
+    <div class="cvp-chart-container">
+      <canvas id="liveChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- LECTURER -->
+<section class="doc-section reveal" id="lecturer" style="border-bottom:none;">
+  <div class="section-number">07 - סמכות הדרכה רלוונטית</div>
+  <h2 class="section-heading">סגל מומחה</h2>
+
+  <div class="lecturer-wrapper">
+    <div class="lecturer-avatar">שצ</div>
+    <div class="lecturer-content">
+      <h3>ד״ר שי צבאן</h3>
+      <div class="lecturer-tagline">רואה חשבון, מומחה בקריאת קופסאות שחורות ובניתוח דוחות מהותיים</div>
+      <p class="lecturer-desc">
+        פעור מילים גבוהות, ד״ר צבאן שם לנגד האקדמיה מטרה לספק פתרונות נגישים ומציאותיים לגופי ממשל וביטחון בארץ ובעולם. דרך לימודו משלבת דוגמאות טריות מאותם ספקים שעימם עובדים אנשי היועכ״ל, תוך שימוש במערכים ומתודות שנכתבו באופן אישי במיוחד עבור אתגרים אלו. הוא מסייע בניקוי מסכי עשן של הנהלות חשבונות גדולות, כדי לקבל החלטות נכונות בעולם אמיתי.
+      </p>
+      <div class="lecturer-badges">
+        <span class="badge">רואה חשבון מוסמך מהשטח</span>
+        <span class="badge">Ph.D בניהול, בתחום הכלכלה</span>
+        <span class="badge">מרצה מבוקש ומצטיין בפקולטות לחשבונאות וכלכלה</span>
+        <span class="badge">מימנות עשירה מול מגזר הציבורי</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+// Scroll Reveal Animation
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add('active');
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(r => revealObserver.observe(r));
+
+// TOC Active Link Update
+const sections = document.querySelectorAll('.doc-section');
+const navLinks = document.querySelectorAll('.toc-link');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  const offset = 150; 
+  sections.forEach(sec => {
+    const secTop = sec.offsetTop;
+    if (pageYOffset >= secTop - offset) {
+      current = sec.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// Advanced CVP Simulator logic
+const inputs = ['p_price', 'p_vc', 'p_fc', 'p_qty'].map(id => document.getElementById(id));
+const els = {
+  bep: document.getElementById('res_bep'),
+  cmr: document.getElementById('res_cmr'),
+  mos: document.getElementById('res_mos'),
+  prof: document.getElementById('res_prof')
+};
+
+function formatMoney(n) {
+  if (Math.abs(n) >= 1e6) return '₪' + (n/1e6).toFixed(1) + 'M';
+  return '₪' + n.toLocaleString();
+}
+
+function updateCalculator() {
+  const p = parseFloat(inputs[0].value) || 0;
+  const v = parseFloat(inputs[1].value) || 0;
+  const fc = parseFloat(inputs[2].value) || 0;
+  const q = parseFloat(inputs[3].value) || 0;
+
+  const cm = p - v;
+  const bep = cm > 0 ? Math.ceil(fc / cm) : 0;
+  const cmr = p > 0 ? (cm / p) : 0;
+  const mos = (q > 0 && bep > 0) ? Math.max(0, ((q - bep) / q) * 100) : 0;
+  const profit = (q * cm) - fc;
+
+  els.bep.innerText = bep.toLocaleString();
+  els.cmr.innerText = (cmr * 100).toFixed(1) + '%';
+  els.mos.innerText = mos.toFixed(1) + '%';
+  els.prof.innerText = formatMoney(profit);
+  els.prof.style.color = profit >= 0 ? 'var(--teal)' : 'var(--red)';
+
+  drawChart(p, v, fc, q, bep);
+}
+
+inputs.forEach(inp => inp.addEventListener('input', updateCalculator));
+
+function drawChart(p, vc, fc, q, bep) {
+  const canvas = document.getElementById('liveChart');
+  const ctx = canvas.getContext('2d');
+  
+  // Handle high DPI
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+  const W = rect.width, H = rect.height;
+  
+  ctx.clearRect(0, 0, W, H);
+
+  // Extend chart domain slightly
+  const maxUnits = Math.max(q * 1.5, bep * 1.5, 10);
+  const maxRevs = maxUnits * p;
+  const maxCosts = fc + (maxUnits * vc);
+  const maxY = Math.max(maxRevs, maxCosts) * 1.1;
+
+  const pad = { t: 20, r: 20, b: 40, l: 60 };
+  const cW = W - pad.l - pad.r;
+  const cH = H - pad.t - pad.b;
+
+  const getX = u => pad.l + (u / maxUnits) * cW;
+  const getY = val => pad.t + cH - (val / maxY) * cH;
+
+  // Grid / Axis
+  ctx.lineWidth = 1;
+  for(let i=0; i<=5; i++) {
+    const yVal = (maxY / 5) * i;
+    const lineY = getY(yVal);
+    ctx.strokeStyle = '#edf0f4';
+    ctx.beginPath(); ctx.moveTo(pad.l, lineY); ctx.lineTo(W - pad.r, lineY); ctx.stroke();
+    
+    ctx.fillStyle = '#7a8a9e';
+    ctx.font = '11px Heebo';
+    ctx.textAlign = 'right';
+    ctx.fillText(formatMoney(yVal).replace('₪','').trim(), pad.l - 5, lineY + 4);
+  }
+
+  // Draw lines
+  // Fixed Cost (Dashed)
+  ctx.strokeStyle = '#c0392b';
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath(); ctx.moveTo(getX(0), getY(fc)); ctx.lineTo(getX(maxUnits), getY(fc)); ctx.stroke();
+  ctx.setLineDash([]);
+  
+  // Total Cost (Solid Red)
+  ctx.strokeStyle = '#c0392b';
+  ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(getX(0), getY(fc)); ctx.lineTo(getX(maxUnits), getY(fc + maxUnits*vc)); ctx.stroke();
+
+  // Revenue (Solid Blue)
+  ctx.strokeStyle = '#124076';
+  ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(getX(0), getY(0)); ctx.lineTo(getX(maxUnits), getY(maxUnits*p)); ctx.stroke();
+
+  // Shading Profit / Loss area
+  if(bep > 0 && bep < maxUnits) {
+    // Profit Zone
+    ctx.fillStyle = 'rgba(30, 138, 90, 0.1)';
+    ctx.beginPath();
+    ctx.moveTo(getX(bep), getY(bep*p));
+    ctx.lineTo(getX(maxUnits), getY(maxUnits*p));
+    ctx.lineTo(getX(maxUnits), getY(fc + maxUnits*vc));
+    ctx.closePath();
+    ctx.fill();
+
+    // Loss Zone
+    ctx.fillStyle = 'rgba(192, 57, 43, 0.08)';
+    ctx.beginPath();
+    ctx.moveTo(getX(0), getY(0));
+    ctx.lineTo(getX(bep), getY(bep*p));
+    ctx.lineTo(getX(bep), getY(fc + bep*vc));
+    ctx.lineTo(getX(0), getY(fc));
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Draw BEP marker
+  if(bep > 0 && bep <= maxUnits) {
+    const xBep = getX(bep);
+    const yBep = getY(bep*p);
+    
+    ctx.beginPath(); ctx.arc(xBep, yBep, 7, 0, Math.PI*2);
+    ctx.fillStyle = '#d4af37'; ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth=2; ctx.stroke();
+
+    ctx.fillStyle = '#1a2332';
+    ctx.font = 'bold 12px Heebo';
+    ctx.textAlign = 'center';
+    ctx.fillText('נקודת איזון', xBep, yBep - 15);
+  }
+
+  // Current Qty Marker
+  if(q > 0 && q <= maxUnits) {
+    const xQ = getX(q);
+    const yRev = getY(q*p);
+    ctx.setLineDash([3,3]);
+    ctx.strokeStyle = '#546178';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(xQ, pad.t); ctx.lineTo(xQ, pad.t + cH); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#124076';
+    ctx.fillText('כמות נרכשת', xQ, pad.t + cH + 20);
+  }
+}
+
+// Init
+window.addEventListener('resize', updateCalculator);
+// Delay initially so bold font loads
+setTimeout(updateCalculator, 200);
+</script>
+
+</body>
+</html>
