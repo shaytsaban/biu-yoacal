@@ -23,202 +23,1062 @@ function switchTab(tab){
 </script>
 <style>
 :root {
-  --bg: #EEF4FB;
-  --bg2: #E2EDF8;
-  --surface: #FFFFFF;
-  --surface2: #F5F9FF;
-  --purple: #5B2D8E;
-  --purple2: #7B4DB5;
-  --blue: #1A4F8C;
-  --blue2: #2B6CC8;
-  --blue3: #4A90D9;
-  --accent: #E8A020;
-  --accent2: #F0C060;
-  --text: #1A2535;
-  --text2: #3A4A60;
-  --text3: #6B7A90;
-  --green: #1A7050;
-  --green2: #2A9A70;
-  --red: #A02828;
-  --border: #C5D8F0;
-  --shadow: 0 4px 24px rgba(26,79,140,0.10);
+  --bg: #f8fafc;
+  --bg2: #f1f5f9;
+  --surface: #ffffff;
+  --surface2: #fafafb;
+  --purple: #6366f1;
+  --purple2: #818cf8;
+  --blue: #1d4ed8;
+  --blue2: #3b82f6;
+  --blue3: #60a5fa;
+  --accent: #f59e0b;
+  --accent2: #fbbf24;
+  --text: #0f172a;
+  --text2: #334155;
+  --text3: #64748b;
+  --green: #10b981;
+  --green2: #34d399;
+  --red: #ef4444;
+  --border: #e2e8f0;
+  --shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.02);
+  --shadow-hover: 0 20px 40px -10px rgba(15, 23, 42, 0.08), 0 8px 20px -6px rgba(15, 23, 42, 0.04);
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Heebo',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:16px;}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
 
 /* HERO */
-.hero{background:linear-gradient(140deg,#111830 0%,#1A3060 45%,#4A1A7A 100%);color:#fff;padding:64px 40px 52px;text-align:center;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 65%);border-radius:50%;}
-.hero::after{content:'';position:absolute;bottom:-80px;left:-60px;width:320px;height:320px;background:radial-gradient(circle,rgba(232,160,32,.10) 0%,transparent 65%);border-radius:50%;}
-.hero-badge{display:inline-block;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:30px;padding:6px 22px;font-size:13px;margin-bottom:20px;color:#C8DFFF;}
-.hero h1{font-size:2.7em;font-weight:900;line-height:1.2;margin-bottom:10px;}
-.hero h2{font-size:1.25em;font-weight:400;color:#A8C8F8;margin-bottom:8px;}
-.hero-sub{font-size:14px;color:#8AB0E0;margin-bottom:28px;}
-.hero-meta{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
-.hm{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:12px;padding:10px 18px;font-size:13px;color:#C8DFFF;display:flex;align-items:center;gap:8px;}
+.hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #31105e 100%);
+  color: #ffffff;
+  padding: 72px 24px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
 
-/* TIMELINE */
-.tl-bar{background:#fff;border-bottom:3px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(26,79,140,.09);overflow-x:auto;}
-.tl-inner{display:flex;min-width:580px;}
-.tl-seg{flex:1;padding:13px 8px;text-align:center;font-size:12px;font-weight:700;cursor:pointer;border-right:2px solid var(--border);color:var(--text3);transition:background .2s;}
-.tl-seg:last-child{border-right:none;}
-.tl-seg:hover{background:var(--bg2);}
-.tl-seg.active{background:linear-gradient(135deg,var(--purple),var(--blue2));color:#fff;}
-.tl-seg .tl-time{font-size:10px;font-weight:400;opacity:.75;display:block;margin-bottom:2px;}
-.tl-seg.dim{opacity:.45;cursor:default;}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -150px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -120px;
+  left: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  padding: 6px 20px;
+  font-size: 13.5px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  color: #cbd5e1;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hero h1 {
+  font-size: 2.85em;
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #ffffff 60%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero h2 {
+  font-size: 1.35em;
+  font-weight: 400;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.hero-sub {
+  font-size: 14.5px;
+  color: #64748b;
+  margin-bottom: 32px;
+}
+
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hm {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.hm:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
 
 /* CONTAINER */
-.container{max-width:980px;margin:0 auto;padding:44px 24px 60px;}
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 48px 24px 72px;
+}
+
+/* TABS / TIMELINE BAR */
+.tabs-bar {
+  display: flex;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 130px;
+  padding: 16px 12px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text3);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Heebo', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.tab-btn:hover {
+  background: rgba(241, 245, 249, 0.6);
+  color: var(--text2);
+}
+
+.tab-btn.active {
+  color: var(--blue);
+  border-bottom-color: var(--blue2);
+  background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.05));
+}
+
+.tab-btn .tb-icon {
+  font-size: 18px;
+}
+
+.tab-pane {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* SECTION HEADER */
-.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:30px;padding-bottom:18px;border-bottom:3px solid var(--border);}
-.sec-num{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--purple),var(--blue2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;flex-shrink:0;}
-.sec-title h3{font-size:1.5em;font-weight:800;color:var(--purple);line-height:1.2;}
-.sec-title p{font-size:13px;color:var(--text3);margin-top:3px;}
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 36px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--border);
+}
 
-/* CARD */
-.card{background:var(--surface);border-radius:16px;padding:28px 30px;margin-bottom:26px;box-shadow:var(--shadow);border:1px solid var(--border);}
-.card-title{font-size:1.1em;font-weight:800;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:9px;}
+.sec-num {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+  flex-shrink: 0;
+  box-shadow: 0 8px 16px -4px rgba(59, 130, 246, 0.3);
+}
 
-/* ── FLIP CARDS ── */
-.fc-wrap{margin-bottom:28px;}
-.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;}
-.fc{cursor:pointer;border-radius:16px;border:2px solid var(--border);background:var(--surface);box-shadow:0 3px 12px rgba(26,79,140,.08);transition:box-shadow .2s,transform .2s;overflow:hidden;}
-.fc:hover{box-shadow:0 6px 20px rgba(26,79,140,.15);transform:translateY(-2px);}
-.fc-front{padding:20px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:130px;justify-content:center;}
-.fc-front .emo{font-size:32px;}
-.fc-front h4{font-size:14px;font-weight:800;color:var(--blue);line-height:1.3;}
-.fc-front p{font-size:12px;color:var(--text2);line-height:1.5;}
-.fc-front .hint{font-size:11px;color:var(--blue2);margin-top:4px;background:#EBF3FF;border-radius:8px;padding:3px 10px;font-weight:bold;}
-.fc-detail{display:none;padding:18px 16px;background:var(--surface2);border-top:2px solid var(--border);font-size:13px;color:var(--text);line-height:1.75;text-align:right;}
-.fc-detail.open{display:block;}
-.fc-detail h5{font-weight:800;color:var(--blue);margin-bottom:8px;font-size:14px;}
-.fc-detail ul{padding-right:18px;}
-.fc-detail li{margin-bottom:5px;color:var(--text);}
-.fc-detail p{margin-bottom:6px;color:var(--text);}
+.sec-title h3 {
+  font-size: 1.55em;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+}
 
-/* color themes for fc */
-.fc.purple-fc .fc-front{background:linear-gradient(135deg,#F3EBF8,#EDE0F5);}
-.fc.purple-fc .fc-front h4{color:var(--purple);}
-.fc.purple-fc .fc-front .hint{color:var(--purple);background:#F3EBF8;}
-.fc.green-fc .fc-front{background:linear-gradient(135deg,#EBF8F3,#DDF2EA);}
-.fc.green-fc .fc-front h4{color:var(--green);}
-.fc.green-fc .fc-front .hint{color:var(--green);background:#EBF8F3;}
-.fc.orange-fc .fc-front{background:linear-gradient(135deg,#FFF4E5,#FFEACC);}
-.fc.orange-fc .fc-front h4{color:#804000;}
-.fc.orange-fc .fc-front .hint{color:#804000;background:#FFF4E5;}
-.fc.blue-fc .fc-front{background:linear-gradient(135deg,#EBF3FF,#DDEEFF);}
-.fc.blue-fc .fc-front h4{color:var(--blue);}
-.fc.blue-fc .fc-front .hint{color:var(--blue);background:#EBF3FF;}
+.sec-title p {
+  font-size: 13.5px;
+  color: var(--text3);
+  margin-top: 4px;
+}
 
-/* HOLISTIC NODES */
-.hol-flow{display:flex;flex-direction:column;gap:0;align-items:stretch;max-width:480px;margin:0 auto 20px auto;}
-.hol-node{border-radius:14px;padding:14px 20px;font-size:14px;font-weight:800;cursor:pointer;text-align:center;border:2px solid transparent;transition:box-shadow .18s,transform .18s;margin-bottom:0;}
-.hol-node:hover{transform:translateX(-3px);box-shadow:0 4px 14px rgba(26,79,140,.18);}
-.hol-arrow{text-align:center;font-size:18px;color:var(--blue3);padding:3px 0;line-height:1;}
-.hol-detail{display:none;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:16px 18px;font-size:13.5px;color:var(--text);line-height:1.75;margin-top:4px;margin-bottom:4px;}
-.hol-detail.open{display:block;}
-.hol-detail h5{font-weight:800;color:var(--blue);margin-bottom:8px;}
-.hol-detail ul{padding-right:18px;}
-.hol-detail li{margin-bottom:4px;color:var(--text);}
+/* CARDS */
+.card {
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.card-title {
+  font-size: 1.2em;
+  font-weight: 800;
+  color: var(--blue);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-right: 4px solid var(--blue2);
+  padding-right: 12px;
+}
+
+/* FLIP CARDS */
+.fc-wrap {
+  margin-bottom: 32px;
+}
+
+.fc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 20px;
+}
+
+.fc {
+  cursor: pointer;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.fc:hover {
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  transform: translateY(-4px);
+}
+
+.fc-front {
+  padding: 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-height: 150px;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.fc-front .emo {
+  font-size: 36px;
+  transition: transform 0.3s ease;
+}
+
+.fc:hover .fc-front .emo {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.fc-front h4 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.fc-front p {
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.5;
+}
+
+.fc-front .hint {
+  font-size: 11px;
+  color: var(--blue);
+  margin-top: 6px;
+  background: rgba(59, 130, 246, 0.08);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-weight: 600;
+}
+
+.fc-detail {
+  display: none;
+  padding: 20px 24px;
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.8;
+  text-align: right;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; max-height: 0; }
+  to { opacity: 1; max-height: 1000px; }
+}
+
+.fc-detail.open {
+  display: block;
+}
+
+.fc-detail h5 {
+  font-weight: 800;
+  color: var(--blue);
+  margin-bottom: 12px;
+  font-size: 14.5px;
+}
+
+.fc-detail ul {
+  padding-right: 20px;
+}
+
+.fc-detail li {
+  margin-bottom: 8px;
+}
+
+.fc-detail p {
+  margin-bottom: 8px;
+}
+
+/* Card color themes */
+.fc.purple-fc .fc-front {
+  background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+}
+.fc.purple-fc .fc-front h4 {
+  color: #6b21a8;
+}
+.fc.purple-fc:hover {
+  border-color: var(--purple2);
+}
+
+.fc.green-fc .fc-front {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+}
+.fc.green-fc .fc-front h4 {
+  color: #065f46;
+}
+.fc.green-fc:hover {
+  border-color: var(--green2);
+}
+
+.fc.orange-fc .fc-front {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+}
+.fc.orange-fc .fc-front h4 {
+  color: #92400e;
+}
+.fc.orange-fc:hover {
+  border-color: var(--accent2);
+}
+
+.fc.blue-fc .fc-front {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+}
+.fc.blue-fc .fc-front h4 {
+  color: #1e40af;
+}
+.fc.blue-fc:hover {
+  border-color: var(--blue3);
+}
+
+/* VERTICAL FLOW */
+.vflow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 24px 0;
+}
+
+.vflow-root {
+  border-radius: 16px;
+  padding: 16px 28px;
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  min-width: 240px;
+  display: inline-block;
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+}
+
+.vflow-arrow-down {
+  text-align: center;
+  font-size: 24px;
+  color: var(--blue3);
+  padding: 8px 0;
+  margin: 0 auto;
+  width: 240px;
+}
+
+.vflow-branches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+}
+
+.vflow-branch {
+  border-radius: 14px;
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  min-width: 150px;
+  flex: 1;
+  max-width: 200px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+}
+
+/* HOLISTIC FLOW NODES */
+.hol-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+  max-width: 500px;
+  margin: 0 auto 24px auto;
+}
+
+.hol-node {
+  border-radius: 16px;
+  padding: 16px 24px;
+  font-size: 14.5px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.01);
+}
+
+.hol-node:hover {
+  transform: translateX(-4px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.hol-arrow {
+  text-align: center;
+  font-size: 22px;
+  color: var(--blue3);
+  padding: 4px 0;
+  line-height: 1;
+}
+
+.hol-detail {
+  display: none;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 24px;
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.8;
+  margin: 6px 0;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+  animation: slideDown 0.3s ease;
+}
+
+.hol-detail.open {
+  display: block;
+}
+
+.hol-detail h5 {
+  font-weight: 800;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+
+.hol-detail ul {
+  padding-right: 20px;
+}
+
+.hol-detail li {
+  margin-bottom: 6px;
+}
 
 /* HIGHLIGHT BOXES */
-.hl{border-radius:14px;padding:18px 22px;margin:18px 0;display:flex;gap:14px;align-items:flex-start;}
-.hl.blue{background:#EBF3FF;border-right:5px solid var(--blue2);}
-.hl.purple{background:#F3EBF8;border-right:5px solid var(--purple2);}
-.hl.green{background:#EBF8F3;border-right:5px solid var(--green2);}
-.hl.orange{background:#FFF4E5;border-right:5px solid var(--accent);}
-.hl.red{background:#FFF0F0;border-right:5px solid var(--red);}
-.hl-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
-.hl-body h4{font-weight:800;margin-bottom:5px;font-size:14px;color:var(--text);}
-.hl-body p,.hl-body li{font-size:14px;color:var(--text);line-height:1.7;}
-.hl-body ul{padding-right:18px;}
-.hl-body li{margin-bottom:4px;}
-.hl-body a{color:var(--blue2);font-weight:bold;}
+.hl {
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+}
 
-/* FLOW */
-.flow-wrap{overflow-x:auto;padding:8px 0;}
-.flow{display:flex;align-items:center;gap:0;justify-content:flex-end;flex-wrap:wrap;}
-.fn{border-radius:12px;padding:14px 16px;text-align:center;font-size:13px;font-weight:700;min-width:110px;box-shadow:0 3px 10px rgba(26,79,140,.18);color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue2));}
-.fn.purple{background:linear-gradient(135deg,var(--purple),var(--purple2));}
-.fn.green{background:linear-gradient(135deg,#155A40,#1E8060);}
-.fn.orange{background:linear-gradient(135deg,#904010,#C05020);}
-.fn.gray{background:linear-gradient(135deg,#4A5870,#6A7890);}
-.fn-sub{font-size:10px;font-weight:400;opacity:.85;margin-top:3px;}
-.fa{color:var(--blue3);font-size:18px;padding:0 5px;flex-shrink:0;}
+.hl.blue {
+  background: #eff6ff;
+  border-right: 6px solid var(--blue2);
+}
+.hl.purple {
+  background: #f5f3ff;
+  border-right: 6px solid var(--purple);
+}
+.hl.green {
+  background: #ecfdf5;
+  border-right: 6px solid var(--green);
+}
+.hl.orange {
+  background: #fffbeb;
+  border-right: 6px solid var(--accent);
+}
+.hl.red {
+  background: #fff1f2;
+  border-right: 6px solid var(--red);
+}
 
-/* Q&A */
-.qa{background:linear-gradient(135deg,#FAF3FF,#F0EBF8);border:2px solid var(--purple2);border-radius:16px;padding:24px;margin:26px 0;}
-.qa-q{font-size:1.05em;font-weight:700;color:var(--purple);margin-bottom:16px;display:flex;align-items:flex-start;gap:10px;}
-.qa-icon{background:var(--purple);color:#fff;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;}
-.btn-hint{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#1A2535;border:none;border-radius:10px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Heebo',sans-serif;margin-left:6px;margin-top:4px;transition:opacity .2s;}
-.btn-hint:hover{opacity:.86;}
-.btn-ans{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:none;border-radius:10px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Heebo',sans-serif;margin-top:8px;transition:opacity .2s;}
-.btn-ans:hover{opacity:.86;}
-.hint-box,.ans-box{display:none;border-radius:10px;padding:14px;font-size:14px;line-height:1.7;margin-top:10px;}
-.hint-box{background:#FFF8E8;border:1.5px solid var(--accent2);color:#604000;}
-.ans-box{background:#EEFAF3;border:1.5px solid var(--green2);color:#0A3A20;}
-.hint-box.open,.ans-box.open{display:block;}
+.hl-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
 
-/* TABLE */
-table{width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;}
-th{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;padding:12px 16px;text-align:right;font-weight:700;}
-td{padding:11px 16px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text);}
-tr:nth-child(even){background:var(--surface2);}
-tr:last-child td{border-bottom:none;}
+.hl-body h4 {
+  font-weight: 800;
+  margin-bottom: 6px;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.hl-body p, .hl-body li {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.8;
+}
+
+.hl-body ul {
+  padding-right: 20px;
+}
+
+.hl-body li {
+  margin-bottom: 6px;
+}
+
+.hl-body a {
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hl-body a:hover {
+  text-decoration: underline;
+}
+
+/* FLOW (Horizontal) */
+.flow-wrap {
+  overflow-x: auto;
+  padding: 12px 4px;
+  scrollbar-width: thin;
+}
+
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+
+.fn {
+  border-radius: 14px;
+  padding: 14px 20px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  min-width: 130px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+}
+
+.fn.purple {
+  background: linear-gradient(135deg, var(--purple), #4f46e5);
+}
+
+.fn.green {
+  background: linear-gradient(135deg, #047857, #10b981);
+}
+
+.fn.orange {
+  background: linear-gradient(135deg, #b45309, #f59e0b);
+}
+
+.fn.gray {
+  background: linear-gradient(135deg, #475569, #64748b);
+}
+
+.fn-sub {
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+.fa {
+  color: var(--blue3);
+  font-size: 20px;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+/* Q&A / QUIZ */
+.qa {
+  background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 20px;
+  padding: 28px;
+  margin: 32px 0;
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.04);
+}
+
+.qa-q {
+  font-size: 1.1em;
+  font-weight: 800;
+  color: #5b21b6;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.qa-icon {
+  background: #7c3aed;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  box-shadow: 0 4px 10px rgba(124, 58, 237, 0.2);
+}
+
+.btn-hint, .btn-ans {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.btn-hint {
+  background: linear-gradient(135deg, var(--accent), #f59e0b);
+  color: #ffffff;
+  margin-left: 8px;
+  margin-top: 6px;
+}
+
+.btn-hint:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 15px rgba(245, 158, 11, 0.25);
+}
+
+.btn-ans {
+  background: linear-gradient(135deg, var(--green), #10b981);
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+.btn-ans:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 15px rgba(16, 185, 129, 0.25);
+}
+
+.hint-box, .ans-box {
+  display: none;
+  border-radius: 14px;
+  padding: 16px 20px;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 16px;
+  border: 1px solid transparent;
+  animation: slideDown 0.35s ease;
+}
+
+.hint-box {
+  background: #fffbeb;
+  border-color: rgba(245, 158, 11, 0.2);
+  color: #78350f;
+}
+
+.ans-box {
+  background: #ecfdf5;
+  border-color: rgba(16, 185, 129, 0.2);
+  color: #065f46;
+}
+
+.hint-box.open, .ans-box.open {
+  display: block;
+}
+
+/* MCQ BUTTONS */
+.mcq-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+  text-align: right;
+  color: var(--text2);
+  transition: all 0.2s ease;
+  line-height: 1.6;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+}
+
+.mcq-btn:hover:not(:disabled) {
+  background: #eff6ff;
+  border-color: var(--blue2);
+  color: var(--blue);
+  transform: translateX(-4px);
+}
+
+.mcq-btn:disabled {
+  cursor: default;
+  opacity: 0.8;
+}
+
+/* TABLES */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14.5px;
+  margin: 20px 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+}
+
+th {
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  color: #ffffff;
+  padding: 14px 20px;
+  text-align: right;
+  font-weight: 700;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text2);
+  background: var(--surface);
+}
+
+tr:nth-child(even) td {
+  background: var(--surface2);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
 
 /* SUMMARY SENTENCE */
-.summary-sentence{background:linear-gradient(135deg,var(--purple),var(--blue2));color:#fff;border-radius:16px;padding:20px 28px;text-align:center;font-size:1.1em;font-weight:700;margin:24px 0;line-height:1.6;}
+.summary-sentence {
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 24px 32px;
+  text-align: center;
+  font-size: 1.15em;
+  font-weight: 700;
+  margin: 32px 0;
+  line-height: 1.7;
+  box-shadow: 0 8px 24px -6px rgba(99, 102, 241, 0.35);
+}
 
-/* BREAK */
-.break-banner{background:linear-gradient(135deg,#F0F6FF,#EBF0FC);border:2px solid var(--border);border-radius:14px;padding:18px 24px;text-align:center;margin:36px 0;color:var(--text);font-weight:700;font-size:15px;}
+/* BREAK BANNER */
+.break-banner {
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 28px;
+  text-align: center;
+  margin: 44px 0;
+  color: var(--text2);
+  font-weight: 700;
+  font-size: 15.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+}
 
 /* TOOL GRID */
-.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:16px 0;}
-.tool-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:14px 12px;text-align:center;}
-.tool-card .tc-icon{font-size:24px;margin-bottom:6px;}
-.tool-card h5{font-size:13px;font-weight:800;color:var(--blue);margin-bottom:4px;}
-.tool-card p{font-size:11.5px;color:var(--text);line-height:1.55;}
-.tool-card a{font-size:11px;color:var(--blue2);font-weight:700;}
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.tool-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.01);
+  transition: all 0.25s ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  border-color: var(--blue3);
+}
+
+.tool-card .tc-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.tool-card h5 {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.tool-card p {
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.tool-card a {
+  font-size: 11.5px;
+  color: var(--blue2);
+  font-weight: 700;
+  text-decoration: none;
+  background: rgba(59, 130, 246, 0.08);
+  padding: 4px 10px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.tool-card a:hover {
+  background: var(--blue2);
+  color: #ffffff;
+}
 
 /* TEXTAREA */
-textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-family:'Heebo',sans-serif;font-size:14px;resize:vertical;color:var(--text);background:#fff;margin-top:8px;}
-textarea:focus{outline:none;border-color:var(--blue2);}
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-family: 'Heebo', sans-serif;
+  font-size: 14.5px;
+  resize: vertical;
+  color: var(--text);
+  background: var(--surface);
+  margin-top: 10px;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--blue2);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* TAGS */
+.tag {
+  display: inline-block;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 12.5px;
+  color: var(--text2);
+  margin: 3px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: rgba(59, 130, 246, 0.05);
+  border-color: var(--blue3);
+  color: var(--blue);
+}
 
 /* PROGRESS RING */
-.prog-ring-wrap{position:fixed;bottom:24px;left:24px;z-index:999;cursor:pointer;filter:drop-shadow(0 3px 8px rgba(26,79,140,.25));}
-.prog-ring-wrap svg{transform:rotate(-90deg);}
-.prog-ring-bg{fill:none;stroke:rgba(255,255,255,.25);}
-.prog-ring-fill{fill:none;stroke-linecap:round;transition:stroke-dashoffset .4s ease;}
-.prog-ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.prog-ring-pct{font-size:13px;font-weight:900;color:#fff;line-height:1;}
-.prog-ring-label{font-size:9px;color:rgba(255,255,255,.8);margin-top:2px;font-weight:600;}
-.prog-bg-circle{width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));position:absolute;inset:0;}
+.prog-ring-wrap {
+  position: fixed;
+  bottom: 32px;
+  left: 32px;
+  z-index: 999;
+  cursor: pointer;
+  filter: drop-shadow(0 10px 20px rgba(15, 23, 42, 0.2));
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-/* TABS */
-.tabs-bar{display:flex;background:#fff;border-bottom:3px solid var(--border);overflow-x:auto;}
-.tab-btn{flex:1;min-width:130px;padding:14px 10px;text-align:center;font-size:13px;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--text3);border-bottom:3px solid transparent;margin-bottom:-3px;transition:all .2s;font-family:'Heebo',sans-serif;}
-.tab-btn:hover{background:var(--bg2);}
-.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue2);background:linear-gradient(180deg,transparent,#EBF3FF);}
-.tab-btn .tb-icon{display:block;font-size:18px;margin-bottom:3px;}
-.tab-pane{display:none;}
-.tab-pane.active{display:block;}
+.prog-ring-wrap:hover {
+  transform: scale(1.08);
+}
 
-/* MCQ buttons */
-.mcq-btn{background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Heebo',sans-serif;text-align:right;color:var(--text);transition:background .2s;line-height:1.5;}
-.mcq-btn:hover:not(:disabled){background:#EBF3FF;border-color:var(--blue2);}
-.mcq-btn:disabled{cursor:default;}
+.prog-ring-wrap svg {
+  transform: rotate(-90deg);
+}
 
-/* RESP */
-@media(max-width:620px){
-  .hero h1{font-size:1.9em;}
-  .fc-grid{grid-template-columns:1fr 1fr;}
-  .hol-flow{max-width:100%;}
-  .prog-ring-wrap{bottom:12px;left:12px;}
+.prog-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.15);
+}
+
+.prog-ring-fill {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.4s ease;
+}
+
+.prog-ring-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.prog-ring-pct {
+  font-size: 14px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.prog-ring-label {
+  font-size: 8.5px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+.prog-bg-circle {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  position: absolute;
+  inset: 0;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.2em; }
+  .card { padding: 24px; }
+  .container { padding: 32px 16px 48px; }
+  .fc-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 620px) {
+  .hero h1 { font-size: 1.85em; }
+  .hero h2 { font-size: 1.15em; }
+  .fc-grid { grid-template-columns: 1fr; }
+  .hol-flow { max-width: 100%; }
+  .vflow-branches { justify-content: center; }
+  .prog-ring-wrap { bottom: 20px; left: 20px; }
 }
 </style>
 </head>
 <body>
+
 <div class="hero">
   <div class="hero-badge">🏛️ אוניברסיטת בר-אילן &nbsp;|&nbsp; היחידה ללימודי תעודה &nbsp;|&nbsp; חלק א׳ – תצוגה מקדימה</div>
   <h1>עדכוני תקינה וביקורת</h1>
@@ -246,6 +1106,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
+<!-- TABS -->
 <div class="tabs-bar" id="tabs-bar">
   <button class="tab-btn active" id="tab-a" onclick="switchTab('a')">
     <span class="tb-icon">🌐</span>חלק א׳<br><small style="font-size:10px;font-weight:400;">09:00–10:30</small>
@@ -263,10 +1124,11 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     <span class="tb-icon">🎓</span>בחן את עצמך<br><small style="font-size:10px;font-weight:400;">Quiz סיום</small>
   </button>
 </div>
-
 <div id="pane-a" class="tab-pane active"><div class="container">
 
-<!-- A-1 -->
+<!-- ════════════════════════════════
+     A-1: תפקיד רואה החשבון
+════════════════════════════════ -->
 <div class="sec-head">
   <div class="sec-num">א</div>
   <div class="sec-title">
@@ -311,7 +1173,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       <div class="fc-detail">
         <h5>💰 תכנון ותקצוב</h5>
         <ul>
-          <li>Bniat תקציב שנתי ורב-שנתי (5–10 שנה)</li>
+          <li>בניית תקציב שנתי ורב-שנתי (5–10 שנה)</li>
           <li>תחזיות תזרים מזומנים ובקרת ביצוע</li>
           <li>ניתוח חריגות ועדכון תחזיות</li>
           <li><strong>📌 ייחודי לאגף:</strong> תקציב ביטחוני של 117 מיליארד ₪ (2025) + תוספות מלחמה</li>
@@ -363,6 +1225,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   <div class="summary-sentence">💡 רואה החשבון הוא לא רק "מי שמכין את הדוחות" – הוא מתרגם מציאות כלכלית לשפה שמאפשרת קבלת החלטות</div>
 </div>
 
+<!-- תפקידים ייחודיים לאגף -->
 <div class="card">
   <div class="card-title">🎯 מה ייחודי בתפקיד היועץ הכספי לרמטכ"ל ואגף התקציבים?</div>
   <div class="hl blue">
@@ -382,7 +1245,9 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </table>
 </div>
 
-<!-- A-2 -->
+<!-- ════════════════════════════════
+     A-2: המסגרת ההוליסטית – אנכית
+════════════════════════════════ -->
 <div class="card">
   <div class="card-title">🔗 המסגרת ההוליסטית – חמישה ממדים שפועלים יחד</div>
   <p style="font-size:14.5px;color:var(--text2);margin-bottom:12px;">
@@ -390,6 +1255,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </p>
 
   <div style="display:grid;grid-template-columns:1fr 2fr;gap:20px;align-items:start;">
+    <!-- flow column -->
     <div class="hol-flow">
       <div class="hol-node blue-fc" style="background:#EBF3FF;border-color:var(--blue2);color:var(--blue);" onclick="toggleHol('h1')">📊 מידע<br><small style="font-weight:400;font-size:12px;">נתונים גולמיים</small></div>
       <div class="hol-arrow">↕</div>
@@ -401,6 +1267,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       <div class="hol-arrow">↕</div>
       <div class="hol-node orange-fc" style="background:#FFF4E5;border-color:var(--accent);color:#804000;" onclick="toggleHol('h5')">🏛️ חברה<br><small style="font-weight:400;font-size:12px;">אחריות ציבורית</small></div>
     </div>
+    <!-- detail column -->
     <div>
       <div id="h1" class="hol-detail open">
         <h5>📊 מידע – הבסיס לכל</h5>
@@ -458,10 +1325,13 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   <div class="summary-sentence" style="margin-top:22px;">🔗 כשמשנים תקן חשבונאי אחד – כל חמשת הממדים מרגישים את זה. הכשרה שמתמקדת רק בטכניקה מחמיצה את התמונה הגדולה.</div>
 </div>
 
-<!-- A-3 -->
+<!-- ════════════════════════════════
+     A-3: AI ואוטומציה
+════════════════════════════════ -->
 <div class="card">
   <div class="card-title">🤖 AI ואוטומציה בחשבונאות – לאט ובהדרגה</div>
 
+  <!-- שאלת פתיחה -->
   <div class="qa">
     <div class="qa-q"><div class="qa-icon">💭</div>
       <div><strong>שאלת פתיחה 🎤</strong><br>
@@ -474,6 +1344,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     <div id="ai-pre-fb" class="ans-box"></div>
   </div>
 
+  <!-- AI ≠ ChatGPT -->
   <div class="hl blue" style="margin-bottom:20px;">
     <div class="hl-icon">🚫</div>
     <div class="hl-body">
@@ -482,15 +1353,19 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
-  <div class="card-title" style="font-size:15px;margin-bottom:14px;">🗂️ משפחת ה-AI – תרשים פונקציונלי</div>
+  <!-- משפחת AI – אנכי -->
+  <div class="card-title" style="font-size:15px;margin-bottom:14px;">🗂️ משפחת ה-AI – תרשים אנכי</div>
 
   <div style="max-width:520px;margin:0 auto 24px auto;">
+    <!-- שורש -->
     <div style="text-align:center;margin-bottom:8px;">
       <div style="display:inline-block;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;border-radius:16px;padding:16px 30px;font-size:15px;font-weight:800;box-shadow:0 4px 14px rgba(91,45,142,.3);">
         🧠 בינה מלאכותית (AI)<br><span style="font-size:12px;font-weight:400;opacity:.85;">הכינוי הכללי לכל המשפחה</span>
       </div>
     </div>
+    <!-- חץ למטה -->
     <div style="text-align:center;font-size:22px;color:var(--purple2);margin-bottom:8px;">↓</div>
+    <!-- 4 ענפים -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
       <div style="background:linear-gradient(135deg,#1A4F8C,#2B6CC8);color:#fff;border-radius:12px;padding:14px;text-align:center;font-size:13px;font-weight:700;">
         ⚙️ אוטומציה<div style="font-size:11px;opacity:.85;margin-top:3px;">כללים קשיחים</div>
@@ -508,6 +1383,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     <div style="text-align:center;font-size:12px;color:var(--text3);margin-top:10px;">לחצו על כרטיסי ההסבר למטה לפרטים על כל קטגוריה ↓</div>
   </div>
 
+  <!-- 4 כרטיסי קטגוריה – fc עם פירוט נפתח -->
   <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr));margin-bottom:0;">
     <div class="fc blue-fc" onclick="toggleFC(this)">
       <div class="fc-front"><div class="emo">⚙️</div><h4>אוטומציה</h4><p>Macro · RPA · Workflow</p><div class="hint">לחצו לפרטים ↓</div></div>
@@ -547,7 +1423,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       </div>
     </div>
 
-    <div class="fc blue-fc" onclick="toggleFC(this)">
+    <div class="fc" onclick="toggleFC(this)">
       <div class="fc-front"><div class="emo">💬</div><h4>NLP</h4><p>Natural Language Processing</p><div class="hint">לחצו לפרטים ↓</div></div>
       <div class="fc-detail">
         <h5>💬 NLP – שפה → מספרים</h5>
@@ -561,6 +1437,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- מודלים לוקאליים וסוכנים -->
   <div class="hl purple" style="margin-top:20px;">
     <div class="hl-icon">🏠</div>
     <div class="hl-body">
@@ -576,6 +1453,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- מודלים vs סוכנים -->
   <div class="hl orange" style="margin-top:4px;">
     <div class="hl-icon">🤝</div>
     <div class="hl-body">
@@ -590,6 +1468,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- כלי AI לנסות -->
   <div class="card-title" style="font-size:15px;margin-top:22px;margin-bottom:14px;">🧪 כלי AI לנסות – מדריך לסטודנט</div>
   <p style="font-size:14px;color:var(--text2);margin-bottom:14px;">ניתן להתחיל לנסות את הכלים הבאים <strong>עוד היום</strong> – ברמה האישית, לא על נתוני סוד:</p>
 
@@ -644,6 +1523,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- ML מפורט -->
   <div class="card" style="background:var(--surface2);border:1.5px solid var(--border);margin-top:4px;margin-bottom:0;">
     <div class="card-title" style="font-size:15px;">📊 Machine Learning בחשבונאות – 5 שלבים</div>
     <p style="font-size:14px;color:var(--text2);margin-bottom:16px;">ML הוא <em>לא קסם</em>. זהו תהליך מובנה. הבנת השלבים חיונית כדי לדעת מתי לסמוך על המודל.</p>
@@ -662,9 +1542,11 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       </div>
     </div>
 
+    <!-- 3 שימושי ML -->
     <div class="card-title" style="font-size:14px;margin-bottom:12px;">שלושה שימושי ML בחשבונאות – דוגמאות ישראליות (לחצו)</div>
     <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
-      <div class="fc blue-fc" onclick="toggleFC(this)">
+
+      <div class="fc" onclick="toggleFC(this)">
         <div class="fc-front"><div class="emo">🚨</div><h4>זיהוי חריגות</h4><p>Anomaly Detection</p><div class="hint">↓ דוגמאות ישראליות</div></div>
         <div class="fc-detail">
           <h5>🚨 זיהוי חריגות – מה זה?</h5>
@@ -699,6 +1581,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       </div>
     </div>
 
+    <!-- Data Governance -->
     <div class="hl orange" style="margin-top:16px;">
       <div class="hl-icon">🏗️</div>
       <div class="hl-body">
@@ -713,6 +1596,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       </div>
     </div>
 
+    <!-- תרגיל data governance -->
     <div class="qa" style="margin-top:16px;">
       <div class="qa-q"><div class="qa-icon">✏️</div>
         <div><strong>תרגיל – Data Governance 🎤</strong><br>
@@ -726,8 +1610,10 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- כלי Big4 -->
   <div class="card-title" style="font-size:15px;margin-top:24px;margin-bottom:14px;">🛠️ כלי AI בשימוש Big 4 – 2025/26 (לחצו)</div>
   <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(190px,1fr));">
+
     <div class="fc blue-fc" onclick="toggleFC(this)">
       <div class="fc-front"><div class="emo">🔵</div><h4>KPMG Workbench</h4><p>Multi-agent Audit AI</p><div class="hint">↓</div></div>
       <div class="fc-detail">
@@ -769,6 +1655,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- רגולציה -->
   <div class="card-title" style="font-size:15px;margin-top:24px;margin-bottom:14px;">⚖️ רגולציית AI בישראל – מה הדין?</div>
   <p style="font-size:14px;color:var(--text2);margin-bottom:14px;">דצמבר 2025: הצוות הבין-משרדי פרסם דוח סופי. <a href="https://www.boi.org.il/media/rh0bejl4/aireport.pdf" target="_blank" style="color:var(--blue2);font-weight:700;">לקריאת הדוח ←</a></p>
 
@@ -829,7 +1716,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       <div class="fc-detail">
         <h5>EU AI Act (2024)</h5>
         <ul>
-          <li>Hvrut ישראליות שמוכרות לאירופה (Elbit, IAI, רפאל) – כפופות לחוק</li>
+          <li>חברות ישראליות שמוכרות לאירופה (Elbit, IAI, רפאל) – כפופות לחוק</li>
           <li>מערכות AI ב"סיכון גבוה" (כולל ביטחוני) → דרישות תיעוד קפדניות</li>
           <li>קנסות: עד 30M € או 6% ממחזור</li>
         </ul>
@@ -847,7 +1734,9 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- A-4 -->
+<!-- ════════════════════════════════
+     A-4: סגירות תקופתיות
+════════════════════════════════ -->
 <div class="card">
   <div class="card-title">📅 סגירות תקופתיות מהירות – מה זה ולמה זה משנה?</div>
   <p style="font-size:14.5px;color:var(--text2);margin-bottom:16px;">"סגירה תקופתית" (Period-end Close) = ריכוז כל הנתונים הפיננסיים בתום תקופה, בדיקה ויצירת דוחות. <strong>ההבדל בין אתמול להיום:</strong></p>
@@ -886,7 +1775,9 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- A-5 -->
+<!-- ════════════════════════════════
+     A-5: בקרות
+════════════════════════════════ -->
 <div class="card">
   <div class="card-title">🔒 בקרות ידניות מול אוטומטיות – ועקרון ההסתמכות</div>
   <p style="font-size:14px;color:var(--text2);margin-bottom:14px;"><em>הערה:</em> תהליכי העבודה הספציפיים באגף התקציבים עשויים להיות שונים ממה שמוצג כאן. הדגש הוא על העקרונות הרלוונטיים.</p>
@@ -923,9 +1814,12 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- A-6 -->
+<!-- ════════════════════════════════
+     A-6: ניתוח חריגות
+════════════════════════════════ -->
 <div class="card">
   <div class="card-title">📉 ניתוח חריגות תקציביות – מסורתי מול ML</div>
+
   <p style="font-size:14px;color:var(--text2);margin-bottom:14px;">Variance Analysis = השוואה בין תקציב מאושר לביצוע בפועל וזיהוי גורמי הפערים.</p>
 
   <div class="card-title" style="font-size:14px;margin-bottom:10px;">📐 תהליך ניתוח מסורתי</div>
@@ -943,6 +1837,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- מקרה בוחן ושלושת סוגי הסטייה -->
   <div class="card-title" style="font-size:14px;margin-bottom:12px;">📋 מקרה בוחן – לחצו על כל סוג סטייה לפרטים</div>
   <div class="hl orange" style="margin-bottom:14px;">
     <div class="hl-icon">📊</div>
@@ -1011,6 +1906,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- תרגיל variance -->
   <div class="qa" style="margin-top:18px;">
     <div class="qa-q"><div class="qa-icon">✏️</div>
       <div><strong>תרגיל – ניתוח חריגה 🎤</strong><br>
@@ -1024,7 +1920,9 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- A-7 -->
+<!-- ════════════════════════════════
+     A-7: הישרדות מקצועית
+════════════════════════════════ -->
 <div class="card">
   <div class="card-title">🚀 הישרדות מקצועית – שינוי תפיסה, לא רק כלים</div>
 
@@ -1041,6 +1939,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 
   <div class="card-title" style="font-size:14px;margin-bottom:14px;">🗺️ שלושה עקרונות – לחצו לפרטים</div>
+
   <div class="flow-wrap" style="margin-bottom:16px;">
     <div class="flow" style="gap:0;flex-wrap:wrap;justify-content:flex-end;">
       <div class="fn purple" style="min-width:140px;padding:15px 12px;">🔤 עקרון ה-T<div class="fn-sub">עומק + רוחב</div></div>
@@ -1116,7 +2015,9 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- A-8 -->
+<!-- ════════════════════════════════
+     A-8: מפת יום העיון
+════════════════════════════════ -->
 <div class="card">
   <div class="card-title">🗺️ לאן הולכים מכאן? – מפת יום העיון</div>
   <p style="font-size:14.5px;color:var(--text2);margin-bottom:20px;">בחלק א׳ ייצרנו את <em>המסגרת</em>. עכשיו שאר יום העיון מיישם אותה על כלים קונקרטיים. לחצו על כל תחנה:</p>
@@ -1201,12 +2102,12 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   <span style="font-size:12px;opacity:.7;">אוניברסיטת בר-אילן · היחידה ללימודי תעודה · 2026 | חלק א׳</span>
 </div>
 
+</div><!-- /container -->
 </div></div>
-
 <div id="pane-b" class="tab-pane"><div class="container">
 <div id="part-b-root">
 
-<!-- B -->
+<!-- ══════════ SECTION HEADER B ══════════ -->
 <div class="sec-head" style="margin-top:0;">
   <div class="sec-num" style="background:linear-gradient(135deg,#1A7050,#2A9A70);">ב</div>
   <div class="sec-title">
@@ -1215,6 +2116,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
+<!-- Bridge from Part A -->
 <div class="hl blue" style="margin-bottom:22px;">
   <div class="hl-icon">🔗</div>
   <div class="hl-body">
@@ -1223,10 +2125,13 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- B-1 -->
+<!-- ══════════════════════════════════════════
+     B-1: IFRS 18 – WHY + WHAT
+══════════════════════════════════════════ -->
 <div class="card">
   <div class="card-title" style="color:var(--purple);">📐 IFRS 18 – הצגה ודיווח בדוחות כספיים (בתוקף 1.1.2027)</div>
 
+  <!-- שאלת פתיחה -->
   <div class="qa" style="margin-bottom:20px;">
     <div class="qa-q"><div class="qa-icon" style="background:var(--green);">💭</div>
       <div><strong>שאלת מחשבה לפני שמתחילים 🎤</strong><br>
@@ -1239,6 +2144,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     <div id="fb18-open" class="ans-box"></div>
   </div>
 
+  <!-- Why IFRS 18 -->
   <div class="card-title" style="font-size:14px;margin-bottom:12px;">❓ למה בכלל צריך IFRS 18? מה הבעיה עם IAS 1?</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
     <div style="background:#FFF0F0;border-radius:12px;padding:16px;border:1.5px solid #FFBBBB;">
@@ -1251,7 +2157,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
         <li>הנהלות שמו "הוצאות חוזרות" כ"חד-פעמיות"</li>
       </ul>
     </div>
-    <div style="background:#F0FBF6;border-radius:12px;padding:16px;border:1.5px solid #88DDB0;">
+    <div style="background:#EEFAF3;border-radius:12px;padding:16px;border:1.5px solid #88DDB0;">
       <div style="font-weight:800;color:var(--green);margin-bottom:8px;">✅ IFRS 18 – הפתרון</div>
       <ul style="font-size:13px;color:var(--text2);padding-right:16px;line-height:1.85;">
         <li>5 קטגוריות נוקשות לכל שורה</li>
@@ -1263,8 +2169,10 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- 5 categories visual -->
   <div class="card-title" style="font-size:14px;margin-bottom:12px;">📊 5 הקטגוריות החדשות בדוח רווח והפסד (לחצו)</div>
   <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(175px,1fr));">
+
     <div class="fc blue-fc" onclick="toggleFC(this)">
       <div class="fc-front"><div class="emo">🏭</div><h4>1. Operations</h4><p>פעילות עסקית ליבה</p><div class="hint">↓ מה נכנס לכאן?</div></div>
       <div class="fc-detail">
@@ -1323,7 +2231,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       </div>
     </div>
 
-    <div class="fc blue-fc" onclick="toggleFC(this)">
+    <div class="fc" onclick="toggleFC(this)">
       <div class="fc-front"><div class="emo">🎲</div><h4>5. Discontinued</h4><p>פעילות מופסקת</p><div class="hint">↓ מתי רלוונטי?</div></div>
       <div class="fc-detail">
         <h5>קטגוריית Discontinued Operations</h5>
@@ -1337,6 +2245,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- IAS 1 vs IFRS 18 visual -->
   <div class="card-title" style="font-size:14px;margin-top:20px;margin-bottom:12px;">🔄 מבנה דוח ר"ה – לפני ואחרי</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
     <div style="background:#FFF8F8;border-radius:12px;padding:14px;border:2px dashed #FFAAAA;font-size:13px;line-height:2.0;">
@@ -1370,6 +2279,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- MPMs -->
   <div class="hl orange">
     <div class="hl-icon">📏</div>
     <div class="hl-body">
@@ -1386,9 +2296,10 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- MCQ 1 -->
   <div class="card" style="background:linear-gradient(135deg,#F8F4FF,#F0EBFF);border:2px solid var(--purple2);margin-top:18px;">
     <div class="card-title" style="color:var(--purple);">🧠 שאלה אמריקאית – IFRS 18</div>
-    <p style="font-size:14px;margin-bottom:14px;color:var(--text2);">ספק ביטחוני ישראלי מדווח "רווח תפעולי מותאם" שמוציא ממנו הוצאות ארגון מחדש בסך 50M ₪ ש"חזרו" בכל שנה מ-2020 עד 2026. לפי IFRS 18, מה יקרה מ-2027?</p>
+    <p style="font-size:14px;margin-bottom:14px;color:var(--text2);">ספק ביטחוני ישראלי מדווח "רווח תפעולי מותאם" שמוציא ממנו הוצאות ארגון מחדש בסך 50M ₪ ש"חזרו" בכל שנה מ-2020 עד 2026. לפי IFRS 18, מה יקרה מ-2027?</div>
     <div id="mcq-b1" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
       <button class="mcq-btn" onclick="checkMCQ('mcq-b1',this,'wrong')">א. ניתן להמשיך כרגיל – אם הנהלה מאמינה שזה חד-פעמי</button>
       <button class="mcq-btn" onclick="checkMCQ('mcq-b1',this,'correct')">ב. חובה לפרסם Reconciliation בדוח + לגלות שהוצאה זו "חד-פעמית" שחזרה 7 שנים</button>
@@ -1399,9 +2310,12 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- B-2 -->
+<!-- ══════════════════════════════════════════
+     B-2: IFRS 18 Israeli Case Study
+══════════════════════════════════════════ -->
 <div class="card">
   <div class="card-title" style="color:var(--purple);">🇮🇱 Case Study: אלביט מערכות – IFRS 18 בפועל</div>
+
   <div class="hl blue">
     <div class="hl-icon">📊</div>
     <div class="hl-body">
@@ -1412,11 +2326,12 @@ textarea:focus{outline:none;border-color:var(--blue2);}
 
   <div class="card-title" style="font-size:14px;margin-bottom:12px;">🔬 ניתוח "קוסמטיקה חשבונאית" – מה IFRS 18 ישנה?</div>
   <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+
     <div class="fc orange-fc" onclick="toggleFC(this)">
       <div class="fc-front"><div class="emo">💸</div><h4>SBC בחוץ</h4><p>Stock-Based Compensation</p><div class="hint">↓ מה הבעיה?</div></div>
       <div class="fc-detail">
         <h5>SBC – "הוצאה שאינה מזומן"</h5>
-        <p>חברות מוציאות SBC מ-Adjusted Income כי "אינה הוצאה מזומנית". <strong>הבעיה:</strong> SBC היא עלות ריאלית – דילול בעלי المניות.</p>
+        <p>חברות מוציאות SBC מ-Adjusted Income כי "אינה הוצאה מזומנית". <strong>הבעיה:</strong> SBC היא עלות ריאלית – דילול בעלי המניות.</p>
         <p><strong>לפי IFRS 18:</strong> SBC היא הוצאה תפעולית (Operations). לא ניתן "להוציא" אותה ממדד MPM בלי Reconciliation שקופה. המשקיעים יראו בדיוק כמה שנוסף בגין SBC.</p>
         <p>📌 <strong>בהקשר ביטחוני:</strong> SBC של הנהלת ספק → עלות שמגולמת במחיר שמ"ב משלם.</p>
       </div>
@@ -1443,6 +2358,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- תרגיל IFRS 18 -->
   <div class="qa" style="margin-top:16px;">
     <div class="qa-q"><div class="qa-icon" style="background:var(--green);">✏️</div>
       <div><strong>תרגיל קצר – MPM Reconciliation 🎤</strong><br>
@@ -1457,9 +2373,12 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- B-3 -->
+<!-- ══════════════════════════════════════════
+     B-3: IFRS 18 – Timeline & Action
+══════════════════════════════════════════ -->
 <div class="card">
   <div class="card-title" style="color:var(--purple);">⏰ לוח זמנים ומה לעשות עכשיו</div>
+
   <div class="flow-wrap" style="margin-bottom:16px;">
     <div class="flow" style="gap:0;flex-wrap:wrap;justify-content:flex-end;">
       <div class="fn" style="min-width:115px;padding:12px 10px;font-size:12px;">2024<div class="fn-sub">IFRS 18 פורסם (אפריל)</div></div>
@@ -1480,6 +2399,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- MCQ 2 -->
   <div class="card" style="background:linear-gradient(135deg,#F8F4FF,#F0EBFF);border:2px solid var(--purple2);margin-top:16px;">
     <div class="card-title" style="color:var(--purple);">🧠 שאלה אמריקאית – לוח זמנים</div>
     <p style="font-size:14px;margin-bottom:12px;color:var(--text2);">חברת רפאל (חברה ממשלתית) מכינה דוחות לשנת 2026. איזה מהבאים נכון לגבי IFRS 18?</p>
@@ -1493,9 +2413,12 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- B-4 -->
+<!-- ══════════════════════════════════════════
+     B-4: IFRS 15 – Introduction
+══════════════════════════════════════════ -->
 <div class="card">
   <div class="card-title" style="color:var(--green);">📑 IFRS 15 – הכרה בהכנסה מחוזים עם לקוחות</div>
+
   <div class="hl green">
     <div class="hl-icon">🎯</div>
     <div class="hl-body">
@@ -1504,6 +2427,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- 5 steps visual -->
   <div class="card-title" style="font-size:14px;margin-bottom:14px;">🪜 5 הצעדים של IFRS 15 – לחצו על כל צעד</div>
   <div class="hol-flow" style="max-width:100%;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;">
     <div>
@@ -1518,7 +2442,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
           <li>אושר (בכתב, בעל-פה, או מקובל)</li>
           <li>ניתן לזהות זכויות ומחויבויות</li>
           <li>קיים תשלום ששתי הצדדים יכולים לאכוף</li>
-          <li><strong>הגבייה צפויה</strong> (&gt;50% סבירות)</li>
+          <li><strong>הגבייה צפויה</strong> (>50% סבירות)</li>
         </ul>
         <p>📌 <strong>בהקשר ביטחוני:</strong> מכרז שזכינו בו → זהו חוזה. LOI (Letter of Intent) לבד → <em>לא</em> חוזה לפי IFRS 15. ספק לא יכול להכיר הכנסה על LOI בלבד.</p>
       </div>
@@ -1590,6 +2514,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- MCQ 3 -->
   <div class="card" style="background:linear-gradient(135deg,#F0FBF6,#E8F8F0);border:2px solid var(--green2);margin-top:18px;">
     <div class="card-title" style="color:var(--green);">🧠 שאלה אמריקאית – 5 צעדי IFRS 15</div>
     <p style="font-size:14px;margin-bottom:12px;color:var(--text2);">חוזה לאספקת מערכת אלקטרונית + 3 שנות תחזוקה ב-120M ₪. בצעד 2 – כמה Performance Obligations יש?</p>
@@ -1603,9 +2528,13 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- B-5 -->
+<!-- ══════════════════════════════════════════
+     B-5: IFRS 15 – Over Time + Defense
+══════════════════════════════════════════ -->
 <div class="card">
   <div class="card-title" style="color:var(--green);">🛡️ IFRS 15 בחוזים ביטחוניים – המורכבויות</div>
+
+  <!-- Over time methods -->
   <div class="card-title" style="font-size:14px;margin-bottom:12px;">📏 מדידת התקדמות Over Time – שיטות</div>
   <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
     <div class="fc green-fc" onclick="toggleFC(this)">
@@ -1623,7 +2552,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       <div class="fc-detail">
         <h5>Milestone Output Method</h5>
         <p><strong>עיקרון:</strong> הכנסה מוכרת כשמתוגמלת אבן דרך מוגדרת מראש.</p>
-        <p><strong>דוגמה:</strong> חוזה 100M ₪ WITH 4 milestones שווים (25M ₪ כל אחד): עיצוב, אב-טיפוס, בדיקות, מסירה. → כל milestone שאושר על ידי מ"ב = 25M ₪ הכנסה.</p>
+        <p><strong>דוגמה:</strong> חוזה 100M ₪ עם 4 milestones שווים (25M ₪ כל אחד): עיצוב, אב-טיפוס, בדיקות, מסירה. → כל milestone שאושר על ידי מ"ב = 25M ₪ הכנסה.</p>
         <p>✅ <strong>יתרון:</strong> פשוט, מובן לכולם, מסונכרן עם תשלומים.</p>
         <p>⚠️ <strong>סיכון:</strong> Milestone לא תואם בהכרח ל-% ביצוע ריאלי. "25% מהחוזה = עיצוב" אבל בפועל ביצוע 40% כבר. → Contract Asset נוצר.</p>
       </div>
@@ -1641,7 +2570,9 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- שינוי מפרט + מקרה בוחן מרכזי -->
   <div class="card-title" style="font-size:14px;margin-top:20px;margin-bottom:12px;">🔧 Contract Modification – כשמ"ב משנה מפרט</div>
+
   <div class="hl orange">
     <div class="hl-icon">🔄</div>
     <div class="hl-body">
@@ -1693,6 +2624,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- מקרה בוחן מרכזי -->
   <div class="card" style="background:var(--surface2);border:1.5px solid var(--border);margin-top:16px;">
     <div class="card-title" style="font-size:14px;color:var(--green);">🔬 מקרה בוחן: חוזה רכש רחפנים – מ"ב vs ספק</div>
     <div class="hl green" style="margin-bottom:14px;">
@@ -1735,14 +2667,14 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- תרגיל מספרי IFRS 15 -->
   <div class="qa" style="margin-top:16px;">
     <div class="qa-q"><div class="qa-icon" style="background:var(--green);">✏️</div>
       <div><strong>תרגיל מספרי – IFRS 15 🎤</strong><br>
       <span style="font-size:14px;font-weight:400;color:var(--text2);">חוזה: 200M ₪ | עלות כוללה: 160M ₪ | עלויות עד כה: 80M ₪<br>
       שאלות: (1) כמה הכנסה מוכרת? (2) אם מ"ב מוסיף עוד 50M ₪ ל-TP אחרי שינוי מפרט שהעלה עלות ל-200M ₪, מהו ה-Catch-Up?</span></div>
     </div>
-    <textarea id="ifrs15-ex" rows="3" placeholder="(1) % ביצוע = ... הכנסה = ...
-(2) % ביצוע חדש = ... הכנסה שצריך = ... Catch-Up = ..."></textarea>
+    <textarea id="ifrs15-ex" rows="3" placeholder="(1) % ביצוע = ... הכנסה = ...\n(2) % ביצוע חדש = ... הכנסה שצריך = ... Catch-Up = ..."></textarea>
     <button class="btn-hint" onclick="toggleBox('h15-ex')">💡 רמז שלב 1</button>
     <button class="btn-hint" onclick="toggleBox('h15-ex2')">💡 רמז שלב 2</button>
     <button class="btn-ans" onclick="giveFeedbackB('ifrs15-ex','fb15-ex')">📩 פתרון מלא</button>
@@ -1751,6 +2683,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     <div id="fb15-ex" class="ans-box"></div>
   </div>
 
+  <!-- MCQ 4 -->
   <div class="card" style="background:linear-gradient(135deg,#F0FBF6,#E8F8F0);border:2px solid var(--green2);margin-top:16px;">
     <div class="card-title" style="color:var(--green);">🧠 שאלה אמריקאית – Variable Consideration</div>
     <p style="font-size:14px;margin-bottom:12px;color:var(--text2);">חוזה כולל קנס פיגורים של 5M ₪ לכל חודש עיכוב. הספק צופה עיכוב של 2 חודשים. מה נכון לפי IFRS 15?</p>
@@ -1764,9 +2697,12 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- B-6 -->
+<!-- ══════════════════════════════════════════
+     B-6: IFRS 15 Israeli Market
+══════════════════════════════════════════ -->
 <div class="card">
   <div class="card-title" style="color:var(--green);">🇮🇱 IFRS 15 בשוק הישראלי – מה רלוונטי לכם</div>
+
   <div class="hl blue">
     <div class="hl-icon">📊</div>
     <div class="hl-body">
@@ -1806,12 +2742,13 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- MCQ 5 -->
   <div class="card" style="background:linear-gradient(135deg,#F8F4FF,#F0EBFF);border:2px solid var(--purple2);margin-top:18px;">
     <div class="card-title" style="color:var(--purple);">🧠 שאלה אמריקאית – ישראל</div>
     <p style="font-size:14px;margin-bottom:12px;color:var(--text2);">ספק ביטחוני ישראלי רשם 4B ₪ כ-Contract Asset (נכס חוזה) בדוחותיו. מה זה אומר?</p>
     <div id="mcq-b5" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
       <button class="mcq-btn" onclick="checkMCQ('mcq-b5',this,'wrong')">א. ביצוע הקדים תשלומים – אין בזה בעיה</button>
-      <button class="mcq-btn" onclick="checkMCQ('mcq-b5',this,'correct')">ב. אהספק הכיר הכנסה (לפי % ביצוע) שמ"ב עוד לא אישר לתשלום – כלומר הוא "קדם" את עצמו</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b5',this,'correct')">ב. הספק הכיר הכנסה (לפי % ביצוע) שמ"ב עוד לא אישר לתשלום – כלומר הוא "קדם" את עצמו</button>
       <button class="mcq-btn" onclick="checkMCQ('mcq-b5',this,'wrong')">ג. זה חוב שהספק חייב למ"ב</button>
       <button class="mcq-btn" onclick="checkMCQ('mcq-b5',this,'wrong')">ד. זה מזומן שקיבל מראש</button>
     </div>
@@ -1819,11 +2756,15 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- B-6b -->
+<!-- ══════════════════════════════════════════
+<!-- ══════════════════════════════════════════
+     B-6b: תרגילים כמותיים מדורגים
+══════════════════════════════════════════ -->
 <div class="card">
   <div class="card-title" style="color:var(--purple);">🧮 תרגילים כמותיים מדורגים – IFRS 18 ו-IFRS 15</div>
   <p style="font-size:14px;color:var(--text2);margin-bottom:18px;">כל תרגיל מוצג <strong>שלב אחרי שלב</strong>. לחצו "הצג שלב הבא" להמשך. ענו בעצמכם לפני שתלחצו.</p>
 
+  <!-- ── תרגיל כמותי 1: IFRS 18 Categories ── -->
   <div class="card" style="background:#F8F4FF;border:2px solid var(--purple2);margin-bottom:16px;">
     <div class="card-title" style="color:var(--purple);font-size:14px;">תרגיל 1 – IFRS 18: סיווג שורות דוח ר"ה לקטגוריות</div>
     <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">
@@ -1841,18 +2782,22 @@ textarea:focus{outline:none;border-color:var(--blue2);}
         </div>
         <div class="step-fb" style="display:none;"></div>
       </div>
+
       <div class="ex-step locked" id="ex1-s1" style="background:#F8F8F8;border-radius:10px;padding:14px;margin-bottom:8px;border:1.5px dashed #CCC;opacity:.5;">
         <div style="font-weight:700;color:var(--text3);margin-bottom:8px;">🔒 שורה 2 (תופיע אחרי שורה 1) – הוצאות מו"פ – 620M $</div>
       </div>
+
       <div class="ex-step locked" id="ex1-s2" style="background:#F8F8F8;border-radius:10px;padding:14px;margin-bottom:8px;border:1.5px dashed #CCC;opacity:.5;">
         <div style="font-weight:700;color:var(--text3);margin-bottom:8px;">🔒 שורה 3 – ריבית על אג"ח שהנפיקה החברה – 85M $</div>
       </div>
+
       <div class="ex-step locked" id="ex1-s3" style="background:#F8F8F8;border-radius:10px;padding:14px;margin-bottom:8px;border:1.5px dashed #CCC;opacity:.5;">
         <div style="font-weight:700;color:var(--text3);margin-bottom:8px;">🔒 שורה 4 – חלק ברווחי חברה כלולה (Equity Method) – 40M $</div>
       </div>
     </div>
   </div>
 
+  <!-- ── תרגיל כמותי 2: IFRS 15 Cost-to-Cost מדורג ── -->
   <div class="card" style="background:#EBF8F3;border:2px solid var(--green2);margin-bottom:16px;">
     <div class="card-title" style="color:var(--green);font-size:14px;">תרגיל 2 – IFRS 15: Cost-to-Cost – 4 שלבים</div>
     <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">
@@ -1869,6 +2814,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
 
     <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px;">פתרו שלב אחר שלב – לחצו על הנוסחה נכונה:</div>
 
+    <!-- שלב א -->
     <div style="background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;border:1.5px solid var(--green2);">
       <div style="font-weight:700;color:var(--green);margin-bottom:8px;">שלב א׳ – חישוב % ביצוע</div>
       <div style="font-family:monospace;background:#F0FBF6;padding:10px;border-radius:8px;font-size:13px;margin-bottom:10px;">
@@ -1883,6 +2829,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       <div id="ex2-sa-fb" style="display:none;margin-top:8px;padding:10px;border-radius:8px;font-size:13px;"></div>
     </div>
 
+    <!-- שלב ב -->
     <div style="background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;border:1.5px solid var(--border);" id="ex2-sb-block">
       <div style="font-weight:700;color:var(--blue);margin-bottom:8px;">שלב ב׳ – חישוב הכנסה לה"כ שיש להכיר עד 31.12</div>
       <div style="font-family:monospace;background:#EBF3FF;padding:10px;border-radius:8px;font-size:13px;margin-bottom:10px;">
@@ -1897,6 +2844,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       <div id="ex2-sb-fb" style="display:none;margin-top:8px;padding:10px;border-radius:8px;font-size:13px;"></div>
     </div>
 
+    <!-- שלב ג -->
     <div style="background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;border:1.5px solid var(--border);" id="ex2-sc-block">
       <div style="font-weight:700;color:var(--blue);margin-bottom:8px;">שלב ג׳ – רווח גולמי מוכר (Gross Profit)</div>
       <div style="font-family:monospace;background:#EBF3FF;padding:10px;border-radius:8px;font-size:13px;margin-bottom:10px;">
@@ -1911,6 +2859,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
       <div id="ex2-sc-fb" style="display:none;margin-top:8px;padding:10px;border-radius:8px;font-size:13px;"></div>
     </div>
 
+    <!-- תרשים סיכום -->
     <div id="ex2-summary" style="display:none;background:linear-gradient(135deg,#EBF8F3,#DDF2EA);border-radius:12px;padding:16px;border:2px solid var(--green2);font-size:13px;">
       <div style="font-weight:800;color:var(--green);margin-bottom:10px;">📊 סיכום רישום בספרים – 31.12</div>
       <table style="width:100%;font-size:13px;">
@@ -1924,6 +2873,7 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- ── תרגיל כמותי 3: Contract Modification ── -->
   <div class="card" style="background:#FFF4E5;border:2px solid var(--accent);margin-bottom:16px;">
     <div class="card-title" style="color:#804000;font-size:14px;">תרגיל 3 – Contract Modification: שינוי מפרט ב-ICL</div>
     <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">המשך תרגיל 2. ICL שינתה מפרטים → עלות כוללה עלתה ל-3,000,000 ₪. ICL תוסיף 200,000 ₪ ל-TP.</p>
@@ -1974,10 +2924,11 @@ textarea:focus{outline:none;border-color:var(--blue2);}
     </div>
   </div>
 
+  <!-- ── תרגיל כמותי 4: MCQ על MPM ── -->
   <div class="card" style="background:linear-gradient(135deg,#F8F4FF,#F0EBFF);border:2px solid var(--purple2);margin-bottom:0;">
     <div class="card-title" style="color:var(--purple);font-size:14px;">תרגיל 4 – חישוב Operating Profit לפי IFRS 18</div>
     <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">
-      חברת <strong>Check Point Software</strong> (חברת סייבר ישראלית, NASDAQ: CHKP) מדווחת: הכנסות 2,500M $| עלות המכר 400M$ | הוצ' מחקר ופיתוח 700M $| הוצ' מכירה 300M$ | ריבית שוטפת על פיקדונות 180M $ | הפחתת נכסים בלתי מוחשיים מרכישה 90M $<br>
+      חברת <strong>Check Point Software</strong> (חברת סייבר ישראלית, NASDAQ: CHKP) מדווחת: הכנסות 2,500M $ | עלות המכר 400M $ | הוצ' מחקר ופיתוח 700M $ | הוצ' מכירה 300M $ | ריבית שוטפת על פיקדונות 180M $ | הפחתת נכסים בלתי מוחשיים מרכישה 90M $<br>
       לפי IFRS 18 – <strong>מה ה-Operating Profit?</strong>
     </p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
@@ -1998,11 +2949,14 @@ textarea:focus{outline:none;border-color:var(--blue2);}
   </div>
 </div>
 
-<!-- B-6c -->
+<!-- ══════════════════════════════════════════
+     B-6c: תרגילי Prompt Engineering לסטודנטים
+══════════════════════════════════════════ -->
 <div class="card">
   <div class="card-title" style="color:var(--blue);">🤖 תרגילי Prompt Engineering – השתמשו ב-AI לניתוח חשבונאי</div>
   <p style="font-size:14px;color:var(--text2);margin-bottom:16px;">בתרגילים הבאים תקבלו <strong>דאטה + פרומפט מוכן</strong>. העתיקו אותם לכלי AI (ChatGPT, Claude, Gemini וכו׳) וקבלו ניתוח השוואתי. הדוגמאות מתבססות על <strong>חברות מסחריות ציבוריות ישראליות</strong>.</p>
 
+  <!-- Prompt 1 -->
   <div class="card" style="background:#EBF3FF;border:2px solid var(--blue2);margin-bottom:16px;">
     <div class="card-title" style="font-size:14px;color:var(--blue);">🔵 פרומפט 1 – IAS 1 מול IFRS 18: חברת Nice Systems</div>
     <div class="hl blue" style="margin-bottom:12px;">
@@ -2033,6 +2987,7 @@ FORMAT: Two side-by-side income statements. Highlight which lines move between c
     <div style="margin-top:10px;font-size:12px;color:var(--text3);">🔗 נסו ב: <a href="https://chatgpt.com" target="_blank">ChatGPT</a> | <a href="https://claude.ai" target="_blank">Claude</a> | <a href="https://gemini.google.com" target="_blank">Gemini</a></div>
   </div>
 
+  <!-- Prompt 2 -->
   <div class="card" style="background:#EBF8F3;border:2px solid var(--green2);margin-bottom:16px;">
     <div class="card-title" style="font-size:14px;color:var(--green);">🟢 פרומפט 2 – IFRS 15: ניתוח הכרת הכנסה בחוזה ארוך</div>
     <div class="hl green" style="margin-bottom:12px;">
@@ -2068,6 +3023,7 @@ Answer in Hebrew. Show all calculations step by step in a table format.</div>
     <div style="margin-top:10px;font-size:12px;color:var(--text3);">🔗 מומלץ: <a href="https://claude.ai" target="_blank">Claude</a> (טוב לניתוח ארוך) | <a href="https://chatgpt.com" target="_blank">ChatGPT</a></div>
   </div>
 
+  <!-- Prompt 3 -->
   <div class="card" style="background:#FFF4E5;border:2px solid var(--accent);">
     <div class="card-title" style="font-size:14px;color:#804000;">🟠 פרומפט 3 – זיהוי "קוסמטיקה חשבונאית" ב-MPM</div>
     <div class="hl orange" style="margin-bottom:12px;">
@@ -2104,9 +3060,95 @@ Answer in Hebrew with detailed explanations.</div>
   </div>
 </div>
 
-<!-- B-7 -->
+<script>
+/* Step-based exercises */
+function checkStep(id, btn, result, value){
+  var container = btn.closest('.ex-step') || btn.closest('[id$="-block"]') || btn.parentElement.parentElement;
+  container.querySelectorAll('.mcq-btn').forEach(function(b){b.disabled=true;});
+  var fb = document.getElementById(id+'-fb');
+  var stepExplanations = {
+    'ex1-s0': {correct:'✅ Operations! הכנסות ממכירת מוצרים/שירותים = ליבת הפעילות. תמיד נכנס ל-Operations תחת IFRS 18.', wrong:'❌ הכנסות ממכירת שירותי תוכנה = ליבת הפעילות = Operations.'},
+    'ex2-sa': {correct:'✅ 40%! % ביצוע = 960K ÷ 2,400K (עלות כוללה, לא מחיר חוזה!). שגיאה נפוצה: לחלק ב-TP במקום בעלות.', wrong:'❌ חלקים בעלות כוללה: 960K ÷ 2,400K = 40%. לא מחלקים ב-TP!'},
+    'ex2-sb': {correct:'✅ 1,200,000 ₪! 40% × 3,000K = הכנסה שיש להכיר עד כה.', wrong:'❌ הכנסה = % ביצוע × TP = 40% × 3,000K = 1,200,000 ₪.'},
+    'ex2-sc': {correct:'✅ 240,000 ₪! = 1,200K (הכנסה) − 960K (עלות) = רווח גולמי מוכר (8% מ-TP).', wrong:'❌ רווח גולמי = הכנסה מוכרת − עלות שנצברה = 1,200K − 960K = 240,000 ₪.'},
+    'ex3-sa': {correct:'✅ 32%! % חדש = 960K ÷ 3,000K (העלות עלתה!). לכן % ירד מ-40% ל-32%.', wrong:'❌ % חדש = 960K ÷ עלות חדשה = 960K ÷ 3,000K = 32%. העלות עלתה → % ירד!'},
+    'ex3-sb': {correct:'✅ 1,024,000 ₪! = 32% × 3,200K (TP חדש). שימו לב: הכנסה ירדה למרות ש-TP עלה!', wrong:'❌ הכנסה נדרשת = % חדש × TP חדש = 32% × 3,200K = 1,024,000 ₪.'},
+    'ex3-sc': {correct:'✅ −176,000 ₪! = 1,024K − 1,200K. יש לבטל 176K מהכנסה שכבר הוכרה. ה"פיצוי" ב-TP לא עזר מספיק.', wrong:'❌ Catch-Up = 1,024K − 1,200K = −176,000 ₪ (שלילי! יש לבטל הכנסה שכבר הוכרה).'},
+    'ex4': {correct:'✅ 1,010M $! = 2,500−400−700−300−90 = 1,010M. ריבית על פיקדונות (180M$) = Financing/Investing, לא Operations.', wrong:'❌ ריבית על פיקדונות = Financing (לא Operations). Operating = 2,500−400−700−300−90 = 1,010M$.'}
+  };
+  var ex = stepExplanations[id] || {correct:'✅ נכון!', wrong:'❌ לא נכון.'};
+  if(fb){
+    fb.style.display='block';
+    if(result==='correct'){
+      btn.style.background='linear-gradient(135deg,#1A7050,#2A9A70)'; btn.style.color='#fff';
+      fb.style.cssText='display:block;padding:10px;border-radius:8px;background:#EEFAF3;border:1.5px solid #2A9A70;font-size:13px;';
+      fb.innerHTML = ex.correct;
+    } else {
+      btn.style.background='linear-gradient(135deg,#A02828,#C03030)'; btn.style.color='#fff';
+      fb.style.cssText='display:block;padding:10px;border-radius:8px;background:#FFF0F0;border:1.5px solid #C03030;font-size:13px;';
+      fb.innerHTML = ex.wrong;
+    }
+  }
+  // unlock next step
+  var nextBlocks = {
+    'ex1-s0': 'ex1-s1', 'ex1-s1': 'ex1-s2', 'ex1-s2': 'ex1-s3',
+    'ex2-sa': 'ex2-sb-block', 'ex2-sb': 'ex2-sc-block',
+    'ex2-sc': 'ex2-summary',
+    'ex3-sa': 'ex3-sb-block', 'ex3-sb': 'ex3-sc-block',
+    'ex3-sc': 'ex3-insight'
+  };
+  var nextId = nextBlocks[id];
+  if(nextId){
+    var next = document.getElementById(nextId);
+    if(next){
+      setTimeout(function(){
+        next.style.opacity='1'; next.style.borderStyle='solid';
+        next.classList.remove('locked');
+        // unlock buttons inside
+        next.querySelectorAll('.mcq-btn').forEach(function(b){b.disabled=false;});
+        if(next.style.display==='none') next.style.display='block';
+        next.scrollIntoView({behavior:'smooth',block:'nearest'});
+        // unlock ex1 inner steps
+        if(nextId.startsWith('ex1-s')){
+          var n = next;
+          n.style.background='#fff';
+          var innerBtns = ['Operations','Financing','Investing','Associates'];
+          var correctMap = {'ex1-s1':'Operations','ex1-s2':'Financing','ex1-s3':'Associates'};
+          var corr = correctMap[nextId];
+          n.innerHTML = n.innerHTML.replace('🔒','') + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">'
+            + innerBtns.map(function(opt){
+              return '<button class="mcq-btn" onclick="checkStep(\''+nextId+'\',this,\''+(opt===corr?'correct':'wrong')+'\',\''+opt+'\')">'+(opt===corr?opt+' ✅':opt)+'</button>';
+            }).join('')
+            + '</div><div class="step-fb" id="'+nextId+'-fb" style="display:none;"></div>';
+        }
+      }, 500);
+    }
+  }
+}
+
+function copyPrompt(btn, id){
+  var pre = btn.previousElementSibling;
+  var text = pre ? pre.textContent : '';
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){
+      btn.textContent = '✅ הועתק!';
+      setTimeout(function(){ btn.innerHTML = '📋 העתק פרומפט'; }, 2500);
+    });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    btn.textContent = '✅ הועתק!';
+    setTimeout(function(){ btn.innerHTML = '📋 העתק פרומפט'; }, 2500);
+  }
+}
+</script>
+
+     B-7: Summary + Bridge to Part C
+══════════════════════════════════════════ -->
 <div class="card">
   <div class="card-title">🔗 סיכום חלק ב׳ + חיבור לחלק ג׳</div>
+
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
     <div style="background:linear-gradient(135deg,#F3EBF8,#EDE0F5);border-radius:14px;padding:18px;border:2px solid var(--purple2);">
       <div style="font-weight:800;color:var(--purple);font-size:15px;margin-bottom:10px;">📐 IFRS 18 – 3 לקחים</div>
@@ -2143,10 +3185,12 @@ Answer in Hebrew with detailed explanations.</div>
   <span style="font-size:22px">🍽️</span>&nbsp; הפסקת צהריים — 12:00 עד 13:00 &nbsp;|&nbsp; חלק ג׳ – תקני ביקורת (רו"ח ארנון אטיס) יתחיל ב-13:00
 </div>
 
-</div></div></div>
+</div><!-- /part-b-root -->
+</div></div>
+<!-- ════════ QUIZ PANE ════════ -->
+<div id="pane-q" class="tab-pane">
+<div class="container">
 
-<!-- QUIZ PANE -->
-<div id="pane-q" class="tab-pane"><div class="container">
 <div class="sec-head">
   <div class="sec-num" style="background:linear-gradient(135deg,#E8A020,#F0C060);color:#4A2000;">🎓</div>
   <div class="sec-title">
@@ -2164,16 +3208,19 @@ Answer in Hebrew with detailed explanations.</div>
 </div>
 
 <div id="quiz-container"></div>
+
 <div id="quiz-results" style="display:none;"></div>
 
-</div></div>
-
+</div>
+</div>
+<!-- ════════ END QUIZ PANE ════════ -->
 <script>
 /* ═══════════════════════════════════════════
-    CORE ENGINE & HANDLERS
+   CORE ENGINE
 ═══════════════════════════════════════════ */
 window._currentTab = 'a';
 
+// Progress Ring
 const CIRC = 163.4;
 function updateProgress(){
   var tab = window._currentTab;
@@ -2196,6 +3243,7 @@ function updateProgress(){
 window.addEventListener('scroll', updateProgress);
 setTimeout(updateProgress, 300);
 
+// fc toggle
 function toggleFC(el){
   var d = el.querySelector('.fc-detail');
   if(!d) return;
@@ -2218,6 +3266,7 @@ function toggleBox(id){
   if(el) el.classList.toggle('open');
 }
 
+/* ═══ Part A Feedback ═══ */
 function giveFeedback(inpId, fbId){
   var val = document.getElementById(inpId).value.trim();
   var el = document.getElementById(fbId);
@@ -2261,6 +3310,7 @@ function giveFeedback(inpId, fbId){
   el.classList.add('open');
 }
 
+/* ═══ Part B Feedback ═══ */
 function giveFeedbackB(inpId, fbId){
   var val = document.getElementById(inpId).value.trim();
   var el = document.getElementById(fbId);
@@ -2296,12 +3346,13 @@ function giveFeedbackB(inpId, fbId){
   el.classList.add('open');
 }
 
+/* ═══ MCQ Checker ═══ */
 var mcqExplanations = {
   'mcq-b1':'לפי IFRS 18: MPM שפורסם בתקשורת פומבית חייב Reconciliation מלא בדוח עצמו. הוצאה "חד-פעמית" שחזרה 7 שנים – חייבת גילוי מפורש.',
   'mcq-b2':'IFRS 18 חל על כל חברה המדווחת לפי IFRS, כולל ממשלתיות. נתוני 2026 = ה-Comparative לדוחות 2027.',
   'mcq-b3':'חוזה ל"מערכת + תחזוקה" = 2 PO מובחנים: (1) המערכת – נמסרת בנקודת זמן. (2) תחזוקה – Over Time. כל PO מקבל הקצאת מחיר נפרדת.',
   'mcq-b4':'Variable Consideration = תמורה משתנה. קנס פיגורים צפוי = VC שלילי. לפי ה-Constraint Rule צריך להפחית מ-TP כל VC ש"highly probable" שיתממש.',
-  'mcq-b5':'Contract Asset = ביצוע הקדים חיוב. אהספק הכיר הכנסה לפי % ביצוע אבל טרם הגיע Milestone החיוב. מגלה שהספק "רץ קדימה" – בדקו אם זה מוצדק.'
+  'mcq-b5':'Contract Asset = ביצוע הקדים חיוב. הספק הכיר הכנסה לפי % ביצוע אבל טרם הגיע Milestone החיוב. מגלה שהספק "רץ קדימה" – בדקו אם זה מוצדק.'
 };
 
 function checkMCQ(gridId, btn, result){
@@ -2322,6 +3373,7 @@ function checkMCQ(gridId, btn, result){
     btn.style.color='#fff';
     res.style.cssText='display:block;padding:12px;border-radius:10px;background:#FFF0F0;border:1.5px solid #C03030;font-size:14px;margin-top:8px;';
     res.innerHTML='❌ <strong>לא נכון.</strong> '+ex;
+    // highlight correct answer
     var btns = grid.querySelectorAll('.mcq-btn');
     var correctIdx = {'mcq-b1':1,'mcq-b2':2,'mcq-b3':1,'mcq-b4':1,'mcq-b5':1};
     var ci = correctIdx[gridId];
@@ -2329,88 +3381,11 @@ function checkMCQ(gridId, btn, result){
   }
 }
 
-function checkStep(id, btn, result, value){
-  var container = btn.closest('.ex-step') || document.getElementById(id+'-block') || btn.parentElement.parentElement;
-  container.querySelectorAll('.mcq-btn').forEach(function(b){b.disabled=true;});
-  var fb = document.getElementById(id+'-fb');
-  var stepExplanations = {
-    'ex1-s0': {correct:'✅ Operations! הכנסות ממכירת מוצרים/שירותים = ליבת הפעילות. תמיד נכנס ל-Operations תחת IFRS 18.', wrong:'❌ הכנסות ממכירת שירותי תוכנה = ליבת הפעילות = Operations.'},
-    'ex2-sa': {correct:'✅ 40%! % ביצוע = 960K ÷ 2,400K (עלות כוללה, לא מחיר חוזה!). שגיאה נפוצה: לחלק ב-TP במקום בעלות.', wrong:'❌ חלקים בעלות כוללה: 960K ÷ 2,400K = 40%. לא מחלקים ב-TP!'},
-    'ex2-sb': {correct:'✅ 1,200,000 ₪! 40% × 3,000K = הכנסה שיש להכיר עד כה.', wrong:'❌ הכנסה = % ביצוע × TP = 40% × 3,000K = 1,200,000 ₪.'},
-    'ex2-sc': {correct:'✅ 240,000 ₪! = 1,200K (הכנסה) − 960K (עלות) = רווח גולמי מוכר (8% מ-TP).', wrong:'❌ רווח גולמי = הכנסה מוכרת − עלות שנצברה = 1,200K − 960K = 240,000 ₪.'},
-    'ex3-sa': {correct:'✅ 32%! % חדש = 960K ÷ 3,000K (העלות עלתה!). לכן % ירד מ-40% ל-32%.', wrong:'❌ % חדש = 960K ÷ עלות חדשה = 960K ÷ 3,000K = 32%. העלות עלתה → % ירד!'},
-    'ex3-sb': {correct:'✅ 1,024,000 ₪! = 32% × 3,200K (TP חדש). שימו לב: הכנסה ירדה למרות ש-TP עלה!', wrong:'❌ הכנסה נדרשת = % חדש × TP חדש = 32% × 3,200K = 1,024,000 ₪.'},
-    'ex3-sc': {correct:'✅ −176,000 ₪! = 1,024K − 1,200K. יש לבטל 176K מהכנסה שכבר הוכרה. ה"פיצוי" ב-TP לא עזר מספיק.', wrong:'❌ Catch-Up = 1,024K − 1,200K = −176,000 ₪ (שלילי! יש לבטל הכנסה שכבר הוכרה).'},
-    'ex4': {correct:'✅ 1,010M $! = 2,500−400−700−300−90 = 1,010M. ריבית על פיקדונות (180M$) = Financing/Investing, לא Operations.', wrong:'❌ ריבית על פיקדונות = Financing (לא Operations). Operating = 2,500−400−700−300−90 = 1,010M$.'}
-  };
-  var ex = stepExplanations[id] || {correct:'✅ נכון!', wrong:'❌ לא נכון.'};
-  if(fb){
-    fb.style.display='block';
-    if(result==='correct'){
-      btn.style.background='linear-gradient(135deg,#1A7050,#2A9A70)'; btn.style.color='#fff';
-      fb.style.cssText='display:block;padding:10px;border-radius:8px;background:#EEFAF3;border:1.5px solid #2A9A70;font-size:13px;';
-      fb.innerHTML = ex.correct;
-    } else {
-      btn.style.background='linear-gradient(135deg,#A02828,#C03030)'; btn.style.color='#fff';
-      fb.style.cssText='display:block;padding:10px;border-radius:8px;background:#FFF0F0;border:1.5px solid #C03030;font-size:13px;';
-      fb.innerHTML = ex.wrong;
-    }
-  }
-  var nextBlocks = {
-    'ex1-s0': 'ex1-s1', 'ex1-s1': 'ex1-s2', 'ex1-s2': 'ex1-s3',
-    'ex2-sa': 'ex2-sb-block', 'ex2-sb': 'ex2-sc-block',
-    'ex2-sc': 'ex2-summary',
-    'ex3-sa': 'ex3-sb-block', 'ex3-sb': 'ex3-sc-block',
-    'ex3-sc': 'ex3-insight'
-  };
-  var nextId = nextBlocks[id];
-  if(nextId){
-    var next = document.getElementById(nextId);
-    if(next){
-      setTimeout(function(){
-        next.style.opacity='1'; next.style.borderStyle='solid';
-        next.classList.remove('locked');
-        next.querySelectorAll('.mcq-btn').forEach(function(b){b.disabled=false;});
-        if(next.style.display==='none') next.style.display='block';
-        next.scrollIntoView({behavior:'smooth',block:'nearest'});
-        if(nextId.startsWith('ex1-s')){
-          var n = next;
-          n.style.background='#fff';
-          var innerBtns = ['Operations','Financing','Investing','Associates'];
-          var correctMap = {'ex1-s1':'Operations','ex1-s2':'Financing','ex1-s3':'Associates'};
-          var corr = correctMap[nextId];
-          n.innerHTML = n.innerHTML.replace('🔒','') + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">'
-            + innerBtns.map(function(opt){
-              return '<button class="mcq-btn" onclick="checkStep(''+nextId+'',this,''+(opt===corr?'correct':'wrong')+'',''+opt+'')">'+(opt===corr?opt+' ✅':opt)+'</button>';
-            }).join('')
-            + '</div><div class="step-fb" id="'+nextId+'-fb" style="display:none;"></div>';
-        }
-      }, 500);
-    }
-  }
-}
-
-function copyPrompt(btn, id){
-  var pre = btn.previousElementSibling;
-  var text = pre ? pre.textContent : '';
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(function(){
-      btn.textContent = '✅ הועתק!';
-      setTimeout(function(){ btn.innerHTML = '📋 העתק פרומפט'; }, 2500);
-    });
-  } else {
-    var ta = document.createElement('textarea');
-    ta.value = text; document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-    btn.textContent = '✅ הועתק!';
-    setTimeout(function(){ btn.innerHTML = '📋 העתק פרומפט'; }, 2500);
-  }
-}
-
 /* ═══════════════════════════════════════════
-    QUIZ ENGINE DATA & RENDERING
+   QUIZ ENGINE
 ═══════════════════════════════════════════ */
 var quizQuestions = [
+  // Part A – AI & Framework (8 questions)
   {q:'מהו ה-Holistic Framework (המסגרת ההוליסטית) בחשבונאות?',
    a:['שם של תוכנת ERP מתקדמת','שיטה לניתוח 5 ממדים משולבים: מידע, דיווח, פרשנות, בקרה וחברה','מסגרת לביקורת פנימית בלבד','שיטת דיווח ממשלתית'],
    c:1, ex:'המסגרת ההוליסטית מחברת 5 ממדים שפועלים יחד. שינוי בתקן אחד (כמו IFRS 18) משפיע על כולם בו-זמנית.'},
@@ -2435,6 +3410,7 @@ var quizQuestions = [
   {q:'מה זה "Professional Skepticism" ולמה AI לא יחליף אותו?',
    a:['ספקנות מקצועית – יכולת לחשוד בנתונים גם כשנראים תקינים; דורשת שיקול דעת אנושי שלא ניתן לנסח כאלגוריתם','שם לכלי AI של KPMG','מונח מתמטי לזיהוי חריגות','סוג של ביקורת פנימית'],
    c:0, ex:'Professional Skepticism = מנטליות "אני לא מניח שזה נכון – אני בודק". AI מזהה דפוסים; ספקנות מקצועית = יכולת לחשוד שגם הדפוס עצמו עלול להיות מניפולטיבי.'},
+  // IFRS 18 (8 questions)
   {q:'IFRS 18 מחליף איזה תקן קיים?',
    a:['IFRS 9','IAS 1 – הצגת דוחות כספיים','IAS 16 – רכוש קבוע','IFRS 15 – הכנסות'],
    c:1, ex:'IFRS 18 מחליף את IAS 1 Presentation of Financial Statements. בתוקף מ-1.1.2027 בצורה מחייבת, עם Retrospective Application לנתוני 2026.'},
@@ -2447,7 +3423,7 @@ var quizQuestions = [
   {q:'מה זה "Adjusted EBITDA"? (ראשי תיבות)',
    a:['Annual Earnings Before Interest, Tax & Depreciation Assets','Earnings Before Interest, Taxes, Depreciation & Amortization – רווח לפני ריבית, מס, פחת והפחתות – "מותאם" = לאחר הוצאות "שהוחרגו"','External Balance In Tax & Dividend Analysis','אין כזה מונח רשמי'],
    c:1, ex:'EBITDA = Earnings Before Interest Taxes Depreciation & Amortization. "Adjusted" = הנהלה מוציאה עוד סעיפים שהיא מגדירה כ"חד-פעמיים". IFRS 18 מחייב שקיפות: מה בדיוק הוחרג ולמה.'},
-  {q:'Hvrh מציגה "ארגון מחדש" כ-Adjustment ב-Adjusted EBITDA במשך 6 שנים ברצף. לפי IFRS 18 – מה הבעיה?',
+  {q:'חברה מציגה "ארגון מחדש" כ-Adjustment ב-Adjusted EBITDA במשך 6 שנים ברצף. לפי IFRS 18 – מה הבעיה?',
    a:['אין בעיה – זה תמיד מותר','הוצאה שחוזרת שנה אחרי שנה אינה "חד-פעמית" – IFRS 18 דורש גילוי ו-Reconciliation, ולא ניתן יותר להסתירה','הבעיה היא רק אם הסכום גדול מ-5% מהכנסות','אסור להציג Adjusted EBITDA בכלל'],
    c:1, ex:'KPMG זיהה זאת כבעיה נפוצה: "חד-פעמי שחזר" = לא חד-פעמי. IFRS 18 מחייב הסבר על כל תיקון ב-MPM, והמשקיעים יראו שה"חריג" חזר 6 שנים.'},
   {q:'מתי נכנס IFRS 18 לתוקף מחייב?',
@@ -2455,37 +3431,38 @@ var quizQuestions = [
    c:2, ex:'IFRS 18 בתוקף ל-Annual Periods המתחילים ב-1.1.2027 ואילך. יישום מוקדם אפשרי. חשוב: Retrospective – נתוני 2026 יוצגו מחדש כ-Comparative בדוחות 2027.'},
   {q:'מה המשמעות של "Retrospective Application" של IFRS 18?',
    a:['החברה יכולה לבחור לא ליישם','הדוחות הישנים לא ישתנו','נתוני שנת 2026 יוצגו מחדש לפי הקטגוריות החדשות בדוחות 2027','יישום יחל רק מ-2030'],
-   c:2, ex:'Retrospective = החלה למפרע. חברה שתאמץ IFRS 18 ב-2027 תצטרך להציג גם נתוני 2026 לפי הקטגוריות החדשות. לכן – נתוני 2026 ישתנו מפרע ב-2027.'},
+   c:2, ex:'Retrospective = החלה למפרע. חברה שתאמץ IFRS 18 ב-2027 תצטרך להציג גם נתוני 2026 לפי הקטגוריות החדשות. לכן – נכון להיערך כבר בשנת 2026.'},
   {q:'חברת הייטק ישראלית מדווחת "Adjusted Operating Income" שמוציא SBC (תגמול מבוסס מניות). לפי IFRS 18 מה נדרש?',
    a:['זה מותר ולא נדרש כלום נוסף','SBC הוא הוצאה תפעולית (Operations). חייב Reconciliation בדוח: מה הוחרג, כמה, ולמה. הגילוי הזה חייב להיות בדוח עצמו','SBC לא שייך ל-Operating Profit בכלל','IFRS 18 לא מטפל ב-SBC'],
-   c:1, ex:'SBC הוא הוצאה תפעולית ריאלית. IFRS 18 מחייב MPM Note ייעודי בדוח הכספי עם גילוי מלא ו-Reconciliation לרווח התפעולי הרשמי.'},
+   c:1, ex:'SBC (Stock Based Compensation = תגמול מבוסס מניות) הוא הוצאה תפעולית ריאלית – גם אם לא מזומנית. IFRS 18: כל MPM שמוציא SBC חייב Reconciliation שקוף בדוח.'},
+  // IFRS 15 (9 questions)
   {q:'מה העיקרון המרכזי של IFRS 15 בהכרה בהכנסה?',
    a:['הכנסה מוכרת עם קבלת התשלום','הכנסה מוכרת עם חתימת החוזה','הכנסה מוכרת כאשר מועברת שליטה על הסחורה/שירות ללקוח','הכנסה מוכרת בסוף השנה הכספית'],
-   c:2, ex:'IFRS 15 מתבסס על העברת שליטה (Control Transfer) ללקוח. הלקוח יכול לכוון את השימוש בנכס ולקבל את מלוא התשואה ממנו.'},
+   c:2, ex:'IFRS 15 = Control Transfer. שליטה עוברת כשהלקוח יכול להשתמש בסחורה/שירות ולהפיק ממנה תועלת. זה שונה מהתקן הישן (IAS 18) שהתבסס על סיכונים ותשואות.'},
   {q:'מה זה "Performance Obligation" (מחויבות ביצוע)?',
    a:['סעיף תשלום בחוזה','הבטחה לספק מוצר או שירות מובחן שהלקוח יכול להפיק ממנו תועלת','מדד ביצוע ניהולי','סוג של ביקורת פנימית'],
-   c:1, ex:'Performance Obligation (PO) הוא הבטחה נפרדת ומובחנת בחוזה לספק מוצר או שירות.'},
+   c:1, ex:'Performance Obligation (PO) = כל הבטחה נפרדת בחוזה לספק מוצר/שירות "מובחן" (שהלקוח יכול להשתמש בו לבד). חוזה "מחשב + תוכנה + הדרכה" = 3 POs נפרדים.'},
   {q:'ספק ביטחוני חתם על חוזה לאספקת 100 רחפנים + הדרכה. כמה Performance Obligations?',
    a:['אחת – זהו חוזה אחד','שתיים – הרחפנים והדרכה (2 שירותים מובחנים)','שלוש – כל מאה רחפן בנפרד','תלוי במחיר'],
-   c:1, ex:'2 מחויבויות ביצוע: הרחפנים וההדרכה הם מוצרים ושירותים מובחנים הניתנים לזיהוי בנפרד.'},
+   c:1, ex:'2 POs: (1) הרחפנים – ניתן לרכוש בלי הדרכה, (2) ההדרכה – ניתן לרכוש בנפרד. כל PO מקבל הקצאת מחיר לפי SSP (Standalone Selling Price) שלו.'},
   {q:'מה זה "Variable Consideration"?',
    a:['מחיר קבוע לכל יחידה','תמורה משתנה: קנסות, בונוסים, הנחות שייקבעו רק בעתיד – חייבים להיות מוכרים בהסתברות גבוהה','אחוז ביצוע משוכלל','עמלת מכירה משתנה'],
-   c:1, ex:'Variable Consideration כולל רכיבים משתנים כמו בונוסי עמידה ביעדים או קנסות פיגורים שיש להעריך מראש.'},
-  {q:'Hvrh רשמה 50% ביצוע על חוזה 200M ₪ לפי Cost-to-Cost. כמה הכנסה הוכרה?',
+   c:1, ex:'Variable Consideration = תמורה שאינה קבועה מראש. דוגמאות: קנס פיגורים (מפחית TP), בונוס על מסירה מהירה (מוסיף TP). IFRS 15: יש לכלול VC ב-Transaction Price רק אם "highly probable" שלא יוחזר.'},
+  {q:'חברת בנייה רשמה 50% ביצוע על חוזה 200M ₪ לפי Cost-to-Cost. כמה הכנסה הוכרה?',
    a:['25M ₪','100M ₪','200M ₪','תלוי ב-Milestones'],
-   c:1, ex:'הכרה בהכנסה לפי שיטת העלויות (Input Method): 50% מתוך 200 מיליון ₪ שווים ל-100 מיליון ₪ הכנסה.'},
+   c:1, ex:'Cost-to-Cost: % ביצוע × TP = 50% × 200M = 100M ₪. זה בלי קשר לתשלומים שהתקבלו – הכנסה = לפי ביצוע, לא לפי מזומן.'},
   {q:'מה ההבדל בין "Over Time" ל-"Point in Time" בהכרה בהכנסה?',
    a:['Over Time = בסוף החוזה; Point in Time = בהתחלה','Over Time = הכרה הדרגתית כשהלקוח מקבל שליטה ברציפות; Point in Time = הכרה בנקודה ספציפית (למשל מסירה ואישור)','שניהם זהים','Point in Time = Over Time מהיר יותר'],
-   c:1, ex:'Over Time מיועד לשירותים או פרויקטים ארוכים שבהם השליטה מועברת בהדרגה. Point in Time חל ברגע מסירה ברור וחד-פעמי.'},
+   c:1, ex:'Over Time: כשהלקוח מקבל ומשתמש ברציפות (שירות תחזוקה, בנייה) – מכירים הדרגתית לפי % ביצוע. Point in Time: כשיש נקודת מסירה ברורה (מסירת מוצר גמור + אישור לקוח).'},
   {q:'מה זה "Cumulative Catch-Up Adjustment" בשינוי חוזה?',
    a:['תשלום מפרע ללקוח','תיקון מצטבר: כשמשנים חוזה קיים, מחשבים מחדש כמה הכנסה "צריכה" להיות מוכרת עד היום, ומכירים את ההפרש ברבעון הנוכחי','סוג של ביקורת על שינוי חוזה','שיטה לחישוב קנסות'],
-   c:1, ex:'Cumulative Catch-Up מעדכן את סך ההכנסות שהוכרו עד כה ברבעון שבו חל שינוי באומדן או בחוזה.'},
+   c:1, ex:'Catch-Up: נניח הכרת 40M ₪. שינוי → TP גדל → הכנסה שצריכה להיות מוכרת כעת = 48M ₪. Catch-Up = 8M ₪ ברבעון הנוכחי. חשוב: לפעמים Catch-Up = 0 כשהעלייה ב-TP מקוזזת בירידת %-ביצוע.'},
   {q:'מה זה "Contract Asset"?',
    a:['נכס שרכש הספק מהלקוח','הכנסה שהוכרה לפי % ביצוע אך עדיין לא הגיע מועד החיוב – "ספק קדם את עצמו"','מזומן שהלקוח שילם מראש','חוב של הספק ללקוח'],
-   c:1, ex:'Contract Asset מייצג זכות לקבלת תמורה בגין עבודה שבוצעה אך טרם הולידה זכות חיבוב מוחלטת (Receivable).'},
+   c:1, ex:'Contract Asset: הספק ביצע עבודה ← הכיר הכנסה ← אבל לפי לוח תשלומים הוא עוד לא יכול לחייב. מגלה שהביצוע "רץ קדימה" מהתשלומים. ≠ Receivable (שזה חיוב שכבר הוצא).'},
   {q:'חברת תוכנה ישראלית חתמה חוזה 5 שנים לתחזוקת מערכת ב-500K ₪ לשנה. מתי תכיר בהכנסה לפי IFRS 15?',
    a:['הכל ב-Year 1 עם חתימת החוזה','500K ₪ בשנה – Over Time לאורך 5 שנות השירות','הכל ב-Year 5 עם סיום החוזה','רק עם קבלת כל תשלום'],
-   c:1, ex:'חוזה תחזוקה שוטף מקיים תנאי הכרה לאורך זמן (Over Time) ומחולק שווה בשווה על פני שנות מתן השירות.'}
+   c:1, ex:'שירות תחזוקה שוטף = PO ש"מסופק Over Time". הלקוח מקבל ומשתמש בשירות ברציפות → הכנסה מוכרת הדרגתית: 500K ₪ לשנה × 5 שנים. לא משנה מתי מגיע התשלום הכספי.'}
 ];
 
 var quizState = { answers: {}, submitted: {} };
@@ -2504,11 +3481,11 @@ function renderQuiz(){
       html += '<button class="mcq-btn" id="qq-'+i+'-'+j+'" onclick="answerQuiz('+i+','+j+')">'+letter+'. '+opt+'</button>';
     });
     html += '</div>';
-    html += '<div id="qq-'+i+'-fb" style="not-specified;margin-top:10px;padding:12px;border-radius:10px;font-size:14px;"></div>';
+    html += '<div id="qq-'+i+'-fb" style="display:none;margin-top:10px;padding:12px;border-radius:10px;font-size:14px;"></div>';
     html += '</div>';
   });
   html += '<div style="text-align:center;margin:30px 0;">';
-  html += '<button onclick="calcScore()" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:#1A2535;border:none;border-radius:14px;padding:16px 40px;font-size:16px;font-weight:800;cursor:pointer;font-family:Heebo,sans-serif;">📊 חשב ציון וראה תוצאות</button>';
+  html += '<button onclick="calcScore()" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:14px;padding:16px 40px;font-size:16px;font-weight:800;cursor:pointer;font-family:Heebo,sans-serif;">📊 חשב ציון וראה תוצאות</button>';
   html += '</div>';
   c.innerHTML = html;
 }
@@ -2585,6 +3562,7 @@ function resetQuiz(){
   document.getElementById('quiz-container').scrollIntoView({behavior:'smooth'});
 }
 
+// Init quiz when tab-q is clicked (lazy render)
 var _quizRendered = false;
 var _origSwitchTab = window.switchTab;
 window.switchTab = function(tab){
@@ -2595,6 +3573,7 @@ window.switchTab = function(tab){
     if(ql) ql.textContent='בוחן';
   }
 };
+
 </script>
 </body>
 </html>
