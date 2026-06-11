@@ -1,0 +1,2600 @@
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>יום עיון 1 | ד"ר שי צבאן | בר-אילן</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>
+// ── MUST be in <head> so onclick works immediately ──
+function switchTab(tab){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  var pane = document.getElementById('pane-'+tab);
+  var btn  = document.getElementById('tab-'+tab);
+  if(pane) pane.classList.add('active');
+  if(btn)  btn.classList.add('active');
+  var bar = document.getElementById('tabs-bar');
+  if(bar) window.scrollTo({top: bar.offsetTop - 4, behavior:'smooth'});
+  window._currentTab = tab;
+  setTimeout(updateProgress, 200);
+}
+</script>
+<style>
+:root {
+  --bg: #EEF4FB;
+  --bg2: #E2EDF8;
+  --surface: #FFFFFF;
+  --surface2: #F5F9FF;
+  --purple: #5B2D8E;
+  --purple2: #7B4DB5;
+  --blue: #1A4F8C;
+  --blue2: #2B6CC8;
+  --blue3: #4A90D9;
+  --accent: #E8A020;
+  --accent2: #F0C060;
+  --text: #1A2535;
+  --text2: #3A4A60;
+  --text3: #6B7A90;
+  --green: #1A7050;
+  --green2: #2A9A70;
+  --red: #A02828;
+  --border: #C5D8F0;
+  --shadow: 0 4px 24px rgba(26,79,140,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Heebo',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:16px;}
+
+/* HERO */
+.hero{background:linear-gradient(140deg,#111830 0%,#1A3060 45%,#4A1A7A 100%);color:#fff;padding:64px 40px 52px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 65%);border-radius:50%;}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-60px;width:320px;height:320px;background:radial-gradient(circle,rgba(232,160,32,.10) 0%,transparent 65%);border-radius:50%;}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:30px;padding:6px 22px;font-size:13px;margin-bottom:20px;color:#C8DFFF;}
+.hero h1{font-size:2.7em;font-weight:900;line-height:1.2;margin-bottom:10px;}
+.hero h2{font-size:1.25em;font-weight:400;color:#A8C8F8;margin-bottom:8px;}
+.hero-sub{font-size:14px;color:#8AB0E0;margin-bottom:28px;}
+.hero-meta{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+.hm{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:12px;padding:10px 18px;font-size:13px;color:#C8DFFF;display:flex;align-items:center;gap:8px;}
+
+/* TIMELINE */
+.tl-bar{background:#fff;border-bottom:3px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(26,79,140,.09);overflow-x:auto;}
+.tl-inner{display:flex;min-width:580px;}
+.tl-seg{flex:1;padding:13px 8px;text-align:center;font-size:12px;font-weight:700;cursor:pointer;border-right:2px solid var(--border);color:var(--text3);transition:background .2s;}
+.tl-seg:last-child{border-right:none;}
+.tl-seg:hover{background:var(--bg2);}
+.tl-seg.active{background:linear-gradient(135deg,var(--purple),var(--blue2));color:#fff;}
+.tl-seg .tl-time{font-size:10px;font-weight:400;opacity:.75;display:block;margin-bottom:2px;}
+.tl-seg.dim{opacity:.45;cursor:default;}
+
+/* CONTAINER */
+.container{max-width:980px;margin:0 auto;padding:44px 24px 60px;}
+
+/* SECTION HEADER */
+.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:30px;padding-bottom:18px;border-bottom:3px solid var(--border);}
+.sec-num{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--purple),var(--blue2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;flex-shrink:0;}
+.sec-title h3{font-size:1.5em;font-weight:800;color:var(--purple);line-height:1.2;}
+.sec-title p{font-size:13px;color:var(--text3);margin-top:3px;}
+
+/* CARD */
+.card{background:var(--surface);border-radius:16px;padding:28px 30px;margin-bottom:26px;box-shadow:var(--shadow);border:1px solid var(--border);}
+.card-title{font-size:1.1em;font-weight:800;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:9px;}
+
+/* ── FLIP CARDS ── */
+.fc-wrap{margin-bottom:28px;}
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;}
+.fc{cursor:pointer;border-radius:16px;border:2px solid var(--border);background:var(--surface);box-shadow:0 3px 12px rgba(26,79,140,.08);transition:box-shadow .2s,transform .2s;overflow:hidden;}
+.fc:hover{box-shadow:0 6px 20px rgba(26,79,140,.15);transform:translateY(-2px);}
+.fc-front{padding:20px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:130px;justify-content:center;}
+.fc-front .emo{font-size:32px;}
+.fc-front h4{font-size:14px;font-weight:800;color:var(--blue);line-height:1.3;}
+.fc-front p{font-size:12px;color:var(--text2);line-height:1.5;}
+.fc-front .hint{font-size:11px;color:var(--blue2);margin-top:4px;background:#EBF3FF;border-radius:8px;padding:3px 10px;font-weight:bold;}
+.fc-detail{display:none;padding:18px 16px;background:var(--surface2);border-top:2px solid var(--border);font-size:13px;color:var(--text);line-height:1.75;text-align:right;}
+.fc-detail.open{display:block;}
+.fc-detail h5{font-weight:800;color:var(--blue);margin-bottom:8px;font-size:14px;}
+.fc-detail ul{padding-right:18px;}
+.fc-detail li{margin-bottom:5px;color:var(--text);}
+.fc-detail p{margin-bottom:6px;color:var(--text);}
+
+/* color themes for fc */
+.fc.purple-fc .fc-front{background:linear-gradient(135deg,#F3EBF8,#EDE0F5);}
+.fc.purple-fc .fc-front h4{color:var(--purple);}
+.fc.purple-fc .fc-front .hint{color:var(--purple);background:#F3EBF8;}
+.fc.green-fc .fc-front{background:linear-gradient(135deg,#EBF8F3,#DDF2EA);}
+.fc.green-fc .fc-front h4{color:var(--green);}
+.fc.green-fc .fc-front .hint{color:var(--green);background:#EBF8F3;}
+.fc.orange-fc .fc-front{background:linear-gradient(135deg,#FFF4E5,#FFEACC);}
+.fc.orange-fc .fc-front h4{color:#804000;}
+.fc.orange-fc .fc-front .hint{color:#804000;background:#FFF4E5;}
+.fc.blue-fc .fc-front{background:linear-gradient(135deg,#EBF3FF,#DDEEFF);}
+.fc.blue-fc .fc-front h4{color:var(--blue);}
+.fc.blue-fc .fc-front .hint{color:var(--blue);background:#EBF3FF;}
+
+/* HOLISTIC NODES */
+.hol-flow{display:flex;flex-direction:column;gap:0;align-items:stretch;max-width:480px;margin:0 auto 20px auto;}
+.hol-node{border-radius:14px;padding:14px 20px;font-size:14px;font-weight:800;cursor:pointer;text-align:center;border:2px solid transparent;transition:box-shadow .18s,transform .18s;margin-bottom:0;}
+.hol-node:hover{transform:translateX(-3px);box-shadow:0 4px 14px rgba(26,79,140,.18);}
+.hol-arrow{text-align:center;font-size:18px;color:var(--blue3);padding:3px 0;line-height:1;}
+.hol-detail{display:none;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:16px 18px;font-size:13.5px;color:var(--text);line-height:1.75;margin-top:4px;margin-bottom:4px;}
+.hol-detail.open{display:block;}
+.hol-detail h5{font-weight:800;color:var(--blue);margin-bottom:8px;}
+.hol-detail ul{padding-right:18px;}
+.hol-detail li{margin-bottom:4px;color:var(--text);}
+
+/* HIGHLIGHT BOXES */
+.hl{border-radius:14px;padding:18px 22px;margin:18px 0;display:flex;gap:14px;align-items:flex-start;}
+.hl.blue{background:#EBF3FF;border-right:5px solid var(--blue2);}
+.hl.purple{background:#F3EBF8;border-right:5px solid var(--purple2);}
+.hl.green{background:#EBF8F3;border-right:5px solid var(--green2);}
+.hl.orange{background:#FFF4E5;border-right:5px solid var(--accent);}
+.hl.red{background:#FFF0F0;border-right:5px solid var(--red);}
+.hl-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+.hl-body h4{font-weight:800;margin-bottom:5px;font-size:14px;color:var(--text);}
+.hl-body p,.hl-body li{font-size:14px;color:var(--text);line-height:1.7;}
+.hl-body ul{padding-right:18px;}
+.hl-body li{margin-bottom:4px;}
+.hl-body a{color:var(--blue2);font-weight:bold;}
+
+/* FLOW */
+.flow-wrap{overflow-x:auto;padding:8px 0;}
+.flow{display:flex;align-items:center;gap:0;justify-content:flex-end;flex-wrap:wrap;}
+.fn{border-radius:12px;padding:14px 16px;text-align:center;font-size:13px;font-weight:700;min-width:110px;box-shadow:0 3px 10px rgba(26,79,140,.18);color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue2));}
+.fn.purple{background:linear-gradient(135deg,var(--purple),var(--purple2));}
+.fn.green{background:linear-gradient(135deg,#155A40,#1E8060);}
+.fn.orange{background:linear-gradient(135deg,#904010,#C05020);}
+.fn.gray{background:linear-gradient(135deg,#4A5870,#6A7890);}
+.fn-sub{font-size:10px;font-weight:400;opacity:.85;margin-top:3px;}
+.fa{color:var(--blue3);font-size:18px;padding:0 5px;flex-shrink:0;}
+
+/* Q&A */
+.qa{background:linear-gradient(135deg,#FAF3FF,#F0EBF8);border:2px solid var(--purple2);border-radius:16px;padding:24px;margin:26px 0;}
+.qa-q{font-size:1.05em;font-weight:700;color:var(--purple);margin-bottom:16px;display:flex;align-items:flex-start;gap:10px;}
+.qa-icon{background:var(--purple);color:#fff;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;}
+.btn-hint{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#1A2535;border:none;border-radius:10px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Heebo',sans-serif;margin-left:6px;margin-top:4px;transition:opacity .2s;}
+.btn-hint:hover{opacity:.86;}
+.btn-ans{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:none;border-radius:10px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Heebo',sans-serif;margin-top:8px;transition:opacity .2s;}
+.btn-ans:hover{opacity:.86;}
+.hint-box,.ans-box{display:none;border-radius:10px;padding:14px;font-size:14px;line-height:1.7;margin-top:10px;}
+.hint-box{background:#FFF8E8;border:1.5px solid var(--accent2);color:#604000;}
+.ans-box{background:#EEFAF3;border:1.5px solid var(--green2);color:#0A3A20;}
+.hint-box.open,.ans-box.open{display:block;}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;}
+th{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;padding:12px 16px;text-align:right;font-weight:700;}
+td{padding:11px 16px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text);}
+tr:nth-child(even){background:var(--surface2);}
+tr:last-child td{border-bottom:none;}
+
+/* SUMMARY SENTENCE */
+.summary-sentence{background:linear-gradient(135deg,var(--purple),var(--blue2));color:#fff;border-radius:16px;padding:20px 28px;text-align:center;font-size:1.1em;font-weight:700;margin:24px 0;line-height:1.6;}
+
+/* BREAK */
+.break-banner{background:linear-gradient(135deg,#F0F6FF,#EBF0FC);border:2px solid var(--border);border-radius:14px;padding:18px 24px;text-align:center;margin:36px 0;color:var(--text);font-weight:700;font-size:15px;}
+
+/* TOOL GRID */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:16px 0;}
+.tool-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:14px 12px;text-align:center;}
+.tool-card .tc-icon{font-size:24px;margin-bottom:6px;}
+.tool-card h5{font-size:13px;font-weight:800;color:var(--blue);margin-bottom:4px;}
+.tool-card p{font-size:11.5px;color:var(--text);line-height:1.55;}
+.tool-card a{font-size:11px;color:var(--blue2);font-weight:700;}
+
+/* TEXTAREA */
+textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-family:'Heebo',sans-serif;font-size:14px;resize:vertical;color:var(--text);background:#fff;margin-top:8px;}
+textarea:focus{outline:none;border-color:var(--blue2);}
+
+/* PROGRESS RING */
+.prog-ring-wrap{position:fixed;bottom:24px;left:24px;z-index:999;cursor:pointer;filter:drop-shadow(0 3px 8px rgba(26,79,140,.25));}
+.prog-ring-wrap svg{transform:rotate(-90deg);}
+.prog-ring-bg{fill:none;stroke:rgba(255,255,255,.25);}
+.prog-ring-fill{fill:none;stroke-linecap:round;transition:stroke-dashoffset .4s ease;}
+.prog-ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.prog-ring-pct{font-size:13px;font-weight:900;color:#fff;line-height:1;}
+.prog-ring-label{font-size:9px;color:rgba(255,255,255,.8);margin-top:2px;font-weight:600;}
+.prog-bg-circle{width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));position:absolute;inset:0;}
+
+/* TABS */
+.tabs-bar{display:flex;background:#fff;border-bottom:3px solid var(--border);overflow-x:auto;}
+.tab-btn{flex:1;min-width:130px;padding:14px 10px;text-align:center;font-size:13px;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--text3);border-bottom:3px solid transparent;margin-bottom:-3px;transition:all .2s;font-family:'Heebo',sans-serif;}
+.tab-btn:hover{background:var(--bg2);}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue2);background:linear-gradient(180deg,transparent,#EBF3FF);}
+.tab-btn .tb-icon{display:block;font-size:18px;margin-bottom:3px;}
+.tab-pane{display:none;}
+.tab-pane.active{display:block;}
+
+/* MCQ buttons */
+.mcq-btn{background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Heebo',sans-serif;text-align:right;color:var(--text);transition:background .2s;line-height:1.5;}
+.mcq-btn:hover:not(:disabled){background:#EBF3FF;border-color:var(--blue2);}
+.mcq-btn:disabled{cursor:default;}
+
+/* RESP */
+@media(max-width:620px){
+  .hero h1{font-size:1.9em;}
+  .fc-grid{grid-template-columns:1fr 1fr;}
+  .hol-flow{max-width:100%;}
+  .prog-ring-wrap{bottom:12px;left:12px;}
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-badge">🏛️ אוניברסיטת בר-אילן &nbsp;|&nbsp; היחידה ללימודי תעודה &nbsp;|&nbsp; חלק א׳ – תצוגה מקדימה</div>
+  <h1>עדכוני תקינה וביקורת</h1>
+  <h2>מה השתנה ומה המשמעות בשטח</h2>
+  <div class="hero-sub">יום עיון 1 &nbsp;·&nbsp; 11.06.2026 &nbsp;·&nbsp; ד"ר שי צבאן</div>
+  <div class="hero-meta">
+    <div class="hm"><span>⏱️</span> 6 שעות לימוד</div>
+    <div class="hm"><span>📋</span> IFRS 18 · IFRS 15 · תקני ביקורת</div>
+    <div class="hm"><span>🎯</span> יועץ כספי לרמטכ"ל · אגף התקציבים</div>
+    <div class="hm"><span>📅</span> 11/06/2026</div>
+  </div>
+</div>
+
+<!-- PROGRESS RING -->
+<div class="prog-ring-wrap" id="prog-ring-wrap" title="התקדמות בחלק הנוכחי">
+  <div class="prog-bg-circle"></div>
+  <svg width="62" height="62" viewBox="0 0 62 62">
+    <circle class="prog-ring-bg" cx="31" cy="31" r="26" stroke-width="5"/>
+    <circle id="prog-fill" class="prog-ring-fill" cx="31" cy="31" r="26" stroke-width="5"
+      stroke="#A0E8C0" stroke-dasharray="163.4" stroke-dashoffset="163.4"/>
+  </svg>
+  <div class="prog-ring-inner">
+    <div class="prog-ring-pct" id="prog-pct">0%</div>
+    <div class="prog-ring-label" id="prog-label">חלק א׳</div>
+  </div>
+</div>
+
+<div class="tabs-bar" id="tabs-bar">
+  <button class="tab-btn active" id="tab-a" onclick="switchTab('a')">
+    <span class="tb-icon">🌐</span>חלק א׳<br><small style="font-size:10px;font-weight:400;">09:00–10:30</small>
+  </button>
+  <button class="tab-btn" id="tab-b" onclick="switchTab('b')">
+    <span class="tb-icon">📊</span>חלק ב׳ – IFRS<br><small style="font-size:10px;font-weight:400;">10:45–12:00</small>
+  </button>
+  <button class="tab-btn" style="opacity:.45;cursor:default;">
+    <span class="tb-icon">☕</span>הפסקה<br><small style="font-size:10px;font-weight:400;">12:00–13:00</small>
+  </button>
+  <button class="tab-btn" style="opacity:.45;cursor:default;">
+    <span class="tb-icon">🔍</span>חלק ג׳ – ביקורת<br><small style="font-size:10px;font-weight:400;">13:00–16:30</small>
+  </button>
+  <button class="tab-btn" id="tab-q" onclick="switchTab('q')" style="background:linear-gradient(180deg,#FFF8E8,#FFF3CC);color:#804000;border-bottom-color:var(--accent);">
+    <span class="tb-icon">🎓</span>בחן את עצמך<br><small style="font-size:10px;font-weight:400;">Quiz סיום</small>
+  </button>
+</div>
+
+<div id="pane-a" class="tab-pane active"><div class="container">
+
+<!-- A-1 -->
+<div class="sec-head">
+  <div class="sec-num">א</div>
+  <div class="sec-title">
+    <h3>עתיד החשבונאות והדיווח הכספי</h3>
+    <p>09:00 – 10:30 &nbsp;|&nbsp; מרצה: ד"ר שי צבאן</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">👤 מי הוא רואה החשבון – ומה הוא באמת עושה?</div>
+  <p style="font-size:14.5px;color:var(--text2);margin-bottom:20px;">לפני שנדון בשינויים ובעתיד, חשוב לכייל ציפיות. לחצו על כל תפקיד לפרטים ולהקשר הביטחוני הספציפי.</p>
+
+  <div class="fc-grid">
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">📑</div><h4>דיווח כספי</h4><p>הכנה ועמידה בתקינה</p><div class="hint">לחצו לפרטים ↓</div></div>
+      <div class="fc-detail">
+        <h5>📑 דיווח כספי</h5>
+        <ul>
+          <li>הכנת דוחות לפי IFRS / IPSAS ממשלתי</li>
+          <li>עמידה בלוחות זמנים: ועדת ביקורת, דירקטוריון, רגולטורים</li>
+          <li>גילוי נאות, הערות לדוחות, ניהול מדיניות חשבונאית</li>
+          <li><strong>📌 בהקשר מ"ב:</strong> דוחות לרשות החשבת הכללית, לאגף התקציבים, ולוועדת ביטחון הכנסת</li>
+          <li><strong>ייחוד:</strong> תקציב מ"ב אינו דוח רווח-הפסד – הוא Appropriations Budget. השפה שונה לגמרי</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🔍</div><h4>ביקורת ובקרה</h4><p>פנימית, חיצונית, ועדת ביקורת</p><div class="hint">לחצו לפרטים ↓</div></div>
+      <div class="fc-detail">
+        <h5>🔍 ביקורת ובקרה</h5>
+        <ul>
+          <li><strong>ביקורת פנימית:</strong> בדיקת תהליכים, בקרות, עמידה ברגולציה – מאותת על בעיות לפני שמגיעות לביקורת חיצונית</li>
+          <li><strong>ביקורת חיצונית:</strong> אישוש נאותות הדוחות – נדרש ל-ISA 700/701/705</li>
+          <li><strong>ועדת ביקורת:</strong> גשר בין הנהלה לבין מבקר חיצוני</li>
+          <li><strong>📌 במ"ב:</strong> ביקורת הסכמי ספקים (רפאל/תע"א/אלביט), אישורי חשבון, מבקר המדינה</li>
+          <li>מבקר המדינה 2024 מצא שמ"ב צבר חוב של 13 מיליארד ₪ – כשל ביקורת ובקרה</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fc green-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">💰</div><h4>תכנון ותקצוב</h4><p>תכנון פיננסי ותקציב שנתי ורב-שנתי</p><div class="hint">לחצו לפרטים ↓</div></div>
+      <div class="fc-detail">
+        <h5>💰 תכנון ותקצוב</h5>
+        <ul>
+          <li>Bniat תקציב שנתי ורב-שנתי (5–10 שנה)</li>
+          <li>תחזיות תזרים מזומנים ובקרת ביצוע</li>
+          <li>ניתוח חריגות ועדכון תחזיות</li>
+          <li><strong>📌 ייחודי לאגף:</strong> תקציב ביטחוני של 117 מיליארד ₪ (2025) + תוספות מלחמה</li>
+          <li><strong>אתגר ייחודי:</strong> מ"ב הוא המשרד היחיד שמנהל את תקציב הרכש שלו בעצמו, מחוץ לפיקוח שגרתי של האוצר (TheMarker 2025)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fc orange-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">⚖️</div><h4>ייעוץ מס</h4><p>תכנון ועמידה בחובות</p><div class="hint">לחצו לפרטים ↓</div></div>
+      <div class="fc-detail">
+        <h5>⚖️ ייעוץ מס</h5>
+        <ul>
+          <li>עמידה בחובות: דיווח שוטף, ניכוי במקור, מע"מ</li>
+          <li>תכנון מס חוקי: מינוף הטבות, קבוצות, העברות</li>
+          <li>ייצוג מול רשות המסים</li>
+          <li><strong>📌 לגוף ממשלתי:</strong> פחות רלוונטי ישירות, אך הכרחי לניתוח מס של ספקים פרטיים כגון אלביט, IAI</li>
+          <li>דוגמה: ספק שנהנה מהטבת מס גדולה – האם המחיר שהוא דורש משקף זאת?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">📊</div><h4>ניתוח עסקי</h4><p>הערכות שווי, M&A, סיכונים</p><div class="hint">לחצו לפרטים ↓</div></div>
+      <div class="fc-detail">
+        <h5>📊 ניתוח עסקי</h5>
+        <ul>
+          <li>הערכות שווי לחברות ונכסים</li>
+          <li>ניתוח M&A, גיוס הון, מיזוגים</li>
+          <li>ניתוח סיכונים פיננסיים ותרחישי רגישות</li>
+          <li><strong>📌 רלוונטי לאגף:</strong> הערכת הצעות מחיר של ספקים, Cost Analysis, Benchmarking בין ספקי נשק</li>
+          <li>שאלה: האם מחיר טיל שרפאל מבקשת הוגן? → ניתוח Cost Build-up</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🏛️</div><h4>ממשל תאגידי</h4><p>דירקטוריון, ועדות, ESG</p><div class="hint">לחצו לפרטים ↓</div></div>
+      <div class="fc-detail">
+        <h5>🏛️ ממשל תאגידי</h5>
+        <ul>
+          <li>שירות כדירקטור עצמאי / בעל מומחיות פיננסית</li>
+          <li>ועדות ביקורת, שכר, השקעות</li>
+          <li>ESG: דיווח קיימות (יום עיון 2)</li>
+          <li><strong>📌 בהקשר ביטחוני:</strong> ועדות פנימיות, בקרת תקציב, דיווח לוועדת ביטחון הכנסת</li>
+          <li>תע"א 2024: מבקר המדינה מצא ליקויים בממשל – בכיר ניהל תקציב רכש "בצורה לא מוקפדת"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-sentence">💡 רואה החשבון הוא לא רק "מי שמכין את הדוחות" – הוא מתרגם מציאות כלכלית לשפה שמאפשרת קבלת החלטות</div>
+</div>
+
+<div class="card">
+  <div class="card-title">🎯 מה ייחודי בתפקיד היועץ הכספי לרמטכ"ל ואגף התקציבים?</div>
+  <div class="hl blue">
+    <div class="hl-icon">📐</div>
+    <div class="hl-body">
+      <h4>אגף התקציבים במ"ב – בקצרה</h4>
+      <p>אגף התקציבים הוא <strong>הסמכות המקצועית העליונה בכל הנושאים הכלכליים</strong> של מערכת הביטחון. הוא קובע מדיניות פיננסית לרכש, מכין תחזיות מאקרו, ומייצר תמונת מצב שנתית ורב-שנתית. תקציב 2025 עמד על 117 מיליארד ₪ – ולאחר תוספות מלחמה, עוד עשרות מיליארדים.</p>
+    </div>
+  </div>
+  <table>
+    <tr><th>תפקיד</th><th>ביצוע בפועל</th><th>הכלי החשבונאי</th></tr>
+    <tr><td><strong>תכנון תקציב</strong></td><td>שנתי + רב-שנתי, כולל רכש מערכות נשק</td><td>NPV, תחזיות תזרים, רגישות תרחישים</td></tr>
+    <tr><td><strong>בחינת ספקים</strong></td><td>ניתוח דוחות IAI, Elbit, רפאל, ספקים פרטיים</td><td>IFRS 15, IFRS 18, ניתוח יחסים</td></tr>
+    <tr><td><strong>בקרת חוזים</strong></td><td>מעקב אחר אבני דרך, תשלומים, חריגות</td><td>% of Completion, Contract Modifications</td></tr>
+    <tr><td><strong>דיווח לפיקוח</strong></td><td>ועדת ביטחון הכנסת, רשות החשבת, מבקר</td><td>תקינה ממשלתית IPSAS, גילוי נאות</td></tr>
+    <tr><td><strong>ניהול סיכונים</strong></td><td>סיכוני שער (רכש דולרי), אינפלציית הגנה</td><td>IFRS 9, גידור, ניתוח רגישות</td></tr>
+  </table>
+</div>
+
+<!-- A-2 -->
+<div class="card">
+  <div class="card-title">🔗 המסגרת ההוליסטית – חמישה ממדים שפועלים יחד</div>
+  <p style="font-size:14.5px;color:var(--text2);margin-bottom:12px;">
+    <strong>המסגרת ההוליסטית</strong> היא דרך לחשוב על עבודת החשב לא כסדרת משימות מבודדות, אלא כמערכת שבה חמישה ממדים פועלים בו-זמנית. כשספק ביטחוני מדווח על הכנסות בחוזה רב-שנתי – כל חמשת הממדים מושפעים. <strong>לחצו על כל ממד:</strong>
+  </p>
+
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:20px;align-items:start;">
+    <div class="hol-flow">
+      <div class="hol-node blue-fc" style="background:#EBF3FF;border-color:var(--blue2);color:var(--blue);" onclick="toggleHol('h1')">📊 מידע<br><small style="font-weight:400;font-size:12px;">נתונים גולמיים</small></div>
+      <div class="hol-arrow">↕</div>
+      <div class="hol-node purple-fc" style="background:#F3EBF8;border-color:var(--purple2);color:var(--purple);" onclick="toggleHol('h2')">📑 דיווח<br><small style="font-weight:400;font-size:12px;">IFRS / ממשלתי</small></div>
+      <div class="hol-arrow">↕</div>
+      <div class="hol-node blue-fc" style="background:#EBF3FF;border-color:var(--blue2);color:var(--blue);" onclick="toggleHol('h3')">🔍 פרשנות<br><small style="font-weight:400;font-size:12px;">ניתוח מהותי</small></div>
+      <div class="hol-arrow">↕</div>
+      <div class="hol-node green-fc" style="background:#EBF8F3;border-color:var(--green2);color:var(--green);" onclick="toggleHol('h4')">🛡️ בקרה<br><small style="font-weight:400;font-size:12px;">סיכונים &amp; בקרות</small></div>
+      <div class="hol-arrow">↕</div>
+      <div class="hol-node orange-fc" style="background:#FFF4E5;border-color:var(--accent);color:#804000;" onclick="toggleHol('h5')">🏛️ חברה<br><small style="font-weight:400;font-size:12px;">אחריות ציבורית</small></div>
+    </div>
+    <div>
+      <div id="h1" class="hol-detail open">
+        <h5>📊 מידע – הבסיס לכל</h5>
+        <p>הכל מתחיל בנתונים. בעידן המודרני הנתונים מגיעים ממערכות ERP (SAP, Oracle), מחוזים דיגיטליים ומחיישנים. <strong>הבעיה:</strong> נפח הנתונים עלה פי 100 בעשור – אבל יכולת ניתוח ידנית לא עלתה.</p>
+        <ul>
+          <li>נתוני עסקאות (חשבוניות, תשלומים)</li>
+          <li>נתוני ביצוע חוזה (Milestone reports)</li>
+          <li>נתוני שוק: שע"ח, ריבית, מדדי מחירים</li>
+          <li><strong>בהקשר מ"ב:</strong> 1,400+ עסקאות שנתיות עם ספקי חו"ל בלבד (2025)</li>
+        </ul>
+      </div>
+      <div id="h2" class="hol-detail">
+        <h5>📑 דיווח – שיקוף המציאות?</h5>
+        <p>הדיווח הוא לא רק "הכנת דוחות" – הוא <strong>שיקוף של מציאות כלכלית</strong>. השאלה אינה רק "האם הדוח נכון טכנית?" אלא "האם הוא מספר את הסיפור הנכון?"</p>
+        <ul>
+          <li>IFRS vs. ממשלתי (IPSAS) – שתי מסגרות, עקרונות שונים</li>
+          <li>IFRS 18 (2027): מבנה דוח חדש – רלוונטי לספקים ביטחוניים</li>
+          <li><strong>שאלת עומק:</strong> ספק שמכיר הכנסה "לפי אחוז ביצוע" – האם זה משקף ביצוע ריאלי?</li>
+          <li>מ"ב חייב ל-13 מיליארד ₪ לרפאל/תע"א/אלביט – שיקוף כלשהו בדוחות?</li>
+        </ul>
+      </div>
+      <div id="h3" class="hol-detail">
+        <h5>🔍 פרשנות – מה המספרים באמת אומרים?</h5>
+        <p>זהו הממד שמבדיל בין חשב טכני לאנליסט אסטרטגי.</p>
+        <ul>
+          <li>ניתוח DuPont: מדוע ROE של ספק עלה – מינוף, שוליים, יעילות?</li>
+          <li>ניתוח אנכי/אופקי: מגמות רב-שנתיות בספק ביטחוני</li>
+          <li>זיהוי "קוסמטיקה": Non-GAAP, Adjusted EBITDA, הוצאות "חד-פעמיות"</li>
+          <li><strong>בהקשר:</strong> ספק מדווח "adjusted EBITDA גבוה" – מה הוא מסתיר תחת "adjusted"?</li>
+        </ul>
+      </div>
+      <div id="h4" class="hol-detail">
+        <h5>🛡️ בקרה – מניעת כשלים</h5>
+        <p>מערכת בקרה כוללת בקרות ידניות ואוטומטיות שמאמתות שנתונים נכונים ותהליכים תקינים.</p>
+        <ul>
+          <li>Segregation of Duties: הפרדת תפקידים (אישור / ביצוע / תיעוד)</li>
+          <li>בקרות אוטומטיות ב-ERP: כללי אימות, ספי אישור, התראות</li>
+          <li><strong>בהקשר ביטחוני:</strong> כשל בקרה = עיכוב תשלום לספק = עיכוב באספקת מערכת נשק → סיכון ביטחוני ממשי</li>
+          <li>תע"א 2024: בכיר חרג ב"מיליוני שקלים" ללא בקרה (מבקר המדינה)</li>
+        </ul>
+      </div>
+      <div id="h5" class="hol-detail">
+        <h5>🏛️ חברה – האחריות הציבורית</h5>
+        <p>הממד הרחב ביותר: לדיווח פיננסי יש משמעות ציבורית, חברתית ופוליטית.</p>
+        <ul>
+          <li>שקיפות: תקציב הביטחון הוא כסף ציבורי – 117 מיליארד ₪ בשנה</li>
+          <li>ESG ביטחוני: כיצד ספקי הגנה מדווחים על קיימות (יום עיון 2)</li>
+          <li>דיווח לפיקוח: ועדת ביטחון הכנסת, מבקר, בג"ץ</li>
+          <li>גלובלי: CSRD אירופי, FCPA, ציות ביצוא ביטחוני</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-sentence" style="margin-top:22px;">🔗 כשמשנים תקן חשבונאי אחד – כל חמשת הממדים מרגישים את זה. הכשרה שמתמקדת רק בטכניקה מחמיצה את התמונה הגדולה.</div>
+</div>
+
+<!-- A-3 -->
+<div class="card">
+  <div class="card-title">🤖 AI ואוטומציה בחשבונאות – לאט ובהדרגה</div>
+
+  <div class="qa">
+    <div class="qa-q"><div class="qa-icon">💭</div>
+      <div><strong>שאלת פתיחה 🎤</strong><br>
+      <span style="font-size:14px;font-weight:400;color:var(--text2);">כשאתם שומעים "בינה מלאכותית בחשבונאות" – מה עולה לכם בראש? רשמו 2-3 מילים.</span></div>
+    </div>
+    <textarea id="ai-pre" rows="2" placeholder="הקלידו כאן..."></textarea>
+    <button class="btn-hint" onclick="toggleBox('ai-pre-hint')">💡 רמז</button>
+    <button class="btn-ans" onclick="giveFeedback('ai-pre','ai-pre-fb')">📩 קבל משוב</button>
+    <div id="ai-pre-hint" class="hint-box">רמז: ChatGPT הוא רק כלי <em>אחד</em> מתוך עשרות. כמו לשאול "מה זה רכב?" ולקבל "פורשה". נכון, אבל יש גם משאיות ואוטובוסים...</div>
+    <div id="ai-pre-fb" class="ans-box"></div>
+  </div>
+
+  <div class="hl blue" style="margin-bottom:20px;">
+    <div class="hl-icon">🚫</div>
+    <div class="hl-body">
+      <h4>AI זה לא רק ChatGPT</h4>
+      <p>ChatGPT הוא כלי אחד מתוך מאות, מקטגוריה שנקראת "בינה מלאכותית גנרטיבית" (GenAI). בעולם הפיננסי, רוב עבודת ה-AI נעשית ע"י <strong>סוגים אחרים לגמרי</strong> של מודלים – שלא כותבים טקסט, אלא מנתחים מספרים, מזהים דפוסים, ומסווגים עסקאות.</p>
+    </div>
+  </div>
+
+  <div class="card-title" style="font-size:15px;margin-bottom:14px;">🗂️ משפחת ה-AI – תרשים פונקציונלי</div>
+
+  <div style="max-width:520px;margin:0 auto 24px auto;">
+    <div style="text-align:center;margin-bottom:8px;">
+      <div style="display:inline-block;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;border-radius:16px;padding:16px 30px;font-size:15px;font-weight:800;box-shadow:0 4px 14px rgba(91,45,142,.3);">
+        🧠 בינה מלאכותית (AI)<br><span style="font-size:12px;font-weight:400;opacity:.85;">הכינוי הכללי לכל המשפחה</span>
+      </div>
+    </div>
+    <div style="text-align:center;font-size:22px;color:var(--purple2);margin-bottom:8px;">↓</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="background:linear-gradient(135deg,#1A4F8C,#2B6CC8);color:#fff;border-radius:12px;padding:14px;text-align:center;font-size:13px;font-weight:700;">
+        ⚙️ אוטומציה<div style="font-size:11px;opacity:.85;margin-top:3px;">כללים קשיחים</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#155A40,#1E8060);color:#fff;border-radius:12px;padding:14px;text-align:center;font-size:13px;font-weight:700;">
+        📊 Machine Learning<div style="font-size:11px;opacity:.85;margin-top:3px;">למידה מנתונים</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#904010,#C05020);color:#fff;border-radius:12px;padding:14px;text-align:center;font-size:13px;font-weight:700;">
+        ✍️ Generative AI<div style="font-size:11px;opacity:.85;margin-top:3px;">יצירת תוכן</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#4A5870,#6A7890);color:#fff;border-radius:12px;padding:14px;text-align:center;font-size:13px;font-weight:700;">
+        💬 NLP<div style="font-size:11px;opacity:.85;margin-top:3px;">עיבוד שפה</div>
+      </div>
+    </div>
+    <div style="text-align:center;font-size:12px;color:var(--text3);margin-top:10px;">לחצו על כרטיסי ההסבר למטה לפרטים על כל קטגוריה ↓</div>
+  </div>
+
+  <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr));margin-bottom:0;">
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">⚙️</div><h4>אוטומציה</h4><p>Macro · RPA · Workflow</p><div class="hint">לחצו לפרטים ↓</div></div>
+      <div class="fc-detail">
+        <h5>⚙️ אוטומציה – "אם... אז..."</h5>
+        <p><strong>עיקרון:</strong> תנאי קשיח → פעולה. המחשב עושה בדיוק מה שאמרו לו. אין חשיבה.</p>
+        <p><strong>🔹 Macro (Excel/VBA):</strong> רצף פקודות מוקלט. "בכל לחיצה – הפעל נוסחאות אלה, עדכן גיליון ב, שלח PDF". משמש לסגירות תקציב חודשיות.</p>
+        <p><strong>🔹 Workflow Automation:</strong> ניתוב מסמכים לאנשים הנכונים. "חשבונית הגיעה → שלח לאישור מנהל → אם אושר → שלח לתשלום". כלים: Monday.com, Power Automate.</p>
+        <p><strong>🔹 RPA (Robotic Process Automation):</strong> "רובוט" תוכנה שמחקה קליקים של אדם. מעתיק נתונים מ-SAP לאקסל, ממלא טפסים, שולח מיילים. כלים: UiPath, Blue Prism.</p>
+        <p>⚠️ <strong>מגבלה קריטית:</strong> אם הממשק משתנה – הרובוט נשבר. אין יכולת הסתגלות.</p>
+        <p>📌 <strong>בהקשר מ"ב:</strong> אוטומציית הגשת דוחות תקציביים חודשיים, עדכון קוד ספק, ניתוב חשבוניות לאישור.</p>
+      </div>
+    </div>
+
+    <div class="fc green-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">📊</div><h4>Machine Learning</h4><p>למידה · ניבוי · דפוסים</p><div class="hint">לחצו לפרטים ↓</div></div>
+      <div class="fc-detail">
+        <h5>📊 Machine Learning – לומד מדוגמאות</h5>
+        <p><strong>עיקרון:</strong> במקום לכתוב כללים – מראים דוגמאות. המודל מוצא לבד את הקשרים.</p>
+        <p><strong>🔹 Random Forest:</strong> מאות "עצי החלטה" מקבילים שמצביעים. כמו לשאול 500 מומחים ולקחת רוב. יציב, מסביר את עצמו.</p>
+        <p><strong>🔹 Neural Network / Deep Learning:</strong> שכבות מחוברות שמחקות מוח. מצוין לדפוסים מורכבים, פחות מסביר את עצמו ("קופסה שחורה").</p>
+        <p><strong>🔹 דרישה קריטית:</strong> Labeled Data – נתונים היסטוריים מסומנים. "1,000 חשבוניות תקינות + 50 הונאות" → המודל לומד את ההבדל.</p>
+        <p>✅ <strong>יתרון:</strong> מוצא חריגות שאדם לא ישים לב אליהן ב-50,000 רשומות.</p>
+        <p>⚠️ <strong>מגבלה:</strong> נדרש Data Governance מצוין + אימות אנושי של תוצאות.</p>
+      </div>
+    </div>
+
+    <div class="fc orange-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">✍️</div><h4>Generative AI</h4><p>GPT · Claude · יצירת תוכן</p><div class="hint">לחצו לפרטים ↓</div></div>
+      <div class="fc-detail">
+        <h5>✍️ GenAI – "כתוב לי..."</h5>
+        <p><strong>עיקרון:</strong> מודלים שמייצרים תוכן חדש – טקסט, קוד, תמונות, מצגות.</p>
+        <p><strong>🔹 בחשבונאות:</strong> כתיבת הערות לדוחות, סיכום ממצאי ביקורת, ניסוח מכתבי דרישה, ניתוח חוזה מ-PDF.</p>
+        <p><strong>🔹 Deloitte 2024:</strong> 50%+ חיסכון בסקירת חוזים ותיעוד ביקורת.</p>
+        <p>⚠️ <strong>סיכון: Hallucinations</strong> – מציג עובדות לא נכונות בביטחון מלא. בחשבונאות: עשוי להמציא תקנים, פסקי דין, מספרים. <strong>חובה לאמת כל פלט!</strong></p>
+        <p>📌 <strong>בהקשר מ"ב:</strong> ניסוח סיכומי בדיקת ספקים, כתיבת דו"חות לוועדת ביטחון, ניתוח חוזי רכש ב-PDF.</p>
+      </div>
+    </div>
+
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">💬</div><h4>NLP</h4><p>Natural Language Processing</p><div class="hint">לחצו לפרטים ↓</div></div>
+      <div class="fc-detail">
+        <h5>💬 NLP – שפה → מספרים</h5>
+        <p><strong>עיקרון:</strong> הופך טקסט לא מובנה (PDF, מייל, חוזה) לנתונים מובנים שמחשב יכול לנתח.</p>
+        <p><strong>🔹 Text Extraction:</strong> סריקת PDF חוזה → מזיהה תאריכי Milestone, סכומי קנסות, תנאים מיוחדים.</p>
+        <p><strong>🔹 Sentiment Analysis:</strong> "מה הטון של ה-MD&A בדוח הספק? אופטימי / זהיר / מודאג?"</p>
+        <p><strong>🔹 Power BI Copilot:</strong> שאל "מהם 3 הסעיפים עם הכי הרבה חריגה?" – קבל גרף. זמין בעברית מסוף 2024.</p>
+        <p><strong>🔹 Trullion:</strong> קורא חוזה IFRS 15 ב-PDF, מוצא Performance Obligations, מחשב הכרה בהכנסה.</p>
+        <p>📌 <strong>בהקשר:</strong> עיבוד אלפי עמודי חוזי רכש ביטחוני לאיתור חריגים.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hl purple" style="margin-top:20px;">
+    <div class="hl-icon">🏠</div>
+    <div class="hl-body">
+      <h4>מודלים לוקאליים (Local Models) – מה זה ולמה זה חשוב בהקשר ביטחוני?</h4>
+      <p>כל הכלים שנזכרו עד כה (ChatGPT, Claude וכו') פועלים ב<strong>ענן</strong> – הנתונים עוברים לשרתים חיצוניים. בהקשר ביטחוני, זה <strong>בעייתי מאוד</strong>.</p>
+      <p style="margin-top:6px;"><strong>מודל לוקאלי</strong> = מודל AI שרץ על שרתים של הארגון עצמו, ללא מגע עם האינטרנט. הנתונים לא עוזבים את הארגון.</p>
+      <ul>
+        <li>🔒 <strong>אבטחת מידע:</strong> חובה לסיווג ביטחוני – חוזה עם רפאל לא יכול לעבור ל-OpenAI</li>
+        <li>💻 <strong>דוגמאות למודלים לוקאליים:</strong> Llama 3 (Meta, חינמי), Mistral, Phi-4 (Microsoft) – ניתן להריץ על שרת מקומי</li>
+        <li>🏢 <strong>פתרון ארגוני:</strong> Azure OpenAI Service / AWS Bedrock – GenAI בסביבה מבוקרת, בענן ממשלתי</li>
+        <li>⚖️ <strong>רגולציה:</strong> דוח הצוות הבין-משרדי (ישראל 2025) מציין במפורש שגופים מפוקחים חייבים להגדיר מדיניות לאיפה הנתונים עוברים</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hl orange" style="margin-top:4px;">
+    <div class="hl-icon">🤝</div>
+    <div class="hl-body">
+      <h4>מודל AI מול סוכן AI (Agent) – מה ההבדל?</h4>
+      <p>זהו אחד הנושאים החמים ביותר ב-2025–2026:</p>
+      <ul>
+        <li>🧠 <strong>מודל AI:</strong> עונה לשאלה אחת. שואלים → עונה. "כתוב לי סיכום של דוח זה" → מקבל סיכום. סיים.</li>
+        <li>🤖 <strong>סוכן AI (Agent):</strong> מתכנן ומבצע רצף של פעולות בצורה אוטונומית. "נתח את כל חשבוניות Q1, זהה חריגות, כתוב דו"ח, ושלח לאישור מנהל" – הסוכן עושה הכל לבד, כולל קריאה למכשירים חיצוניים (ERP, מייל, מסד נתונים).</li>
+        <li>📌 <strong>דוגמה:</strong> KPMG Workbench (2025) = מערכת Multi-Agent: סוכן אחד בודק חשבוניות, אחד בודק אישורים, אחד כותב ממצאים – כולם פועלים במקביל.</li>
+        <li>⚠️ <strong>סיכון של סוכנים:</strong> פעולות בלתי הפיכות. "מחק כפילויות" → הסוכן מחק נתונים חשובים. חובה: Human-in-the-loop לפעולות מהותיות.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-title" style="font-size:15px;margin-top:22px;margin-bottom:14px;">🧪 כלי AI לנסות – מדריך לסטודנט</div>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:14px;">ניתן להתחיל לנסות את הכלים הבאים <strong>עוד היום</strong> – ברמה האישית, לא על נתוני סוד:</p>
+
+  <div class="tool-grid">
+    <div class="tool-card">
+      <div class="tc-icon">🟢</div>
+      <h5>ChatGPT</h5>
+      <p>OpenAI. הנפוץ ביותר. GPT-4o חינמי. מצוין לניתוח טקסט, כתיבה, קוד.</p>
+      <a href="https://chatgpt.com" target="_blank">chatgpt.com →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-icon">🟣</div>
+      <h5>Claude</h5>
+      <p>Anthropic. מצוין לניתוח מסמכים ארוכים (עד 200K tokens). מדויק ומסביר.</p>
+      <a href="https://claude.ai" target="_blank">claude.ai →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-icon">🔵</div>
+      <h5>Gemini</h5>
+      <p>Google. משולב ב-Google Workspace. שואל שאלות על Gmail / Drive.</p>
+      <a href="https://gemini.google.com" target="_blank">gemini.google.com →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-icon">🔶</div>
+      <h5>DeepSeek</h5>
+      <p>סיני. R1 – מצוין להסברים לוגיים ומתמטיים. חינמי. מודל פתוח.</p>
+      <a href="https://chat.deepseek.com" target="_blank">chat.deepseek.com →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-icon">🟡</div>
+      <h5>Qwen</h5>
+      <p>Alibaba. חזק במתמטיקה ובנתונים. מודל פתוח – ניתן להריץ לוקאלית.</p>
+      <a href="https://chat.qwen.ai" target="_blank">chat.qwen.ai →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-icon">🇮🇱</div>
+      <h5>Z.ai</h5>
+      <p>ישראלי (Zoominfo). ממוקד לעסקים. ממשק עברי. מתאים לניתוח שוק.</p>
+      <a href="https://www.zoominfo.com" target="_blank">zoominfo →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-icon">🏠</div>
+      <h5>Ollama (לוקאלי)</h5>
+      <p>מריץ מודלים על המחשב שלך. Llama3, Mistral. ללא אינטרנט. מתאים לנתונים רגישים.</p>
+      <a href="https://ollama.com" target="_blank">ollama.com →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-icon">☁️</div>
+      <h5>Azure OpenAI</h5>
+      <p>GPT-4 בסביבה ארגונית מבוקרת. עומד בדרישות GDPR. מתאים לגופים ממשלתיים.</p>
+      <a href="https://azure.microsoft.com/en-us/products/ai-services/openai-service" target="_blank">azure →</a>
+    </div>
+  </div>
+
+  <div class="card" style="background:var(--surface2);border:1.5px solid var(--border);margin-top:4px;margin-bottom:0;">
+    <div class="card-title" style="font-size:15px;">📊 Machine Learning בחשבונאות – 5 שלבים</div>
+    <p style="font-size:14px;color:var(--text2);margin-bottom:16px;">ML הוא <em>לא קסם</em>. זהו תהליך מובנה. הבנת השלבים חיונית כדי לדעת מתי לסמוך על המודל.</p>
+
+    <div class="flow-wrap" style="margin-bottom:20px;">
+      <div class="flow" style="gap:0;justify-content:flex-end;flex-wrap:wrap;">
+        <div class="fn purple" style="min-width:108px;padding:12px 10px;font-size:12px;">1️⃣ נתונים<div class="fn-sub">לאסוף ולנקות</div></div>
+        <div class="fa">←</div>
+        <div class="fn" style="min-width:108px;padding:12px 10px;font-size:12px;">2️⃣ סימון<div class="fn-sub">תקין / חריג</div></div>
+        <div class="fa">←</div>
+        <div class="fn green" style="min-width:108px;padding:12px 10px;font-size:12px;">3️⃣ אימון<div class="fn-sub">המודל לומד</div></div>
+        <div class="fa">←</div>
+        <div class="fn orange" style="min-width:108px;padding:12px 10px;font-size:12px;">4️⃣ בדיקה<div class="fn-sub">נתוני test</div></div>
+        <div class="fa">←</div>
+        <div class="fn" style="min-width:108px;padding:12px 10px;font-size:12px;">5️⃣ פריסה<div class="fn-sub">Live + פיקוח</div></div>
+      </div>
+    </div>
+
+    <div class="card-title" style="font-size:14px;margin-bottom:12px;">שלושה שימושי ML בחשבונאות – דוגמאות ישראליות (לחצו)</div>
+    <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+      <div class="fc blue-fc" onclick="toggleFC(this)">
+        <div class="fc-front"><div class="emo">🚨</div><h4>זיהוי חריגות</h4><p>Anomaly Detection</p><div class="hint">↓ דוגמאות ישראליות</div></div>
+        <div class="fc-detail">
+          <h5>🚨 זיהוי חריגות – מה זה?</h5>
+          <p><strong>הגדרה:</strong> המודל לומד מה "נורמלי" ומסמן כל מה שחורג – בלי שהגדרנו מראש מה חריג.</p>
+          <p><strong>🇮🇱 תע"א 2024:</strong> מבקר המדינה מצא שבכיר הוציא מיליוני ₪ על קשרי תקשורת מעל לתקציב ובלי אישור. מערכת ML על נתוני ERP היתה מסמנת זאת ב-real time – לא חודשים לאחר מכן. <a href="https://www.ynet.co.il/economy/article/sjv8fdvxc" target="_blank">מקור ←</a></p>
+          <p><strong>🌍 Wirecard (2020):</strong> "הענרון הגרמני" – חברת תשלומים זייפה 1.9 מיליארד € ב"מזומן" שלא היה קיים. מחקר MDPI 2025 הראה שמודל ML היה מזהה חריגות ב-Beneish M-Score כבר ב-2015 – <strong>5 שנים לפני הקריסה</strong>. מבקרי EY לא זיהו ידנית. <a href="https://www.mdpi.com/1911-8074/18/11/605" target="_blank">מקור ←</a></p>
+          <p><strong>🇮🇱 מ"ב 2025:</strong> חוב מ"ב לרפאל/תע"א/אלביט הגיע ל-13 מיליארד ₪. ML על נתוני חשבוניות וגביה יכל לאותת על הצטברות הפיגורים חודשים קודם. <a href="https://www.calcalist.co.il/local_news/article/s1ahwwctzx" target="_blank">מקור ←</a></p>
+        </div>
+      </div>
+
+      <div class="fc green-fc" onclick="toggleFC(this)">
+        <div class="fc-front"><div class="emo">🔮</div><h4>ניבוי תקציבי</h4><p>Predictive Analytics</p><div class="hint">↓ איך זה עובד?</div></div>
+        <div class="fc-detail">
+          <h5>🔮 ניבוי תקציבי – לדעת מראש</h5>
+          <p><strong>הגדרה:</strong> לימוד ממגמות היסטוריות לניבוי עתיד. "בהתבסס על 5 שנות ביצוע – אגף X יחרוג ב-Q3 ב-12%."</p>
+          <p><strong>🇮🇱 דוגמה קונקרטית:</strong> מ"ב מבצע תכנית רב-שנתית. ML על נתוני ביצוע היסטוריים (רכש, פרויקטים, מלחמות) יכול לשפר דיוק תחזית ב-40%+.</p>
+          <p><strong>דוגמה מספרית:</strong> "חוזה עם רפאל נוטה לחרוג ב-Q3 → בהסתמך על דפוס 2019/2021 → צפויה חריגה של 300M ₪ → התראה 3 חודשים מראש."</p>
+          <p>⚠️ <strong>מגבלה חשובה:</strong> ML לא "יודע" על מלחמות, שינויי מדיניות, תחנות COVID. נדרש judgment אנושי לנסיבות חריגות.</p>
+        </div>
+      </div>
+
+      <div class="fc purple-fc" onclick="toggleFC(this)">
+        <div class="fc-front"><div class="emo">🗂️</div><h4>סיווג אוטומטי</h4><p>Classification</p><div class="hint">↓ מה זה ולמה חשוב?</div></div>
+        <div class="fc-detail">
+          <h5>🗂️ סיווג אוטומטי – "שוטר הנתונים"</h5>
+          <p><strong>הגדרה:</strong> בהינתן עסקה חדשה, המודל מחליט לאיזה קטגוריה היא שייכת.</p>
+          <p><strong>🔹 דוגמה:</strong> חשבונית על "ציוד תקשורת מדגם X" – האם זה CAPEX (רכוש קבוע)? OPEX (תחזוקה)? מלאי? ההבחנה משנה <em>כל שורת תקציב</em>.</p>
+          <p><strong>🔹 ברמה הטכנית:</strong> המודל אומן על 50,000 חשבוניות היסטוריות מסווגות. לחשבונית חדשה הוא מנבא קטגוריה ב-94-97% דיוק לעומת 85% ידנית.</p>
+          <p><strong>🔹 תועלת עיקרית:</strong> אחידות בין מחלקות. "ציוד קשר" בסעיף 30 = "ציוד תקשורת" בסעיף 31 = אותו דבר. ML מאחד.</p>
+          <p>📌 <strong>חשוב:</strong> הסיווג חייב לעמוד בהגדרות תקציביות מוסכמות – ה"מדריך" שכתבנו מראש.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hl orange" style="margin-top:16px;">
+      <div class="hl-icon">🏗️</div>
+      <div class="hl-body">
+        <h4>Data Governance – למה זה "הבעיה האמיתית"?</h4>
+        <p>ML טוב כמו הנתונים שהוא מקבל. <strong>"Garbage in, garbage out"</strong> – נכון פי עשרה כשה-AI מופעל.</p>
+        <ul>
+          <li>🔴 <strong>קוד ספק:</strong> לרפאל יש קוד אחד בכל מערכת? או "רפאל מערכות" + "RAFAEL Ltd." + "04-120-30" = שלושה ספקים שונים?</li>
+          <li>🟡 <strong>קוד תקציב:</strong> האם "ציוד קשר" בסעיף 30 ב-2022 = "ציוד תקשורת" בסעיף 31 ב-2023?</li>
+          <li>🟢 <strong>תאריכים:</strong> תאריך חתימת חוזה ≠ תאריך אישור ≠ תאריך ביצוע – כל שלושת השדות נדרשים</li>
+          <li>📌 <strong>McKinsey 2025:</strong> Data governance = גורם #1 לכישלון פרויקטי AI פיננסיים. לפני שמתקינים AI – בונים Data Dictionary.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qa" style="margin-top:16px;">
+      <div class="qa-q"><div class="qa-icon">✏️</div>
+        <div><strong>תרגיל – Data Governance 🎤</strong><br>
+        <span style="font-size:14px;font-weight:400;color:var(--text2);">אתם רוצים לבנות מודל ML לזיהוי חריגות ברכש. מה 3 שדות הנתונים הראשונים שתוודאו שהם אחידים?</span></div>
+      </div>
+      <textarea id="data-gov" rows="2" placeholder="לדוגמה: קוד ספק..."></textarea>
+      <button class="btn-hint" onclick="toggleBox('dg-hint')">💡 רמז</button>
+      <button class="btn-ans" onclick="giveFeedback('data-gov','dg-fb')">📩 קבל משוב</button>
+      <div id="dg-hint" class="hint-box">חשבו: מה מזהה עסקה בצורה חד-ערכית? ספק? סכום? תאריך? סעיף תקציב? מטבע?</div>
+      <div id="dg-fb" class="ans-box"></div>
+    </div>
+  </div>
+
+  <div class="card-title" style="font-size:15px;margin-top:24px;margin-bottom:14px;">🛠️ כלי AI בשימוש Big 4 – 2025/26 (לחצו)</div>
+  <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(190px,1fr));">
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🔵</div><h4>KPMG Workbench</h4><p>Multi-agent Audit AI</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>KPMG Workbench (2025)</h5>
+        <p><strong>סוג:</strong> Audit AI – Multi-Agent System</p>
+        <p>מנתח 100% מהעסקאות (לא דגימה). מפעיל סוכנים מקבילים: אחד בודק חשבוניות, אחד בודק אישורים, אחד בודק עקביות.</p>
+        <p><strong>📌 ישראל:</strong> רו"ח ארנון אטיס – המרצה שלנו היום – הוביל הטמעה של מערכות KPMG AI בישראל.</p>
+      </div>
+    </div>
+
+    <div class="fc green-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🟢</div><h4>PwC GL.ai</h4><p>ML · General Ledger</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>PwC GL.ai</h5>
+        <p><strong>סוג:</strong> ML Anomaly Detection על פנקס ראשי</p>
+        <p>בנוי עם H2O.ai. מזהה עסקאות שחורגות מהדפוס הסטטיסטי הנורמלי – <em>ללא</em> הגדרה מראש של "מה חריג".</p>
+        <p><strong>יתרון:</strong> מוצא חריגות שדגימה סטטיסטית מפספסת לגמרי. מיועד לארגונים עם מיליוני רשומות.</p>
+      </div>
+    </div>
+
+    <div class="fc orange-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🟡</div><h4>Deloitte GenAI Audit</h4><p>GenAI · Review</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>Deloitte GenAI Audit Platform</h5>
+        <p><strong>סוג:</strong> GenAI לסקירת תיעוד ביקורת</p>
+        <p>סריקת תיעוד, הצעת שיפורים, ניסוח ממצאים. 50%+ חיסכון בסקירת מסמכים.</p>
+        <p>EY השיקה מערכת דומה עבור 160,000+ ביקורות גלובליות שנתיות. PwC: 20–50% רווח פרודוקטיביות.</p>
+      </div>
+    </div>
+
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🟣</div><h4>Trullion</h4><p>NLP · IFRS 15/16</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>Trullion – NLP לחוזים</h5>
+        <p><strong>סוג:</strong> NLP + Automation לחוזים פיננסיים</p>
+        <p>קורא חוזה IFRS 15 ב-PDF, מוצא Performance Obligations, מחשב הכרה בהכנסה, ומייצר Journal Entry ל-ERP.</p>
+        <p>גם מטפל ב-IFRS 16 – חוזי שכירות. <strong>📌 רלוונטי מאוד</strong> לניתוח חוזי ספקים ביטחוניים.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-title" style="font-size:15px;margin-top:24px;margin-bottom:14px;">⚖️ רגולציית AI בישראל – מה הדין?</div>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:14px;">דצמבר 2025: הצוות הבין-משרדי פרסם דוח סופי. <a href="https://www.boi.org.il/media/rh0bejl4/aireport.pdf" target="_blank" style="color:var(--blue2);font-weight:700;">לקריאת הדוח ←</a></p>
+
+  <div class="flow-wrap" style="margin-bottom:16px;">
+    <div class="flow" style="gap:0;flex-wrap:wrap;justify-content:flex-end;">
+      <div class="fn purple" style="min-width:110px;padding:11px 8px;font-size:12px;">⚖️ EU AI Act<div class="fn-sub">אירופה 2024</div></div>
+      <div class="fa">←</div>
+      <div class="fn" style="min-width:110px;padding:11px 8px;font-size:12px;">🇮🇱 דוח בין-משרדי<div class="fn-sub">ישראל דצמ׳ 2025</div></div>
+      <div class="fa">←</div>
+      <div class="fn green" style="min-width:110px;padding:11px 8px;font-size:12px;">🏦 גוף מפוקח<div class="fn-sub">בנק/ביטוח/ני"ע</div></div>
+      <div class="fa">←</div>
+      <div class="fn orange" style="min-width:110px;padding:11px 8px;font-size:12px;">📋 AI Governance<div class="fn-sub">חובה ליישם</div></div>
+      <div class="fa">←</div>
+      <div class="fn" style="min-width:110px;padding:11px 8px;font-size:12px;">✅ אחריות אנושית<div class="fn-sub">תמיד נשארת</div></div>
+    </div>
+  </div>
+
+  <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🏛️</div><h4>AI Governance</h4><p>ממשל בינה מלאכותית</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>AI Governance – מה נדרש?</h5>
+        <ul>
+          <li>נהלים ברורים לאישור ולהפעלת מודל AI</li>
+          <li>מיפוי סיכונים לכל מערכת AI</li>
+          <li>ניטור שוטף: "האם המודל עדיין מדויק?"</li>
+          <li>מינוי אחראי AI בארגון</li>
+        </ul>
+        <a href="https://www.boi.org.il/media/rh0bejl4/aireport.pdf" target="_blank">← מקור: דוח בנק ישראל 2025</a>
+      </div>
+    </div>
+    <div class="fc green-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">💡</div><h4>הסבריות</h4><p>Explainability</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>הסבריות – "קופסה שחורה" אסורה</h5>
+        <ul>
+          <li>מודל שמחליט "לא לשלם לספק" חייב להסביר <em>למה</em></li>
+          <li>בית משפט, ועדת ביקורת, מבקר – יידרשו הסבר</li>
+          <li>Deep Learning = קופסה שחורה → אסור להחלטות מהותיות</li>
+        </ul>
+        <a href="https://www.law.co.il/news/2025/12/25/final-report-examining-use-of-ai-in-the-financial-sector/" target="_blank">← מקור: law.co.il 2025</a>
+      </div>
+    </div>
+    <div class="fc orange-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">⚠️</div><h4>Bias ואפליה</h4><p>הטיות במודל</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>Bias – המלכודת הנסתרת</h5>
+        <ul>
+          <li>מודל שאומן על נתונים היסטוריים לומד גם את ה-bias</li>
+          <li>דוגמה: "ספקים קטנים נכשלו יותר בעבר" → מודל ידחה ספקים קטנים חדשים ללא סיבה</li>
+          <li>חובת בדיקת אפליה לפני פריסה</li>
+          <li>אחריות משפטית = על הארגון, לא על האלגוריתם</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🌍</div><h4>EU AI Act</h4><p>חל גם על ספקים ישראלים</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>EU AI Act (2024)</h5>
+        <ul>
+          <li>Hvrut ישראליות שמוכרות לאירופה (Elbit, IAI, רפאל) – כפופות לחוק</li>
+          <li>מערכות AI ב"סיכון גבוה" (כולל ביטחוני) → דרישות תיעוד קפדניות</li>
+          <li>קנסות: עד 30M € או 6% ממחזור</li>
+        </ul>
+        <a href="https://artificialintelligenceact.eu/" target="_blank">← EU AI Act</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hl blue" style="margin-top:18px;">
+    <div class="hl-icon">🔗</div>
+    <div class="hl-body">
+      <h4>חיבור לנושא הבא: מה קורה כשה-AI בנוי נכון?</h4>
+      <p>כשמבינים את הפוטנציאל, עולה שאלה: <strong>כמה זמן לוקח לגוף לסגור תקופה חשבונאית?</strong> ב-2025 – ה-Close הוא מדד לבגרות דיגיטלית של ארגון. ב-2026 – הוא גם מדד לכמה ה-AI שלך עובד.</p>
+    </div>
+  </div>
+</div>
+
+<!-- A-4 -->
+<div class="card">
+  <div class="card-title">📅 סגירות תקופתיות מהירות – מה זה ולמה זה משנה?</div>
+  <p style="font-size:14.5px;color:var(--text2);margin-bottom:16px;">"סגירה תקופתית" (Period-end Close) = ריכוז כל הנתונים הפיננסיים בתום תקופה, בדיקה ויצירת דוחות. <strong>ההבדל בין אתמול להיום:</strong></p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+    <div style="background:#FFF0F0;border-radius:13px;padding:18px;border:1.5px solid #FFBBBB;">
+      <div style="font-weight:800;color:var(--red);margin-bottom:10px;">⏳ Close מסורתי</div>
+      <ul style="font-size:13px;color:var(--text2);padding-right:16px;line-height:1.8;">
+        <li>12–15 ימי עסקים לסגירה חודשית</li>
+        <li>ידני: איסוף, מיזוג, יישוב הפרשים</li>
+        <li>גיליונות Excel שעוברים במייל</li>
+        <li>9 שגיאות ל-1,000 רשומות ידניות</li>
+        <li>ניתוח <strong>אחרי</strong> הסגירה – לפעמים חודש מאוחר</li>
+      </ul>
+    </div>
+    <div style="background:#EEFAF3;border-radius:13px;padding:18px;border:1.5px solid #88DDB0;">
+      <div style="font-weight:800;color:var(--green);margin-bottom:10px;">⚡ Continuous Close</div>
+      <ul style="font-size:13px;color:var(--text2);padding-right:16px;line-height:1.8;">
+        <li>ERP ב-Cloud: עסקאות מוקלטות בזמן אמת</li>
+        <li>סגירה: 1–3 ימים (Deloitte: מ-12 ל-3 בממוצע)</li>
+        <li>90%+ פחות שגיאות ידניות עם AI</li>
+        <li>ניתוח <strong>בזמן</strong> ההתרחשות</li>
+      </ul>
+    </div>
+  </div>
+  <div class="hl blue">
+    <div class="hl-icon">🎯</div>
+    <div class="hl-body">
+      <h4>מה זה אומר לאגף התקציבים?</h4>
+      <ul>
+        <li>ניתוח ביצוע תקציב <strong>בזמן אמת</strong> – לא ב-30 יום עיכוב</li>
+        <li>זיהוי מגמות חריגה <strong>בתוך</strong> הרבעון</li>
+        <li>ספקים שמשתמשים ב-Continuous Close מדווחים בזמן; ספקים שלא → <strong>סיכון חוזי</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- A-5 -->
+<div class="card">
+  <div class="card-title">🔒 בקרות ידניות מול אוטומטיות – ועקרון ההסתמכות</div>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:14px;"><em>הערה:</em> תהליכי העבודה הספציפיים באגף התקציבים עשויים להיות שונים ממה שמוצג כאן. הדגש הוא על העקרונות הרלוונטיים.</p>
+
+  <table>
+    <tr><th>סוג הבקרה</th><th>דוגמה מעולם הביטחון</th><th>חוזקות</th><th>חולשות</th></tr>
+    <tr>
+      <td><strong>ידנית</strong></td>
+      <td>קצין חשבות חותם על חשבונית ספק >200K ₪</td>
+      <td>שיקול דעת אנושי, גמישות</td>
+      <td>טעויות אנוש, עומסים, עיכובים</td>
+    </tr>
+    <tr>
+      <td><strong>אוטומטית</strong></td>
+      <td>ERP חוסם תשלום ללא Purchase Order</td>
+      <td>עקביות מלאה, 24/7</td>
+      <td>עלולה להיות עקפת, תלויה בהגדרה</td>
+    </tr>
+    <tr>
+      <td><strong>AI-based</strong></td>
+      <td>מודל מסמן חשבוניות חריגות לבדיקה</td>
+      <td>זיהוי דפוסים שנעלמו מעין אנושית</td>
+      <td>Explainability, False Positives, Bias</td>
+    </tr>
+  </table>
+
+  <div class="hl green">
+    <div class="hl-icon">⚖️</div>
+    <div class="hl-body">
+      <h4>עקרון ההסתמכות (ISA 315, 330) – בפועל</h4>
+      <p>מבקר שמסתמך על בקרה אוטומטית חייב לוודא שהבקרה <em>הוגדרה נכון, פועלת ברציפות, ולא עקפה</em>. אם כן – יכול להפחית Substantive Testing. אם לא – חייב לפצות בבדיקות ידניות נרחבות.</p>
+      <p style="margin-top:6px;"><strong>בהקשר מכרזים/ביטחון:</strong> בקרת "סף אישור לפי סוג מכרז" (מרכזי/פטור ממכרז/בטחוני) חייבת להיות מתועדת, ידועה, ומעודכנת. מבקר המדינה בודק בדיוק את זה.</p>
+    </div>
+  </div>
+</div>
+
+<!-- A-6 -->
+<div class="card">
+  <div class="card-title">📉 ניתוח חריגות תקציביות – מסורתי מול ML</div>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:14px;">Variance Analysis = השוואה בין תקציב מאושר לביצוע בפועל וזיהוי גורמי הפערים.</p>
+
+  <div class="card-title" style="font-size:14px;margin-bottom:10px;">📐 תהליך ניתוח מסורתי</div>
+  <div class="flow-wrap" style="margin-bottom:18px;">
+    <div class="flow" style="gap:0;justify-content:flex-end;flex-wrap:wrap;">
+      <div class="fn" style="min-width:100px;padding:12px 8px;font-size:12px;">תקציב<div class="fn-sub">מאושר</div></div>
+      <div class="fa">←</div>
+      <div class="fn purple" style="min-width:100px;padding:12px 8px;font-size:12px;">ביצוע<div class="fn-sub">ERP/SAP</div></div>
+      <div class="fa">←</div>
+      <div class="fn green" style="min-width:100px;padding:12px 8px;font-size:12px;">חישוב<div class="fn-sub">₪ ו-%</div></div>
+      <div class="fa">←</div>
+      <div class="fn orange" style="min-width:110px;padding:12px 8px;font-size:12px;">ניתוח גורמים<div class="fn-sub">מחיר/כמות/מיקס</div></div>
+      <div class="fa">←</div>
+      <div class="fn" style="min-width:100px;padding:12px 8px;font-size:12px;">דיווח<div class="fn-sub">המלצות</div></div>
+    </div>
+  </div>
+
+  <div class="card-title" style="font-size:14px;margin-bottom:12px;">📋 מקרה בוחן – לחצו על כל סוג סטייה לפרטים</div>
+  <div class="hl orange" style="margin-bottom:14px;">
+    <div class="hl-icon">📊</div>
+    <div class="hl-body">
+      <h4>מקרה בוחן: חריגה בתקציב רכש ציוד תקשורת</h4>
+      <p><strong>תקציב:</strong> 80M ₪ &nbsp;|&nbsp; <strong>ביצוע:</strong> 104M ₪ &nbsp;|&nbsp; <strong>חריגה:</strong> 24M ₪ (30%)</p>
+    </div>
+  </div>
+
+  <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+    <div class="fc orange-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">💱</div><h4>סטיית מחיר</h4><p>+9M ₪</p><div class="hint">↓ מה גרם לה?</div></div>
+      <div class="fc-detail">
+        <h5>💱 סטיית מחיר (+9M ₪)</h5>
+        <p><strong>מה זה:</strong> המחיר בפועל שונה מהמחיר בתקציב, בכמות זהה.</p>
+        <p><strong>גורמים בדוגמה זו:</strong></p>
+        <ul>
+          <li>אינפלציית ביטחון: עלויות חומרי גלם עלו 8% (מדד תשומות ביטחון)</li>
+          <li>ייסוף הדולר: רכש דולרי יקר יותר ב-5% לעומת הנחת התקציב</li>
+          <li>ספק יחיד: היעדר תחרות אפשר לרפאל לעדכן מחיר</li>
+        </ul>
+        <p><strong>📌 מה עושים:</strong> בחינת סעיף Price Adjustment בחוזה. האם קיים CPI clause?</p>
+      </div>
+    </div>
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">📦</div><h4>סטיית כמות</h4><p>+8M ₪</p><div class="hint">↓ מה גרם לה?</div></div>
+      <div class="fc-detail">
+        <h5>📦 סטיית כמות (+8M ₪)</h5>
+        <p><strong>מה זה:</strong> הכמות שנרכשה גדולה יותר מהתכנית.</p>
+        <p><strong>גורמים בדוגמה:</strong></p>
+        <ul>
+          <li>הרחבת פרויקט: פיקוד צפון הוסיף 2 גדודים לתכנית ולא עדכן תקציב</li>
+          <li>נזק לציוד קיים: נדרש רכש חלפים לא מתוכנן</li>
+          <li>שינוי מפרט: מעבר מציוד רדיו ל-סייבר-סקיור גרם ל-scope creep</li>
+        </ul>
+        <p><strong>📌 מה עושים:</strong> בקרת Change Orders. כל שינוי scope → אישור תקציב מראש.</p>
+      </div>
+    </div>
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">📅</div><h4>סטיית עיתוי</h4><p>+7M ₪</p><div class="hint">↓ מה גרם לה?</div></div>
+      <div class="fc-detail">
+        <h5>📅 סטיית עיתוי (+7M ₪)</h5>
+        <p><strong>מה זה:</strong> עסקאות שהיו אמורות להתבצע בשנה הבאה הוקדמו.</p>
+        <p><strong>גורמים:</strong></p>
+        <ul>
+          <li>מדיניות "צריכת תקציב": "אם לא נוציא – נאבד את התקציב לשנה הבאה"</li>
+          <li>עיכוב ספק: הזמנות ל-2025 שהגיעו ב-Q4 של 2024</li>
+          <li>חלון הזדמנויות: מחיר טוב שתפסו לפני העלאת מחיר ידועה</li>
+        </ul>
+        <p><strong>📌 מה עושים:</strong> Accrual accounting – ההכרה בהוצאה לפי ביצוע, לא לפי תשלום.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hl purple" style="margin-top:16px;">
+    <div class="hl-icon">🧠</div>
+    <div class="hl-body">
+      <h4>ML לניתוח חריגות – ערך מוסף על ניתוח מסורתי</h4>
+      <p><strong>הניתוח המסורתי</strong> (לעיל) הגיע 45 יום אחרי תום הרבעון. <strong>ML</strong> יכול לאותת על הגורמים האלה 3 חודשים מראש.</p>
+      <ul>
+        <li>🔴 מזהה מגמת מחיר עולה אצל ספק לפני שהיא משפיעה על תקציב</li>
+        <li>🟡 מזהה שינויי scope (לפי תדירות ותוכן בקשות Change Order)</li>
+        <li>🟢 מסמן "צריכת תקציב" מואצת ב-Q4 כדפוס לא נורמלי</li>
+      </ul>
+      <p style="margin-top:8px;">⚠️ <strong>חשוב:</strong> ML מסמן. אדם מחליט. הוא כלי אזהרה, לא מנגנון החלטה.</p>
+    </div>
+  </div>
+
+  <div class="qa" style="margin-top:18px;">
+    <div class="qa-q"><div class="qa-icon">✏️</div>
+      <div><strong>תרגיל – ניתוח חריגה 🎤</strong><br>
+      <span style="font-size:14px;font-weight:400;color:var(--text2);">תקציב פרויקט: 50M ₪. ביצוע בפועל: 62M ₪. מה 3 השאלות הראשונות שתשאלו כדי לאבחן את מקור החריגה?</span></div>
+    </div>
+    <textarea id="variance-q" rows="3" placeholder="השאלות שלי..."></textarea>
+    <button class="btn-hint" onclick="toggleBox('var-hint')">💡 רמז</button>
+    <button class="btn-ans" onclick="giveFeedback('variance-q','var-fb')">📩 קבל משוב</button>
+    <div id="var-hint" class="hint-box">רמז: חשבו על שלושת הממדים – מחיר? כמות? עיתוי? מה ניתן לבדוק מהר? חשבוניות? Change Orders? פגישת ספק?</div>
+    <div id="var-fb" class="ans-box"></div>
+  </div>
+</div>
+
+<!-- A-7 -->
+<div class="card">
+  <div class="card-title">🚀 הישרדות מקצועית – שינוי תפיסה, לא רק כלים</div>
+
+  <div class="qa" style="margin-bottom:20px;">
+    <div class="qa-q"><div class="qa-icon">💭</div>
+      <div><strong>לפני העקרונות – שאלת מחשבה 🎤</strong><br>
+      <span style="font-size:14px;font-weight:400;color:var(--text2);">KPMG 2025: גיוס junior חשבונאות ירד 16%. מה הכישורים שה-AI <strong>לא יצליח להחליף</strong>? רשמו.</span></div>
+    </div>
+    <textarea id="survival-q" rows="2" placeholder="הקלידו..."></textarea>
+    <button class="btn-hint" onclick="toggleBox('surv-hint')">💡 רמז</button>
+    <button class="btn-ans" onclick="giveFeedback('survival-q','surv-fb')">📩 קבל משוב</button>
+    <div id="surv-hint" class="hint-box">רמז: AI מצוין בדפוסים. מה דורש חוסר-ודאות? מה דורש אחריות? מה דורש אמון אנושי?</div>
+    <div id="surv-fb" class="ans-box"></div>
+  </div>
+
+  <div class="card-title" style="font-size:14px;margin-bottom:14px;">🗺️ שלושה עקרונות – לחצו לפרטים</div>
+  <div class="flow-wrap" style="margin-bottom:16px;">
+    <div class="flow" style="gap:0;flex-wrap:wrap;justify-content:flex-end;">
+      <div class="fn purple" style="min-width:140px;padding:15px 12px;">🔤 עקרון ה-T<div class="fn-sub">עומק + רוחב</div></div>
+      <div class="fa" style="font-size:20px;">+</div>
+      <div class="fn" style="min-width:140px;padding:15px 12px;">❓ עקרון ה"ולמה"<div class="fn-sub">שאלה לכל מספר</div></div>
+      <div class="fa" style="font-size:20px;">+</div>
+      <div class="fn green" style="min-width:140px;padding:15px 12px;">🌉 עקרון ה-Bridge<div class="fn-sub">נתון → החלטה</div></div>
+      <div class="fa" style="font-size:20px;">←</div>
+      <div class="fn orange" style="min-width:140px;padding:15px 12px;">💼 מומחיות בלתי מוחלפת</div>
+    </div>
+  </div>
+
+  <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr));">
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🔤</div><h4>עקרון ה-T</h4><p>מה זה ולמה זה שונה מהעבר?</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>עקרון ה-T – "עומק + רוחב"</h5>
+        <p>דמיינו את האות T: הקו האנכי = עומק מקצועי בתחום אחד. הקו האופקי = רוחב בתחומים משיקים.</p>
+        <p><strong>בעבר:</strong> "מומחה IFRS" היה מספיק. בעידן AI – IFRS בלבד = תפקיד לאוטומציה.</p>
+        <p><strong>היום:</strong> מומחה IFRS <em>שגם</em> מבין AI + ESG + שרשרת אספקה ביטחונית = פי 3 יקר יותר.</p>
+        <p><strong>📌 ישראל:</strong> EY אימנה 55,000 עובדים ב-AI. מי שלא עבר הכשרה – לא קודם. <a href="https://tax.thomsonreuters.com/blog/how-do-different-accounting-firms-use-ai-tri/" target="_blank">מקור ←</a></p>
+      </div>
+    </div>
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">❓</div><h4>עקרון ה"ולמה"</h4><p>מה ההבדל מניתוח רגיל?</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>עקרון ה"ולמה" – שאל אחרת</h5>
+        <p>AI טוב ב"מה". אנוש חייב להיות טוב ב"למה" ו"מה עושים".</p>
+        <p><strong>דוגמה:</strong> "חוב מ"ב לרפאל הגיע ל-13 מיליארד ₪" (כלכליסט 2026).</p>
+        <ul>
+          <li>AI: מזהה את המספר</li>
+          <li>אנוש: "מה זה אומר לאספקת כיפת ברזל? מה הcascading effect על ספקי משנה? מה המשמעות לביטחון הלאומי?"</li>
+        </ul>
+        <p><strong>שינוי תפיסה:</strong> מ"מרכז עלות" → ל"מרכז ניתוח אסטרטגי".</p>
+      </div>
+    </div>
+    <div class="fc green-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🌉</div><h4>עקרון ה-Bridge</h4><p>מה חדש בו?</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>ה-Bridge – גשר להחלטה</h5>
+        <p>חיבור בין נתון גולמי לבין החלטה ניהולית: נתון → משמעות → פעולה.</p>
+        <p><strong>בעבר:</strong> הגשת דוח. <strong>היום:</strong> הצגת דוח + המלצה מנומקת + תרחישי רגישות.</p>
+        <p><strong>דוגמה:</strong> "ספק חרג ב-30%" → לא מספיק להגיש. נדרש: לאכוף קנס? לאפשר timeline revision? להחליף ספק? – עם כמות, איכות ועלות לכל אופציה.</p>
+        <p><strong>KPMG CFO Survey 2024:</strong> "Inability to communicate insights" = החסם #1 לקידום CFO.</p>
+      </div>
+    </div>
+    <div class="fc orange-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">💼</div><h4>מה לא ניתן לאוטמט?</h4><p>המיומנויות של העתיד</p><div class="hint">↓</div></div>
+      <div class="fc-detail">
+        <h5>מה ה-AI לא יחליף?</h5>
+        <ul>
+          <li>⚖️ <strong>שיקול דעת בחוסר ודאות:</strong> מלחמה, שינוי מדיניות, ספק מתמוטט</li>
+          <li>🗣️ <strong>תקשורת לרמטכ"ל/שר/כנסת:</strong> תרגום מספרים לשפה אסטרטגית</li>
+          <li>🤝 <strong>משא ומתן:</strong> מול ספקים, מול האוצר, מול ועדות</li>
+          <li>🔍 <strong>Professional Skepticism:</strong> החשד המקצועי שאינו נוסחה</li>
+          <li>📌 <strong>אחריות משפטית:</strong> תמיד יהיה אנוש אחראי. לא האלגוריתם</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="hl blue" style="margin-top:16px;">
+    <div class="hl-icon">📌</div>
+    <div class="hl-body">
+      <h4>דוגמאות מהשוק – מאומתות עם קישורים</h4>
+      <ul>
+        <li>🔴 <strong>EY 2025:</strong> הכשרת 55,000 עובדים ב-AI. שינויי מבנה בשכבת junior. <a href="https://tax.thomsonreuters.com/blog/how-do-different-accounting-firms-use-ai-tri/" target="_blank">מקור ←</a></li>
+        <li>🟡 <strong>KPMG/Stanford 2025:</strong> גיוס junior ירד 16% בשנתיים. <a href="https://lakshyacommerce.com/blog/how-big4-are-using-ai-and-automation" target="_blank">מקור ←</a></li>
+        <li>🟢 <strong>מ"ב ישראל 2025:</strong> חוב ל-3 ספקים גדולים: 13 מיליארד ₪. אותו צוות, הרבה יותר עבודה = ייעול הכרחי. <a href="https://www.calcalist.co.il/local_news/article/s1ahwwctzx" target="_blank">מקור ←</a></li>
+        <li>🔵 <strong>רשות ני"ע ישראל 2025:</strong> חברות ציבוריות חייבות לגלות כיצד AI משפיע על תהליכי הדיווח. <a href="https://www.new.isa.gov.il/images/Fittings/isa/asset_library_pic/al_lobby/al_lobby-63b3dc4fa5dd2/AIreport.pdf" target="_blank">מקור ←</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- A-8 -->
+<div class="card">
+  <div class="card-title">🗺️ לאן הולכים מכאן? – מפת יום העיון</div>
+  <p style="font-size:14.5px;color:var(--text2);margin-bottom:20px;">בחלק א׳ ייצרנו את <em>המסגרת</em>. עכשיו שאר יום העיון מיישם אותה על כלים קונקרטיים. לחצו על כל תחנה:</p>
+
+  <div class="flow-wrap" style="margin-bottom:20px;">
+    <div class="flow" style="gap:0;flex-wrap:wrap;justify-content:flex-end;">
+      <div class="fn" style="min-width:140px;padding:16px 12px;background:linear-gradient(135deg,#5B2D8E,#7B4DB5);">🌐 מסגרת הוליסטית<div class="fn-sub">חלק א׳ ✅</div></div>
+      <div class="fa" style="font-size:22px;">←</div>
+      <div class="fn" style="min-width:140px;padding:16px 12px;">📐 IFRS 18<div class="fn-sub">חלק ב׳ – 10:45</div></div>
+      <div class="fa" style="font-size:22px;">←</div>
+      <div class="fn green" style="min-width:140px;padding:16px 12px;">📑 IFRS 15<div class="fn-sub">חלק ב׳ – 11:20</div></div>
+      <div class="fa" style="font-size:22px;">←</div>
+      <div class="fn orange" style="min-width:140px;padding:16px 12px;">🔍 תקני ביקורת<div class="fn-sub">חלק ג׳ – 13:00</div></div>
+      <div class="fa" style="font-size:22px;">←</div>
+      <div class="fn gray" style="min-width:140px;padding:16px 12px;">🌱 ESG<div class="fn-sub">יום עיון 2</div></div>
+    </div>
+  </div>
+
+  <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(190px,1fr));">
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">📐</div><h4>IFRS 18</h4><p>10:45 – 11:20</p><div class="hint">↓ מה נלמד?</div></div>
+      <div class="fc-detail">
+        <h5>IFRS 18 – מה חדש?</h5>
+        <ul>
+          <li>מחליף את IAS 1 מ-2027</li>
+          <li>מבנה דוח ר"ה חדש: 3 קטגוריות נוקשות</li>
+          <li>חובת גילוי MPM</li>
+          <li>ספקים ביטחוניים יצטרכו לשנות הצגת תוצאות</li>
+          <li>נחשב בחוזים ב-2024 שכבר חתמו? כדאי לדעת!</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fc green-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">📑</div><h4>IFRS 15</h4><p>11:20 – 12:00</p><div class="hint">↓ מה נלמד?</div></div>
+      <div class="fc-detail">
+        <h5>IFRS 15 – חוזים ארוכים</h5>
+        <ul>
+          <li>הכרה בהכנסה: מתי ואיך?</li>
+          <li>חוזי רכש ביטחוני = לב ליבו של התקן</li>
+          <li>מה קורה כשמ"ב שינה מפרט?</li>
+          <li>סימולציות מספריות + case studies</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fc orange-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🔍</div><h4>תקני ביקורת</h4><p>13:00 – 16:30 | רו"ח אטיס</p><div class="hint">↓ מה נלמד?</div></div>
+      <div class="fc-detail">
+        <h5>תקני ביקורת 2025/26</h5>
+        <ul>
+          <li>ISA 700/705/701: חוות דעת חדשה</li>
+          <li>ISA 265: תקשורת ליקויים בבקרה פנימית</li>
+          <li>Case Study: כשל 500M ₪ בחברה ציבורית ישראלית</li>
+          <li>KPMG Workbench: ביקורת AI בפועל</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🌱</div><h4>ESG ביטחוני</h4><p>יום עיון 2 – 29/07</p><div class="hint">↓ מה נלמד?</div></div>
+      <div class="fc-detail">
+        <h5>ESG ביטחוני</h5>
+        <ul>
+          <li>CSRD אירופי: מה חל על ספקים ישראלים?</li>
+          <li>רשות ני"ע: חובות דיווח קיימות</li>
+          <li>ESG ביטחוני: הסתירה לכאורה</li>
+          <li>סדנה: בניית תשתית נתוני קיימות</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-sentence">🎯 יום העיון הזה לא מלמד תקינה – הוא מלמד <em>לחשוב חשבונאית</em> בעידן שבו כלים משתנים ותקנים מתעדכנים. מי שמבין <strong>למה</strong> השינויים קורים – לא רק <strong>מה</strong> השתנה – הוא זה שישרוד ויצמח.</div>
+</div>
+
+<div class="break-banner">
+  <span style="font-size:22px">☕</span>&nbsp; הפסקה — 10:30 עד 10:45 &nbsp;|&nbsp; חלק ב׳ יתחיל ב-10:45
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center;padding:20px 0 8px;color:var(--text3);font-size:13px;border-top:1px solid var(--border);">
+  <div style="margin-bottom:6px;font-size:20px;">📚</div>
+  <strong>ד"ר שי צבאן</strong> &nbsp;|&nbsp; shay.tsaban@gmail.com &nbsp;|&nbsp; 050-655-1519<br>
+  <span style="font-size:12px;opacity:.7;">אוניברסיטת בר-אילן · היחידה ללימודי תעודה · 2026 | חלק א׳</span>
+</div>
+
+</div></div>
+
+<div id="pane-b" class="tab-pane"><div class="container">
+<div id="part-b-root">
+
+<!-- B -->
+<div class="sec-head" style="margin-top:0;">
+  <div class="sec-num" style="background:linear-gradient(135deg,#1A7050,#2A9A70);">ב</div>
+  <div class="sec-title">
+    <h3 style="color:var(--green);">תקני החשבונאות הפיננסית – שני שינויים מג׳וריים</h3>
+    <p>10:45 – 12:00 &nbsp;|&nbsp; השפעות מהותיות על ספקי הביטחון ועל אגף התקציבים</p>
+  </div>
+</div>
+
+<div class="hl blue" style="margin-bottom:22px;">
+  <div class="hl-icon">🔗</div>
+  <div class="hl-body">
+    <h4>חיבור לחלק א׳ – למה זה מגיע עכשיו?</h4>
+    <p>בחלק א׳ דיברנו על המסגרת ההוליסטית: מידע → דיווח → פרשנות → בקרה → חברה. IFRS 18 ו-IFRS 15 משנים <strong>שניים מתוך חמישה ממדים אלו בו-זמנית</strong> – את אופן ה<strong>דיווח</strong> ואת <strong>הפרשנות</strong> של תוצאות ספקים. כל מה שנלמד כאן ישפיע ישירות על יכולתכם לבחון דוחות של רפאל, אלביט, ותע"א.</p>
+  </div>
+</div>
+
+<!-- B-1 -->
+<div class="card">
+  <div class="card-title" style="color:var(--purple);">📐 IFRS 18 – הצגה ודיווח בדוחות כספיים (בתוקף 1.1.2027)</div>
+
+  <div class="qa" style="margin-bottom:20px;">
+    <div class="qa-q"><div class="qa-icon" style="background:var(--green);">💭</div>
+      <div><strong>שאלת מחשבה לפני שמתחילים 🎤</strong><br>
+      <span style="font-size:14px;font-weight:400;color:var(--text2);">ספק ביטחוני מדווח "Adjusted EBITDA" של 500M ₪, אבל הרווח הנקי שלו הוא 80M ₪. כיועצי התקציב – מה אתם שואלים ראשון?</span></div>
+    </div>
+    <textarea id="ifrs18-open" rows="2" placeholder="התשובה שלי..."></textarea>
+    <button class="btn-hint" onclick="toggleBox('h18-open')">💡 רמז</button>
+    <button class="btn-ans" onclick="giveFeedbackB('ifrs18-open','fb18-open')">📩 משוב</button>
+    <div id="h18-open" class="hint-box">רמז: מה ה"adjusted" מוציא מהחישוב? האם ההוצאות שהוצאו הן חד-פעמיות באמת? כמה פעמים חזרו בחמש שנים האחרונות?</div>
+    <div id="fb18-open" class="ans-box"></div>
+  </div>
+
+  <div class="card-title" style="font-size:14px;margin-bottom:12px;">❓ למה בכלל צריך IFRS 18? מה הבעיה עם IAS 1?</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+    <div style="background:#FFF0F0;border-radius:12px;padding:16px;border:1.5px solid #FFBBBB;">
+      <div style="font-weight:800;color:var(--red);margin-bottom:8px;">❌ IAS 1 – הבעיות</div>
+      <ul style="font-size:13px;color:var(--text2);padding-right:16px;line-height:1.85;">
+        <li>אין הגדרה נוקשה ל"רווח תפעולי"</li>
+        <li>חברות הגדירו Operating Profit כרצונן</li>
+        <li>Adjusted EBITDA לא היה מבוקר</li>
+        <li>אי-אפשר להשוות בין חברות</li>
+        <li>הנהלות שמו "הוצאות חוזרות" כ"חד-פעמיות"</li>
+      </ul>
+    </div>
+    <div style="background:#F0FBF6;border-radius:12px;padding:16px;border:1.5px solid #88DDB0;">
+      <div style="font-weight:800;color:var(--green);margin-bottom:8px;">✅ IFRS 18 – הפתרון</div>
+      <ul style="font-size:13px;color:var(--text2);padding-right:16px;line-height:1.85;">
+        <li>5 קטגוריות נוקשות לכל שורה</li>
+        <li>Operating Profit – הגדרה חוקית ומחייבת</li>
+        <li>MPM חייב להיות בדוח + Reconciliation</li>
+        <li>השוואה בין חברות הופכת אפשרית</li>
+        <li>"קוסמטיקה" חשבונאית – נחשפת</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-title" style="font-size:14px;margin-bottom:12px;">📊 5 הקטגוריות החדשות בדוח רווח והפסד (לחצו)</div>
+  <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(175px,1fr));">
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🏭</div><h4>1. Operations</h4><p>פעילות עסקית ליבה</p><div class="hint">↓ מה נכנס לכאן?</div></div>
+      <div class="fc-detail">
+        <h5>קטגוריית Operations</h5>
+        <p>הכנסות ועלויות שנובעות <strong>ישירות</strong> מפעילות העסק הליבה.</p>
+        <ul>
+          <li>הכנסות ממכירות מוצרים/שירותים</li>
+          <li>עלות המכר (COGS)</li>
+          <li>הוצאות מחקר ופיתוח (תפעולי)</li>
+          <li>הוצאות מכירה ושיווק</li>
+          <li>הוצאות הנהלה וכלליות</li>
+        </ul>
+        <p>📌 <strong>ספק ביטחוני:</strong> ייצור מערכות נשק, שירות ותחזוקה, פיתוח מוצרים חדשים.</p>
+        <p>⭐ <strong>Operating Profit</strong> = סכום קטגוריה זו. עכשיו הגדרה חוקית!</p>
+      </div>
+    </div>
+
+    <div class="fc green-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">📈</div><h4>2. Investing</h4><p>רק לחברות השקעה</p><div class="hint">↓ מי מדווח כאן?</div></div>
+      <div class="fc-detail">
+        <h5>קטגוריית Investing</h5>
+        <p>תחול <strong>רק</strong> על חברות שה-Business Model שלהן הוא ייצור תשואה על השקעות.</p>
+        <ul>
+          <li>בנקים, חברות ביטוח, קרנות – כן</li>
+          <li>ספקים ביטחוניים כמו אלביט/רפאל – <strong>לא</strong></li>
+        </ul>
+        <p>⚠️ <strong>הלכה-למעשה:</strong> רוב הכנסות/הוצאות ה"פיננסיות" של ספקים ביטחוניים שהוגדרו כ-"Investing" עוברות ל-Operations.</p>
+        <p>📌 השלכה: תוצאות תפעוליות "נשמעות טוב פחות" כי כבר לא ניתן להשמיד הוצאות ע"י סיווגן כ-Investing.</p>
+      </div>
+    </div>
+
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">💳</div><h4>3. Financing</h4><p>מימון חוב ספציפי</p><div class="hint">↓ מה שינה?</div></div>
+      <div class="fc-detail">
+        <h5>קטגוריית Financing</h5>
+        <p>הוצאות ריבית על חוב <strong>ספציפי</strong> בלבד. הגדרה צרה יותר מבעבר.</p>
+        <ul>
+          <li>הוצאות ריבית על אג"ח ואשראי</li>
+          <li>הכנסות ריבית <strong>רק</strong> אם Business Model = ניהול עודפי מזומנים</li>
+        </ul>
+        <p>📌 <strong>השלכה לאלביט:</strong> ריביות על Lease Obligations (IFRS 16) → Financing. אבל הכנסות ריבית על פיקדונות – ייבחן מחדש.</p>
+        <p>🔗 חיבור לחלק ג׳ (ביקורת): קצין ביקורת יבחן סיווג זה בפירוט.</p>
+      </div>
+    </div>
+
+    <div class="fc orange-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🔗</div><h4>4. Associates</h4><p>חברות כלולות</p><div class="hint">↓ מי כלול?</div></div>
+      <div class="fc-detail">
+        <h5>קטגוריית Associates & JVs</h5>
+        <p>חלק ברווחי חברות כלולות (equity method) ושותפויות.</p>
+        <ul>
+          <li>רפאל מחזיקה ב-X% בחברה מאוגדת → חלק ברווח נכנס כאן</li>
+          <li>לא מעורבב עוד עם רווח תפעולי</li>
+        </ul>
+        <p>📌 <strong>ייחוד לביטחוני:</strong> פעמים רבות יש Consortiums ו-JVs בפרויקטים ביטחוניים. כל אחד מהם יסווג כאן בנפרד.</p>
+      </div>
+    </div>
+
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🎲</div><h4>5. Discontinued</h4><p>פעילות מופסקת</p><div class="hint">↓ מתי רלוונטי?</div></div>
+      <div class="fc-detail">
+        <h5>קטגוריית Discontinued Operations</h5>
+        <p>פעילות עסקית שהופסקה או מוגדרת כ"מוחזקת למכירה".</p>
+        <ul>
+          <li>מוצגת בשורה נפרדת – לא משפיעה על Operating Profit</li>
+          <li>מסומנת בבירור כ"לא חוזרת"</li>
+        </ul>
+        <p>📌 <strong>בהקשר ביטחוני:</strong> פרויקט שמ"ב ביטל → האם הספק יגדיר כ-Discontinued? כיצד זה ישפיע על המחיר בחוזה הבא?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-title" style="font-size:14px;margin-top:20px;margin-bottom:12px;">🔄 מבנה דוח ר"ה – לפני ואחרי</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
+    <div style="background:#FFF8F8;border-radius:12px;padding:14px;border:2px dashed #FFAAAA;font-size:13px;line-height:2.0;">
+      <div style="font-weight:800;color:var(--red);margin-bottom:8px;font-size:14px;">IAS 1 (הישן – עד 2026)</div>
+      הכנסות<br>
+      עלות המכר<br>
+      <span style="color:var(--blue);font-weight:700;">── רווח גולמי ──</span><br>
+      הוצאות הנהלה<br>
+      הוצאות מכירה<br>
+      <span style="color:var(--blue);font-weight:700;">── Operating Profit ──</span><br>
+      <span style="color:var(--red);font-size:11px;">⚠️ ללא הגדרה נוקשה!</span><br>
+      הכנסות מימון / הוצ' מימון<br>
+      שונות (מכל מקום...)<br>
+      <span style="color:var(--text3);">── רווח לפני מס ──</span><br>
+      מסים<br>
+      <span style="color:var(--text3);">── רווח נקי ──</span>
+    </div>
+    <div style="background:#F0FBF6;border-radius:12px;padding:14px;border:2px solid var(--green2);font-size:13px;line-height:2.0;">
+      <div style="font-weight:800;color:var(--green);margin-bottom:8px;font-size:14px;">IFRS 18 (מ-2027) ✅</div>
+      <span style="color:var(--blue);font-weight:700;">CATEGORY: Operations</span><br>
+      הכנסות מכירה / עלות / הוצ' תפעול<br>
+      <span style="color:var(--green);font-weight:800;">── Operating Profit (מוגדר!) ──</span><br>
+      <span style="color:var(--purple);font-weight:700;">CATEGORY: Investing</span><br>
+      (רק אם Business Model = השקעות)<br>
+      <span style="color:var(--blue2);font-weight:700;">CATEGORY: Financing</span><br>
+      הוצ' ריבית ספציפיות בלבד<br>
+      <span style="color:var(--text3);">── רווח לפני מס ──</span><br>
+      מסים<br>
+      <span style="color:var(--text3);">── רווח נקי ──</span><br>
+      <span style="color:var(--red);font-size:11px;">+ גילוי MPM חובה! + Reconciliation</span>
+    </div>
+  </div>
+
+  <div class="hl orange">
+    <div class="hl-icon">📏</div>
+    <div class="hl-body">
+      <h4>MPMs – Management Performance Measures – מה זה?</h4>
+      <p><strong>MPM</strong> = מדד ביצוע שהנהלה מפרסמת <em>מחוץ</em> לדוחות הרשמיים ומציגה בהודעות לעיתונות, מצגות, דוחות שנתיים. דוגמאות: "Adjusted EBITDA", "Underlying profit", "Core earnings".</p>
+      <p style="margin-top:6px;"><strong>לפי IFRS 18:</strong> MPMs שמפורסמים ב"תקשורת פומבית" חייבים:</p>
+      <ul>
+        <li>להיכלל <strong>בתוך הדוח הכספי עצמו</strong> (לא רק בהודעה לעיתונות)</li>
+        <li>לכלול Reconciliation מפורטת לסכום IFRS המקביל</li>
+        <li>להסביר מדוע הנהלה מאמינה שהמדד שימושי</li>
+        <li>לגלות השפעת מס ומיעוט עבור כל תיקון</li>
+      </ul>
+      <p style="margin-top:6px;">📌 <strong>מה זה אומר בפועל לאגף התקציבים:</strong> כשאלביט מדווחת "Adjusted EBITDA 1.2B$" בהודעה לעיתונות – מ-2027 תוכלו לראות בדוח עצמו: מה הוחלט מהחישוב, ולמה. <em>שקיפות שלא הייתה קיימת עד כה.</em></p>
+    </div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,#F8F4FF,#F0EBFF);border:2px solid var(--purple2);margin-top:18px;">
+    <div class="card-title" style="color:var(--purple);">🧠 שאלה אמריקאית – IFRS 18</div>
+    <p style="font-size:14px;margin-bottom:14px;color:var(--text2);">ספק ביטחוני ישראלי מדווח "רווח תפעולי מותאם" שמוציא ממנו הוצאות ארגון מחדש בסך 50M ₪ ש"חזרו" בכל שנה מ-2020 עד 2026. לפי IFRS 18, מה יקרה מ-2027?</p>
+    <div id="mcq-b1" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b1',this,'wrong')">א. ניתן להמשיך כרגיל – אם הנהלה מאמינה שזה חד-פעמי</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b1',this,'correct')">ב. חובה לפרסם Reconciliation בדוח + לגלות שהוצאה זו "חד-פעמית" שחזרה 7 שנים</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b1',this,'wrong')">ג. אסור לדווח Adjusted EBITDA בכלל</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b1',this,'wrong')">ד. מספיק להסביר בהערות לדוח</button>
+    </div>
+    <div id="mcq-b1-result" style="display:none;padding:12px;border-radius:10px;font-size:14px;"></div>
+  </div>
+</div>
+
+<!-- B-2 -->
+<div class="card">
+  <div class="card-title" style="color:var(--purple);">🇮🇱 Case Study: אלביט מערכות – IFRS 18 בפועל</div>
+  <div class="hl blue">
+    <div class="hl-icon">📊</div>
+    <div class="hl-body">
+      <h4>אלביט מערכות 2024 – נתוני רקע</h4>
+      <p>אלביט, חברה ציבורית ישראלית (TASE + NASDAQ), רשמה ב-2024 הכנסות שיא של כ-6.3 מיליארד דולר. צבר ההזמנות עמד על 17.9 מיליארד דולר. החברה מדווחת "Adjusted Operating Income" שמוציא בין היתר: SBC (Stock-Based Compensation), Amortization of acquired intangibles, ורשומות ארגון מחדש. <a href="https://www.zman.co.il/647506/" target="_blank">מקור ←</a></p>
+    </div>
+  </div>
+
+  <div class="card-title" style="font-size:14px;margin-bottom:12px;">🔬 ניתוח "קוסמטיקה חשבונאית" – מה IFRS 18 ישנה?</div>
+  <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+    <div class="fc orange-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">💸</div><h4>SBC בחוץ</h4><p>Stock-Based Compensation</p><div class="hint">↓ מה הבעיה?</div></div>
+      <div class="fc-detail">
+        <h5>SBC – "הוצאה שאינה מזומן"</h5>
+        <p>חברות מוציאות SBC מ-Adjusted Income כי "אינה הוצאה מזומנית". <strong>הבעיה:</strong> SBC היא עלות ריאלית – דילול בעלי المניות.</p>
+        <p><strong>לפי IFRS 18:</strong> SBC היא הוצאה תפעולית (Operations). לא ניתן "להוציא" אותה ממדד MPM בלי Reconciliation שקופה. המשקיעים יראו בדיוק כמה שנוסף בגין SBC.</p>
+        <p>📌 <strong>בהקשר ביטחוני:</strong> SBC של הנהלת ספק → עלות שמגולמת במחיר שמ"ב משלם.</p>
+      </div>
+    </div>
+
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🏷️</div><h4>Amortization</h4><p>פחת נכסים בלתי מוחשיים</p><div class="hint">↓ איפה הבעיה?</div></div>
+      <div class="fc-detail">
+        <h5>Amortization – "רכישות העבר"</h5>
+        <p>חברות קונות חברות → נוצרים נכסים בלתי מוחשיים → מופחתים שנים רבות. "לא מייצג ביצוע שוטף" – כך טוענות הנהלות.</p>
+        <p><strong>לפי IFRS 18:</strong> Amortization של נכסים רכושניים נשאר ב-Operations. חייב Reconciliation. </p>
+        <p>📌 <strong>אלביט ספציפית:</strong> לאחר רכישות מרובות (Elbit USA, Elbit UK) – הוצאת amortization גבוהה. מ-2027 – גלויה ומפורטת בדוח.</p>
+      </div>
+    </div>
+
+    <div class="fc green-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🔄</div><h4>ארגון מחדש</h4><p>Restructuring Charges</p><div class="hint">↓ מה נחשב "חד-פעמי"?</div></div>
+      <div class="fc-detail">
+        <h5>ארגון מחדש – "חד-פעמי שחזר"</h5>
+        <p>KPMG 2026: "הבעיה הנפוצה ביותר שנצפתה ביישום IFRS 18 היא חברות שניסו להמשיך להגדיר הוצאות ארגון מחדש חוזרות כ-MPM Adjustment."</p>
+        <p><strong>הפתרון של IFRS 18:</strong> אם הוצאה "חד-פעמית" חזרה 3+ שנים ← אסור להחריגה ממדד MPM.</p>
+        <p>📌 <strong>ישראל:</strong> רשות ני"ע תבחן את ה-Reconciliation ותשאל: האם ה"חריג" הפך לשגרה? <a href="https://kpmg.com/lu/en/insights/risk-and-regulation/international-financial-reporting-standards--ifrs--explained/ifrs-18---presentation-and-disclosure-in-financial-statements.html" target="_blank">מקור KPMG ←</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="qa" style="margin-top:16px;">
+    <div class="qa-q"><div class="qa-icon" style="background:var(--green);">✏️</div>
+      <div><strong>תרגיל קצר – MPM Reconciliation 🎤</strong><br>
+      <span style="font-size:14px;font-weight:400;color:var(--text2);">ספק ביטחוני מדווח: Operating Profit (IFRS): 200M ₪ | Adjusted Operating Income: 320M ₪<br>
+      ההפרש: 120M ₪. מנו 3 הוצאות שיכולות להסביר את ההפרש – ואיזו לפי IFRS 18 אסורה ב-Adjustment?</span></div>
+    </div>
+    <textarea id="ifrs18-ex" rows="3" placeholder="הוצאה 1: ... הוצאה 2: ... הוצאה 3: ..."></textarea>
+    <button class="btn-hint" onclick="toggleBox('h18-ex')">💡 רמז</button>
+    <button class="btn-ans" onclick="giveFeedbackB('ifrs18-ex','fb18-ex')">📩 משוב</button>
+    <div id="h18-ex" class="hint-box">רמז: חשבו – SBC? פחת רכישות? ארגון מחדש שחזר? הפסדי ירידת ערך? מה מהם "חוזר" מדי שנה?</div>
+    <div id="fb18-ex" class="ans-box"></div>
+  </div>
+</div>
+
+<!-- B-3 -->
+<div class="card">
+  <div class="card-title" style="color:var(--purple);">⏰ לוח זמנים ומה לעשות עכשיו</div>
+  <div class="flow-wrap" style="margin-bottom:16px;">
+    <div class="flow" style="gap:0;flex-wrap:wrap;justify-content:flex-end;">
+      <div class="fn" style="min-width:115px;padding:12px 10px;font-size:12px;">2024<div class="fn-sub">IFRS 18 פורסם (אפריל)</div></div>
+      <div class="fa">←</div>
+      <div class="fn purple" style="min-width:115px;padding:12px 10px;font-size:12px;">2026 ✅ עכשיו<div class="fn-sub">שנת השוואה (Comparative)</div></div>
+      <div class="fa">←</div>
+      <div class="fn green" style="min-width:115px;padding:12px 10px;font-size:12px;">1.1.2027<div class="fn-sub">תחולה מחייבת</div></div>
+      <div class="fa">←</div>
+      <div class="fn orange" style="min-width:115px;padding:12px 10px;font-size:12px;">Q1 2027<div class="fn-sub">דוחות ביניים חדשים</div></div>
+    </div>
+  </div>
+
+  <div class="hl red">
+    <div class="hl-icon">⚠️</div>
+    <div class="hl-body">
+      <h4>מה זה אומר שה-Comparative יחוייב ב-2026?</h4>
+      <p>חברות שיאמצו IFRS 18 מ-1.1.2027 <strong>חייבות לייצג מחדש את נתוני 2026</strong> לפי הקטגוריות החדשות. כלומר: דוחות 2026 שנחתמו כבר – יוצגו בשנייה שונה ב-2027. ספקי ביטחון ישראליים שמדווחים היום (2026) <strong>כבר צריכים להיערך</strong>. <a href="https://www.bdo.co.uk/en-gb/insights/audit-and-assurance/ifrs-us-gaap-and-international-gaap/ifrs-18-presentation-and-disclosure-in-financial-statements" target="_blank">מקור BDO ←</a></p>
+    </div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,#F8F4FF,#F0EBFF);border:2px solid var(--purple2);margin-top:16px;">
+    <div class="card-title" style="color:var(--purple);">🧠 שאלה אמריקאית – לוח זמנים</div>
+    <p style="font-size:14px;margin-bottom:12px;color:var(--text2);">חברת רפאל (חברה ממשלתית) מכינה דוחות לשנת 2026. איזה מהבאים נכון לגבי IFRS 18?</p>
+    <div id="mcq-b2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b2',this,'wrong')">א. IFRS 18 לא חל על חברות ממשלתיות</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b2',this,'wrong')">ב. חברות ישראליות פטורות עד 2030</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b2',this,'correct')">ג. נתוני 2026 ישמשו כ-Comparative כשתתחיל תחולה ב-2027 – ולכן כדאי להיערך כבר עכשיו</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b2',this,'wrong')">ד. אפשר לבחור שלא ליישם IFRS 18</button>
+    </div>
+    <div id="mcq-b2-result" style="display:none;padding:12px;border-radius:10px;font-size:14px;"></div>
+  </div>
+</div>
+
+<!-- B-4 -->
+<div class="card">
+  <div class="card-title" style="color:var(--green);">📑 IFRS 15 – הכרה בהכנסה מחוזים עם לקוחות</div>
+  <div class="hl green">
+    <div class="hl-icon">🎯</div>
+    <div class="hl-body">
+      <h4>למה IFRS 15 קריטי לאגף התקציבים?</h4>
+      <p>אתם מייצגים את הלקוח הגדול ביותר של ספקי הביטחון הישראלים. <strong>IFRS 15 שולט בדיוק בשאלה: מתי ספק מכיר בהכנסה?</strong> כלומר – מתי הוא "מרשם" שעשה עבודה ויכול לדרוש תשלום? ההבנה שלכם את התקן = כוח מיקוח טוב יותר.</p>
+    </div>
+  </div>
+
+  <div class="card-title" style="font-size:14px;margin-bottom:14px;">🪜 5 הצעדים של IFRS 15 – לחצו על כל צעד</div>
+  <div class="hol-flow" style="max-width:100%;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;">
+    <div>
+      <div class="hol-node" style="background:linear-gradient(135deg,#EBF3FF,#DDEEFF);border-color:var(--blue2);color:var(--blue);" onclick="toggleHol('s1')">
+        <strong>צעד 1:</strong> זיהוי החוזה עם הלקוח
+        <small style="display:block;font-weight:400;font-size:11px;margin-top:3px;">מתי מדובר ב"חוזה" לפי IFRS?</small>
+      </div>
+      <div id="s1" class="hol-detail">
+        <h5>צעד 1 – מהו "חוזה" לפי IFRS 15?</h5>
+        <p>חוזה קיים כשמתקיימים <em>כל</em> התנאים:</p>
+        <ul>
+          <li>אושר (בכתב, בעל-פה, או מקובל)</li>
+          <li>ניתן לזהות זכויות ומחויבויות</li>
+          <li>קיים תשלום ששתי הצדדים יכולים לאכוף</li>
+          <li><strong>הגבייה צפויה</strong> (&gt;50% סבירות)</li>
+        </ul>
+        <p>📌 <strong>בהקשר ביטחוני:</strong> מכרז שזכינו בו → זהו חוזה. LOI (Letter of Intent) לבד → <em>לא</em> חוזה לפי IFRS 15. ספק לא יכול להכיר הכנסה על LOI בלבד.</p>
+      </div>
+    </div>
+    <div>
+      <div class="hol-node" style="background:linear-gradient(135deg,#F3EBF8,#EDE0F5);border-color:var(--purple2);color:var(--purple);" onclick="toggleHol('s2')">
+        <strong>צעד 2:</strong> זיהוי Performance Obligations
+        <small style="display:block;font-weight:400;font-size:11px;margin-top:3px;">כמה "יחידות מכירה" יש בחוזה?</small>
+      </div>
+      <div id="s2" class="hol-detail">
+        <h5>צעד 2 – Performance Obligations</h5>
+        <p><strong>Performance Obligation (PO)</strong> = הבטחה לספק מוצר/שירות מובחן.</p>
+        <p>מוצר/שירות הוא <em>מובחן</em> אם:</p>
+        <ul>
+          <li>הלקוח יכול להפיק תועלת ממנו לבד (standalone)</li>
+          <li>הוא ניתן לזיהוי נפרד בחוזה</li>
+        </ul>
+        <p><strong>דוגמה ביטחונית:</strong> חוזה "מסירת 50 רחפנים + הדרכה + תחזוקה 5 שנים" = כמה PO?</p>
+        <button class="btn-hint" onclick="toggleBox('po-hint')">💡 רמז</button>
+        <div id="po-hint" class="hint-box">3 PO: (1) הרחפנים, (2) ההדרכה, (3) חוזה התחזוקה. כל אחד מובחן ויכול לעמוד לבדו.</div>
+      </div>
+    </div>
+    <div>
+      <div class="hol-node" style="background:linear-gradient(135deg,#EBF8F3,#DDF2EA);border-color:var(--green2);color:var(--green);" onclick="toggleHol('s3')">
+        <strong>צעד 3:</strong> קביעת מחיר העסקה
+        <small style="display:block;font-weight:400;font-size:11px;margin-top:3px;">כמה נגבה? כולל Variable Consideration</small>
+      </div>
+      <div id="s3" class="hol-detail">
+        <h5>צעד 3 – Transaction Price</h5>
+        <p>מחיר העסקה = הסכום שהספק <em>צפוי</em> לקבל בסופו של דבר. כולל:</p>
+        <ul>
+          <li><strong>Variable Consideration:</strong> קנסות עיכוב (ניכוי), בונוסים לביצוע מהיר (תוספת)</li>
+          <li><strong>Constraint:</strong> ספק יכיר Variable VC רק אם "highly probable" שלא יוחזר</li>
+          <li><strong>Financing Component:</strong> אם תשלום מראש משמעותי → ריבית</li>
+        </ul>
+        <p>📌 <strong>חוזה עם מ"ב:</strong> קנסות פיגורים = Variable Consideration שלילית. ספק שלא מכיר בה → מנפח הכנסות.</p>
+      </div>
+    </div>
+    <div>
+      <div class="hol-node" style="background:linear-gradient(135deg,#FFF4E5,#FFEACC);border-color:var(--accent);color:#804000;" onclick="toggleHol('s4')">
+        <strong>צעד 4:</strong> הקצאת מחיר ל-POs
+        <small style="display:block;font-weight:400;font-size:11px;margin-top:3px;">לחלק את המחיר בין יחידות</small>
+      </div>
+      <div id="s4" class="hol-detail">
+        <h5>צעד 4 – Allocation</h5>
+        <p>כל PO מקבל חלק ממחיר העסקה <strong>לפי מחיר המכירה העצמאי (SSP)</strong> שלו.</p>
+        <p><strong>דוגמה:</strong> חוזה 100M ₪ ל-3 POs:<br>רחפנים SSP=70M, הדרכה SSP=10M, תחזוקה SSP=20M → סה"כ SSP=100M → קיבלנו הקצאה "נקייה".</p>
+        <p>⚠️ <strong>מה אם SSP לא ידוע?</strong> חשב עלויות + רווחיות מקובלת, או Residual Approach.</p>
+        <p>📌 <strong>חשוב לאגף:</strong> ספק שמעוות הקצאה → מקדים הכנסה מ-PO שטרם בוצע.</p>
+      </div>
+    </div>
+    <div>
+      <div class="hol-node" style="background:linear-gradient(135deg,#F2F5FA,#E8EEF8);border-color:#B0BFCC;color:#4A5870;" onclick="toggleHol('s5')">
+        <strong>צעד 5:</strong> הכרה בהכנסה
+        <small style="display:block;font-weight:400;font-size:11px;margin-top:3px;">מתי מוקלטת ההכנסה?</small>
+      </div>
+      <div id="s5" class="hol-detail">
+        <h5>צעד 5 – Recognition: מתי?</h5>
+        <p>הכנסה מוכרת כש-PO <em>מקויים</em>: <strong>בנקודת זמן</strong> או <strong>לאורך זמן</strong>.</p>
+        <p><strong>Over Time (לאורך זמן)</strong> – קייים אם אחד מאלה:</p>
+        <ul>
+          <li>הלקוח מקבל ועושה שימוש בשירות ברציפות</li>
+          <li>הספק יוצר נכס שנמצא שליטת הלקוח</li>
+          <li>אין שימוש חלופי לנכס + זכות לתשלום על עבודה שבוצעה</li>
+        </ul>
+        <p>📌 <strong>ברוב חוזי הרכש הביטחוני:</strong> Over Time = Percentage of Completion.</p>
+        <p>📌 <strong>Point in Time:</strong> מסירת מוצר גמור (e.g., 100 רחפנים + הסכמת לקוח).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,#F0FBF6,#E8F8F0);border:2px solid var(--green2);margin-top:18px;">
+    <div class="card-title" style="color:var(--green);">🧠 שאלה אמריקאית – 5 צעדי IFRS 15</div>
+    <p style="font-size:14px;margin-bottom:12px;color:var(--text2);">חוזה לאספקת מערכת אלקטרונית + 3 שנות תחזוקה ב-120M ₪. בצעד 2 – כמה Performance Obligations יש?</p>
+    <div id="mcq-b3" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b3',this,'wrong')">א. PO אחד – זהו חוזה אחד</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b3',this,'correct')">ב. שניים – המערכת ושירות התחזוקה מובחנים</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b3',this,'wrong')">ג. שלושה – מערכת, שנה 1, שנה 2</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b3',this,'wrong')">ד. תלוי בחוזה הספציפי ולא ניתן לדעת</button>
+    </div>
+    <div id="mcq-b3-result" style="display:none;padding:12px;border-radius:10px;font-size:14px;"></div>
+  </div>
+</div>
+
+<!-- B-5 -->
+<div class="card">
+  <div class="card-title" style="color:var(--green);">🛡️ IFRS 15 בחוזים ביטחוניים – המורכבויות</div>
+  <div class="card-title" style="font-size:14px;margin-bottom:12px;">📏 מדידת התקדמות Over Time – שיטות</div>
+  <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+    <div class="fc green-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">💰</div><h4>Input Method – עלויות</h4><p>Cost-to-Cost</p><div class="hint">↓ מתי משתמשים?</div></div>
+      <div class="fc-detail">
+        <h5>Cost-to-Cost Method</h5>
+        <p><strong>נוסחה:</strong> % ביצוע = עלויות שנצברו עד כה ÷ עלויות כוללות מוערכות</p>
+        <p><strong>דוגמה:</strong> חוזה 200M ₪, עלות כוללה מוערכת 160M ₪, עלויות עד כה 64M ₪.<br>% ביצוע = 64/160 = <strong>40%</strong> → הכנסה = 40% × 200M = <strong>80M ₪</strong></p>
+        <p>✅ <strong>יתרון:</strong> מבוסס על עלויות מדידות. שכיח בתעשיית הביטחון.</p>
+        <p>⚠️ <strong>סיכון:</strong> אומדן "עלויות כוללות" – שגיאה שם = שגיאה בהכנסה. הנהלות מנצלות זאת לעיוות.</p>
+      </div>
+    </div>
+    <div class="fc blue-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🏁</div><h4>Output Method – Milestones</h4><p>אבני דרך</p><div class="hint">↓ מתי משתמשים?</div></div>
+      <div class="fc-detail">
+        <h5>Milestone Output Method</h5>
+        <p><strong>עיקרון:</strong> הכנסה מוכרת כשמתוגמלת אבן דרך מוגדרת מראש.</p>
+        <p><strong>דוגמה:</strong> חוזה 100M ₪ WITH 4 milestones שווים (25M ₪ כל אחד): עיצוב, אב-טיפוס, בדיקות, מסירה. → כל milestone שאושר על ידי מ"ב = 25M ₪ הכנסה.</p>
+        <p>✅ <strong>יתרון:</strong> פשוט, מובן לכולם, מסונכרן עם תשלומים.</p>
+        <p>⚠️ <strong>סיכון:</strong> Milestone לא תואם בהכרח ל-% ביצוע ריאלי. "25% מהחוזה = עיצוב" אבל בפועל ביצוע 40% כבר. → Contract Asset נוצר.</p>
+      </div>
+    </div>
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">📊</div><h4>Output Method – Units</h4><p>יחידות שנמסרו</p><div class="hint">↓ מתי מתאים?</div></div>
+      <div class="fc-detail">
+        <h5>Units-Delivered Method</h5>
+        <p><strong>עיקרון:</strong> הכנסה לפי יחידות שנמסרו ואושרו.</p>
+        <p><strong>דוגמה:</strong> חוזה ל-100 כטמ"מים ב-500M ₪ (5M ₪ ליחידה). נמסרו 30 → הכנסה = 150M ₪.</p>
+        <p>✅ <strong>מתאים כשיש מוצרים זהים, מסירות ברורות.</strong></p>
+        <p>⚠️ <strong>לא מתאים:</strong> כשכל "יחידה" שונה (מערכות מותאמות אישית).</p>
+        <p>📌 <strong>בהקשר:</strong> רכש סדרתי (טילים, כלי רכב, מחשבים) → Units. מערכת C2 ייחודית → Cost-to-Cost.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-title" style="font-size:14px;margin-top:20px;margin-bottom:12px;">🔧 Contract Modification – כשמ"ב משנה מפרט</div>
+  <div class="hl orange">
+    <div class="hl-icon">🔄</div>
+    <div class="hl-body">
+      <h4>מה קורה כש"הלקוח שינה את הדרישות"?</h4>
+      <p>בחוזי רכש ביטחוני – שינויי מפרט הם שגרה, לא חריג. IFRS 15 מגדיר כיצד לטפל בהם.</p>
+    </div>
+  </div>
+
+  <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr));">
+    <div class="fc green-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">➕</div><h4>New Contract</h4><p>שינוי = חוזה חדש</p><div class="hint">↓ מתי?</div></div>
+      <div class="fc-detail">
+        <h5>Modification = New Contract</h5>
+        <p>תחול כאשר:</p>
+        <ul>
+          <li>השינוי מוסיף Distinct Goods/Services <strong>חדשים</strong></li>
+          <li>המחיר מגולם את ה-SSP של ה-scope החדש</li>
+        </ul>
+        <p><strong>דוגמה:</strong> מ"ב מבקש להוסיף 10 כטמ"מים נוספים במחיר שוק. → New Contract. TP של השינוי = 10 × 5M = 50M ₪ בנפרד.</p>
+        <p>✅ <strong>פשוט יחסית – לא משפיע על ההכנסה הישנה.</strong></p>
+      </div>
+    </div>
+    <div class="fc orange-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🔄</div><h4>Catch-Up Adjustment</h4><p>שינוי = תיקון מצטבר</p><div class="hint">↓ מתי?</div></div>
+      <div class="fc-detail">
+        <h5>Cumulative Catch-Up</h5>
+        <p>תחול כאשר השינוי <strong>אינו</strong> מוסיף Distinct Goods (אותו scope, מחיר שונה).</p>
+        <p><strong>דוגמה מחושבת:</strong><br>
+        TP מקורי = 100M ₪ | % ביצוע = 40% → הוכר: 40M ₪<br>
+        שינוי מפרט: TP עולה ל-120M ₪<br>
+        TP × % ביצוע חדש = 120M × 40% = <strong>48M ₪</strong><br>
+        כבר הוכר: 40M ₪<br>
+        → Catch-Up = <strong>+8M ₪</strong> ברבעון הנוכחי</p>
+        <p>⚠️ <strong>סיכון:</strong> אם הספק "מעריך" שוב את % הביצוע לאחר שינוי = הזדמנות לעיוות.</p>
+      </div>
+    </div>
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🛑</div><h4>מ"ב עוצר פרויקט</h4><p>Termination</p><div class="hint">↓ מה קורה?</div></div>
+      <div class="fc-detail">
+        <h5>Termination – הלקוח עוצר</h5>
+        <p>כשמ"ב עוצר פרויקט בחצי – מה הספק יכול להכיר?</p>
+        <p><strong>לפי IFRS 15:</strong> ספק שעמל Over Time זכאי להכיר הכנסה על עבודה שבוצעה <em>גם אם</em> הפרויקט הופסק – כל עוד:</p>
+        <ul>
+          <li>יש "enforceable right to payment" – זכות חוזית לתשלום</li>
+          <li>הוצאות נצברו ומוכחות</li>
+        </ul>
+        <p>📌 <strong>בהקשר ביטחוני:</strong> חוזה עם מ"ב שמכיל סעיף "Termination for Convenience" → ספק יכול לדרוש תשלום על עבודה שבוצעה + רווח סביר. זה מה-IFRS 15 מגן עליו.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:var(--surface2);border:1.5px solid var(--border);margin-top:16px;">
+    <div class="card-title" style="font-size:14px;color:var(--green);">🔬 מקרה בוחן: חוזה רכש רחפנים – מ"ב vs ספק</div>
+    <div class="hl green" style="margin-bottom:14px;">
+      <div class="hl-icon">📋</div>
+      <div class="hl-body">
+        <h4>נתוני המקרה</h4>
+        <p><strong>חוזה:</strong> 100M ₪ לאספקת 50 רחפנים טקטיים + הדרכה + תמיכה 2 שנים<br>
+        <strong>שיטה:</strong> Cost-to-Cost | <strong>עלות כוללה מוערכת:</strong> 80M ₪<br>
+        <strong>מצב נוכחי:</strong> עלויות שנצברו: 32M ₪ | <strong>שינוי:</strong> מ"ב שינה מפרט → עלות עלתה ל-96M ₪</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div>
+        <div style="font-weight:800;color:var(--blue);margin-bottom:8px;font-size:14px;">📊 לפני שינוי המפרט</div>
+        <table style="font-size:13px;">
+          <tr><th>פריט</th><th>חישוב</th><th>תוצאה</th></tr>
+          <tr><td>% ביצוע</td><td>32M ÷ 80M</td><td>40%</td></tr>
+          <tr><td>הכנסה מוכרת</td><td>40% × 100M</td><td><strong>40M ₪</strong></td></tr>
+          <tr><td>Contract Asset</td><td>40M - תשלומי LS</td><td>לפי חוזה</td></tr>
+        </table>
+      </div>
+      <div>
+        <div style="font-weight:800;color:var(--green);margin-bottom:8px;font-size:14px;">📊 אחרי שינוי המפרט</div>
+        <table style="font-size:13px;">
+          <tr><th>פריט</th><th>חישוב</th><th>תוצאה</th></tr>
+          <tr><td>% ביצוע (מעודכן)</td><td>32M ÷ 96M</td><td>33.3%</td></tr>
+          <tr><td>TP מעודכן</td><td>(נניח +20M לפיצוי)</td><td>120M ₪</td></tr>
+          <tr><td>הכנסה שצריך לעמוד</td><td>33.3% × 120M</td><td><strong>40M ₪</strong></td></tr>
+          <tr><td>Catch-Up</td><td>40M - 40M</td><td><strong>0 ₪</strong> 😲</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="hl purple" style="margin-top:14px;">
+      <div class="hl-icon">💡</div>
+      <div class="hl-body">
+        <h4>מסקנה מפתיעה</h4>
+        <p>למרות ש-TP עלה ב-20M ₪, אין Catch-Up – כי % הביצוע ירד בגלל שהמכנה גדל. ה"פיצוי" ייוכר בהדרגה ככל שהביצוע מתקדם. <strong>זה בדיוק למה מ"ב צריך לעקוב אחר עדכוני % ביצוע של ספקים</strong> – הם מנוף לניהול הכנסות.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="qa" style="margin-top:16px;">
+    <div class="qa-q"><div class="qa-icon" style="background:var(--green);">✏️</div>
+      <div><strong>תרגיל מספרי – IFRS 15 🎤</strong><br>
+      <span style="font-size:14px;font-weight:400;color:var(--text2);">חוזה: 200M ₪ | עלות כוללה: 160M ₪ | עלויות עד כה: 80M ₪<br>
+      שאלות: (1) כמה הכנסה מוכרת? (2) אם מ"ב מוסיף עוד 50M ₪ ל-TP אחרי שינוי מפרט שהעלה עלות ל-200M ₪, מהו ה-Catch-Up?</span></div>
+    </div>
+    <textarea id="ifrs15-ex" rows="3" placeholder="(1) % ביצוע = ... הכנסה = ...
+(2) % ביצוע חדש = ... הכנסה שצריך = ... Catch-Up = ..."></textarea>
+    <button class="btn-hint" onclick="toggleBox('h15-ex')">💡 רמז שלב 1</button>
+    <button class="btn-hint" onclick="toggleBox('h15-ex2')">💡 רמז שלב 2</button>
+    <button class="btn-ans" onclick="giveFeedbackB('ifrs15-ex','fb15-ex')">📩 פתרון מלא</button>
+    <div id="h15-ex" class="hint-box">שלב 1: % ביצוע = 80M ÷ 160M = 50%. הכנסה = 50% × 200M = 100M ₪.</div>
+    <div id="h15-ex2" class="hint-box">שלב 2: % ביצוע חדש = 80M ÷ 200M = 40%. TP חדש = 250M. הכנסה שצריך = 40% × 250M = 100M ₪. Catch-Up = 100M - 100M = 0.</div>
+    <div id="fb15-ex" class="ans-box"></div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,#F0FBF6,#E8F8F0);border:2px solid var(--green2);margin-top:16px;">
+    <div class="card-title" style="color:var(--green);">🧠 שאלה אמריקאית – Variable Consideration</div>
+    <p style="font-size:14px;margin-bottom:12px;color:var(--text2);">חוזה כולל קנס פיגורים של 5M ₪ לכל חודש עיכוב. הספק צופה עיכוב של 2 חודשים. מה נכון לפי IFRS 15?</p>
+    <div id="mcq-b4" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b4',this,'wrong')">א. הקנס יוכר רק בפועל – לא מקדימים</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b4',this,'correct')">ב. הספק צריך להפחית 10M ₪ מה-Transaction Price עכשיו (Variable Consideration)</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b4',this,'wrong')">ג. הקנס לא חלק מ-IFRS 15 – זה עניין משפטי בלבד</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b4',this,'wrong')">ד. הספק יכול להמתין לאישור מ"ב לפני ההכרה</button>
+    </div>
+    <div id="mcq-b4-result" style="display:none;padding:12px;border-radius:10px;font-size:14px;"></div>
+  </div>
+</div>
+
+<!-- B-6 -->
+<div class="card">
+  <div class="card-title" style="color:var(--green);">🇮🇱 IFRS 15 בשוק הישראלי – מה רלוונטי לכם</div>
+  <div class="hl blue">
+    <div class="hl-icon">📊</div>
+    <div class="hl-body">
+      <h4>ענף הביטחון הישראלי – מספרי רקע 2024</h4>
+      <p>אלביט, תע"א ורפאל רשמו ב-2024 הכנסות שיא משותפות של <strong>16.2 מיליארד דולר</strong> – עלייה של 16% לעומת 2023. צבר ההזמנות של אלביט לבד: 17.9 מיליארד דולר. ייצוא ביטחוני ישראלי: 14.8 מיליארד דולר (שיא היסטורי). <a href="https://www.zman.co.il/647506/" target="_blank">מקור ←</a></p>
+    </div>
+  </div>
+
+  <div class="fc-grid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr));">
+    <div class="fc purple-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🚁</div><h4>אלביט מערכות</h4><p>IFRS 15 בפועל</p><div class="hint">↓ מה רלוונטי?</div></div>
+      <div class="fc-detail">
+        <h5>אלביט – IFRS 15</h5>
+        <p><strong>ענפי עיקר:</strong> מערכות אוויר, קרקע, ים, סייבר.</p>
+        <p><strong>אתגר IFRS 15:</strong> חוזים גלובליים מרובי-מדינות עם מספר POs מורכבים. הגדרת Performance Obligations לחוזה "ספינת מלחמה + מערכות + הדרכה" = אתגר מהותי.</p>
+        <p><strong>הגילוי בדוחות:</strong> אלביט מגלה שרוב הכנסותיה מוכרות "over time" לפי Cost-to-Cost – דורשת ניתוח קפדני של הנחות העלות.</p>
+      </div>
+    </div>
+    <div class="fc orange-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">🎯</div><h4>רפאל</h4><p>חברה ממשלתית</p><div class="hint">↓ מה ייחודי?</div></div>
+      <div class="fc-detail">
+        <h5>רפאל – ייחוד IFRS 15</h5>
+        <p><strong>כחברה ממשלתית:</strong> חייבת ב-IFRS 15 כמו כל חברה ציבורית ישראלית.</p>
+        <p><strong>אתגר ייחודי:</strong> חוזים כ"Termination for Convenience" שמ"ב יכול לבטל. → זכות תשלום על עבודה שבוצעה חייבת לעמוד ב-IFRS 15.</p>
+        <p><strong>חוב מ"ב:</strong> כ-6 מיליארד ₪ חוב של מ"ב לרפאל (כלכליסט 2026) = <em>Contract Receivables</em> שבדוחות. <a href="https://www.calcalist.co.il/local_news/article/s1ahwwctzx" target="_blank">מקור ←</a></p>
+      </div>
+    </div>
+    <div class="fc green-fc" onclick="toggleFC(this)">
+      <div class="fc-front"><div class="emo">✈️</div><h4>תעשייה אווירית (IAI)</h4><p>פרויקטים מורכבים</p><div class="hint">↓ אתגרי IFRS 15</div></div>
+      <div class="fc-detail">
+        <h5>IAI – אתגרי IFRS 15</h5>
+        <p><strong>פרויקטים:</strong> לווינים, מערכות חץ, מטוסי איסוף.</p>
+        <p><strong>אתגר מיוחד:</strong> חוזה בין-ממשלתי (G2G) – האם המחירון הממשלתי = SSP? IFRS 15 דורש SSP מסחרי.</p>
+        <p><strong>דוגמה:</strong> לווין שמכירתו ל-NASA נרשמת אחרת מלווין שנמכר לסוכנות ממשלתית ישראלית – גם אם המחיר זהה.</p>
+        <p>🔬 <strong>מבקר המדינה:</strong> ציין ליקויים בתיעוד % ביצוע בפרויקטי IAI. <a href="https://www.ynet.co.il/economy/article/sjv8fdvxc" target="_blank">מקור ←</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,#F8F4FF,#F0EBFF);border:2px solid var(--purple2);margin-top:18px;">
+    <div class="card-title" style="color:var(--purple);">🧠 שאלה אמריקאית – ישראל</div>
+    <p style="font-size:14px;margin-bottom:12px;color:var(--text2);">ספק ביטחוני ישראלי רשם 4B ₪ כ-Contract Asset (נכס חוזה) בדוחותיו. מה זה אומר?</p>
+    <div id="mcq-b5" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b5',this,'wrong')">א. ביצוע הקדים תשלומים – אין בזה בעיה</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b5',this,'correct')">ב. אהספק הכיר הכנסה (לפי % ביצוע) שמ"ב עוד לא אישר לתשלום – כלומר הוא "קדם" את עצמו</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b5',this,'wrong')">ג. זה חוב שהספק חייב למ"ב</button>
+      <button class="mcq-btn" onclick="checkMCQ('mcq-b5',this,'wrong')">ד. זה מזומן שקיבל מראש</button>
+    </div>
+    <div id="mcq-b5-result" style="display:none;padding:12px;border-radius:10px;font-size:14px;"></div>
+  </div>
+</div>
+
+<!-- B-6b -->
+<div class="card">
+  <div class="card-title" style="color:var(--purple);">🧮 תרגילים כמותיים מדורגים – IFRS 18 ו-IFRS 15</div>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:18px;">כל תרגיל מוצג <strong>שלב אחרי שלב</strong>. לחצו "הצג שלב הבא" להמשך. ענו בעצמכם לפני שתלחצו.</p>
+
+  <div class="card" style="background:#F8F4FF;border:2px solid var(--purple2);margin-bottom:16px;">
+    <div class="card-title" style="color:var(--purple);font-size:14px;">תרגיל 1 – IFRS 18: סיווג שורות דוח ר"ה לקטגוריות</div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">
+      חברת <strong>אמדוקס (Amdocs)</strong> – חברת טכנולוגיה ישראלית ציבורית. הנתונים הבאים מתוך דוח רווח והפסד שנתי. סווגו כל שורה לפי 5 הקטגוריות של IFRS 18: <span style="font-weight:700;">Operations / Investing / Financing / Associates / Discontinued</span>
+    </p>
+
+    <div id="ex1-steps">
+      <div class="ex-step" id="ex1-s0" style="background:#fff;border-radius:10px;padding:14px;margin-bottom:8px;border:1.5px solid var(--border);">
+        <div style="font-weight:700;color:var(--blue);margin-bottom:8px;">📊 שורה 1: הכנסות ממכירת שירותי תוכנה – 4,500M $</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <button class="mcq-btn" onclick="checkStep('ex1-s0',this,'correct','Operations')">Operations ✅</button>
+          <button class="mcq-btn" onclick="checkStep('ex1-s0',this,'wrong','Financing')">Financing</button>
+          <button class="mcq-btn" onclick="checkStep('ex1-s0',this,'wrong','Investing')">Investing</button>
+          <button class="mcq-btn" onclick="checkStep('ex1-s0',this,'wrong','Associates')">Associates</button>
+        </div>
+        <div class="step-fb" style="display:none;"></div>
+      </div>
+      <div class="ex-step locked" id="ex1-s1" style="background:#F8F8F8;border-radius:10px;padding:14px;margin-bottom:8px;border:1.5px dashed #CCC;opacity:.5;">
+        <div style="font-weight:700;color:var(--text3);margin-bottom:8px;">🔒 שורה 2 (תופיע אחרי שורה 1) – הוצאות מו"פ – 620M $</div>
+      </div>
+      <div class="ex-step locked" id="ex1-s2" style="background:#F8F8F8;border-radius:10px;padding:14px;margin-bottom:8px;border:1.5px dashed #CCC;opacity:.5;">
+        <div style="font-weight:700;color:var(--text3);margin-bottom:8px;">🔒 שורה 3 – ריבית על אג"ח שהנפיקה החברה – 85M $</div>
+      </div>
+      <div class="ex-step locked" id="ex1-s3" style="background:#F8F8F8;border-radius:10px;padding:14px;margin-bottom:8px;border:1.5px dashed #CCC;opacity:.5;">
+        <div style="font-weight:700;color:var(--text3);margin-bottom:8px;">🔒 שורה 4 – חלק ברווחי חברה כלולה (Equity Method) – 40M $</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:#EBF8F3;border:2px solid var(--green2);margin-bottom:16px;">
+    <div class="card-title" style="color:var(--green);font-size:14px;">תרגיל 2 – IFRS 15: Cost-to-Cost – 4 שלבים</div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">
+      <strong>חברת רד-טק בע"מ</strong> (חברת הנדסה ישראלית בינונית) זכתה במכרז לבניית מערכת בקרה תעשייתית עבור חברת<em> ICL (כימיקלים לישראל)</em>. פרטי החוזה:
+    </p>
+    <div style="background:#fff;border-radius:10px;padding:14px;margin-bottom:14px;border:1px solid var(--border);font-size:13px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;line-height:2.0;">
+        <div>💰 <strong>מחיר חוזה (TP):</strong></div><div>3,000,000 ₪</div>
+        <div>📊 <strong>עלות כוללה מוערכת:</strong></div><div>2,400,000 ₪</div>
+        <div>📅 <strong>עלויות שנצברו עד 31.12:</strong></div><div>960,000 ₪</div>
+        <div>🏭 <strong>שיטת מדידה:</strong></div><div>Cost-to-Cost (Input Method)</div>
+      </div>
+    </div>
+
+    <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px;">פתרו שלב אחר שלב – לחצו על הנוסחה נכונה:</div>
+
+    <div style="background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;border:1.5px solid var(--green2);">
+      <div style="font-weight:700;color:var(--green);margin-bottom:8px;">שלב א׳ – חישוב % ביצוע</div>
+      <div style="font-family:monospace;background:#F0FBF6;padding:10px;border-radius:8px;font-size:13px;margin-bottom:10px;">
+        % ביצוע = עלויות שנצברו ÷ עלות כוללה מוערכת
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <button class="mcq-btn" onclick="checkStep('ex2-sa',this,'wrong','32%')">= 960K ÷ 3,000K = 32%</button>
+        <button class="mcq-btn" onclick="checkStep('ex2-sa',this,'correct','40%')" id="ex2-sa">= 960K ÷ 2,400K = 40% ✅</button>
+        <button class="mcq-btn" onclick="checkStep('ex2-sa',this,'wrong','25%')">= 960K ÷ 3,960K = 24%</button>
+        <button class="mcq-btn" onclick="checkStep('ex2-sa',this,'wrong','50%')">= 1,200K ÷ 2,400K = 50%</button>
+      </div>
+      <div id="ex2-sa-fb" style="display:none;margin-top:8px;padding:10px;border-radius:8px;font-size:13px;"></div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;border:1.5px solid var(--border);" id="ex2-sb-block">
+      <div style="font-weight:700;color:var(--blue);margin-bottom:8px;">שלב ב׳ – חישוב הכנסה לה"כ שיש להכיר עד 31.12</div>
+      <div style="font-family:monospace;background:#EBF3FF;padding:10px;border-radius:8px;font-size:13px;margin-bottom:10px;">
+        הכנסה מוכרת = % ביצוע × מחיר החוזה (TP)
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <button class="mcq-btn" onclick="checkStep('ex2-sb',this,'correct','1,200K ₪')">= 40% × 3,000K = 1,200,000 ₪ ✅</button>
+        <button class="mcq-btn" onclick="checkStep('ex2-sb',this,'wrong','960K ₪')">= עלות שנצברה = 960,000 ₪</button>
+        <button class="mcq-btn" onclick="checkStep('ex2-sb',this,'wrong','1,500K ₪')">= 50% × 3,000K = 1,500,000 ₪</button>
+        <button class="mcq-btn" onclick="checkStep('ex2-sb',this,'wrong','3,000K ₪')">= כל החוזה = 3,000,000 ₪</button>
+      </div>
+      <div id="ex2-sb-fb" style="display:none;margin-top:8px;padding:10px;border-radius:8px;font-size:13px;"></div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;border:1.5px solid var(--border);" id="ex2-sc-block">
+      <div style="font-weight:700;color:var(--blue);margin-bottom:8px;">שלב ג׳ – רווח גולמי מוכר (Gross Profit)</div>
+      <div style="font-family:monospace;background:#EBF3FF;padding:10px;border-radius:8px;font-size:13px;margin-bottom:10px;">
+        רווח גולמי מוכר = הכנסה מוכרת − עלות שנצברה
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <button class="mcq-btn" onclick="checkStep('ex2-sc',this,'wrong','0 ₪')">= 0 ₪ (אין רווח עד להשלמה)</button>
+        <button class="mcq-btn" onclick="checkStep('ex2-sc',this,'correct','240K ₪')">= 1,200K − 960K = 240,000 ₪ ✅</button>
+        <button class="mcq-btn" onclick="checkStep('ex2-sc',this,'wrong','600K ₪')">= 3,000K − 2,400K = 600K ₪ (רווח כולל)</button>
+        <button class="mcq-btn" onclick="checkStep('ex2-sc',this,'wrong','40K ₪')">= 960K × 4% = 38.4K ₪</button>
+      </div>
+      <div id="ex2-sc-fb" style="display:none;margin-top:8px;padding:10px;border-radius:8px;font-size:13px;"></div>
+    </div>
+
+    <div id="ex2-summary" style="display:none;background:linear-gradient(135deg,#EBF8F3,#DDF2EA);border-radius:12px;padding:16px;border:2px solid var(--green2);font-size:13px;">
+      <div style="font-weight:800;color:var(--green);margin-bottom:10px;">📊 סיכום רישום בספרים – 31.12</div>
+      <table style="width:100%;font-size:13px;">
+        <tr><th>חשבון</th><th>חובה (Dr)</th><th>זכות (Cr)</th></tr>
+        <tr><td>Contract Asset (נכס חוזה)</td><td>1,200,000</td><td>–</td></tr>
+        <tr><td>הכנסות (Revenue)</td><td>–</td><td>1,200,000</td></tr>
+        <tr><td>עלות המכר (COGS)</td><td>960,000</td><td>–</td></tr>
+        <tr><td>Work in Progress (WIP)</td><td>–</td><td>960,000</td></tr>
+        <tr style="background:#EBF8F3;font-weight:700;"><td colspan="3">רווח גולמי: 240,000 ₪ (= 8% מ-TP, 25% מרווח כולל)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="background:#FFF4E5;border:2px solid var(--accent);margin-bottom:16px;">
+    <div class="card-title" style="color:#804000;font-size:14px;">תרגיל 3 – Contract Modification: שינוי מפרט ב-ICL</div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">המשך תרגיל 2. ICL שינתה מפרטים → עלות כוללה עלתה ל-3,000,000 ₪. ICL תוסיף 200,000 ₪ ל-TP.</p>
+
+    <div style="background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;border:1.5px solid var(--accent);">
+      <div style="font-weight:700;color:#804000;margin-bottom:8px;">שלב א׳ – % ביצוע מעודכן</div>
+      <div style="font-family:monospace;background:#FFF4E5;padding:10px;border-radius:8px;font-size:13px;margin-bottom:8px;">
+        % חדש = עלות שנצברה ÷ עלות כוללה <strong>מעודכנת</strong> = 960K ÷ 3,000K = ?
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <button class="mcq-btn" onclick="checkStep('ex3-sa',this,'correct','32%')">= 960 ÷ 3,000 = 32% ✅</button>
+        <button class="mcq-btn" onclick="checkStep('ex3-sa',this,'wrong','40%')">= 40% (לא השתנה)</button>
+        <button class="mcq-btn" onclick="checkStep('ex3-sa',this,'wrong','50%')">= 50%</button>
+        <button class="mcq-btn" onclick="checkStep('ex3-sa',this,'wrong','960/2400=40%')">= 960÷2400 = 40%</button>
+      </div>
+      <div id="ex3-sa-fb" style="display:none;margin-top:8px;padding:10px;border-radius:8px;font-size:13px;"></div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;border:1.5px solid var(--border);" id="ex3-sb-block">
+      <div style="font-weight:700;color:#804000;margin-bottom:8px;">שלב ב׳ – הכנסה שצריכה להיות מוכרת (TP חדש = 3,200K)</div>
+      <div style="font-family:monospace;background:#FFF4E5;padding:10px;border-radius:8px;font-size:13px;margin-bottom:8px;">
+        הכנסה נדרשת = 32% × 3,200K = ?
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <button class="mcq-btn" onclick="checkStep('ex3-sb',this,'wrong','1,200K')">= 1,200,000 ₪ (לא השתנה)</button>
+        <button class="mcq-btn" onclick="checkStep('ex3-sb',this,'correct','1,024K')">= 32% × 3,200K = 1,024,000 ₪ ✅</button>
+        <button class="mcq-btn" onclick="checkStep('ex3-sb',this,'wrong','1,600K')">= 50% × 3,200K = 1,600K ₪</button>
+        <button class="mcq-btn" onclick="checkStep('ex3-sb',this,'wrong','3,200K')">= כל ה-TP = 3,200K ₪</button>
+      </div>
+      <div id="ex3-sb-fb" style="display:none;margin-top:8px;padding:10px;border-radius:8px;font-size:13px;"></div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:14px;border:1.5px solid var(--border);" id="ex3-sc-block">
+      <div style="font-weight:700;color:#804000;margin-bottom:8px;">שלב ג׳ – Cumulative Catch-Up</div>
+      <div style="font-family:monospace;background:#FFF4E5;padding:10px;border-radius:8px;font-size:13px;margin-bottom:8px;">
+        Catch-Up = הכנסה נדרשת − הכנסה כבר מוכרת = 1,024K − 1,200K = ?
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <button class="mcq-btn" onclick="checkStep('ex3-sc',this,'correct','-176K')">= −176,000 ₪ (תיקון שלילי!) ✅</button>
+        <button class="mcq-btn" onclick="checkStep('ex3-sc',this,'wrong','+200K')">= +200,000 ₪ (תוספת TP)</button>
+        <button class="mcq-btn" onclick="checkStep('ex3-sc',this,'wrong','0')">= 0 ₪</button>
+        <button class="mcq-btn" onclick="checkStep('ex3-sc',this,'wrong','+176K')">= +176,000 ₪</button>
+      </div>
+      <div id="ex3-sc-fb" style="display:none;margin-top:8px;padding:10px;border-radius:8px;font-size:13px;"></div>
+      <div id="ex3-insight" style="display:none;margin-top:12px;background:#FFF4E5;border-radius:10px;padding:12px;border:1.5px solid var(--accent);font-size:13px;">
+        💡 <strong>תובנה חשובה:</strong> למרות שה-TP עלה ב-200K ₪, יש לבטל 176K ₪ מהכנסה שכבר הוכרה! הסיבה: % הביצוע ירד מ-40% ל-32% כי המכנה (עלות כוללה) גדל. זה בדיוק הסיכון שמ"ב צריך להיות ערני אליו – ספק שמגדיל עלויות עלול לדווח על הפחתת הכנסה.
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,#F8F4FF,#F0EBFF);border:2px solid var(--purple2);margin-bottom:0;">
+    <div class="card-title" style="color:var(--purple);font-size:14px;">תרגיל 4 – חישוב Operating Profit לפי IFRS 18</div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">
+      חברת <strong>Check Point Software</strong> (חברת סייבר ישראלית, NASDAQ: CHKP) מדווחת: הכנסות 2,500M $| עלות המכר 400M$ | הוצ' מחקר ופיתוח 700M $| הוצ' מכירה 300M$ | ריבית שוטפת על פיקדונות 180M $ | הפחתת נכסים בלתי מוחשיים מרכישה 90M $<br>
+      לפי IFRS 18 – <strong>מה ה-Operating Profit?</strong>
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+      <button class="mcq-btn" onclick="checkStep('ex4',this,'wrong','1,280M')">א. 2,500−400−700−300+180−90 = 1,190M $</button>
+      <button class="mcq-btn" onclick="checkStep('ex4',this,'correct','1,010M')">ב. 2,500−400−700−300−90 = 1,010M $ (ריבית = Financing, לא Operations) ✅</button>
+      <button class="mcq-btn" onclick="checkStep('ex4',this,'wrong','1,100M')">ג. 2,500−400−700−300 = 1,100M $ (בלי הפחתות)</button>
+      <button class="mcq-btn" onclick="checkStep('ex4',this,'wrong','2,100M')">ד. 2,500−400 = 2,100M $ (גולמי בלבד)</button>
+    </div>
+    <div id="ex4-fb" style="display:none;padding:12px;border-radius:10px;font-size:13px;"></div>
+    <div class="hl purple" style="margin-top:14px;">
+      <div class="hl-icon">💡</div>
+      <div class="hl-body">
+        <h4>הסבר: מה נכנס ל-Operations לפי IFRS 18</h4>
+        <p>✅ Operations: הכנסות מכירה, עלות מכר, מחקר ופיתוח, מכירה ושיווק, הפחתות מרכישות (= Operating!)<br>
+        ❌ <strong>לא</strong> Operations: ריבית על פיקדונות → Financing (או Investing אם זה Business Model ניהול מזומנים). לכן 180M $ מוצאים מ-Operating Profit.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B-6c -->
+<div class="card">
+  <div class="card-title" style="color:var(--blue);">🤖 תרגילי Prompt Engineering – השתמשו ב-AI לניתוח חשבונאי</div>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:16px;">בתרגילים הבאים תקבלו <strong>דאטה + פרומפט מוכן</strong>. העתיקו אותם לכלי AI (ChatGPT, Claude, Gemini וכו׳) וקבלו ניתוח השוואתי. הדוגמאות מתבססות על <strong>חברות מסחריות ציבוריות ישראליות</strong>.</p>
+
+  <div class="card" style="background:#EBF3FF;border:2px solid var(--blue2);margin-bottom:16px;">
+    <div class="card-title" style="font-size:14px;color:var(--blue);">🔵 פרומפט 1 – IAS 1 מול IFRS 18: חברת Nice Systems</div>
+    <div class="hl blue" style="margin-bottom:12px;">
+      <div class="hl-icon">ℹ️</div>
+      <div class="hl-body">
+        <h4>מה תלמדו</h4>
+        <p>להשוות כיצד אותם נתונים יוצגו בדוח ר"ה לפי IAS 1 (הישן) מול IFRS 18 (החדש). ריבית על פיקדונות = הדגמה מרכזית להבדל.</p>
+      </div>
+    </div>
+    <p style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px;">📋 העתיקו את הפרומפט הבא לכלי AI:</p>
+    <div style="background:#fff;border-radius:10px;padding:16px;border:1.5px dashed var(--blue2);font-size:13px;line-height:1.8;direction:ltr;text-align:left;font-family:monospace;white-space:pre-wrap;">You are an IFRS expert. I will give you financial data from Nice Systems (Israeli tech company, NASDAQ: NICE). Present the SAME data TWICE: once as an income statement under IAS 1 (old standard), and once under IFRS 18 (new, effective 2027). Show clearly what changes and why.
+
+DATA (FY2024 simplified, in USD millions):
+- Software revenue: 2,100
+- Service revenue: 1,200
+- Cost of revenue: 850
+- R&D expenses: 650
+- Sales & marketing: 580
+- G&A expenses: 180
+- Interest income on cash deposits: 95
+- Interest expense on bonds: 45
+- Share of profit from equity investee: 30
+- Amortization of acquired intangibles: 120
+- Restructuring charges (occurred for 4 consecutive years): 75
+
+FORMAT: Two side-by-side income statements. Highlight which lines move between categories. Explain the impact on Operating Profit under each standard. Use Hebrew for explanations.</div>
+    <button onclick="copyPrompt(this,'p1')" id="p1-btn" style="margin-top:10px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:none;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:Heebo,sans-serif;">📋 העתק פרומפט</button>
+    <div style="margin-top:10px;font-size:12px;color:var(--text3);">🔗 נסו ב: <a href="https://chatgpt.com" target="_blank">ChatGPT</a> | <a href="https://claude.ai" target="_blank">Claude</a> | <a href="https://gemini.google.com" target="_blank">Gemini</a></div>
+  </div>
+
+  <div class="card" style="background:#EBF8F3;border:2px solid var(--green2);margin-bottom:16px;">
+    <div class="card-title" style="font-size:14px;color:var(--green);">🟢 פרומפט 2 – IFRS 15: ניתוח הכרת הכנסה בחוזה ארוך</div>
+    <div class="hl green" style="margin-bottom:12px;">
+      <div class="hl-icon">ℹ️</div>
+      <div class="hl-body">
+        <h4>מה תלמדו</h4>
+        <p>כיצד AI מנתח חוזה ארוך-טווח של חברה ריאלית לפי 5 הצעדים של IFRS 15, כולל זיהוי Performance Obligations, חישוב % ביצוע ו-Catch-Up.</p>
+      </div>
+    </div>
+    <p style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:8px;">📋 העתיקו:</p>
+    <div style="background:#fff;border-radius:10px;padding:16px;border:1.5px dashed var(--green2);font-size:13px;line-height:1.8;direction:ltr;text-align:left;font-family:monospace;white-space:pre-wrap;">You are an IFRS 15 expert. Analyze the following contract using the 5-step IFRS 15 model. Show each step clearly and calculate revenue recognition for Year 1.
+
+CONTEXT: Sapiens International (Israeli insurance software company, NASDAQ: SPNS) signed a contract with a European insurance company.
+
+CONTRACT DETAILS:
+- Total contract price: €8,000,000
+- Deliverables: (1) Core software implementation, (2) 2-year maintenance & support, (3) Staff training (5 days)
+- Estimated standalone selling prices: Software €5,000,000 | Maintenance €2,000,000 | Training €500,000 (total SSP = €7,500,000)
+- Total estimated cost: €6,400,000
+- Costs incurred in Year 1: €1,920,000
+- Customer signed acceptance of Phase 1 (software go-live) in Month 9
+
+QUESTIONS:
+1. Identify all Performance Obligations and classify as Point-in-Time or Over-Time
+2. Allocate the Transaction Price to each PO (pro-rata to SSP)
+3. Calculate % completion for each PO at year end
+4. Calculate revenue to recognize in Year 1 for each PO
+5. Show the journal entries
+6. If the customer now requests to add a mobile app module for +€500,000 (with additional cost €350,000), how does this affect Year 1 revenue? (Cumulative Catch-Up)
+
+Answer in Hebrew. Show all calculations step by step in a table format.</div>
+    <button onclick="copyPrompt(this,'p2')" id="p2-btn" style="margin-top:10px;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:none;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:Heebo,sans-serif;">📋 העתק פרומפט</button>
+    <div style="margin-top:10px;font-size:12px;color:var(--text3);">🔗 מומלץ: <a href="https://claude.ai" target="_blank">Claude</a> (טוב לניתוח ארוך) | <a href="https://chatgpt.com" target="_blank">ChatGPT</a></div>
+  </div>
+
+  <div class="card" style="background:#FFF4E5;border:2px solid var(--accent);">
+    <div class="card-title" style="font-size:14px;color:#804000;">🟠 פרומפט 3 – זיהוי "קוסמטיקה חשבונאית" ב-MPM</div>
+    <div class="hl orange" style="margin-bottom:12px;">
+      <div class="hl-icon">ℹ️</div>
+      <div class="hl-body">
+        <h4>מה תלמדו</h4>
+        <p>כיצד AI מזהה Adjusted Metrics בלתי מוצדקים ומייצר Reconciliation לפי IFRS 18. מבוסס על חברה ישראלית ציבורית.</p>
+      </div>
+    </div>
+    <p style="font-size:13px;font-weight:700;color:#804000;margin-bottom:8px;">📋 העתיקו:</p>
+    <div style="background:#fff;border-radius:10px;padding:16px;border:1.5px dashed var(--accent);font-size:13px;line-height:1.8;direction:ltr;text-align:left;font-family:monospace;white-space:pre-wrap;">You are an IFRS 18 compliance expert reviewing a press release from an Israeli tech company.
+
+COMPANY: Silicom Ltd. (Nasdaq: SILC) - Israeli networking hardware company
+PRESS RELEASE EXCERPT (hypothetical, for learning purposes):
+"Q4 2024 Non-GAAP Results:
+- Non-GAAP Revenue: $52M
+- Non-GAAP Gross Margin: 58%  
+- Non-GAAP Operating Income: $8.2M
+- Non-GAAP EPS: $0.91
+
+Excluded from Non-GAAP: stock-based compensation $1.8M, amortization of intangibles $0.9M, restructuring charges $1.1M (this is the 5th consecutive year of restructuring)"
+
+GAAP Results:
+- GAAP Operating Income: $4.4M (= $8.2M minus the three items above)
+
+YOUR TASKS:
+1. Under IFRS 18, which of these exclusions would be REQUIRED to appear in the financial statements as MPM disclosures (not just press release)?
+2. Which exclusion is most problematic under IFRS 18 and why?
+3. Write the IFRS 18-compliant MPM note that should appear in the financial statements, including the required Reconciliation table
+4. What questions should a financial analyst ask management about these adjustments?
+
+Answer in Hebrew with detailed explanations.</div>
+    <button onclick="copyPrompt(this,'p3')" id="p3-btn" style="margin-top:10px;background:linear-gradient(135deg,#904010,#C05020);color:#fff;border:none;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:Heebo,sans-serif;">📋 העתק פרומפט</button>
+  </div>
+</div>
+
+<!-- B-7 -->
+<div class="card">
+  <div class="card-title">🔗 סיכום חלק ב׳ + חיבור לחלק ג׳</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
+    <div style="background:linear-gradient(135deg,#F3EBF8,#EDE0F5);border-radius:14px;padding:18px;border:2px solid var(--purple2);">
+      <div style="font-weight:800;color:var(--purple);font-size:15px;margin-bottom:10px;">📐 IFRS 18 – 3 לקחים</div>
+      <ul style="font-size:13px;color:var(--text2);padding-right:16px;line-height:1.9;">
+        <li>Operating Profit מקבל הגדרה נוקשה – "קוסמטיקה" נחשפת</li>
+        <li>MPMs חייבים Reconciliation מלא בדוח</li>
+        <li>ספקים ביטחוניים שמדווחים ב-2026 כבר מושפעים (Comparative)</li>
+      </ul>
+    </div>
+    <div style="background:linear-gradient(135deg,#EBF8F3,#DDF2EA);border-radius:14px;padding:18px;border:2px solid var(--green2);">
+      <div style="font-weight:800;color:var(--green);font-size:15px;margin-bottom:10px;">📑 IFRS 15 – 3 לקחים</div>
+      <ul style="font-size:13px;color:var(--text2);padding-right:16px;line-height:1.9;">
+        <li>הכנסה מוכרת לפי % ביצוע – לא לפי תשלום</li>
+        <li>שינוי מפרט → Contract Modification → Catch-Up עלול להיות אפסי</li>
+        <li>Contract Asset = ספק הקדים עצמו – שים לב!</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hl blue">
+    <div class="hl-icon">🔗</div>
+    <div class="hl-body">
+      <h4>חיבור לחלק ג׳ – ביקורת (רו"ח ארנון אטיס, KPMG)</h4>
+      <p>כל מה שלמדנו כאן הוא בדיוק מה שמבקר חיצוני בוחן: האם ה-% ביצוע אמין? האם ה-Contract Modifications תועדו נכון? האם ה-MPMs הוצגו נכון? בחלק ג׳ נראה כיצד ה-KAMs (Key Audit Matters) לפי ISA 701 מתמקדים בדיוק בסוגיות אלו.</p>
+    </div>
+  </div>
+
+  <div class="summary-sentence" style="background:linear-gradient(135deg,var(--green),#1A5A8C);">
+    📊 IFRS 18 + IFRS 15 = כלי x-ray לדוחות ספקים. עכשיו יש לכם את הכלים לחשוף מה שמסתתר מאחורי מספרי "Adjusted Performance".
+  </div>
+</div>
+
+<div class="break-banner">
+  <span style="font-size:22px">🍽️</span>&nbsp; הפסקת צהריים — 12:00 עד 13:00 &nbsp;|&nbsp; חלק ג׳ – תקני ביקורת (רו"ח ארנון אטיס) יתחיל ב-13:00
+</div>
+
+</div></div></div>
+
+<!-- QUIZ PANE -->
+<div id="pane-q" class="tab-pane"><div class="container">
+<div class="sec-head">
+  <div class="sec-num" style="background:linear-gradient(135deg,#E8A020,#F0C060);color:#4A2000;">🎓</div>
+  <div class="sec-title">
+    <h3 style="color:#804000;">בחן את עצמך – כל החומר ביום עיון 1</h3>
+    <p>25 שאלות רב-ברירה | ציון 60+ = תעודת השתתפות</p>
+  </div>
+</div>
+
+<div class="hl orange" style="margin-bottom:24px;">
+  <div class="hl-icon">📋</div>
+  <div class="hl-body">
+    <h4>הוראות</h4>
+    <p>ענו על כל השאלות. בכל שאלה יש <strong>4 אפשרויות</strong> – בחרו אחת. לאחר הבחירה תקבלו משוב מיידי עם הסבר. בסוף – ציון וסיכום. ציון 60 ומעלה = תעודת השתתפות.</p>
+  </div>
+</div>
+
+<div id="quiz-container"></div>
+<div id="quiz-results" style="display:none;"></div>
+
+</div></div>
+
+<script>
+/* ═══════════════════════════════════════════
+    CORE ENGINE & HANDLERS
+═══════════════════════════════════════════ */
+window._currentTab = 'a';
+
+const CIRC = 163.4;
+function updateProgress(){
+  var tab = window._currentTab;
+  var pane = document.getElementById('pane-'+tab);
+  if(!pane) return;
+  var paneTop = pane.getBoundingClientRect().top + window.scrollY;
+  var scrolled = Math.max(0, window.scrollY + window.innerHeight - paneTop);
+  var pct = Math.min(100, Math.round(scrolled / pane.scrollHeight * 100));
+  var offset = CIRC * (1 - pct/100);
+  var fill = document.getElementById('prog-fill');
+  var pctEl = document.getElementById('prog-pct');
+  var labelEl = document.getElementById('prog-label');
+  if(fill) fill.style.strokeDashoffset = offset;
+  if(pctEl) pctEl.textContent = pct+'%';
+  var labels = {a:'חלק א׳', b:'חלק ב׳', q:'בוחן'};
+  if(labelEl) labelEl.textContent = labels[tab]||'';
+  var col = pct<40?'#60B0FF':pct<70?'#A0E8C0':pct<90?'#F0C060':'#FF9060';
+  if(fill) fill.style.stroke = col;
+}
+window.addEventListener('scroll', updateProgress);
+setTimeout(updateProgress, 300);
+
+function toggleFC(el){
+  var d = el.querySelector('.fc-detail');
+  if(!d) return;
+  var wasOpen = d.classList.contains('open');
+  var grid = el.closest('.fc-grid');
+  if(grid) grid.querySelectorAll('.fc-detail').forEach(function(x){x.classList.remove('open');});
+  if(!wasOpen) d.classList.add('open');
+}
+
+function toggleHol(id){
+  document.querySelectorAll('.hol-detail').forEach(function(d){
+    if(d.id!==id) d.classList.remove('open');
+  });
+  var el = document.getElementById(id);
+  if(el) el.classList.toggle('open');
+}
+
+function toggleBox(id){
+  var el = document.getElementById(id);
+  if(el) el.classList.toggle('open');
+}
+
+function giveFeedback(inpId, fbId){
+  var val = document.getElementById(inpId).value.trim();
+  var el = document.getElementById(fbId);
+  if(!val){ el.innerHTML='⚠️ נא לכתוב תשובה.'; el.classList.add('open'); return; }
+  var map = {
+    'ai-pre': function(v){
+      var lv=v.toLowerCase();
+      if(lv.includes('chatgpt')||lv.includes('צ׳אט')) return '💡 ChatGPT הוא פנים מוכרות – אבל רק 1 מתוך 4 קטגוריות AI. רוב עבודת ה-AI בחשבונאות = ML ואוטומציה.';
+      if(lv.includes('ניתוח')||lv.includes('אוטומ')) return '✅ כיוון נכון! נפרק את הקטגוריות בהמשך.';
+      return '📌 בהמשך נסרוק: ML, GenAI, NLP, אוטומציה – ונבחן מה מפתיע.';
+    },
+    'data-gov': function(v){
+      var lv=v.toLowerCase(), hits=[], miss=[];
+      if(lv.includes('ספק')||lv.includes('vendor')) hits.push('✅ קוד ספק');
+      else miss.push('📌 קוד ספק אחיד');
+      if(lv.includes('תקציב')||lv.includes('סעיף')) hits.push('✅ קוד תקציב');
+      else miss.push('📌 קוד/סעיף תקציב');
+      if(lv.includes('תאריך')||lv.includes('date')) hits.push('✅ תאריכים');
+      else miss.push('📌 תאריך חתימה / אספקה / ביצוע – 3 שדות');
+      return (hits.length?'<strong>מצאתם:</strong> '+hits.join(', ')+'<br><br>':'')+(miss.length?'<strong>כדאי גם:</strong><br>'+miss.join('<br>'):'✅ מצוין!');
+    },
+    'variance-q': function(v){
+      var lv=v.toLowerCase(), msg='';
+      if(lv.includes('מחיר')||lv.includes('עלות')) msg+='✅ מחיר<br>';
+      if(lv.includes('כמות')||lv.includes('היקף')) msg+='✅ כמות<br>';
+      if(lv.includes('עיתוי')||lv.includes('מתי')) msg+='✅ עיתוי<br>';
+      if(!msg) msg='📌 ';
+      return msg+'<br><strong>3 שאלות קלאסיות:</strong> (1) מחיר? (2) כמות? (3) עיתוי?';
+    },
+    'survival-q': function(v){
+      var lv=v.toLowerCase(), msg='';
+      if(lv.includes('שיקול')) msg+='✅ שיקול דעת<br>';
+      if(lv.includes('תקשורת')||lv.includes('הסבר')) msg+='✅ תקשורת<br>';
+      if(lv.includes('אחריות')) msg+='✅ אחריות<br>';
+      if(!msg) msg='📌 חשבו: שיקול דעת, אחריות, תקשורת.<br>';
+      return msg+'<br>📌 AI לא יחליף: שיקול דעת · תקשורת · משא ומתן · Professional Skepticism';
+    }
+  };
+  var fn = map[inpId];
+  el.innerHTML = fn ? fn(val) : '📩 תודה! נדון בתשובות בכיתה.';
+  el.classList.add('open');
+}
+
+function giveFeedbackB(inpId, fbId){
+  var val = document.getElementById(inpId).value.trim();
+  var el = document.getElementById(fbId);
+  if(!val){ el.innerHTML='⚠️ נא לכתוב תשובה.'; el.classList.add('open'); return; }
+  var map = {
+    'ifrs18-open': function(v){
+      var lv=v.toLowerCase();
+      if(lv.includes('adjusted')||lv.includes('חד פעמי')||lv.includes('מה כולל'))
+        return '✅ שאלה מדויקת! IFRS 18 בא לפתור בדיוק את זה – לדרוש שקיפות מלאה על מה הוחרג.';
+      if(lv.includes('נקי')||lv.includes('רווח'))
+        return '✅ נכון – הפער 500M vs 80M = 420M ₪ שנעלמו. שאלו: מאיפה? מה ה-Reconciliation?';
+      return '📌 חשבו: 500M vs 80M = פער 420M ₪. מה גרם? האם "הוצאות חד-פעמיות" חוזרות כל שנה?';
+    },
+    'ifrs18-ex': function(v){
+      var lv=v.toLowerCase(), msg='';
+      if(lv.includes('sbc')||lv.includes('מניות')) msg+='✅ SBC<br>';
+      if(lv.includes('amort')||lv.includes('פחת')||lv.includes('רכישות')) msg+='✅ Amortization<br>';
+      if(lv.includes('ארגון')||lv.includes('restructur')) msg+='✅ Restructuring<br>';
+      if(!msg) msg='📌 חשבו: SBC, Amortization, Restructuring. ';
+      return msg+'<br><strong>אסור ב-Adjustment:</strong> ארגון מחדש שחזר כל שנה – לא ניתן להגדיר כ"חד-פעמי".';
+    },
+    'ifrs15-ex': function(v){
+      var lv=v.toLowerCase();
+      var c1 = lv.includes('100') || lv.includes('50%');
+      var c2 = lv.includes('0') || lv.includes('אפס');
+      if(c1&&c2) return '🎉 <strong>מושלם!</strong> שלב 1: 80÷160=50%, הכנסה=100M. שלב 2: %=80÷200=40%, TP=250M, הכנסה=100M, Catch-Up=0.';
+      if(c1) return '✅ שלב 1 נכון! שלב 2: %חדש=80÷200=40%, TP=250M, הכנסה=100M, Catch-Up=0.';
+      return '📌 שלב 1: 80÷160=50%, הכנסה=100M. שלב 2: עלות=200M→%=40%, TP=250M→הכנסה=100M, Catch-Up=0.';
+    }
+  };
+  var fn = map[inpId];
+  el.innerHTML = fn ? fn(val) : '📩 תודה!';
+  el.classList.add('open');
+}
+
+var mcqExplanations = {
+  'mcq-b1':'לפי IFRS 18: MPM שפורסם בתקשורת פומבית חייב Reconciliation מלא בדוח עצמו. הוצאה "חד-פעמית" שחזרה 7 שנים – חייבת גילוי מפורש.',
+  'mcq-b2':'IFRS 18 חל על כל חברה המדווחת לפי IFRS, כולל ממשלתיות. נתוני 2026 = ה-Comparative לדוחות 2027.',
+  'mcq-b3':'חוזה ל"מערכת + תחזוקה" = 2 PO מובחנים: (1) המערכת – נמסרת בנקודת זמן. (2) תחזוקה – Over Time. כל PO מקבל הקצאת מחיר נפרדת.',
+  'mcq-b4':'Variable Consideration = תמורה משתנה. קנס פיגורים צפוי = VC שלילי. לפי ה-Constraint Rule צריך להפחית מ-TP כל VC ש"highly probable" שיתממש.',
+  'mcq-b5':'Contract Asset = ביצוע הקדים חיוב. אהספק הכיר הכנסה לפי % ביצוע אבל טרם הגיע Milestone החיוב. מגלה שהספק "רץ קדימה" – בדקו אם זה מוצדק.'
+};
+
+function checkMCQ(gridId, btn, result){
+  var grid = document.getElementById(gridId);
+  if(!grid) return;
+  grid.querySelectorAll('.mcq-btn').forEach(function(b){b.disabled=true;});
+  var res = document.getElementById(gridId+'-result');
+  if(!res) return;
+  res.style.display='block';
+  var ex = mcqExplanations[gridId]||'';
+  if(result==='correct'){
+    btn.style.background='linear-gradient(135deg,#1A7050,#2A9A70)';
+    btn.style.color='#fff';
+    res.style.cssText='display:block;padding:12px;border-radius:10px;background:#EEFAF3;border:1.5px solid #2A9A70;font-size:14px;margin-top:8px;';
+    res.innerHTML='✅ <strong>נכון!</strong> '+ex;
+  } else {
+    btn.style.background='linear-gradient(135deg,#A02828,#C03030)';
+    btn.style.color='#fff';
+    res.style.cssText='display:block;padding:12px;border-radius:10px;background:#FFF0F0;border:1.5px solid #C03030;font-size:14px;margin-top:8px;';
+    res.innerHTML='❌ <strong>לא נכון.</strong> '+ex;
+    var btns = grid.querySelectorAll('.mcq-btn');
+    var correctIdx = {'mcq-b1':1,'mcq-b2':2,'mcq-b3':1,'mcq-b4':1,'mcq-b5':1};
+    var ci = correctIdx[gridId];
+    if(ci!==undefined && btns[ci]){btns[ci].style.background='linear-gradient(135deg,#1A7050,#2A9A70)';btns[ci].style.color='#fff';}
+  }
+}
+
+function checkStep(id, btn, result, value){
+  var container = btn.closest('.ex-step') || document.getElementById(id+'-block') || btn.parentElement.parentElement;
+  container.querySelectorAll('.mcq-btn').forEach(function(b){b.disabled=true;});
+  var fb = document.getElementById(id+'-fb');
+  var stepExplanations = {
+    'ex1-s0': {correct:'✅ Operations! הכנסות ממכירת מוצרים/שירותים = ליבת הפעילות. תמיד נכנס ל-Operations תחת IFRS 18.', wrong:'❌ הכנסות ממכירת שירותי תוכנה = ליבת הפעילות = Operations.'},
+    'ex2-sa': {correct:'✅ 40%! % ביצוע = 960K ÷ 2,400K (עלות כוללה, לא מחיר חוזה!). שגיאה נפוצה: לחלק ב-TP במקום בעלות.', wrong:'❌ חלקים בעלות כוללה: 960K ÷ 2,400K = 40%. לא מחלקים ב-TP!'},
+    'ex2-sb': {correct:'✅ 1,200,000 ₪! 40% × 3,000K = הכנסה שיש להכיר עד כה.', wrong:'❌ הכנסה = % ביצוע × TP = 40% × 3,000K = 1,200,000 ₪.'},
+    'ex2-sc': {correct:'✅ 240,000 ₪! = 1,200K (הכנסה) − 960K (עלות) = רווח גולמי מוכר (8% מ-TP).', wrong:'❌ רווח גולמי = הכנסה מוכרת − עלות שנצברה = 1,200K − 960K = 240,000 ₪.'},
+    'ex3-sa': {correct:'✅ 32%! % חדש = 960K ÷ 3,000K (העלות עלתה!). לכן % ירד מ-40% ל-32%.', wrong:'❌ % חדש = 960K ÷ עלות חדשה = 960K ÷ 3,000K = 32%. העלות עלתה → % ירד!'},
+    'ex3-sb': {correct:'✅ 1,024,000 ₪! = 32% × 3,200K (TP חדש). שימו לב: הכנסה ירדה למרות ש-TP עלה!', wrong:'❌ הכנסה נדרשת = % חדש × TP חדש = 32% × 3,200K = 1,024,000 ₪.'},
+    'ex3-sc': {correct:'✅ −176,000 ₪! = 1,024K − 1,200K. יש לבטל 176K מהכנסה שכבר הוכרה. ה"פיצוי" ב-TP לא עזר מספיק.', wrong:'❌ Catch-Up = 1,024K − 1,200K = −176,000 ₪ (שלילי! יש לבטל הכנסה שכבר הוכרה).'},
+    'ex4': {correct:'✅ 1,010M $! = 2,500−400−700−300−90 = 1,010M. ריבית על פיקדונות (180M$) = Financing/Investing, לא Operations.', wrong:'❌ ריבית על פיקדונות = Financing (לא Operations). Operating = 2,500−400−700−300−90 = 1,010M$.'}
+  };
+  var ex = stepExplanations[id] || {correct:'✅ נכון!', wrong:'❌ לא נכון.'};
+  if(fb){
+    fb.style.display='block';
+    if(result==='correct'){
+      btn.style.background='linear-gradient(135deg,#1A7050,#2A9A70)'; btn.style.color='#fff';
+      fb.style.cssText='display:block;padding:10px;border-radius:8px;background:#EEFAF3;border:1.5px solid #2A9A70;font-size:13px;';
+      fb.innerHTML = ex.correct;
+    } else {
+      btn.style.background='linear-gradient(135deg,#A02828,#C03030)'; btn.style.color='#fff';
+      fb.style.cssText='display:block;padding:10px;border-radius:8px;background:#FFF0F0;border:1.5px solid #C03030;font-size:13px;';
+      fb.innerHTML = ex.wrong;
+    }
+  }
+  var nextBlocks = {
+    'ex1-s0': 'ex1-s1', 'ex1-s1': 'ex1-s2', 'ex1-s2': 'ex1-s3',
+    'ex2-sa': 'ex2-sb-block', 'ex2-sb': 'ex2-sc-block',
+    'ex2-sc': 'ex2-summary',
+    'ex3-sa': 'ex3-sb-block', 'ex3-sb': 'ex3-sc-block',
+    'ex3-sc': 'ex3-insight'
+  };
+  var nextId = nextBlocks[id];
+  if(nextId){
+    var next = document.getElementById(nextId);
+    if(next){
+      setTimeout(function(){
+        next.style.opacity='1'; next.style.borderStyle='solid';
+        next.classList.remove('locked');
+        next.querySelectorAll('.mcq-btn').forEach(function(b){b.disabled=false;});
+        if(next.style.display==='none') next.style.display='block';
+        next.scrollIntoView({behavior:'smooth',block:'nearest'});
+        if(nextId.startsWith('ex1-s')){
+          var n = next;
+          n.style.background='#fff';
+          var innerBtns = ['Operations','Financing','Investing','Associates'];
+          var correctMap = {'ex1-s1':'Operations','ex1-s2':'Financing','ex1-s3':'Associates'};
+          var corr = correctMap[nextId];
+          n.innerHTML = n.innerHTML.replace('🔒','') + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">'
+            + innerBtns.map(function(opt){
+              return '<button class="mcq-btn" onclick="checkStep(''+nextId+'',this,''+(opt===corr?'correct':'wrong')+'',''+opt+'')">'+(opt===corr?opt+' ✅':opt)+'</button>';
+            }).join('')
+            + '</div><div class="step-fb" id="'+nextId+'-fb" style="display:none;"></div>';
+        }
+      }, 500);
+    }
+  }
+}
+
+function copyPrompt(btn, id){
+  var pre = btn.previousElementSibling;
+  var text = pre ? pre.textContent : '';
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){
+      btn.textContent = '✅ הועתק!';
+      setTimeout(function(){ btn.innerHTML = '📋 העתק פרומפט'; }, 2500);
+    });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    btn.textContent = '✅ הועתק!';
+    setTimeout(function(){ btn.innerHTML = '📋 העתק פרומפט'; }, 2500);
+  }
+}
+
+/* ═══════════════════════════════════════════
+    QUIZ ENGINE DATA & RENDERING
+═══════════════════════════════════════════ */
+var quizQuestions = [
+  {q:'מהו ה-Holistic Framework (המסגרת ההוליסטית) בחשבונאות?',
+   a:['שם של תוכנת ERP מתקדמת','שיטה לניתוח 5 ממדים משולבים: מידע, דיווח, פרשנות, בקרה וחברה','מסגרת לביקורת פנימית בלבד','שיטת דיווח ממשלתית'],
+   c:1, ex:'המסגרת ההוליסטית מחברת 5 ממדים שפועלים יחד. שינוי בתקן אחד (כמו IFRS 18) משפיע על כולם בו-זמנית.'},
+  {q:'מה ההבדל בין "אוטומציה" ל-"Machine Learning"?',
+   a:['שניהם זהים – שני שמות לאותו דבר','אוטומציה פועלת לפי כללים קשיחים מראש; ML לומד מנתונים ומזהה דפוסים','ML הוא ישן יותר מאוטומציה','אוטומציה = AI, ML = לא AI'],
+   c:1, ex:'אוטומציה: "אם חשבונית >50K → שלח לאישור" – כלל קבוע. ML: "למד מ-10,000 חשבוניות ואמור אילו חריגות" – ללא כללים מוגדרים מראש.'},
+  {q:'מה זה RPA? (Robotic Process Automation)',
+   a:['רובוט פיזי לסריקת מסמכים','תוכנה שמחקה קליקים ידניים של אדם – מעתיקה נתונים, ממלאת טפסים, שולחת מיילים','מערכת AI ללמידה עמוקה','פרוטוקול ביקורת חדש של IAASB'],
+   c:1, ex:'RPA = רובוט תוכנה. הוא עושה בדיוק מה שאדם עשה ידנית – אין חשיבה, רק חיקוי. מגבלה: אם הממשק משתנה, הרובוט נשבר.'},
+  {q:'מה פירוש ראשי התיבות NLP?',
+   a:['New Ledger Protocol','Natural Language Processing – עיבוד שפה טבעית','Net Liability Position','Numerical Learning Platform'],
+   c:1, ex:'NLP = עיבוד שפה טבעית. מאפשר למחשב להפוך טקסט (חוזה PDF, מייל) לנתונים מובנים. לדוגמה: Trullion קורא חוזה IFRS 15 ומוצא Performance Obligations.'},
+  {q:'מה ה"Data Governance" שמעכב פרויקטי AI?',
+   a:['בעיה ברישיונות תוכנה','חוסר מדיניות פרטיות','חוסר אחידות בהגדרת נתונים: קודי ספק שונים, הגדרות שדות לא עקביות בין מערכות','בעיות גיוס כוח אדם'],
+   c:2, ex:'"Garbage in, garbage out" – ML טוב כמו הנתונים שהוא מקבל. McKinsey 2025: Data Governance = גורם #1 לכישלון פרויקטי AI פיננסיים.'},
+  {q:'מה ההבדל בין "מודל AI" ל-"סוכן AI" (Agent)?',
+   a:['אין הבדל – אותו דבר','מודל עונה לשאלה אחת; סוכן מתכנן ומבצע רצף פעולות אוטונומי (קורא לכלים, מחליט, פועל)','מודל עובד בענן; סוכן עובד לוקאלית','סוכן הוא מודל ישן יותר'],
+   c:1, ex:'מודל: שואל → עונה, סיים. סוכן: מקבל משימה → מתכנן → מפעיל כלים → בודק → ממשיך. KPMG Workbench = multi-agent system.'},
+  {q:'מה ה"Continuous Close" ולמה הוא שונה מסגירה מסורתית?',
+   a:['שם לתוכנת SAP חדשה','תהליך שבו עסקאות מוקלטות בזמן אמת ודוחות מוכנים תוך 1-3 ימים, לעומת 12-15 ימים מסורתית','שיטת ביקורת חיצונית','פרוטוקול גיבוי נתונים'],
+   c:1, ex:'Continuous Close = סגירה שוטפת. ERP בענן מאפשר הקלטה בזמן אמת. Deloitte: מ-12 ל-3 ימים ממוצע. חשיבות לאגף: ניתוח חריגות בזמן, לא חודש מאוחר.'},
+  {q:'מה זה "Professional Skepticism" ולמה AI לא יחליף אותו?',
+   a:['ספקנות מקצועית – יכולת לחשוד בנתונים גם כשנראים תקינים; דורשת שיקול דעת אנושי שלא ניתן לנסח כאלגוריתם','שם לכלי AI של KPMG','מונח מתמטי לזיהוי חריגות','סוג של ביקורת פנימית'],
+   c:0, ex:'Professional Skepticism = מנטליות "אני לא מניח שזה נכון – אני בודק". AI מזהה דפוסים; ספקנות מקצועית = יכולת לחשוד שגם הדפוס עצמו עלול להיות מניפולטיבי.'},
+  {q:'IFRS 18 מחליף איזה תקן קיים?',
+   a:['IFRS 9','IAS 1 – הצגת דוחות כספיים','IAS 16 – רכוש קבוע','IFRS 15 – הכנסות'],
+   c:1, ex:'IFRS 18 מחליף את IAS 1 Presentation of Financial Statements. בתוקף מ-1.1.2027 בצורה מחייבת, עם Retrospective Application לנתוני 2026.'},
+  {q:'כמה קטגוריות יש בדוח רווח והפסד לפי IFRS 18?',
+   a:['3','4','5','2'],
+   c:2, ex:'5 קטגוריות: (1) Operations – ליבה תפעולית, (2) Investing – רק לחברות השקעה, (3) Financing – מימון חוב, (4) Associates & JVs – חברות כלולות, (5) Discontinued – פעילות מופסקת.'},
+  {q:'מה זה MPM לפי IFRS 18? (Management Performance Measure)',
+   a:['מדד פנימי לניהול עובדים','מדד ביצוע ניהולי שחברות מפרסמות (כמו Adjusted EBITDA) – לפי IFRS 18 חייב להופיע בדוח עם Reconciliation','פרמטר בחישוב ביקורת','ראשי תיבות של מערכת ERP'],
+   c:1, ex:'MPM = Management Performance Measure. לדוגמה: "Adjusted EBITDA". לפי IFRS 18 – כל MPM שמפורסם פומבית חייב להופיע בדוח הכספי עצמו + Reconciliation מלא לסכום ה-IFRS המקביל.'},
+  {q:'מה זה "Adjusted EBITDA"? (ראשי תיבות)',
+   a:['Annual Earnings Before Interest, Tax & Depreciation Assets','Earnings Before Interest, Taxes, Depreciation & Amortization – רווח לפני ריבית, מס, פחת והפחתות – "מותאם" = לאחר הוצאות "שהוחרגו"','External Balance In Tax & Dividend Analysis','אין כזה מונח רשמי'],
+   c:1, ex:'EBITDA = Earnings Before Interest Taxes Depreciation & Amortization. "Adjusted" = הנהלה מוציאה עוד סעיפים שהיא מגדירה כ"חד-פעמיים". IFRS 18 מחייב שקיפות: מה בדיוק הוחרג ולמה.'},
+  {q:'Hvrh מציגה "ארגון מחדש" כ-Adjustment ב-Adjusted EBITDA במשך 6 שנים ברצף. לפי IFRS 18 – מה הבעיה?',
+   a:['אין בעיה – זה תמיד מותר','הוצאה שחוזרת שנה אחרי שנה אינה "חד-פעמית" – IFRS 18 דורש גילוי ו-Reconciliation, ולא ניתן יותר להסתירה','הבעיה היא רק אם הסכום גדול מ-5% מהכנסות','אסור להציג Adjusted EBITDA בכלל'],
+   c:1, ex:'KPMG זיהה זאת כבעיה נפוצה: "חד-פעמי שחזר" = לא חד-פעמי. IFRS 18 מחייב הסבר על כל תיקון ב-MPM, והמשקיעים יראו שה"חריג" חזר 6 שנים.'},
+  {q:'מתי נכנס IFRS 18 לתוקף מחייב?',
+   a:['1.1.2025','1.1.2026','1.1.2027','1.1.2028'],
+   c:2, ex:'IFRS 18 בתוקף ל-Annual Periods המתחילים ב-1.1.2027 ואילך. יישום מוקדם אפשרי. חשוב: Retrospective – נתוני 2026 יוצגו מחדש כ-Comparative בדוחות 2027.'},
+  {q:'מה המשמעות של "Retrospective Application" של IFRS 18?',
+   a:['החברה יכולה לבחור לא ליישם','הדוחות הישנים לא ישתנו','נתוני שנת 2026 יוצגו מחדש לפי הקטגוריות החדשות בדוחות 2027','יישום יחל רק מ-2030'],
+   c:2, ex:'Retrospective = החלה למפרע. חברה שתאמץ IFRS 18 ב-2027 תצטרך להציג גם נתוני 2026 לפי הקטגוריות החדשות. לכן – נתוני 2026 ישתנו מפרע ב-2027.'},
+  {q:'חברת הייטק ישראלית מדווחת "Adjusted Operating Income" שמוציא SBC (תגמול מבוסס מניות). לפי IFRS 18 מה נדרש?',
+   a:['זה מותר ולא נדרש כלום נוסף','SBC הוא הוצאה תפעולית (Operations). חייב Reconciliation בדוח: מה הוחרג, כמה, ולמה. הגילוי הזה חייב להיות בדוח עצמו','SBC לא שייך ל-Operating Profit בכלל','IFRS 18 לא מטפל ב-SBC'],
+   c:1, ex:'SBC הוא הוצאה תפעולית ריאלית. IFRS 18 מחייב MPM Note ייעודי בדוח הכספי עם גילוי מלא ו-Reconciliation לרווח התפעולי הרשמי.'},
+  {q:'מה העיקרון המרכזי של IFRS 15 בהכרה בהכנסה?',
+   a:['הכנסה מוכרת עם קבלת התשלום','הכנסה מוכרת עם חתימת החוזה','הכנסה מוכרת כאשר מועברת שליטה על הסחורה/שירות ללקוח','הכנסה מוכרת בסוף השנה הכספית'],
+   c:2, ex:'IFRS 15 מתבסס על העברת שליטה (Control Transfer) ללקוח. הלקוח יכול לכוון את השימוש בנכס ולקבל את מלוא התשואה ממנו.'},
+  {q:'מה זה "Performance Obligation" (מחויבות ביצוע)?',
+   a:['סעיף תשלום בחוזה','הבטחה לספק מוצר או שירות מובחן שהלקוח יכול להפיק ממנו תועלת','מדד ביצוע ניהולי','סוג של ביקורת פנימית'],
+   c:1, ex:'Performance Obligation (PO) הוא הבטחה נפרדת ומובחנת בחוזה לספק מוצר או שירות.'},
+  {q:'ספק ביטחוני חתם על חוזה לאספקת 100 רחפנים + הדרכה. כמה Performance Obligations?',
+   a:['אחת – זהו חוזה אחד','שתיים – הרחפנים והדרכה (2 שירותים מובחנים)','שלוש – כל מאה רחפן בנפרד','תלוי במחיר'],
+   c:1, ex:'2 מחויבויות ביצוע: הרחפנים וההדרכה הם מוצרים ושירותים מובחנים הניתנים לזיהוי בנפרד.'},
+  {q:'מה זה "Variable Consideration"?',
+   a:['מחיר קבוע לכל יחידה','תמורה משתנה: קנסות, בונוסים, הנחות שייקבעו רק בעתיד – חייבים להיות מוכרים בהסתברות גבוהה','אחוז ביצוע משוכלל','עמלת מכירה משתנה'],
+   c:1, ex:'Variable Consideration כולל רכיבים משתנים כמו בונוסי עמידה ביעדים או קנסות פיגורים שיש להעריך מראש.'},
+  {q:'Hvrh רשמה 50% ביצוע על חוזה 200M ₪ לפי Cost-to-Cost. כמה הכנסה הוכרה?',
+   a:['25M ₪','100M ₪','200M ₪','תלוי ב-Milestones'],
+   c:1, ex:'הכרה בהכנסה לפי שיטת העלויות (Input Method): 50% מתוך 200 מיליון ₪ שווים ל-100 מיליון ₪ הכנסה.'},
+  {q:'מה ההבדל בין "Over Time" ל-"Point in Time" בהכרה בהכנסה?',
+   a:['Over Time = בסוף החוזה; Point in Time = בהתחלה','Over Time = הכרה הדרגתית כשהלקוח מקבל שליטה ברציפות; Point in Time = הכרה בנקודה ספציפית (למשל מסירה ואישור)','שניהם זהים','Point in Time = Over Time מהיר יותר'],
+   c:1, ex:'Over Time מיועד לשירותים או פרויקטים ארוכים שבהם השליטה מועברת בהדרגה. Point in Time חל ברגע מסירה ברור וחד-פעמי.'},
+  {q:'מה זה "Cumulative Catch-Up Adjustment" בשינוי חוזה?',
+   a:['תשלום מפרע ללקוח','תיקון מצטבר: כשמשנים חוזה קיים, מחשבים מחדש כמה הכנסה "צריכה" להיות מוכרת עד היום, ומכירים את ההפרש ברבעון הנוכחי','סוג של ביקורת על שינוי חוזה','שיטה לחישוב קנסות'],
+   c:1, ex:'Cumulative Catch-Up מעדכן את סך ההכנסות שהוכרו עד כה ברבעון שבו חל שינוי באומדן או בחוזה.'},
+  {q:'מה זה "Contract Asset"?',
+   a:['נכס שרכש הספק מהלקוח','הכנסה שהוכרה לפי % ביצוע אך עדיין לא הגיע מועד החיוב – "ספק קדם את עצמו"','מזומן שהלקוח שילם מראש','חוב של הספק ללקוח'],
+   c:1, ex:'Contract Asset מייצג זכות לקבלת תמורה בגין עבודה שבוצעה אך טרם הולידה זכות חיבוב מוחלטת (Receivable).'},
+  {q:'חברת תוכנה ישראלית חתמה חוזה 5 שנים לתחזוקת מערכת ב-500K ₪ לשנה. מתי תכיר בהכנסה לפי IFRS 15?',
+   a:['הכל ב-Year 1 עם חתימת החוזה','500K ₪ בשנה – Over Time לאורך 5 שנות השירות','הכל ב-Year 5 עם סיום החוזה','רק עם קבלת כל תשלום'],
+   c:1, ex:'חוזה תחזוקה שוטף מקיים תנאי הכרה לאורך זמן (Over Time) ומחולק שווה בשווה על פני שנות מתן השירות.'}
+];
+
+var quizState = { answers: {}, submitted: {} };
+
+function renderQuiz(){
+  var c = document.getElementById('quiz-container');
+  if(!c) return;
+  var html = '';
+  quizQuestions.forEach(function(q, i){
+    html += '<div class="card" id="qq-'+i+'" style="margin-bottom:20px;">';
+    html += '<div style="font-weight:800;color:var(--blue);font-size:15px;margin-bottom:12px;">שאלה '+(i+1)+' מתוך '+quizQuestions.length+'</div>';
+    html += '<p style="font-size:15px;color:var(--text);margin-bottom:14px;line-height:1.6;">'+q.q+'</p>';
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">';
+    q.a.forEach(function(opt, j){
+      var letter = ['א','ב','ג','ד'][j];
+      html += '<button class="mcq-btn" id="qq-'+i+'-'+j+'" onclick="answerQuiz('+i+','+j+')">'+letter+'. '+opt+'</button>';
+    });
+    html += '</div>';
+    html += '<div id="qq-'+i+'-fb" style="not-specified;margin-top:10px;padding:12px;border-radius:10px;font-size:14px;"></div>';
+    html += '</div>';
+  });
+  html += '<div style="text-align:center;margin:30px 0;">';
+  html += '<button onclick="calcScore()" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:#1A2535;border:none;border-radius:14px;padding:16px 40px;font-size:16px;font-weight:800;cursor:pointer;font-family:Heebo,sans-serif;">📊 חשב ציון וראה תוצאות</button>';
+  html += '</div>';
+  c.innerHTML = html;
+}
+
+function answerQuiz(qi, ai){
+  if(quizState.submitted[qi]) return;
+  quizState.answers[qi] = ai;
+  quizState.submitted[qi] = true;
+  var q = quizQuestions[qi];
+  var btns = document.querySelectorAll('[id^="qq-'+qi+'-"]:not([id$="-fb"])');
+  btns.forEach(function(b){ b.disabled = true; });
+  var fb = document.getElementById('qq-'+qi+'-fb');
+  var isCorrect = (ai === q.c);
+  var btn = document.getElementById('qq-'+qi+'-'+ai);
+  var correctBtn = document.getElementById('qq-'+qi+'-'+q.c);
+  if(isCorrect){
+    if(btn){ btn.style.background='linear-gradient(135deg,#1A7050,#2A9A70)'; btn.style.color='#fff'; }
+    fb.style.cssText='display:block;padding:12px;border-radius:10px;background:#EEFAF3;border:1.5px solid #2A9A70;font-size:14px;';
+    fb.innerHTML='✅ <strong>נכון!</strong> '+q.ex;
+  } else {
+    if(btn){ btn.style.background='linear-gradient(135deg,#A02828,#C03030)'; btn.style.color='#fff'; }
+    if(correctBtn){ correctBtn.style.background='linear-gradient(135deg,#1A7050,#2A9A70)'; correctBtn.style.color='#fff'; }
+    fb.style.cssText='display:block;padding:12px;border-radius:10px;background:#FFF0F0;border:1.5px solid #C03030;font-size:14px;';
+    fb.innerHTML='❌ <strong>לא נכון.</strong> התשובה הנכונה: <strong>'+['א','ב','ג','ד'][q.c]+'</strong>. '+q.ex;
+  }
+}
+
+function calcScore(){
+  var correct = 0, total = quizQuestions.length;
+  quizQuestions.forEach(function(q,i){
+    if(quizState.answers[i] === q.c) correct++;
+  });
+  var pct = Math.round(correct/total*100);
+  var res = document.getElementById('quiz-results');
+  res.style.display = 'block';
+  var pass = pct >= 60;
+  var color = pass ? 'var(--green)' : 'var(--red)';
+  var html = '<div class="card" style="border:3px solid '+color+';text-align:center;padding:40px 24px;">';
+  html += '<div style="font-size:56px;margin-bottom:12px;">'+(pass?'🎓':'📚')+'</div>';
+  html += '<div style="font-size:2.5em;font-weight:900;color:'+color+';">'+pct+'%</div>';
+  html += '<div style="font-size:16px;color:var(--text2);margin-top:8px;">'+correct+' נכונות מתוך '+total+'</div>';
+  if(pass){
+    html += renderCertificate();
+  } else {
+    html += '<div style="margin-top:20px;font-size:15px;color:var(--text2);">עוד לא הגעתם ל-60%. חזרו על החומר ונסו שוב!</div>';
+    html += '<button onclick="resetQuiz()" style="margin-top:16px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:none;border-radius:12px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:Heebo,sans-serif;">🔄 נסה שוב</button>';
+  }
+  html += '</div>';
+  res.innerHTML = html;
+  res.scrollIntoView({behavior:'smooth'});
+}
+
+function renderCertificate(){
+  var now = new Date();
+  var dateStr = now.getDate()+'.'+(now.getMonth()+1)+'.'+now.getFullYear();
+  return '<div id="certificate" style="margin:28px auto;max-width:580px;border:3px solid #C5A020;border-radius:16px;padding:32px 28px;background:linear-gradient(135deg,#FFFDF0,#FFF8DC);text-align:center;font-family:Heebo,sans-serif;">'
+    +'<div style="font-size:13px;color:#8A7030;letter-spacing:1px;margin-bottom:8px;">אוניברסיטת בר-אילן | היחידה ללימודי תעודה</div>'
+    +'<div style="font-size:22px;font-weight:900;color:#5A3800;margin-bottom:6px;">אישור השתתפות</div>'
+    +'<div style="width:60px;height:3px;background:linear-gradient(90deg,#C5A020,#E8C840);margin:10px auto 18px;border-radius:2px;"></div>'
+    +'<p style="font-size:14px;color:#4A3000;line-height:1.8;">מאשרים בזאת כי בעל מסמך זה השתתף בהרצאה<br>'
+    +'בהיקף <strong>4 שעות</strong> בתחומי <strong>עדכוני תקינה חשבונאית ופיננסית</strong><br>'
+    +'כחלק מתכנית ההשתלמות המקצועית<br>'
+    +'<em>עדכוני תקינה וביקורת – מה השתנה ומה המשמעות בשטח</em></p>'
+    +'<div style="margin:16px 0;font-size:13px;color:#8A7030;">תכנים: IFRS 18, IFRS 15, AI בחשבונאות, ניתוח חריגות תקציביות</div>'
+    +'<div style="font-size:13px;color:#6A5020;">ד"ר שי צבאן &nbsp;|&nbsp; '+dateStr+'</div>'
+    +'</div>'
+    +'<button onclick="window.print()" style="margin-top:14px;background:linear-gradient(135deg,#C5A020,#E8C840);color:#4A2000;border:none;border-radius:12px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:Heebo,sans-serif;">🖨️ הדפס תעודה</button>';
+}
+
+function resetQuiz(){
+  quizState = { answers: {}, submitted: {} };
+  document.getElementById('quiz-results').style.display='none';
+  renderQuiz();
+  document.getElementById('quiz-container').scrollIntoView({behavior:'smooth'});
+}
+
+var _quizRendered = false;
+var _origSwitchTab = window.switchTab;
+window.switchTab = function(tab){
+  _origSwitchTab(tab);
+  if(tab==='q' && !_quizRendered){ _quizRendered=true; renderQuiz(); }
+  if(tab==='q'){
+    var ql=document.getElementById('prog-label');
+    if(ql) ql.textContent='בוחן';
+  }
+};
+</script>
+</body>
+</html>
