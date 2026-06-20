@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>סילבוס אקדמי | המהפכה בפרקטיקה הפיננסית 2026</title>
+  <meta name="description" content="סילבוס אקדמי מלא לסמינר רואי חשבון וחשבים בשוק ה-SME בישראל, כולל מיסוי, AI, בקרה תקציבית וביקורת דיגיטלית – ד״ר שי צבאן" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #00E5FF;
+      --primary-dark: #0097A7;
+      --gold: #FFD700;
+      --gold-dark: #FF8C00;
+      --bg-dark: #07121a;
+      --bg-card: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --text-main: #e8eaf0;
+      --text-muted: #8fa3b1;
+      --green: #69f0ae;
+      --purple: #ce93d8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg-dark);
+      background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(0,150,200,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(100,0,150,0.08) 0%, transparent 50%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      text-align: center;
+      padding: 70px 30px 50px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,229,255,0.06) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+      color: #000;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      text-shadow: 0 4px 30px rgba(0,229,255,0.25);
+    }
+    .hero h1 span { color: var(--primary); }
+    .hero-sub {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+    .author-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,215,0,0.08);
+      border: 1px solid rgba(255,215,0,0.25);
+      border-radius: 50px;
+      padding: 10px 28px;
+    }
+    .author-avatar {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.1rem; color: #000;
+    }
+    .author-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .author-title { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* ─── META GRID ─── */
+    .meta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      padding: 36px 30px;
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 28px;
+      text-align: center;
+      min-width: 160px;
+    }
+    .meta-card .meta-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: block;
+    }
+    .meta-card .meta-lbl { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* ─── SECTION HEADERS ─── */
+    .section-wrap { max-width: 960px; margin: 0 auto; padding: 0 24px 60px; }
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin: 56px 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--primary), transparent);
+      opacity: 0.3;
+    }
+
+    /* ─── DESCRIPTION / OBJECTIVES BLOCK ─── */
+    .prose-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px 36px;
+      line-height: 1.9;
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+    .prose-block p + p { margin-top: 14px; }
+
+    .objectives-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .obj-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-right: 3px solid var(--green);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 0.97rem;
+      line-height: 1.6;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .obj-icon { color: var(--green); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+
+    /* ─── MODULES ─── */
+    .module {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .module:hover {
+      border-color: rgba(0,229,255,0.3);
+      box-shadow: 0 8px 32px rgba(0,229,255,0.07);
+    }
+    .module-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 26px 32px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,229,255,0.03);
+      cursor: pointer;
+    }
+    .module-num {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #000;
+      font-weight: 900;
+      font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0,229,255,0.3);
+    }
+    .module-header-text { flex: 1; }
+    .module-weeks {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    .module-title { font-size: 1.25rem; font-weight: 700; color: #fff; }
+    .module-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
+
+    .module-body { padding: 28px 32px; display: grid; gap: 24px; }
+    .module-col { }
+    .col-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .col-label.blue { color: var(--primary); }
+    .col-label.gold { color: var(--gold); }
+    .col-label.purple { color: var(--purple); }
+    .col-label.green { color: var(--green); }
+
+    .reg-list, .topic-list, .lab-list { list-style: none; }
+    .reg-list li, .topic-list li {
+      padding: 9px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.07);
+      font-size: 0.96rem;
+      line-height: 1.6;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .reg-list li:last-child, .topic-list li:last-child { border-bottom: none; }
+    .bullet-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+    .bd-blue { background: var(--primary); }
+    .bd-gold { background: var(--gold); }
+    .bd-purple { background: var(--purple); }
+    .bd-green { background: var(--green); }
+
+    .cite-tag {
+      display: inline-block;
+      background: rgba(0,229,255,0.1);
+      color: var(--primary);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      margin-right: 6px;
+      white-space: nowrap;
+    }
+
+    .lab-card {
+      background: rgba(105,240,174,0.05);
+      border: 1px solid rgba(105,240,174,0.2);
+      border-radius: 12px;
+      padding: 18px 22px;
+    }
+    .lab-card + .lab-card { margin-top: 12px; }
+    .lab-tag {
+      display: inline-block;
+      background: var(--green);
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .lab-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .lab-card p { font-size: 0.91rem; color: var(--text-muted); line-height: 1.65; }
+    .lab-card code {
+      display: inline-block;
+      background: rgba(0,0,0,0.4);
+      color: var(--primary);
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 0.85rem;
+      font-family: monospace;
+    }
+    .tool-chip {
+      display: inline-block;
+      background: rgba(206,147,216,0.12);
+      color: var(--purple);
+      border: 1px solid rgba(206,147,216,0.25);
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 3px 12px;
+      margin: 3px 4px 3px 0;
+    }
+
+    /* prereqs */
+    .prereq-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .prereq-pill {
+      background: rgba(255,215,0,0.08);
+      border: 1px solid rgba(255,215,0,0.2);
+      color: var(--gold);
+      border-radius: 50px;
+      padding: 7px 18px;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 2;
+    }
+    .footer strong { color: var(--primary); }
+
+    @media (min-width: 640px) {
+      .module-body { grid-template-columns: 1fr 1fr; }
+      .module-body.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 50px 20px 40px; }
+      .module-header { padding: 20px; }
+      .module-body { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="badge">סילבוס אקדמי · גרסה 2026</div>
+  <h1>המהפכה בפרקטיקה<br/><span>הפיננסית ב-SME</span></h1>
+  <p class="hero-sub">
+    קורס מתקדם לרואי חשבון, חשבים ומנהלי כספים — שילוב של עדכוני חקיקה וחשבונאות 2025/2026 עם כלים טכנולוגיים שניתן להדגים ולהפעיל מחר בבוקר: Excel, Power Query, ובינה מלאכותית מקומית ובענן.
+  </p>
+  <div class="author-block">
+    <div class="author-avatar">ש</div>
+    <div>
+      <div class="author-name">ד״ר שי צבאן</div>
+      <div class="author-title">מרצה בכיר | ייעוץ פיננסי ודיגיטל</div>
+    </div>
+  </div>
+</header>
+
+<!-- META -->
+<div class="meta-grid">
+  <div class="meta-card"><span class="meta-val">5</span><span class="meta-lbl">מודולים אקדמיים</span></div>
+  <div class="meta-card"><span class="meta-val">14</span><span class="meta-lbl">שעות אקדמיות</span></div>
+  <div class="meta-card"><span class="meta-val">28+</span><span class="meta-lbl">מראי מקום חוקיים</span></div>
+  <div class="meta-card"><span class="meta-val">12</span><span class="meta-lbl">מעבדות יישום חיות</span></div>
+  <div class="meta-card"><span class="meta-val">2026</span><span class="meta-lbl">עדכני לשנת המס</span></div>
+</div>
+
+<main class="section-wrap">
+
+  <!-- COURSE DESCRIPTION -->
+  <div class="section-title">📋 תיאור הקורס</div>
+  <div class="prose-block">
+    <p>
+      קורס זה מיועד לאנשי מקצוע בתחום החשבונאות והפיננסים המפעילים ומנהלים תיקי לקוחות בשוק העסקים הקטנים והבינוניים (SME) בישראל. הקורס מציג מארג רב-שכבתי: בשכבה הראשונה, עדכון מעמיק ביחס לחקיקה ולתקינה שהשתנו מהותית בשנים 2024–2026; בשכבה השנייה, כלים טכנולוגיים נגישים שניתן לפתוח ולהדגים בדפדפן ובאקסל ללא גישה לסביבה ארגונית פרטית; ובשכבה השלישית, מעבדות יישום חיות שמאפשרות לרואה החשבון לצאת עם תוצר עובד מהיום הראשון.
+    </p>
+    <p>
+      המוטיב המרכזי של הקורס הוא מעבר מ<strong style="color:var(--primary)">חשבונאות תגובתית</strong> (בדיעבד) ל<strong style="color:var(--primary)">ניהול פרואקטיבי בזמן אמת</strong>, תוך שמירה על ציות מלא לדיני המס ולתקני הדיווח הרלוונטיים.
+    </p>
+  </div>
+
+  <!-- PREREQUISITES -->
+  <div class="section-title">🎓 ידע קדם נדרש</div>
+  <div class="prereq-pills">
+    <span class="prereq-pill">הכרת יסודות הנהלת חשבונות</span>
+    <span class="prereq-pill">ניסיון בעבודה עם Excel</span>
+    <span class="prereq-pill">חשיפה בסיסית לדיני מס הכנסה ומע"מ</span>
+    <span class="prereq-pill">הבנה בסיסית של דוחות כספיים</span>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <div class="section-title">🎯 יעדי למידה</div>
+  <div class="objectives-grid">
+    <div class="obj-card"><span class="obj-icon">✓</span>להפעיל Power Query לניתוח ובקרת נתונים כספיים ישירות מדפי בנק וקובצי CSV</div>
+    <div class="obj-card"><span class="obj-icon">✓</span>לשלב מודלי שפה גדולים (LLM) מקומיים לניתוח מסמכים תוך שמירה על פרטיות לקוח</div>
+    <div class="obj-card"><span class="obj-icon">✓</span>לנהל תהליכי ציות לחוק חשבוניות ירוקות (תיקון 49 לחוק מע"מ) בסביבת לקוח SME</div>
+    <div class="obj-card"><span class="obj-icon">✓</span>לבנות מודלי תקציב דינמיים (Rolling Forecast) ב-Excel עם לוגיקת אזהרה אוטומטית</div>
+    <div class="obj-card"><span class="obj-icon">✓</span>לבצע ביקורת ממוחשבת על קבצי BKM.TXT (מבנה אחיד) באמצעות Power Query</div>
+    <div class="obj-card"><span class="obj-icon">✓</span>להחיל תקני ביקורת ISA 315 ו-ISA 240 בסביבת SME ולתעד סיכוני הונאה</div>
+    <div class="obj-card"><span class="obj-icon">✓</span>לתמחר שירותי ייעוץ פיננסי (vCFO) ולבנות מודל ריטיינר מותאם אישית</div>
+    <div class="obj-card"><span class="obj-icon">✓</span>לקיים הליך KYC תקין לפי צו איסור הלבנת הון ולהכין מכתב התקשרות עם חתימה דיגיטלית</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MODULE 1
+  ═══════════════════════════════════════════ -->
+  <div class="section-title">📚 מבנה הקורס — מודולים</div>
+
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">1</div>
+      <div class="module-header-text">
+        <div class="module-weeks">מודול א׳ · 3 שעות</div>
+        <div class="module-title">חקיקה, מיסוי ורגולציה — שנת 2025/2026</div>
+        <div class="module-subtitle">מה השתנה, מה עומד להשתנות, ואיך מיישמים את זה מחר</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="module-col">
+        <div class="col-label blue">⚖️ מסגרת חוקית ורגולטורית</div>
+        <ul class="reg-list">
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">תיקון 49</span>חוק מס ערך מוסף — חשבוניות מקוונות: תקרות 2025 (20,000 ₪), 2026 (15,000 ₪) ועד 5,000 ₪ ב-2028. מנגנון מספר הקצאה ויתרון ניכוי תשומות.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">פקודה, סעיף 126</span>מס חברות 23% — הכנסה חייבת, תיאומים ותכנון אפקטיבי בסביבת SME.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">תקן 19</span>מסים נדחים (Deferred Tax) — איתור פערי עיתוי, הצגה במאזן, חישוב נטו.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">תקן 34</span>הצגת דוחות כספיים למטרות כלליות — דגשים ל-SME.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">ע"א 494/87</span>עקרון בסיס מזומן לצורכי מס — הלכת ק.ב.א. קבוצת בוני ערים.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">חוזר 8/2004</span>מי רשאי לדווח על בסיס מזומן ומתי — הוראות מס הכנסה מעשיות.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">סעיף 32א</span>אי-ניכוי מס במקור = אי-הכרה בהוצאה. בדיקת מבזק לכל ספק.</div></li>
+        </ul>
+      </div>
+      <div class="module-col">
+        <div class="col-label green">🧪 מעבדת יישום — Live Demo</div>
+        <div class="lab-card">
+          <span class="lab-tag">Excel Lab</span>
+          <h4>בניית "דו"ח התאמה למס" אוטומטי</h4>
+          <p>טבלת Excel עם נוסחאות ו-Power Query המשלבת: רווח נקי לפי דוחות → תיאומים (פחת, כיבודים, קנסות, פערי עיתוי) → הכנסה חייבת → חבות מס. <code>SUMIF</code> + קוד בודק מע"מ 18% לפי שנת הזנה.</p>
+          <p style="margin-top:8px">
+            <span class="tool-chip">Excel</span>
+            <span class="tool-chip">Power Query</span>
+          </p>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">Browser Demo</span>
+          <h4>מדמה מנגנון מספר הקצאה — רשות המסים</h4>
+          <p>הדגמה חיה: כניסה לממשק <strong>shaam.gov.il</strong>, ניסוי הפקת מספר הקצאה לחשבונית B2B בסכום 25,000 ₪ וכיצד להוסיף אותו לתבנית Word/Excel של חשבונית.</p>
+          <p style="margin-top:8px"><span class="tool-chip">דפדפן</span><span class="tool-chip">שע"מ API</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MODULE 2
+  ═══════════════════════════════════════════ -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">2</div>
+      <div class="module-header-text">
+        <div class="module-weeks">מודול ב׳ · 3 שעות</div>
+        <div class="module-title">בקרה תקציבית דינמית וניהול תזרים</div>
+        <div class="module-subtitle">Rolling Forecast, ניתוח סטיות ותחזית תזרים — הכל ב-Excel ב-Power Query</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="module-col">
+        <div class="col-label blue">📐 מסגרת תיאורטית</div>
+        <ul class="topic-list">
+          <li><span class="bullet-dot bd-blue"></span><div>מגבלות התקציב השנתי הסטטי — תיאוריה ועדויות אמפיריות. המעבר לדגם Rolling Forecast (4+8, 3+9).</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">תקן 9</span>דו"ח תזרים מזומנים — רכיבי מזומן ושווי מזומן, סיווג פעילות שוטפת/השקעה/מימון.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div>ניהול צ'קים דחויים בסביבה ישראלית — קופת המחאות, תאריכי ערך, החזרות ועמלות.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div>ניתוח סטיות תקציב (Variance Analysis) — סטייה ממחיר מול סטייה מכמות מול סטייה ממיקס.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div>אינדיקטורים מוקדמים: DSO, DPO, Current Ratio, Quick Ratio ואיך לחשב אותם אוטומטית.</div></li>
+        </ul>
+      </div>
+      <div class="module-col">
+        <div class="col-label green">🧪 מעבדת יישום — Live Demo</div>
+        <div class="lab-card">
+          <span class="lab-tag">Excel Lab</span>
+          <h4>לוח בקרה תקציבית חי ב-Excel</h4>
+          <p>בניית מודל Excel מ-0: יבוא דף בנק בפורמט CSV דרך <code>Power Query → Transform</code>, תיוג שורות לסעיף תקציב, חישוב ניצול חודשי ויצירת גרף "מד אחוז" ויזואלי עם <strong>עיצוב מותנה</strong> שמאדים אוטומטית חריגות.</p>
+          <p style="margin-top:8px"><span class="tool-chip">Excel</span><span class="tool-chip">Power Query</span><span class="tool-chip">PivotTable</span></p>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">Excel Lab</span>
+          <h4>תחזית תזרים 13 שבועות</h4>
+          <p>תבנית Excel מוכנה לתחזית תזרים שבועית: שורות לפי קטגוריה (גביות, תשלומי ספקים, שכר, מסים), הזנת רמות ודאות (1–5), ונוסחת <code>SUMPRODUCT</code> לחישוב תזרים צפוי נטו.</p>
+          <p style="margin-top:8px"><span class="tool-chip">Excel</span><span class="tool-chip">Named Ranges</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MODULE 3
+  ═══════════════════════════════════════════ -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">3</div>
+      <div class="module-header-text">
+        <div class="module-weeks">מודול ג׳ · 3 שעות</div>
+        <div class="module-title">בינה מלאכותית מקומית ובענן — יישומים פרקטיים</div>
+        <div class="module-subtitle">LM Studio, Claude, ChatGPT ואוטומציית מסמכים תוך שמירה על פרטיות לקוח</div>
+      </div>
+    </div>
+    <div class="module-body cols-3">
+      <div class="module-col">
+        <div class="col-label blue">📐 מסגרת תיאורטית ורגולטורית</div>
+        <ul class="topic-list">
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">תשע"ז-2017</span>תקנות הגנת הפרטיות (אבטחת מידע) — דרגות אבטחה, DPA, MFA.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">חוה"פ, סעיף 17ב</span>חובת אבטחת מאגרי מידע — השלכות על AI בענן.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div>AI מקומי מול AI בענן — פרטיות, מהירות, עלות. מתי לבחור כל גישה.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div>Prompt Engineering לרואי חשבון — כיצד לנסח שאלות שמפיקות ניתוח מדויק ומדעי.</div></li>
+        </ul>
+      </div>
+      <div class="module-col">
+        <div class="col-label purple">🤖 AI מקומי — LM Studio</div>
+        <div class="lab-card">
+          <span class="lab-tag">Local AI Demo</span>
+          <h4>הרצת Gemma 3 / Llama 3 מקומית</h4>
+          <p>הדגמה: התקנת <strong>LM Studio</strong> בחינם, הורדת מודל עברית (Dicta, Gemma 3 4B), ניתוח מסמך PDF של חשבונית בעברית ללא שליחת נתונים לאינטרנט.</p>
+          <p style="margin-top:8px"><span class="tool-chip">LM Studio</span><span class="tool-chip">Gemma 3</span><span class="tool-chip">PDF</span></p>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">Excel + AI</span>
+          <h4>Power Query + AI לסיווג הוצאות</h4>
+          <p>חיבור בין Power Query ל-OpenAI API: <code>fnCallAI(text)</code> — פונקציה שקוראת לממשק ה-API ומחזירה סיווג הוצאה לסעיף ספר ראשי על סמך שם הספק.</p>
+          <p style="margin-top:8px"><span class="tool-chip">Power Query M</span><span class="tool-chip">OpenAI API</span></p>
+        </div>
+      </div>
+      <div class="module-col">
+        <div class="col-label green">☁️ AI בענן — כלים זמינים</div>
+        <div class="lab-card">
+          <span class="lab-tag">Browser Demo</span>
+          <h4>ניתוח דוחות כספיים עם Claude / ChatGPT</h4>
+          <p>העלאת מאזן בוחן PDF ל-Claude.ai + prompt מובנה המבקש: זיהוי חריגות, חישוב יחסים פיננסיים (Current Ratio, Debt/Equity) והמלצות לפעולה. השוואת תשובות Claude מול ChatGPT.</p>
+          <p style="margin-top:8px"><span class="tool-chip">Claude.ai</span><span class="tool-chip">ChatGPT</span><span class="tool-chip">דפדפן</span></p>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">Automation</span>
+          <h4>Make.com / Zapier — אוטומציה ללא קוד</h4>
+          <p>הדגמה: Scenario ב-Make.com שמקבל מייל עם קובץ חשבונית → מחלץ נתונים → כותב שורה ל-Google Sheets → שולח WhatsApp אישור ללקוח.</p>
+          <p style="margin-top:8px"><span class="tool-chip">Make.com</span><span class="tool-chip">Google Sheets</span><span class="tool-chip">WhatsApp API</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MODULE 4
+  ═══════════════════════════════════════════ -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">4</div>
+      <div class="module-header-text">
+        <div class="module-weeks">מודול ד׳ · 2.5 שעות</div>
+        <div class="module-title">ניהול הפרקטיקה, תמחור ופיתוח עסקי</div>
+        <div class="module-subtitle">KYC דיגיטלי, מכתב התקשרות, ומעבר לשירותי ייעוץ (vCFO)</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="module-col">
+        <div class="col-label gold">⚖️ בסיס חוקי ורגולטורי</div>
+        <ul class="reg-list">
+          <li><span class="bullet-dot bd-gold"></span><div><span class="cite-tag">צו הלב"ה 2014</span>סעיף 4 — הליך KYC חובה: זיהוי יחיד, תאגיד ובעלי מניות מעל 25% (UBO).</div></li>
+          <li><span class="bullet-dot bd-gold"></span><div><span class="cite-tag">כללי רו"ח 1965</span>חובת מכתב התקשרות — גדר השירותים, אחריות, שכ"ט ותנאי תשלום.</div></li>
+          <li><span class="bullet-dot bd-gold"></span><div><span class="cite-tag">חוק חתימה אלקטרונית, סעיף 2</span>תוקף חתימה דיגיטלית (EzSign, DocuSign) — שקילה לחתימת יד.</div></li>
+          <li><span class="bullet-dot bd-gold"></span><div><span class="cite-tag">כלל 4 כללי רו"ח</span>חובת סודיות — בניית ספריית DMS מאובטחת ועץ תיקיות תקני.</div></li>
+        </ul>
+        <div style="margin-top:20px">
+          <div class="col-label gold">💰 מודלי תמחור בשוק 2026</div>
+          <ul class="topic-list">
+            <li><span class="bullet-dot bd-gold"></span>ריטיינר חודשי: עוסק פטור 150–300 ₪ | חברה SME 1,200–4,000 ₪</li>
+            <li><span class="bullet-dot bd-gold"></span>תמחור שעתי: מנהל חשבונות 150–250 ₪ | רו"ח בכיר 500–1,200 ₪</li>
+            <li><span class="bullet-dot bd-gold"></span>תמחור ערך: עמלת הצלחה על החזרי מס (15–25%) ומענקי רשות חדשנות (3–8%)</li>
+            <li><span class="bullet-dot bd-gold"></span>vCFO כשירות: 4,000–12,000 ₪/חודש — מה כולל, מה לא, ואיך מתמחרים</li>
+          </ul>
+        </div>
+      </div>
+      <div class="module-col">
+        <div class="col-label green">🧪 מעבדת יישום — Live Demo</div>
+        <div class="lab-card">
+          <span class="lab-tag">Browser Demo</span>
+          <h4>KYC דיגיטלי עם EzSign</h4>
+          <p>הדגמה מלאה: יצירת שאלון KYC ב-EzSign.co.il, שליחה ב-SMS ללקוח, קבלת חתימה דיגיטלית + תיוק אוטומטי ב-Google Drive. כולל נוסח KYC מלא מוכן להורדה.</p>
+          <p style="margin-top:8px"><span class="tool-chip">EzSign</span><span class="tool-chip">Google Drive</span><span class="tool-chip">דפדפן</span></p>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">Browser Demo</span>
+          <h4>מחשבון ריטיינר — Google Sheets</h4>
+          <p>גיליון Google Sheets ציבורי לחישוב ריטיינר אופטימלי לפי: כמות תלושי שכר, דיווחי מע"מ חודשיים/דו-חודשיים, שירותי ייצוג ובדיקות נאותות — ועם שוליים מחושבים.</p>
+          <p style="margin-top:8px"><span class="tool-chip">Google Sheets</span><span class="tool-chip">דפדפן</span></p>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">AI Lab</span>
+          <h4>ChatGPT כעוזר לניסוח מכתב התקשרות</h4>
+          <p>Prompt מובנה ל-ChatGPT שמייצר טיוטת מכתב התקשרות בעברית לפי פרמטרים שמזינים (לקוח, שירותים, שכ"ט) — ואז עורכים ומשפרים אותו בשיעור.</p>
+          <p style="margin-top:8px"><span class="tool-chip">ChatGPT</span><span class="tool-chip">Word</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MODULE 5
+  ═══════════════════════════════════════════ -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">5</div>
+      <div class="module-header-text">
+        <div class="module-weeks">מודול ה׳ · 2.5 שעות</div>
+        <div class="module-title">ביקורת דיגיטלית ואיתור הונאות</div>
+        <div class="module-subtitle">CAATs, קובץ BKM.TXT, ניתוח MASAV ותקני ISA 240/315</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="module-col">
+        <div class="col-label blue">📐 מסגרת תיאורטית ורגולטורית</div>
+        <ul class="topic-list">
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">ISA 315</span>זיהוי סיכוני עיוות מהותי — מיפוי תהליכי ביקורת לשוק ה-SME, בקרות כלל-ישות.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">ISA 240</span>אחריות המבקר כלפי הונאות — משולש ההונאה (Fraud Triangle), Red Flags ספציפיים לישראל.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><span class="cite-tag">הוראות ניהול ספרים, סעיף 36</span>חובת הפקת קובץ מבנה אחיד (BKM.TXT, INI.TXT, AAS.TXT) — מה כולל כל קובץ.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div>חוק מס"ב (מסלקה בנקאית מאוחדת) — מבנה קבצי התשלום, שדה מס' חשבון, זיהוי חסרים.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div>חוק הבנקאות (שירות ללקוח), תשמ"א-1981 — זכויות לקבלת נתוני עו"ש דיגיטליים (Open Banking).</div></li>
+        </ul>
+      </div>
+      <div class="module-col">
+        <div class="col-label green">🧪 מעבדת יישום — Live Demo</div>
+        <div class="lab-card">
+          <span class="lab-tag">Power Query Lab</span>
+          <h4>ניתוח קובץ BKM.TXT מבנה אחיד</h4>
+          <p>יבוא ידני של קובץ <code>BKM.TXT</code> לתוך Excel באמצעות Power Query (Fixed Width), פיצול עמודות לפי מפרט הוראות ניהול ספרים, ויצירת Pivot Table של תנועות לפי חשבון. איתור כפילויות <code>COUNTIFS</code>.</p>
+          <p style="margin-top:8px"><span class="tool-chip">Excel</span><span class="tool-chip">Power Query</span><span class="tool-chip">BKM.TXT</span></p>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">AI + Excel Lab</span>
+          <h4>ניתוח קובץ מס"ב לאיתור מניפולציה</h4>
+          <p>קובץ מס"ב לדוגמה (CSV): פענוח שדה חשבון נהנה, זיהוי חשבונות בנק שאינם ברשימת הספקים המורשים, ואיתור סכומים הקרובים לסף האישור (99% מהסף). AI-Prompt ל-Claude לניתוח תבניות חשודות.</p>
+          <p style="margin-top:8px"><span class="tool-chip">Excel</span><span class="tool-chip">Claude.ai</span><span class="tool-chip">Power Query</span></p>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">Browser Demo</span>
+          <h4>תיעוד סיכוני ISA 315 — Google Docs</h4>
+          <p>שימוש בתבנית Google Docs מוכנה למיפוי בקרות כלל-ישות, מינוי אחראי בקרה, ותיעוד Red Flags. שיתוף והוספת הערות בזמן אמת — מדמה עבודת צוות ביקורת.</p>
+          <p style="margin-top:8px"><span class="tool-chip">Google Docs</span><span class="tool-chip">דפדפן</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <strong>ד״ר שי צבאן</strong> — מרצה בכיר בנושאי פיננסים, ניהול וטכנולוגיה<br/>
+  סילבוס זה מבוסס על מחקר מעמיק, ציטוטים חוקיים מאומתים ודוגמאות יישום מהשוק הישראלי.<br/>
+  <span style="font-size:0.75rem; color: rgba(143,163,177,0.5)">© 2026 · כל הזכויות שמורות · גרסה 2.0</span>
+</footer>
+
+</body>
+</html>
