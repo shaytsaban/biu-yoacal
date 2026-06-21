@@ -1,0 +1,545 @@
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>סילבוס אקדמי | המהפכה בפרקטיקה הפיננסית 2026</title>
+  <meta name="description" content="סילבוס אקדמי לרואי חשבון: 3 רמות שירותים, מיסוי, ובקרה תקציבית – ד״ר שי צבאן" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #00E5FF;
+      --primary-dark: #0097A7;
+      --gold: #FFD700;
+      --gold-dark: #FF8C00;
+      --bg-dark: #07121a;
+      --bg-card: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --text-main: #e8eaf0;
+      --text-muted: #8fa3b1;
+      --green: #69f0ae;
+      --purple: #ce93d8;
+      --red: #ff5252;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg-dark);
+      background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(0,150,200,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(100,0,150,0.08) 0%, transparent 50%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      text-align: center;
+      padding: 70px 30px 50px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,229,255,0.06) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+      color: #000;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      text-shadow: 0 4px 30px rgba(0,229,255,0.25);
+    }
+    .hero h1 span { color: var(--primary); }
+    .hero-sub {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+    .author-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,215,0,0.08);
+      border: 1px solid rgba(255,215,0,0.25);
+      border-radius: 50px;
+      padding: 10px 28px;
+    }
+    .author-avatar {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.1rem; color: #000;
+    }
+    .author-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .author-title { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* ─── META GRID ─── */
+    .meta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      padding: 36px 30px;
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 28px;
+      text-align: center;
+      min-width: 160px;
+    }
+    .meta-card .meta-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: block;
+    }
+    .meta-card .meta-lbl { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* ─── SECTION HEADERS ─── */
+    .section-wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px 60px; }
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin: 56px 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--primary), transparent);
+      opacity: 0.3;
+    }
+
+    /* ─── DESCRIPTION / OBJECTIVES BLOCK ─── */
+    .prose-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px 36px;
+      line-height: 1.9;
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+    .prose-block p + p { margin-top: 14px; }
+    
+    .tiers-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+    }
+    .tier-box {
+        background: rgba(0,229,255,0.05);
+        border: 1px solid rgba(0,229,255,0.2);
+        border-radius: 12px;
+        padding: 20px;
+    }
+    .tier-box h4 {
+        color: var(--primary);
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+    }
+
+    .objectives-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .obj-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-right: 3px solid var(--green);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 0.97rem;
+      line-height: 1.6;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .obj-icon { color: var(--green); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+
+    /* ─── MODULES ─── */
+    .module {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 35px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .module:hover {
+      border-color: rgba(0,229,255,0.3);
+      box-shadow: 0 8px 32px rgba(0,229,255,0.07);
+    }
+    .module-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 26px 32px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,229,255,0.03);
+    }
+    .module-num {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #000;
+      font-weight: 900;
+      font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0,229,255,0.3);
+    }
+    .module-header-text { flex: 1; }
+    .module-weeks {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+    .module-title { font-size: 1.35rem; font-weight: 700; color: #fff; line-height: 1.3; }
+    .module-subtitle { font-size: 0.95rem; color: var(--text-muted); margin-top: 6px; }
+
+    .module-body { padding: 32px; display: grid; gap: 32px; }
+    
+    .col-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .col-label.blue { color: var(--primary); border-color: rgba(0,229,255,0.2); }
+    .col-label.gold { color: var(--gold); border-color: rgba(255,215,0,0.2); }
+    .col-label.green { color: var(--green); border-color: rgba(105,240,174,0.2); }
+
+    .topic-list { list-style: none; margin-bottom: 24px; }
+    .topic-list li {
+      padding: 12px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.07);
+      font-size: 0.98rem;
+      line-height: 1.6;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .topic-list li:last-child { border-bottom: none; }
+    .bullet-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+    .bd-blue { background: var(--primary); }
+    .bd-gold { background: var(--gold); }
+    
+    .nested-list { margin-top: 8px; margin-right: 20px; list-style-type: circle; color: var(--text-muted); font-size: 0.9rem;}
+    .nested-list li { padding: 4px 0; border: none; }
+
+    .cite-tag {
+      display: inline-block;
+      background: rgba(0,229,255,0.1);
+      color: var(--primary);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      margin-left: 8px;
+      white-space: nowrap;
+    }
+
+    .lab-card {
+      background: rgba(105,240,174,0.05);
+      border: 1px solid rgba(105,240,174,0.2);
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    .lab-tag {
+      display: inline-block;
+      background: var(--green);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .lab-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: #fff; }
+    .lab-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; }
+    .tool-chip {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      margin: 6px 0 0 6px;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align: center;
+      padding: 50px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 2;
+    }
+    .footer strong { color: var(--primary); }
+
+    @media (min-width: 800px) {
+      .module-body { grid-template-columns: 1.2fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 50px 20px 40px; }
+      .module-header { padding: 20px; }
+      .module-body { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="badge">סילבוס אקדמי · V2.0</div>
+  <h1>המהפכה בפרקטיקה הפיננסית ב-SME:<br/><span>ניהול, מיסוי ובקרה</span></h1>
+  <p class="hero-sub">
+    מעבר מחשבונאות תגובתית לניהול פיננסי פרואקטיבי לפי מודל 3 הרמות (Tiers) – קורס עומק לרואי חשבון וחשבים. מותאם בדיוק לפידבק לקוחות מובילים, עם דגש על Hands-on אמיתי בסוף היום.
+  </p>
+  <div class="author-block">
+    <div class="author-avatar">ש</div>
+    <div>
+      <div class="author-name">ד״ר שי צבאן</div>
+      <div class="author-title">מרצה בכיר | ייעוץ פיננסי אסטרטגי</div>
+    </div>
+  </div>
+</header>
+
+<div class="meta-grid">
+  <div class="meta-card"><span class="meta-val">3</span><span class="meta-lbl">מודולים מרוכזים</span></div>
+  <div class="meta-card"><span class="meta-val">11</span><span class="meta-lbl">שעות אקדמיות</span></div>
+  <div class="meta-card"><span class="meta-val">7</span><span class="meta-lbl">מעבדות Excel ו-DMS</span></div>
+  <div class="meta-card"><span class="meta-val">2026</span><span class="meta-lbl">רגולציה ודיני מס</span></div>
+</div>
+
+<main class="section-wrap">
+
+  <div class="section-title">📋 תיאור הקורס ומטרותיו</div>
+  <div class="prose-block">
+    <p>
+      סמינר מעשי זה נועד להוביל משרדי רואי חשבון, חשבים ומנהלי כספים לעידן הפיננסי החדש, בו הם מספקים הרבה יותר משירותי ציות (Compliance). הקורס בנוי במתכונת של יום עיון מרוכז המותאם לרמות האנרגיה לאורך היום: פותחים באנרגיה גבוהה עם תהליכי ניהול המשרד (פרקטיקה עסקית) ודיוני שומות, צוללים באמצע היום לעומק תכנוני המס האסטרטגיים לעסקים קטנים (SME), ומסיימים את היום בתרגול מונחה מעשי בתוכנת Excel וב-Power Query בנושאי בקרה תקציבית כדי לשמור על רמת ערנות עשייה גבוהה.
+    </p>
+    <div class="tiers-container">
+        <div class="tier-box">
+            <h4>Tier 1: הציות והדיווח</h4>
+            <p>הנהלת חשבונות, שכר, דיווחים שוטפים (מע"מ, מקדמות, מס הכנסה 1301/1214) ותיאומי מס.</p>
+        </div>
+        <div class="tier-box">
+            <h4>Tier 2: הבקרה והניהול</h4>
+            <p>תזרים מזומנים מבוסס Rolling Forecast, ניתוחי סטיות ולוחות בקרה ניהוליים.</p>
+        </div>
+        <div class="tier-box">
+            <h4>Tier 3: אסטרטגיה מקיפה</h4>
+            <p>ייעוץ מס אסטרטגי (חברות ארנק, משיכות בעלים), כדאיות התאגדות, ושירותי vCFO.</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="section-title">📚 מבנה הקורס</div>
+
+  <!-- MODULE A -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">א׳</div>
+      <div class="module-header-text">
+        <div class="module-weeks">בוקר · 4 שעות אקדמיות</div>
+        <div class="module-title">ניהול הפרקטיקה הפיננסית ודיווח שנתי</div>
+        <div class="module-subtitle">תזרים העבודה במשרד (Workflows), תיאומי מס מורכבים והתמודדות מול שומות</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <div>
+        <div class="col-label blue">⚙️ תהליכים, דיווח וביקורת מס</div>
+        <ul class="topic-list">
+          <li><span class="bullet-dot bd-blue"></span><div><strong>דיווחים שוטפים ושנתיים:</strong>
+            <ul class="nested-list">
+              <li>יישום חוק החשבוניות המקוונות (תיקון 49) והתמודדות מול לקוחות.</li>
+              <li>בקרת רבעונית על מקדמות למניעת קנסות (טופס 103).</li>
+              <li>בדיקת פטור ניכוי מס במקור במערכת "מבזק" (סעיף 32א).</li>
+              <li>ניהול צ'קליסט סוף שנה והגשת דוחות שנתיים (1214 / 1301).</li>
+            </ul>
+          </div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><strong>תיאומי מס ב-SME (המעבר מרווח לחייב):</strong>
+            <ul class="nested-list">
+              <li>הוצאות רכב 45% מול החזקה מלאה (תקנה 2 לתקנות ניכוי הוצאות רכב).</li>
+              <li>כיבודים, אירוח, קנסות, והפרשות סוציאליות לפי סעיף 18(א).</li>
+            </ul>
+          </div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><strong>דיוני שומות והגנה על העסק:</strong>
+            <ul class="nested-list">
+              <li>שלבי השומה החוקיים (סעיפים 145, 150, 152, 153).</li>
+              <li>מוקדי סיכון: יתרות בעלי שליטה, רווח גולמי, הוצאות פרטיות.</li>
+              <li>הוראות ניהול ספרים למניעת פסילה (סעיף 130(יא)).</li>
+            </ul>
+          </div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><strong>כלים של מחר בבוקר:</strong> KYC דיגיטלי, מכתבי התקשרות דיגיטליים ותמחור שירותי ריטיינר / שכר.</div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-label green">🧪 מעבדות תרגול — Hands-On</div>
+        <div class="lab-card">
+          <span class="lab-tag">Excel Lab</span>
+          <h4>בניית דו"ח התאמה למס דינמי</h4>
+          <p>מודל Excel המתרגם רווח נקי להכנסה חייבת: נוסחאות התאמה, קיזוז פחת כפול, ותקרות רכב וכיבודים.</p>
+          <div style="margin-top:10px;"><span class="tool-chip">Excel</span><span class="tool-chip">Tax Models</span></div>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">DMS Lab</span>
+          <h4>קליטת לקוח דיגיטלית (Digital Onboarding)</h4>
+          <p>יצירת טופס KYC וחתימה על Engagement Letter ב-EzSign עם תיוק ישיר לעץ תיקיות מאובטח.</p>
+          <div style="margin-top:10px;"><span class="tool-chip">EzSign</span><span class="tool-chip">Google Workspace</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE B -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-num">ב׳</div>
+      <div class="module-header-text">
+        <div class="module-weeks">אמצע היום · 3.5 שעות אקדמיות</div>
+        <div class="module-title">רגולציה, מיסוי ותכנון מס אסטרטגי</div>
+        <div class="module-subtitle">אופטימיזציית משיכות, חברות ארנק ומטריצת התאגדות</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <div>
+        <div class="col-label gold">⚖️ אסטרטגיית מס לבעלי שליטה ול-SME</div>
+        <ul class="topic-list">
+          <li><span class="bullet-dot bd-gold"></span><div><span class="cite-tag">סעיף 62א</span><strong>חברות ארנק:</strong> מבחן נושאי המשרה ומבחן 70% הכנסה מלקוח יחיד ב-30 חודשים. מתי החברה תמוסה כדיבידנד/שכר בעל כורחה.</div></li>
+          <li><span class="bullet-dot bd-gold"></span><div><span class="cite-tag">סעיף 3(ט1)</span><strong>משיכות בעלים ושימוש בנכסים:</strong> מיסוי יתרות חובה, הלוואות או שימוש בדירות פרטיות/רכבים בבעלות החברה. מועדי החיוב וסיווג כהכנסת עבודה או דיבידנד.</div></li>
+          <li><span class="bullet-dot bd-gold"></span><div><strong>דיבידנד לעומת שכר:</strong> ניתוח מס משולב (מס חברות + דיבידנד + יסף) מול מדרגות מס שולי ודמי ביטוח לאומי.</div></li>
+          <li><span class="bullet-dot bd-gold"></span><div><strong>רכב: עסקת ליסינג מול רכישה:</strong> הכרה ב-45% הוצאות ומע"מ מול רכב מאגר. השפעת תזרים המזומנים ואפשרויות פחת.</div></li>
+          <li><span class="bullet-dot bd-gold"></span><div><strong>מטריצת התאגדות מעוסק לחברה:</strong> עלויות תקורה עודפות (אגרה, ביקורת) לעומת חיסכון בביטוח לאומי. באילו רמות רווח עוסק מורשה צריך להתאגד.</div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-label green">🧪 מעבדות תרגול — Hands-On</div>
+        <div class="lab-card">
+          <span class="lab-tag">Decision Lab</span>
+          <h4>מחשבון כדאיות התאגדות (Feasibility Optimizer)</h4>
+          <p>מודל המחשב חבות מס מדויקת כעצמאי מול חברה, משקלל הוצאות תקורה חדשות (ביקורת וכו'), ומציג גרף נקודת איזון מבוסס רווחיות קריטית.</p>
+          <div style="margin-top:10px;"><span class="tool-chip">Excel Matrix</span></div>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">Finance Lab</span>
+          <h4>מודל בחירת רכב - קנייה מול ליסינג</h4>
+          <p>השוואת NPV ל-36 חודשים בין רכישת הון, הלוואה, או ליסינג תפעולי, תוך התחשבות בחוקי מע"מ חלקיים ובפחת.</p>
+          <div style="margin-top:10px;"><span class="tool-chip">Financial Modeling</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE C -->
+  <div class="module" style="border-left: 4px solid var(--primary)">
+    <div class="module-header">
+      <div class="module-num">ג׳</div>
+      <div class="module-header-text">
+        <div class="module-weeks">אחר הצהריים · 3.5 שעות אקדמיות</div>
+        <div class="module-title">בקרה תקציבית דינמית וניהול תזרים (תרגול מונחה)</div>
+        <div class="module-subtitle">עבודה אינטנסיבית עם דאטה: בניית קשרי תקציב מבוססי Power Query</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <div>
+        <div class="col-label blue">📊 בקרת ביצוע ותזרים (Control)</div>
+        <ul class="topic-list">
+          <li><span class="bullet-dot bd-blue"></span><div><strong>קשר ישיר לציות:</strong> איך מועדי דיווחי המס השוטפים מכתיבים את הלחץ התזרימי, וכיצד הוראות ניהול פנקסים מאפשרות בקרה נאותה.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><strong>תקציב מתגלגל (Rolling Forecast):</strong> למה תקציב סטטי נכשל בעסקים קטנים? הטמעת מודלי 3+9 או 4+8.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><strong>אינדיקטורים של אשראי (Working Capital):</strong> ניטור מחזור הלקוחות (DSO) ומחזור הספקים (DPO) וקביעת יחסי נזילות רלוונטיים.</div></li>
+          <li><span class="bullet-dot bd-blue"></span><div><strong>ניתוח סטיות למנהלים:</strong> פירוק סטיות ל: סטיית מחיר, סטיית כמות וסטיית תמהיל (Mix Variance).</div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-label green">🎯 תרגול מונחה במחשבים — Data Practice</div>
+        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:15px;">*כל משתתף יקבל ערכת קבצי CSV ו-Excel גולמיים לעבודה בשיעור.</p>
+        <div class="lab-card">
+          <span class="lab-tag">Data Cleaning Lab</span>
+          <h4>ETL & Power Query לחשבונות בנק</h4>
+          <p>יבוא תנועות בנק ב-CSV, ניקוי, שינוי סוגי נתונים ועיבוד. ביצוע Merge מול עץ GL תקציבי לקבלת סיווג תקציבי אוטומטי.</p>
+          <div style="margin-top:10px;"><span class="tool-chip">Power Query M</span><span class="tool-chip">Merge Queries</span></div>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">Dashboard Lab</span>
+          <h4>לוח בקרת ביצוע ותקציב (Pivot & KPI)</h4>
+          <p>טעינת הנתונים שעברו ניקוי לתוך מודל נתונים. בניית Pivot Tables למעקב ביצוע מול תקציב והחלת עיצוב מותנה להבלטת חריגות.</p>
+          <div style="margin-top:10px;"><span class="tool-chip">Pivot Tables</span><span class="tool-chip">Conditional Format</span></div>
+        </div>
+        <div class="lab-card">
+          <span class="lab-tag">Forecasting Lab</span>
+          <h4>תזרים מזומנים מבוסס 13 שבועות</h4>
+          <p>מודל דינמי המשתמש ברמות ודאות (1-5) להוצאות והכנסות, וחישוב שורת תזרים ריאלית בעזרת <code>SUMPRODUCT</code> לפי ודאויות.</p>
+          <div style="margin-top:10px;"><span class="tool-chip">SUMPRODUCT</span><span class="tool-chip">Data Validation</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <strong>ד״ר שי צבאן</strong> — מרצה בכיר בנושאי פיננסים, ניהול וטכנולוגיה<br/>
+  הסילבוס עודכן לבקשת לקוחות: נרטיב מבוסס 3 רמות שירות ללא ביקורת, שילוב עמוק של תכנון מס מעשי (62א, 3ט1), ומוקד תרגול (Hands-on) לחתום את היום.<br/>
+  <span style="font-size:0.75rem; color: rgba(143,163,177,0.5)">© 2026 · כל הזכויות שמורות לד״ר שי צבאן · גרסה 2.0</span>
+</footer>
+
+</body>
+</html>
