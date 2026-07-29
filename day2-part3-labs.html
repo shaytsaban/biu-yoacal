@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>מודול ג׳ · מעבדות אקסל | הפרקטיקה הפיננסית ב-SME</title>
+<meta name="description" content="מדריך מעבדות אקסל למודול ג׳: ניקוי דאטה, בקרה תקציבית, פירוק סטיות, הון חוזר, תזרים 13 שבועות ותחזית מתגלגלת. עובד באקסל למק ולווינדוס. ד״ר שי צבאן" />
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+:root{
+--primary:#4f46e5;--primary-dark:#3730a3;--primary-light:#eef2ff;
+--accent:#14b8a6;--accent-dark:#0f766e;--accent-light:#ccfbf1;
+--purple:#a855f7;--blue:#3b82f6;--amber:#f59e0b;--red:#ef4444;--green:#10b981;
+--ink:#0f172a;--ink-soft:#334155;--muted:#64748b;--line:#e2e8f0;--bg:#f8fafc;--white:#fff;
+--shadow:0 10px 30px rgba(15,23,42,.08);--shadow-lg:0 20px 50px rgba(15,23,42,.14);
+--gold-600:#a9791f;--gold-500:#c39a3a;--cream-50:#faf7f0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg);color:var(--ink);
+font-size:17px;line-height:1.85;direction:rtl;-webkit-font-smoothing:antialiased}
+
+.hero{background:linear-gradient(135deg,#eef2ff 0%,#f8fafc 55%,#ccfbf1 100%);
+padding:66px 24px 52px;text-align:center;border-bottom:1px solid var(--line)}
+.badge{display:inline-block;background:var(--primary);color:#fff;font-size:.74rem;font-weight:700;
+letter-spacing:2px;padding:7px 20px;border-radius:50px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.9rem,4.4vw,3rem);font-weight:900;line-height:1.25;margin-bottom:14px;color:var(--ink)}
+.hero h1 span{color:var(--primary)}
+.hero-sub{font-size:1.06rem;color:var(--ink-soft);max-width:780px;margin:0 auto 26px}
+.author-block{display:inline-flex;align-items:center;gap:12px;background:#fff;
+border:1px solid var(--line);border-radius:50px;padding:9px 22px;box-shadow:var(--shadow)}
+.author-avatar{width:40px;height:40px;background:linear-gradient(135deg,var(--primary),var(--purple));
+border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff}
+.author-name{font-weight:800;color:var(--ink)}
+.author-title{font-size:.8rem;color:var(--muted)}
+
+.metabar{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;padding:26px 20px;background:#fff;border-bottom:1px solid var(--line)}
+.meta-card{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:13px 22px;text-align:center;min-width:132px}
+.meta-val{font-size:1.4rem;font-weight:900;color:var(--primary);display:block;line-height:1.3}
+.meta-lbl{font-size:.76rem;color:var(--muted)}
+
+nav.sticky{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav.sticky .inner{max-width:1120px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:9px 16px}
+nav.sticky a{flex:0 0 auto;color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:600;
+padding:7px 13px;border-radius:10px;border:1px solid transparent;white-space:nowrap;transition:.15s}
+nav.sticky a span{color:var(--primary);font-weight:800;margin-left:6px}
+nav.sticky a:hover,nav.sticky a.active{color:var(--primary-dark);background:var(--primary-light);border-color:#c7d2fe}
+.progwrap{height:3px;background:var(--line)}
+#prog{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .25s}
+
+.wrap{max-width:1000px;margin:0 auto;padding:0 22px 80px}
+.sec-title{font-size:1.5rem;font-weight:900;color:var(--ink);margin:56px 0 8px;display:flex;align-items:center;gap:12px}
+.sec-title::before{content:'';width:5px;height:26px;background:var(--primary);border-radius:3px}
+.sec-sub{color:var(--muted);margin-bottom:22px;font-size:.98rem}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 26px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card h3{font-size:1.2rem;font-weight:800;margin-bottom:10px;color:var(--ink)}
+.card p{color:var(--ink-soft);margin-bottom:10px}
+.card ul,.card ol{color:var(--ink-soft);padding-inline-start:22px;margin-bottom:10px}
+.card li{margin-bottom:7px}
+b,strong{font-weight:700;color:var(--ink)}
+
+.dlrow{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0 6px}
+.dl{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;padding:13px 26px;border-radius:14px;transition:.18s}
+.dl.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(79,70,229,.28)}
+.dl.primary:hover{background:var(--primary-dark);transform:translateY(-2px)}
+.dl.ghost{background:#fff;border:1.5px solid var(--accent);color:var(--accent-dark)}
+.dl.ghost:hover{background:var(--accent-light)}
+
+.timeline{display:grid;gap:8px}
+.tl{display:grid;grid-template-columns:78px 1fr auto;gap:14px;align-items:center;
+background:var(--bg);border:1px solid var(--line);border-radius:13px;padding:11px 15px}
+.tl .t{color:var(--primary);font-weight:800;font-size:.9rem}
+.tl .n{font-weight:600;font-size:.95rem}
+.tl .m{color:var(--muted);font-size:.8rem}
+
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px}
+.lg{display:flex;align-items:center;gap:9px;font-size:.9rem;color:var(--ink-soft)}
+.sw{width:26px;height:26px;border-radius:7px;border:1px solid #cbd5e1}
+
+.tbx{width:100%;border-collapse:collapse;font-size:.92rem}
+.tbx th{background:var(--primary-light);color:var(--primary-dark);font-weight:800;padding:10px 12px;text-align:right;border-bottom:2px solid #c7d2fe}
+.tbx td{padding:9px 12px;border-bottom:1px solid var(--line);color:var(--ink-soft);vertical-align:top}
+.tbx code{background:var(--bg);padding:2px 8px;border-radius:6px;font-size:.86em;color:var(--primary-dark);white-space:nowrap}
+.pill{display:inline-block;font-size:.72rem;font-weight:800;padding:3px 11px;border-radius:50px;white-space:nowrap}
+.pill.now{background:var(--primary-light);color:var(--primary-dark)}
+.pill.later{background:var(--accent-light);color:var(--accent-dark)}
+.pill.data{background:#f1f5f9;color:var(--muted)}
+
+.lab{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;margin-bottom:26px;box-shadow:var(--shadow)}
+.lab-head{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;border-bottom:2px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+.lab-badge{background:var(--primary);color:#fff;font-weight:800;padding:8px 16px;border-radius:12px;font-size:.86rem;white-space:nowrap}
+.lab-titles{flex:1;min-width:240px}
+.lab-titles h2{font-size:1.55rem;font-weight:900;line-height:1.3;color:var(--ink)}
+.lede{color:var(--primary-dark);font-size:1rem;margin-top:6px;font-weight:500}
+.lab-meta{display:flex;gap:7px;flex-wrap:wrap}
+.chip{font-size:.74rem;font-weight:700;padding:5px 12px;border-radius:50px;white-space:nowrap;border:1px solid var(--line);color:var(--muted)}
+.chip.time{background:var(--primary-light);border-color:#c7d2fe;color:var(--primary-dark)}
+.chip.sheet{background:var(--accent-light);border-color:#99f6e4;color:var(--accent-dark)}
+
+.block{margin-bottom:22px}
+.block h4{font-size:1.05rem;font-weight:800;margin-bottom:10px;color:var(--ink)}
+.block p,.block li{color:var(--ink-soft)}
+.block ul,.block ol{padding-inline-start:22px}
+.block li{margin-bottom:6px}
+.block.logic{background:var(--primary-light);border:1px solid #c7d2fe;border-radius:16px;padding:18px 20px}
+.block.logic h4{color:var(--primary-dark)}
+.block.practice{background:var(--cream-50);border:1px solid #eadfc4;border-radius:16px;padding:18px 20px}
+.block.practice h4{color:var(--gold-600)}
+.block.more{background:#faf5ff;border:1px solid #e9d5ff;border-radius:16px;padding:18px 20px}
+.block.more h4{color:#7e22ce}
+
+.term{background:#fff;border:1px solid var(--accent);border-inline-start:5px solid var(--accent);
+border-radius:0 16px 16px 0;padding:15px 18px;margin:14px 0;box-shadow:0 4px 14px rgba(20,184,166,.08)}
+.term-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;font-size:1.05rem}
+.term-h b{font-weight:800}
+.term-tag{background:var(--accent);color:#fff;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:50px;letter-spacing:1px}
+.term-h .en{color:var(--muted);font-size:.86rem;font-weight:600;direction:ltr}
+.term-b{color:var(--ink-soft);font-size:.97rem}
+
+.stage{display:flex;align-items:center;gap:11px;margin:14px 0;padding:9px 14px;border-radius:12px;font-size:.92rem}
+.stage .sl{font-size:.7rem;font-weight:800;letter-spacing:1px;padding:3px 11px;border-radius:50px;white-space:nowrap;color:#fff}
+.stage.demo{background:#eff6ff;border:1px solid #bfdbfe}.stage.demo .sl{background:var(--blue)}
+.stage.do{background:var(--primary-light);border:1px solid #c7d2fe}.stage.do .sl{background:var(--primary)}
+.stage.talk{background:#fef3c7;border:1px solid #fde68a}.stage.talk .sl{background:var(--amber)}
+.stage.box{background:var(--accent-light);border:1px solid #99f6e4}.stage.box .sl{background:var(--accent-dark)}
+.stage .sx{color:var(--ink-soft)}
+
+ol.steps{list-style:none;padding:0}
+ol.steps>li{margin-bottom:18px}
+ol.steps>li.cont{margin-top:-10px}
+.st-h{font-weight:800;font-size:1.06rem;margin-bottom:6px;display:flex;gap:10px;align-items:baseline}
+.st-n{background:var(--primary);color:#fff;width:26px;height:26px;border-radius:50%;display:inline-flex;
+align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex:0 0 auto}
+.st-b{color:var(--ink-soft);font-size:.97rem;margin-bottom:9px}
+
+.fcard{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0}
+.fmeta{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:9px}
+.cellref{background:var(--primary);color:#fff;font-weight:800;font-size:.73rem;padding:3px 10px;border-radius:6px}
+.fwhat{color:var(--ink-soft);font-size:.86rem;flex:1;min-width:150px;font-weight:600}
+.cp{background:#fff;border:1.5px solid var(--primary);color:var(--primary);font-family:inherit;
+font-size:.76rem;font-weight:700;padding:5px 14px;border-radius:8px;cursor:pointer;transition:.15s}
+.cp:hover{background:var(--primary);color:#fff}
+.cp.done{background:var(--green);border-color:var(--green);color:#fff}
+.fcard>code{display:block;background:#0f172a;color:#a5f3fc;font-family:'SF Mono',Menlo,Consolas,monospace;
+font-size:.79rem;line-height:1.7;padding:11px 13px;border-radius:10px;white-space:pre-wrap;
+word-break:break-word;direction:ltr;text-align:left;unicode-bidi:bidi-override}
+.drag{color:var(--gold-600);font-size:.82rem;margin-top:8px;font-weight:600}
+
+.mini-h{font-size:.76rem;font-weight:800;letter-spacing:1px;color:var(--muted);margin:14px 0 7px}
+.bd{margin-top:4px}
+table.bdt{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+table.bdt td{padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem}
+table.bdt tr:last-child td{border-bottom:none}
+td.pc{width:38%;background:#fbfcfe}
+td.pc code{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:.76rem;color:var(--primary-dark);
+direction:ltr;display:inline-block;unicode-bidi:bidi-override;word-break:break-word}
+td.pd{color:var(--ink-soft)}
+.bd.simple p{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-size:.92rem;color:var(--ink-soft)}
+
+.fn-wrap{margin-top:6px}
+.fn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}
+.fn{background:#fff;border:1px solid var(--line);border-radius:11px;padding:9px 12px}
+.fn-h{display:flex;align-items:baseline;gap:8px;margin-bottom:3px}
+.fn-h code{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:.78rem;font-weight:700;
+color:var(--primary-dark);background:var(--primary-light);padding:1px 7px;border-radius:5px;direction:ltr}
+.fn-h span{font-size:.82rem;font-weight:700;color:var(--ink)}
+.fn-d{font-size:.84rem;color:var(--muted);line-height:1.6}
+
+.note{border-radius:16px;padding:15px 18px;margin:16px 0;border:1px solid}
+.note .nt{font-weight:800;margin-bottom:5px;font-size:.98rem}
+.note .nb{font-size:.94rem;color:var(--ink-soft)}
+.note.warn{background:#fffbeb;border-color:#fde68a}.note.warn .nt{color:#b45309}
+.note.info{background:#eff6ff;border-color:#bfdbfe}.note.info .nt{color:#1d4ed8}
+.note.mac{background:#f0fdf4;border-color:#bbf7d0}.note.mac .nt{color:#15803d}
+.note code{background:#0f172a;color:#a5f3fc;padding:1px 7px;border-radius:5px;font-size:.85em;
+direction:ltr;display:inline-block;unicode-bidi:bidi-override}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin-bottom:8px;background:#fff}
+table.dt{width:100%;border-collapse:collapse;font-size:.85rem;min-width:520px}
+table.dt th{background:var(--primary-light);color:var(--primary-dark);font-weight:800;padding:10px 12px;text-align:right;white-space:nowrap}
+table.dt td{padding:8px 12px;border-top:1px solid var(--line);color:var(--ink-soft);white-space:nowrap;unicode-bidi:plaintext}
+table.dt tr:hover td{background:#fbfcfe}
+.tnote{font-size:.87rem;color:var(--muted);margin-bottom:8px}
+
+.selfcheck{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:18px;padding:17px 20px}
+.selfcheck h4{color:#15803d;font-size:.95rem;font-weight:800;margin-bottom:10px}
+.selfcheck ul{list-style:none;padding:0}
+.selfcheck li{margin-bottom:7px}
+.selfcheck label{display:flex;gap:10px;align-items:flex-start;color:var(--ink-soft);font-size:.94rem;cursor:pointer}
+.selfcheck input{margin-top:7px;accent-color:var(--green);width:17px;height:17px;flex:0 0 auto}
+
+.calc{background:linear-gradient(135deg,#eef2ff,#ccfbf1);border:1px solid #c7d2fe;border-radius:20px;padding:20px 22px;margin:18px 0}
+.calc h4{font-size:1.05rem;font-weight:800;margin-bottom:4px;color:var(--primary-dark)}
+.calc .sub{color:var(--ink-soft);font-size:.92rem;margin-bottom:14px}
+.crow{display:grid;grid-template-columns:minmax(120px,200px) 1fr 96px;gap:12px;align-items:center;margin-bottom:9px}
+@media(max-width:520px){.crow{grid-template-columns:1fr 84px}.crow input[type=range]{grid-column:1/-1;order:3}}
+.crow label{color:var(--ink-soft);font-size:.92rem;font-weight:600}
+.crow input[type=range]{width:100%;accent-color:var(--primary)}
+.cval{color:var(--primary-dark);font-weight:800;font-variant-numeric:tabular-nums;text-align:left;direction:ltr;font-size:.95rem}
+.cout{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px}
+.co{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-align:center;box-shadow:var(--shadow)}
+.co .v{font-size:1.35rem;font-weight:900;color:var(--primary);display:block;direction:ltr}
+.co .l{font-size:.78rem;color:var(--muted)}
+.co.good .v{color:var(--green)}.co.bad .v{color:var(--red)}
+
+footer{border-top:1px solid var(--line);padding:38px 24px;text-align:center;color:var(--muted);font-size:.87rem;background:#fff}
+footer .fn2{color:var(--ink);font-weight:800;font-size:1.05rem;margin-bottom:6px}
+@media(max-width:640px){.tl{grid-template-columns:66px 1fr}.tl .m{grid-column:2}td.pc{width:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="badge">מודול ג׳ · תרגול מונחה במחשבים</div>
+  <h1>בקרה תקציבית, תזרים ו<span>ניתוח דאטה</span></h1>
+  <p class="hero-sub">שש מעבדות אקסל על נתונים של חברה אחת. כל נוסחה כאן עובדת זהה באקסל למק ובאקסל לווינדוס — בלי Power Query, בלי מודל נתונים ובלי מאקרו.</p>
+  <div class="author-block">
+    <div class="author-avatar">ש</div>
+    <div style="text-align:right"><div class="author-name">ד״ר שי צבאן</div><div class="author-title">יום עיון: הפרקטיקה הפיננסית והמיסויית ב-SME</div></div>
+  </div>
+</header>
+
+<div class="metabar">
+  <div class="meta-card"><span class="meta-val">6</span><span class="meta-lbl">מעבדות</span></div>
+  <div class="meta-card"><span class="meta-val">2:35</span><span class="meta-lbl">שעות תרגול</span></div>
+  <div class="meta-card"><span class="meta-val">77</span><span class="meta-lbl">נוסחאות</span></div>
+  <div class="meta-card"><span class="meta-val">12</span><span class="meta-lbl">גיליונות</span></div>
+  <div class="meta-card"><span class="meta-val">Mac + PC</span><span class="meta-lbl">תאימות מלאה</span></div>
+</div>
+
+<nav class="sticky">
+  <div class="inner">
+    <a href="#start"><span>00</span>לפני שמתחילים</a>
+    <a href="#toolbox"><span>ארגז</span>הכלים</a>
+    <a href="#lab1"><span>מעבדה 1</span>ניקוי דאטה בנוסחאות</a><a href="#lab2"><span>מעבדה 2</span>לוח בקרת ביצוע מול תקציב</a><a href="#lab3"><span>מעבדה 3</span>פירוק הסטייה: מחיר, כמות ותמהיל</a><a href="#lab4"><span>מעבדה 4</span>הון חוזר ומחזור המזומן</a><a href="#lab5"><span>מעבדה 5</span>תזרים מזומנים ל-13 שבועות</a><a href="#lab6"><span>מעבדה 6</span>תחזית מתגלגלת 3+9 / 4+8</a>
+    <a href="#after"><span>סיום</span>מה לוקחים למשרד</a>
+  </div>
+  <div class="progwrap"><div id="prog"></div></div>
+</nav>
+
+<div class="wrap">
+
+<h2 class="sec-title" id="start">לפני שמתחילים</h2>
+
+<div class="card">
+  <h3>הורידו את חוברת העבודה</h3>
+  <p>כל המעבדות רצות על קובץ אחד. הורידו אותו עכשיו, פתחו אותו באקסל (לא ב-Google Sheets ולא ב-Numbers), ושמרו אותו במקום שתמצאו.</p>
+  <div class="dlrow">
+    <a class="dl primary" href="Module_C_Labs.xlsx" download>הורדת חוברת העבודה (xlsx)</a>
+    <a class="dl ghost" href="Module_C_Labs_SOLVED.xlsx" download>גרסה פתורה — לבדיקה עצמית אחרי השיעור</a>
+  </div>
+  <p style="font-size:.85rem;margin-top:12px">הגרסה הפתורה כוללת את כל הנוסחאות ממולאות. פתחו אותה רק אחרי שניסיתם, או אם נתקעתם.</p>
+</div>
+
+<div class="card">
+  <h3>בדיקת גרסה — 10 שניות</h3>
+  <p>פתחו את אקסל, הקלידו בתא ריק את הנוסחה הבאה ולחצו Enter:</p>
+  <div class="fcard"><div class="fmeta"><span class="cellref">בדיקה</span><span class="fwhat">אמורה להחזיר 1</span><button class="cp" data-f="=LET(x,1,x)">העתקה</button></div><code dir="ltr">=LET(x,1,x)</code></div>
+  <p><b>אם קיבלתם 1</b> — הכול יעבוד אצלכם, במק או בווינדוס.</p>
+  <p><b>אם קיבלתם ‎#NAME?</b> — אתם על אקסל 2019 או ישן יותר. שתי הנוסחאות במעבדה 1 (המרת תאריך והמרת סכום) לא יעבדו אצלכם, כי הן משתמשות בפונקציה LET שנוספה באקסל 2021. כל שאר חמש המעבדות יעבדו במלואן. שבו ליד מישהו לשלב הראשון.</p>
+  <p style="font-size:.85rem;color:var(--text-muted)">שימו לב: זו מגבלת <b>גרסה</b>, לא מגבלת <b>מערכת הפעלה</b>. שום דבר בחוברת הזאת לא עובד במק אחרת מאשר בווינדוס — זה היה האילוץ המרכזי בבנייה שלה.</p>
+</div>
+
+<div class="card">
+  <h3>מקרא הצבעים בקובץ</h3>
+  <div class="legend">
+    <div class="lg"><div class="sw" style="background:#FFF2A8"></div>תא צהוב — כאן אתם מקלידים נוסחה</div>
+    <div class="lg"><div class="sw" style="background:#F2F4F7"></div>תא אפור — נתון קיים, לא נוגעים</div>
+    <div class="lg"><div class="sw" style="background:#FFF9E0"></div>תא קרם — קלט שאתם משנים (תרחיש, תקופה, יעד)</div>
+    <div class="lg"><div class="sw" style="background:#fff"></div>תא לבן — תוצאה שמתמלאת לבד</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>החברה שבתרגיל</h3>
+  <p><b>טכנופיד בע״מ</b> — יבואן ומפיץ ציוד היקפי למשרדים. מחזור שנתי כ-13.5 מיליון ש״ח, תשעה עובדים, בעל שליטה יחיד המחזיק 100%. שלוש מחלקות: מכירות ישירות, ערוץ מפיצים, שירות ותמיכה. ארבע קבוצות מוצר: מדפסות, מסכים, אביזרים, ושירות ואחריות.</p>
+  <p>בחרנו חברה כזאת בכוונה, כי היא מחזיקה את כל החוטים של היום: יש לה <b>מלאי</b> ולכן מחזור מזומן אמיתי, יש לה <b>רכב חברה</b> שנוגע בתקנות הרכב ממודול א׳, יש לה <b>יתרת בעלים פתוחה</b> שנוגעת בסעיף 3(ט1) ממודול ב׳, ויש לה <b>שיעור רווח גולמי</b> שסטייה בו היא מוקד הסיכון המרכזי בשומה.</p>
+  <p style="font-size:.85rem;color:var(--text-muted)">כל הנתונים מלאכותיים ונבנו לצורך התרגול. אין באמור ייעוץ מס או ייעוץ פיננסי.</p>
+</div>
+
+<div class="card">
+  <h3>לוח הזמנים</h3>
+  <div class="timeline">
+    <div class="tl"><span class="t">00:00</span><span class="n">פתיחה, הורדת הקובץ ובדיקת גרסה</span><span class="m">7 דק׳</span></div>
+    <div class="tl"><span class="t">00:07</span><span class="n">מעבדה 1 · ניקוי דאטה בנוסחאות</span><span class="m">30 דק׳</span></div>
+    <div class="tl"><span class="t">00:37</span><span class="n">מעבדה 2 · לוח בקרת ביצוע מול תקציב</span><span class="m">30 דק׳</span></div>
+    <div class="tl"><span class="t">01:07</span><span class="n">מעבדה 3 · פירוק הסטייה למחיר, כמות ותמהיל</span><span class="m">18 דק׳</span></div>
+    <div class="tl"><span class="t">01:25</span><span class="n">מעבדה 4 · הון חוזר ומחזור המזומן</span><span class="m">22 דק׳</span></div>
+    <div class="tl"><span class="t">01:47</span><span class="n">מעבדה 5 · תזרים מזומנים ל-13 שבועות</span><span class="m">30 דק׳</span></div>
+    <div class="tl"><span class="t">02:17</span><span class="n">מעבדה 6 · תחזית מתגלגלת 3+9 / 4+8</span><span class="m">18 דק׳</span></div>
+  </div>
+</div>
+
+<div class="note warn" style="margin-top:16px">
+  <div class="nt">שלוש הודעות שחוסכות חצי שעה של תסכול</div>
+  <div class="nb">
+    <b>1.</b> אם נוסחה מחזירה טקסט במקום תוצאה, כנראה שהתא מעוצב כטקסט. סמנו אותו, לכו ל<b>בית ← מספר</b>, שנו ל״כללי״, ואז לחצו על התא, F2 ו-Enter.<br>
+    <b>2.</b> הפרדת הארגומנטים בנוסחה תלויה בהגדרות שלכם: אצל רובכם זה פסיק, ואצל מי שהגדיר אזור אירופאי זה יהיה נקודה-פסיק. אם ההעתקה נכשלת, החליפו את כל הפסיקים בנקודה-פסיק. זה ההבדל היחיד בין מחשבים שתפגשו כאן.<br>
+    <b>3.</b> אין צורך למחוק שורות מהנתונים הגולמיים, גם אם הם מלוכלכים. זו כל הנקודה של מעבדה 1.
+  </div>
+</div>
+
+<h2 class="sec-title" id="toolbox">ארגז הכלים</h2>
+<p class="sec-sub">החוברת היא ארגז כלים, לא מצגת. חלק מהכלים נבנה יחד היום, וחלק מגיע מוכן ומחכה ליום שבו תצטרכו אותו.</p>
+
+<div class="card">
+  <div class="tablewrap" style="border:none">
+  <table class="tbx">
+    <thead><tr><th>גיליון</th><th>מה זה</th><th>מתי</th></tr></thead>
+    <tbody>
+      <tr><td><code>00_קרא_אותי</code></td><td>הסבר, מקרא צבעים ופרופיל החברה</td><td><span class="pill data">רקע</span></td></tr>
+      <tr><td><code>01_גולמי_בנק</code></td><td>פלט בנק מלוכלך — חומר הגלם למעבדה 1</td><td><span class="pill data">נתונים</span></td></tr>
+      <tr><td><code>02_גולמי_הנהח</code></td><td>468 תנועות הנהלת חשבונות לשנת 2026</td><td><span class="pill data">נתונים</span></td></tr>
+      <tr><td><code>03_מפתח_מיפוי</code></td><td>טבלת התרגום: מילת מפתח ← סעיף תקציבי</td><td><span class="pill data">נתונים</span></td></tr>
+      <tr><td><code>04_ETL</code></td><td>ניקוי דאטה בנוסחאות</td><td><span class="pill now">מעבדה 1</span></td></tr>
+      <tr><td><code>05_תקציב</code></td><td>התקציב המאושר לשנת 2026</td><td><span class="pill data">נתונים</span></td></tr>
+      <tr><td><code>10_בקרה_תקציבית</code></td><td>לוח בקרת ביצוע מול תקציב</td><td><span class="pill now">מעבדה 2</span></td></tr>
+      <tr><td><code>11_פער_מחיר_כמות</code></td><td>פירוק הסטייה למחיר, כמות ותמהיל</td><td><span class="pill now">מעבדה 3</span></td></tr>
+      <tr><td><code>20_הון_חוזר</code></td><td>DSO, DPO, DIO ומחזור המזומן</td><td><span class="pill now">מעבדה 4</span></td></tr>
+      <tr><td><code>30_תזרים_13</code></td><td>תזרים מזומנים ל-13 שבועות</td><td><span class="pill now">מעבדה 5</span></td></tr>
+      <tr><td><code>40_רולינג</code></td><td>תחזית מתגלגלת 3+9 / 4+8</td><td><span class="pill now">מעבדה 6</span></td></tr>
+      <tr><td><code>50_כלי_אשראי_לקוח</code></td><td><b>מגיע מוכן ועובד.</b> כמה עולה לכם לתת ללקוח שוטף פלוס 90 במקום שוטף פלוס 30, ואיזו הנחה שווה לתת לו תמורת תשלום מיידי</td><td><span class="pill later">להמשך</span></td></tr>
+      <tr><td><code>60_תבנית_ריקה_תזרים</code></td><td><b>מגיע מוכן ועובד.</b> אותו מנוע של מעבדה 5, בלי נתונים, מוכן להזנת לקוח אמיתי</td><td><span class="pill later">להמשך</span></td></tr>
+      <tr><td><code>99_פתרון</code></td><td>כל 77 הנוסחאות, מוכנות להעתקה</td><td><span class="pill data">עזר</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h3>שני הכלים שלא נבנה היום, ולמה הם שם</h3>
+  <p><b>גיליון 50 — כמה עולה לתת ללקוח תנאי תשלום ארוכים.</b> לקוח שמבקש שוטף פלוס 90 במקום שוטף פלוס 30 לא מבקש הנחה, אבל הוא לוקח מכם כסף. הגיליון מתרגם את הבקשה שלו לשקלים, אומר כמה אחוזים מהרווח הגולמי על הלקוח הזה נאכלים בגלל זה, וגם מחשב איזו הנחה כדאי לכם להציע לו תמורת תשלום מיידי. הוא נשען ישירות על מה שנלמד במעבדה 4, ולכן אין טעם לבנות אותו לפניה.</p>
+  <p><b>גיליון 60 — תבנית תזרים ריקה.</b> אותו מנוע שתבנו במעבדה 5, רק בלי הנתונים של החברה בתרגיל. ביום שתרצו לבנות תזרים ללקוח אמיתי, פתחו את הגיליון הזה, מלאו שמות שורות, דירוג ודאות וסכומים, וזהו. כל הנוסחאות כבר בפנים.</p>
+  <div class="stage box"><span class="sl">ארגז הכלים</span><span class="sx">אם נשאר זמן בסוף, נפתח את גיליון 50 יחד. אם לא — הוא עובד גם בלעדיי.</span></div>
+</div>
+
+<h2 class="sec-title" id="labs">המעבדות</h2>
+<p class="sec-sub">שש מעבדות על נתונים של חברה אחת. כל מעבדה מתחילה מהלוגיקה העסקית, ורק אחר כך מגיעה לנוסחה.</p>
+
+<section class="lab" id="lab1">
+  <div class="lab-head">
+    <div class="lab-badge">מעבדה 1</div>
+    <div class="lab-titles">
+      <h2>ניקוי דאטה בנוסחאות</h2>
+      <p class="lede">לוקחים פלט בנק מלוכלך והופכים אותו לטבלה מסווגת שאפשר לבנות עליה דוח.</p>
+    </div>
+    <div class="lab-meta"><span class="chip time">30 דקות</span><span class="chip sheet">גיליון 04_ETL</span></div>
+  </div>
+
+  <div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>ETL</b> <span class=en>Extract, Transform, Load</span></div><div class="term-b">שלוש מילים באנגלית שמתארות כל עבודה עם נתונים, בכל כלי שקיים. <b>Extract</b>, שליפה — להוציא את הנתונים מהמקור, למשל להוריד קובץ מאתר הבנק. <b>Transform</b>, המרה — לנקות ולסדר אותם: להפוך טקסט לתאריך, טקסט לסכום, ולהחליט לאיזה סעיף כל שורה שייכת. <b>Load</b>, טעינה — להניח את התוצאה בטבלה אחת מסודרת שממנה בונים את כל הדוחות. אם עשיתם פעם התאמת בנק בידיים, כבר עשיתם ETL. פשוט לא קראתם לזה ככה.</div></div>
+
+  <div class="block logic">
+    <h4>הלוגיקה העסקית — מה אנחנו בעצם עושים ולמה</h4>
+    <p>כל תהליך עבודה עם נתונים, בכל כלי שקיים, עשוי משלושה שלבים שנקראים <b>ETL</b>:</p>
+    <ul><li><b>E — Extract, שליפה.</b> מוציאים את הנתונים מהמקור. כאן: קובץ שהורדנו מאתר הבנק.</li>
+    <li><b>T — Transform, ניקוי והמרה.</b> הופכים טקסט לתאריך, טקסט לסכום, ומסווגים כל שורה לסעיף חשבונאי.</li>
+    <li><b>L — Load, טעינה.</b> מניחים את התוצאה בטבלה אחידה אחת שממנה בונים את כל הדוחות.</li></ul>
+    <p>הבנק לא יודע חשבונאות. הוא נותן טקסט חופשי: ״גוגל אדס - קמפיין חיפוש״. אנחנו צריכים שיהיה כתוב ״פרסום ושיווק״, אחרת אין מה להשוות לתקציב. הפעולה הזאת נעשית היום ברוב המשרדים ידנית, שורה-שורה, כל חודש מחדש. אנחנו נבנה אותה פעם אחת.</p>
+  </div>
+
+  <div class="block"><h4>איך המעבדה הזאת רצה בכיתה</h4><div class="stage demo"><span class="sl">הדגמה על המסך</span><span class="sx">אני מראה על המסך שורה אחת מלוכלכת, ומה קורה לה בכל אחד מחמשת השלבים.</span></div><div class="stage do"><span class="sl">עכשיו אתם</span><span class="sx">אתם מקלידים חמש נוסחאות בשורה 8 בלבד, ואז גוררים אותן למטה. אף אחד לא מתקן שורות בידיים.</span></div><div class="stage talk"><span class="sl">עצירה לדיון</span><span class="sx">מי מכם עושה את הסיווג הזה היום ידנית, כל חודש? כמה זמן זה לוקח?</span></div></div>
+
+  <div class="block"><h4>הנתונים שאיתם עובדים</h4><div class="tablewrap"><table class="dt"><thead><tr><th>תאריך_גולמי</th><th>תיאור_גולמי</th><th>סכום_גולמי</th><th>אסמכתא</th></tr></thead><tbody><tr><td>4.1.26</td><td>חשמל - חברת החשמל</td><td>(57,529 ₪)</td><td>A780016</td></tr><tr><td>22.1.26</td><td>מוסך מורשה - טיפול 40 אלף</td><td>(50,917 ₪)</td><td>A780024</td></tr><tr><td>23.5.26</td><td>ציוד משרדי - אופיס דיפו</td><td> (52,230 ₪) </td><td>A780086</td></tr><tr><td>18/02/2026</td><td>מוסך  מורשה - טיפול 40 אלף</td><td>(43,383 ₪)</td><td>A780037</td></tr><tr><td>7.3.26</td><td>חשמל  - חברת החשמל</td><td>(89,287 ₪)</td><td>A780055</td></tr><tr><td>10.1.26</td><td>לקוח מגה טק בעמ</td><td>120,968 ₪</td><td>A780025</td></tr><tr><td>15/06/2026</td><td>כביש 6 - חיוב חודשי</td><td>(9,211 ₪)</td><td>A780098</td></tr></tbody></table></div><div class="tnote">שימו לב לפלט הגולמי: תאריכים בשני פורמטים (25.3.26 לצד 04/02/2026), סכומים כטקסט עם ₪ ופסיקים, סוגריים במקום מינוס, רווחים כפולים, ורווחים נסתרים בקצה שאי אפשר לראות בעין.</div></div>
+
+  <div class="block">
+    <h4>שלב אחר שלב</h4>
+    <ol class="steps"><li class="has-h"><div class="st-h"><span class="st-n">1</span>פתחו את הגיליון 04_ETL</div><div class="st-b">ארבע העמודות הראשונות כבר מלאות. הן מושכות אוטומטית את הנתון הגולמי מגיליון 01. חמש העמודות הצהובות הן שלכם.</div></li><li class="has-h"><div class="st-h"><span class="st-n">2</span>עמודה E — הפכו את התאריך לתאריך אמיתי</div><div class="st-b">כל עוד התאריך הוא טקסט, אקסל לא יודע למיין אותו, לא לסנן לפי חודש ולא להשוות לתקופה. הנוסחה מאחדת קודם את שני הפורמטים (מחליפה נקודה בלוכסן), ואז חותכת את היום, החודש והשנה ומרכיבה מהם תאריך.</div><div class="fcard"><div class="fmeta"><span class="cellref">E8</span><span class="fwhat">המרת תאריך טקסט לתאריך אמיתי — עמיד לשני פורמטים ובלתי תלוי בהגדרות אזור</span><button class="cp" data-f="=LET(t,SUBSTITUTE(TRIM(A8),&quot;.&quot;,&quot;/&quot;),d,VALUE(LEFT(t,FIND(&quot;/&quot;,t)-1)),r,MID(t,FIND(&quot;/&quot;,t)+1,20),m,VALUE(LEFT(r,FIND(&quot;/&quot;,r)-1)),y,VALUE(MID(r,FIND(&quot;/&quot;,r)+1,4)),DATE(IF(y&lt;100,2000+y,y),m,d))">העתקה</button></div><code dir="ltr">=LET(t,SUBSTITUTE(TRIM(A8),&quot;.&quot;,&quot;/&quot;),d,VALUE(LEFT(t,FIND(&quot;/&quot;,t)-1)),r,MID(t,FIND(&quot;/&quot;,t)+1,20),m,VALUE(LEFT(r,FIND(&quot;/&quot;,r)-1)),y,VALUE(MID(r,FIND(&quot;/&quot;,r)+1,4)),DATE(IF(y&lt;100,2000+y,y),m,d))</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">SUBSTITUTE(TRIM(A8),&quot;.&quot;,&quot;/&quot;)</code></td><td class="pd">קודם מנקים רווחים, ואז מחליפים כל נקודה בלוכסן. זה מאחד את שני הפורמטים: "25.3.26" ו-"04/02/2026" הופכים שניהם למבנה אחד עם לוכסנים.</td></tr><tr><td class="pc"><code dir="ltr">LET(t, ... ,</code></td><td class="pd">נותנים לתוצאה הזאת שם: t. מכאן והלאה נכתוב t במקום לחזור על כל הביטוי.</td></tr><tr><td class="pc"><code dir="ltr">d,VALUE(LEFT(t,FIND(&quot;/&quot;,t)-1))</code></td><td class="pd">היום: קח את כל מה שלפני הלוכסן הראשון, והפוך למספר.</td></tr><tr><td class="pc"><code dir="ltr">r,MID(t,FIND(&quot;/&quot;,t)+1,20)</code></td><td class="pd">השארית: כל מה שאחרי הלוכסן הראשון. קוראים לה r.</td></tr><tr><td class="pc"><code dir="ltr">m,VALUE(LEFT(r,FIND(&quot;/&quot;,r)-1))</code></td><td class="pd">החודש: מתוך השארית, כל מה שלפני הלוכסן הבא.</td></tr><tr><td class="pc"><code dir="ltr">y,VALUE(MID(r,FIND(&quot;/&quot;,r)+1,4))</code></td><td class="pd">השנה: מה שנשאר אחרי הלוכסן השני.</td></tr><tr><td class="pc"><code dir="ltr">DATE(IF(y&lt;100,2000+y,y),m,d)</code></td><td class="pd">ולבסוף מרכיבים תאריך. ה-IF מטפל בשנה דו-ספרתית: אם קיבלנו 26, זה 2026.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>LET</code><span>תן שם לחישוב</span></div><div class="fn-d">מאפשרת לתת שם לתוצאת ביניים ואז להשתמש בשם במקום לחזור על אותו חישוב שוב ושוב. הנוסחה יוצאת קצרה יותר וקריאה יותר. דורשת אקסל 2021 ומעלה.</div></div><div class="fn"><div class="fn-h"><code>SUBSTITUTE</code><span>החלף טקסט</span></div><div class="fn-d">מחליפה כל מופע של טקסט אחד בטקסט אחר. אנחנו משתמשים בה כדי להוריד ₪, פסיקים ותווים נסתרים.</div></div><div class="fn"><div class="fn-h"><code>TRIM</code><span>נקה רווחים</span></div><div class="fn-d">מוחקת רווחים בהתחלה ובסוף, ומצמצמת רווחים כפולים באמצע לרווח אחד.</div></div><div class="fn"><div class="fn-h"><code>VALUE</code><span>הפוך טקסט למספר</span></div><div class="fn-d">לוקחת טקסט שנראה כמו מספר והופכת אותו למספר אמיתי שאפשר לחשב איתו.</div></div><div class="fn"><div class="fn-h"><code>LEFT</code><span>קח מהתחלה</span></div><div class="fn-d">מחזירה את N התווים הראשונים מטקסט.</div></div><div class="fn"><div class="fn-h"><code>FIND</code><span>איפה זה מתחיל</span></div><div class="fn-d">כמו SEARCH, רק שהיא מבחינה בין אותיות גדולות לקטנות. מחזירה את מספר התו שבו נמצא מה שחיפשתם.</div></div><div class="fn"><div class="fn-h"><code>MID</code><span>קח מהאמצע</span></div><div class="fn-d">מחזירה N תווים מטקסט, החל מהמקום שתגידו.</div></div><div class="fn"><div class="fn-h"><code>DATE</code><span>בנה תאריך</span></div><div class="fn-d">מקבלת שנה, חודש ויום — שלושה מספרים נפרדים — ומרכיבה מהם תאריך אמיתי.</div></div><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">3</span>עמודה F — הפכו את הסכום למספר</div><div class="st-b">אותו רעיון: הסרת ₪, פסיקים ורווחים, ואז זיהוי שסוגריים פירושם מספר שלילי. זו המוסכמה הנפוצה ביותר בפלטי בנק בישראל.</div><div class="fcard"><div class="fmeta"><span class="cellref">F8</span><span class="fwhat">המרת סכום טקסט למספר — הסרת ₪, פסיקים ורווחים, וסוגריים = שלילי</span><button class="cp" data-f="=LET(t,TRIM(SUBSTITUTE(C8,UNICHAR(160),&quot; &quot;)),n,SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(t,&quot;₪&quot;,&quot;&quot;),&quot;,&quot;,&quot;&quot;),&quot; &quot;,&quot;&quot;),IF(LEFT(n,1)=&quot;(&quot;,-VALUE(SUBSTITUTE(SUBSTITUTE(n,&quot;(&quot;,&quot;&quot;),&quot;)&quot;,&quot;&quot;)),VALUE(n)))">העתקה</button></div><code dir="ltr">=LET(t,TRIM(SUBSTITUTE(C8,UNICHAR(160),&quot; &quot;)),n,SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(t,&quot;₪&quot;,&quot;&quot;),&quot;,&quot;,&quot;&quot;),&quot; &quot;,&quot;&quot;),IF(LEFT(n,1)=&quot;(&quot;,-VALUE(SUBSTITUTE(SUBSTITUTE(n,&quot;(&quot;,&quot;&quot;),&quot;)&quot;,&quot;&quot;)),VALUE(n)))</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">SUBSTITUTE(C8,UNICHAR(160),&quot; &quot;)</code></td><td class="pd">מחליפים את הרווח הקשיח — תו שנראה כמו רווח אבל אינו רווח — ברווח אמיתי.</td></tr><tr><td class="pc"><code dir="ltr">TRIM( ... )</code></td><td class="pd">מורידים רווחים מיותרים. קוראים לתוצאה t.</td></tr><tr><td class="pc"><code dir="ltr">SUBSTITUTE(...,&quot;₪&quot;,&quot;&quot;) ואז &quot;,&quot; ואז &quot; &quot;</code></td><td class="pd">מורידים בזה אחר זה את סימן השקל, את הפסיקים המפרידים ואת הרווחים. נשאר רק מה שנראה כמו מספר. קוראים לו n.</td></tr><tr><td class="pc"><code dir="ltr">IF(LEFT(n,1)=&quot;(&quot;</code></td><td class="pd">בודקים אם התו הראשון הוא סוגר פותח. בפלטי בנק בישראל, סוגריים הם הדרך לסמן חיוב.</td></tr><tr><td class="pc"><code dir="ltr">-VALUE(SUBSTITUTE(SUBSTITUTE(n,&quot;(&quot;,&quot;&quot;),&quot;)&quot;,&quot;&quot;))</code></td><td class="pd">אם כן: מורידים את שני הסוגריים, הופכים למספר, ומוסיפים מינוס.</td></tr><tr><td class="pc"><code dir="ltr">VALUE(n)</code></td><td class="pd">אם לא: פשוט הופכים למספר.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>LET</code><span>תן שם לחישוב</span></div><div class="fn-d">מאפשרת לתת שם לתוצאת ביניים ואז להשתמש בשם במקום לחזור על אותו חישוב שוב ושוב. הנוסחה יוצאת קצרה יותר וקריאה יותר. דורשת אקסל 2021 ומעלה.</div></div><div class="fn"><div class="fn-h"><code>TRIM</code><span>נקה רווחים</span></div><div class="fn-d">מוחקת רווחים בהתחלה ובסוף, ומצמצמת רווחים כפולים באמצע לרווח אחד.</div></div><div class="fn"><div class="fn-h"><code>SUBSTITUTE</code><span>החלף טקסט</span></div><div class="fn-d">מחליפה כל מופע של טקסט אחד בטקסט אחר. אנחנו משתמשים בה כדי להוריד ₪, פסיקים ותווים נסתרים.</div></div><div class="fn"><div class="fn-h"><code>UNICHAR</code><span>תן לי את התו מספר N</span></div><div class="fn-d">מחזירה תו לפי מספרו בטבלת יוניקוד. חשוב: היא מחזירה בדיוק אותו תו בכל מחשב, בניגוד לפונקציה CHAR שתלויה במערכת ההפעלה.</div></div><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div><div class="fn"><div class="fn-h"><code>LEFT</code><span>קח מהתחלה</span></div><div class="fn-d">מחזירה את N התווים הראשונים מטקסט.</div></div><div class="fn"><div class="fn-h"><code>VALUE</code><span>הפוך טקסט למספר</span></div><div class="fn-d">לוקחת טקסט שנראה כמו מספר והופכת אותו למספר אמיתי שאפשר לחשב איתו.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">4</span>עמודה G — נקו את התיאור</div><div class="st-b">רווח כפול באמצע, רווח בקצה, ותווי כיווניות שהבנק מוסיף כדי שהעברית תוצג נכון. הם בלתי נראים אבל הם שוברים כל השוואה של טקסט.</div><div class="fcard"><div class="fmeta"><span class="cellref">G8</span><span class="fwhat">ניקוי תיאור — רווחים כפולים, רווח קשיח (nbsp) וסימני כיווניות RTL שהבנק משאיר</span><button class="cp" data-f="=TRIM(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(B8,UNICHAR(160),&quot; &quot;),UNICHAR(8207),&quot;&quot;),UNICHAR(8206),&quot;&quot;))">העתקה</button></div><code dir="ltr">=TRIM(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(B8,UNICHAR(160),&quot; &quot;),UNICHAR(8207),&quot;&quot;),UNICHAR(8206),&quot;&quot;))</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">SUBSTITUTE(B8,UNICHAR(160),&quot; &quot;)</code></td><td class="pd">רווח קשיח הופך לרווח רגיל.</td></tr><tr><td class="pc"><code dir="ltr">SUBSTITUTE(...,UNICHAR(8207),&quot;&quot;)</code></td><td class="pd">מוחקים סימן כיווניות מימין לשמאל. הבנק מוסיף אותו כדי שהעברית תיראה נכון, והוא בלתי נראה — אבל הוא שובר כל השוואת טקסט.</td></tr><tr><td class="pc"><code dir="ltr">SUBSTITUTE(...,UNICHAR(8206),&quot;&quot;)</code></td><td class="pd">אותו דבר עם סימן הכיווניות ההפוך.</td></tr><tr><td class="pc"><code dir="ltr">TRIM( ... )</code></td><td class="pd">ולסיום, איחוד רווחים כפולים והורדת רווחים בקצוות.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>TRIM</code><span>נקה רווחים</span></div><div class="fn-d">מוחקת רווחים בהתחלה ובסוף, ומצמצמת רווחים כפולים באמצע לרווח אחד.</div></div><div class="fn"><div class="fn-h"><code>SUBSTITUTE</code><span>החלף טקסט</span></div><div class="fn-d">מחליפה כל מופע של טקסט אחד בטקסט אחר. אנחנו משתמשים בה כדי להוריד ₪, פסיקים ותווים נסתרים.</div></div><div class="fn"><div class="fn-h"><code>UNICHAR</code><span>תן לי את התו מספר N</span></div><div class="fn-d">מחזירה תו לפי מספרו בטבלת יוניקוד. חשוב: היא מחזירה בדיוק אותו תו בכל מחשב, בניגוד לפונקציה CHAR שתלויה במערכת ההפעלה.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">5</span>עמודה H — סווגו כל שורה לסעיף</div><div class="st-b">כאן קורה הקסם. הנוסחה עוברת על טבלת המיפוי בגיליון 03, מחפשת איזו מילת מפתח מופיעה בתיאור, ומחזירה את הסעיף המתאים. אם לא נמצאה אף מילה, היא מחזירה ״לא מסווג״ במקום להתפוצץ.</div><div class="fcard"><div class="fmeta"><span class="cellref">H8</span><span class="fwhat">סיווג אוטומטי לפי מפתח המיפוי — מחזיר את הסעיף של מילת המפתח הראשונה שנמצאה</span><button class="cp" data-f="=IFERROR(INDEX(מפתח[סעיף],SUMPRODUCT(MATCH(1,--ISNUMBER(SEARCH(מפתח[מילת_מפתח],G8)),0))),&quot;לא מסווג&quot;)">העתקה</button></div><code dir="ltr">=IFERROR(INDEX(מפתח[סעיף],SUMPRODUCT(MATCH(1,--ISNUMBER(SEARCH(מפתח[מילת_מפתח],G8)),0))),&quot;לא מסווג&quot;)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">SEARCH(מפתח[מילת_מפתח],G8)</code></td><td class="pd">כאן קורה הדבר החשוב: במקום לחפש מילה אחת, נתנו ל-SEARCH את כל עמודת מילות המפתח בבת אחת. היא מחזירה רשימה של תשובות — לכל מילת מפתח, האם היא נמצאת בתיאור ואיפה.</td></tr><tr><td class="pc"><code dir="ltr">ISNUMBER( ... )</code></td><td class="pd">הופכים את הרשימה הזאת ל״נמצא / לא נמצא״: מספר פירושו נמצא, שגיאה פירושה לא נמצא.</td></tr><tr><td class="pc"><code dir="ltr">--ISNUMBER( ... )</code></td><td class="pd">שני המינוסים הופכים נכון ולא-נכון ל-1 ו-0. זה טריק ותיק שמאפשר להמשיך לחשב.</td></tr><tr><td class="pc"><code dir="ltr">MATCH(1, ... ,0)</code></td><td class="pd">מחפשים את ה-1 הראשון ברשימה, כלומר את מילת המפתח הראשונה שנמצאה. מקבלים את מספר השורה שלה בטבלת המיפוי.</td></tr><tr><td class="pc"><code dir="ltr">SUMPRODUCT( ... )</code></td><td class="pd">העטיפה הזאת מכריחה את אקסל להתייחס לכל הביטוי כרשימה. בלעדיה, בגרסאות מסוימות הנוסחה תסתכל רק על השורה הראשונה.</td></tr><tr><td class="pc"><code dir="ltr">INDEX(מפתח[סעיף], ... )</code></td><td class="pd">ועכשיו שיש לנו מספר שורה, מביאים משם את שם הסעיף.</td></tr><tr><td class="pc"><code dir="ltr">IFERROR( ... ,&quot;לא מסווג&quot;)</code></td><td class="pd">ואם אף מילת מפתח לא נמצאה, במקום שגיאה מקבלים ״לא מסווג״ — שזו בדיוק השורה שתרצו לבדוק ידנית.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IFERROR</code><span>אם יש שגיאה</span></div><div class="fn-d">מריצה נוסחה, ואם היא נכשלת מחזירה מה שתגידו לה במקום להציג שגיאה. שימושי כשחלוקה באפס או ערך חסר הם מצב לגיטימי ולא באג.</div></div><div class="fn"><div class="fn-h"><code>INDEX</code><span>תן לי את הפריט מספר N</span></div><div class="fn-d">מקבלת רשימה ומספר, ומחזירה את הפריט שנמצא במקום הזה ברשימה. לבד היא לא מעניינת, אבל בשילוב עם MATCH היא כלי החיפוש הכי אמין באקסל.</div></div><div class="fn"><div class="fn-h"><code>SUMPRODUCT</code><span>סכום של מכפלות</span></div><div class="fn-d">מכפילה עמודות זו בזו שורה-שורה ואז מחברת. השימוש האמיתי שלה: לסכם עם תנאי מסובך שתלוי בכמה עמודות, מה ש-SUMIFS לא יודעת לעשות.</div></div><div class="fn"><div class="fn-h"><code>MATCH</code><span>באיזה מקום זה נמצא</span></div><div class="fn-d">מחפשת ערך ברשימה ומחזירה את המיקום שלו כמספר. לא את הערך, את המיקום. את הערך עצמו נביא אחר כך עם INDEX.</div></div><div class="fn"><div class="fn-h"><code>ISNUMBER</code><span>האם זה מספר</span></div><div class="fn-d">מחזירה נכון או לא-נכון. אנחנו עוטפים בה את SEARCH כדי להפוך את התשובה ל״נמצא / לא נמצא״ במקום ״מספר או שגיאה״.</div></div><div class="fn"><div class="fn-h"><code>SEARCH</code><span>חפש טקסט בתוך טקסט</span></div><div class="fn-d">מחפשת מילה בתוך משפט ומחזירה באיזה תו היא מתחילה. אם לא מצאה, מחזירה שגיאה. אינה מבחינה בין אותיות גדולות לקטנות.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">6</span>עמודה I — סמנו כפילויות</div><div class="st-b">הורדתם את הקובץ פעמיים בטעות? קלטתם חודש חופף? הנוסחה סופרת כמה פעמים מופיע אותו שילוב של אסמכתא, סכום ותאריך.</div><div class="fcard"><div class="fmeta"><span class="cellref">I8</span><span class="fwhat">זיהוי כפילות — אותה אסמכתא, אותו סכום, אותו תאריך מופיעים יותר מפעם אחת</span><button class="cp" data-f="=IF(COUNTIFS($D$8:$D$108,D8,$F$8:$F$108,F8,$E$8:$E$108,E8)&gt;1,&quot;כפילות&quot;,&quot;&quot;)">העתקה</button></div><code dir="ltr">=IF(COUNTIFS($D$8:$D$108,D8,$F$8:$F$108,F8,$E$8:$E$108,E8)&gt;1,&quot;כפילות&quot;,&quot;&quot;)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">COUNTIFS($D$8:$D$108,D8, ...)</code></td><td class="pd">סופרים כמה שורות בכל הטבלה יש להן בדיוק אותה אסמכתא, אותו סכום ואותו תאריך כמו השורה הזאת.</td></tr><tr><td class="pc"><code dir="ltr">הסימן $</code></td><td class="pd">הדולרים נועלים את הטווח. כשגוררים את הנוסחה למטה, הטווח שנבדק נשאר כל הטבלה ולא זז איתה. זו הטעות הכי נפוצה בגרירת נוסחאות.</td></tr><tr><td class="pc"><code dir="ltr">&gt;1</code></td><td class="pd">אם השורה מופיעה יותר מפעם אחת — היא כפילות. שימו לב שגם המקור מסומן, ולכן חמש כפילויות מייצרות עשרה סימונים.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div><div class="fn"><div class="fn-h"><code>COUNTIFS</code><span>ספירה עם כמה תנאים</span></div><div class="fn-d">סופרת כמה שורות עונות על כל התנאים ביחד. אנחנו משתמשים בה כדי לגלות אם שורה מסוימת מופיעה יותר מפעם אחת.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">7</span>בקרת האיכות בתחתית הגיליון</div><div class="st-b">שש שורות שאומרות לכם אם הניקוי הצליח. מלאו אותן מלמעלה למטה.</div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B112</span><span class="fwhat">שורות שנקלטו</span><button class="cp" data-f="=COUNTA(D8:D108)">העתקה</button></div><code dir="ltr">=COUNTA(D8:D108)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>סופרת כמה תאים בעמודת האסמכתא אינם ריקים, כלומר כמה שורות בכלל נקלטו. בדיקה טריוויאלית שתופסת את התקלה הנפוצה ביותר: חצי מהקובץ לא הודבק.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>COUNTA</code><span>ספירת תאים מלאים</span></div><div class="fn-d">סופרת כמה תאים בטווח אינם ריקים.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B113</span><span class="fwhat">שורות שלא סווגו</span><button class="cp" data-f="=COUNTIF(H8:H108,&quot;לא מסווג&quot;)">העתקה</button></div><code dir="ltr">=COUNTIF(H8:H108,&quot;לא מסווג&quot;)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>סופרת כמה פעמים מופיע ״לא מסווג״ בעמודת הסיווג. כל עוד המספר הזה גדול מאפס — יש שורות שאף אחד לא יודע לאן הן שייכות, ואסור לשלוח דוח.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>COUNTIF</code><span>ספירה עם תנאי</span></div><div class="fn-d">סופרת כמה תאים עונים על תנאי אחד.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B114</span><span class="fwhat">שורות שסומנו ככפילות</span><button class="cp" data-f="=COUNTIF(I8:I108,&quot;כפילות&quot;)">העתקה</button></div><code dir="ltr">=COUNTIF(I8:I108,&quot;כפילות&quot;)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותה ספירה על עמודת הכפילויות. שימו לב שהמספר תמיד זוגי: גם המקור וגם העותק מסומנים, ולכן חמש כפילויות אמיתיות מייצרות עשרה סימונים.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>COUNTIF</code><span>ספירה עם תנאי</span></div><div class="fn-d">סופרת כמה תאים עונים על תנאי אחד.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B115</span><span class="fwhat">סה&quot;כ תקבולים בקובץ (ללא כפילויות)</span><button class="cp" data-f="=SUMIFS(F8:F108,I8:I108,&quot;&quot;,F8:F108,&quot;&gt;0&quot;)">העתקה</button></div><code dir="ltr">=SUMIFS(F8:F108,I8:I108,&quot;&quot;,F8:F108,&quot;&gt;0&quot;)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>SUMIFS עם שני תנאים: שהשורה אינה מסומנת ככפילות (הגרשיים הריקים פירושם ״התא ריק״), ושהסכום גדול מאפס כלומר זו הכנסה.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B116</span><span class="fwhat">סה&quot;כ תשלומים בקובץ (ללא כפילויות)</span><button class="cp" data-f="=SUMIFS(F8:F108,I8:I108,&quot;&quot;,F8:F108,&quot;&lt;0&quot;)">העתקה</button></div><code dir="ltr">=SUMIFS(F8:F108,I8:I108,&quot;&quot;,F8:F108,&quot;&lt;0&quot;)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותה נוסחה בדיוק, רק שהתנאי השני הוא ״קטן מאפס״. כך מפרידים תקבולים מתשלומים בלי לגעת בנתונים.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B117</span><span class="fwhat">סה&quot;כ תשלומי מס בתקופה</span><button class="cp" data-f="=SUMIFS(F8:F108,H8:H108,&quot;תשלומי מס&quot;,I8:I108,&quot;&quot;)">העתקה</button></div><code dir="ltr">=SUMIFS(F8:F108,H8:H108,&quot;תשלומי מס&quot;,I8:I108,&quot;&quot;)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>מסכמת רק שורות שסווגו כתשלומי מס ואינן כפילות. זה נטל המס בפועל על התזרים בחצי השנה — מספר שרוב בעלי העסקים לא ראו מעולם במרוכז.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B118</span><span class="fwhat">סה&quot;כ משיכות בעלים ← דגל 3(ט1)</span><button class="cp" data-f="=SUMIFS(F8:F108,H8:H108,&quot;יתרת בעלים&quot;,I8:I108,&quot;&quot;)">העתקה</button></div><code dir="ltr">=SUMIFS(F8:F108,H8:H108,&quot;יתרת בעלים&quot;,I8:I108,&quot;&quot;)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותו דבר לסעיף יתרת הבעלים. זו שורת הדגל האדום: משיכות שמצטברות ומגיעות לחיוב לפי סעיף 3(ט1) בתום השנה שלאחר מכן. מי שרואה את זה ביוני יכול עוד לתקן.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div></div></div></div></li></ol>
+  </div>
+
+  <div class="note warn"><div class="nt">הכלל החשוב ביותר בטבלת המיפוי — הסדר</div><div class="nb">הנוסחה עוצרת במילת המפתח <b>הראשונה</b> שהיא מוצאת. לכן ״שכר טרחה״ ו״רו״ח״ חייבים להופיע <b>מעל</b> ״שכר״ בטבלה. אחרת ״רו״ח - שכר טרחה רבעוני״ יסווג כמשכורת. פתחו את גיליון 03 וראו את הסדר. זו הטעות מספר אחת בכל פרויקט מיפוי.</div></div><div class="note mac"><div class="nt">למה UNICHAR ולא CHAR</div><div class="nb">הפונקציה <code>CHAR</code> מחזירה תו שונה במק ובווינדוס, כי היא תלויה בטבלת התווים של מערכת ההפעלה. נוסחת ניקוי שמשתמשת ב-<code>CHAR(160)</code> תעבוד אצל חצי מהכיתה ותיכשל אצל החצי השני. <code>UNICHAR</code> מחזירה תמיד את אותו תו בכל מחשב. זו דוגמה מדויקת לסוג התקלה שהחוברת הזאת נבנתה כדי למנוע.</div></div><div class="note info"><div class="nt">למה לא Power Query</div><div class="nb">Power Query הוא כלי מצוין, אבל הגרסה שלו באקסל למק מוגבלת ותלוית גרסה, וחלק מהמשתתפים פשוט לא יצליחו להריץ אותה. נוסחה, לעומת זאת, מתנהגת זהה בכל מחשב, נראית לעין, וניתנת לביקורת בתיק העבודה. מי שעובד רק על ווינדוס ורוצה לאוטמט את השלב הזה יכול לעשות זאת אחר כך — הלוגיקה שלמדתם כאן היא בדיוק אותה לוגיקה.</div></div>
+
+  <div class="block practice">
+    <h4>הקשר לפרקטיקה — מה עושים עם זה במשרד</h4>
+    <p>זה בדיוק תהליך ההתאמה שאתם עושים בכל סגירת חודש. ההבדל הוא שנוסחה נשארת בקובץ: בחודש הבא מדביקים פלט חדש והכול מסווג לבד. בנוסף, בקרת האיכות שבסוף המעבדה (״כמה שורות לא סווגו״, ״כמה כפילויות״) היא בדיוק מה שמצפים למצוא בתיק עבודה בביקורת.</p>
+    <p>שתי שורות בבקרת האיכות הן דגלים אמיתיים: <b>תשלומי מס</b> מראה את נטל המס בפועל על התזרים, ו<b>משיכות בעלים</b> הוא הדגל של סעיף 3(ט1) שדובר עליו במודול ב׳. משיכה שמצטברת ביוני היא בעיה שאפשר לתקן; אותה משיכה שמתגלה במרץ שאחרי היא כבר חבות מס.</p>
+  </div>
+
+  <div class="block more">
+    <h4>איפה עוד משתמשים בזה</h4>
+    <ul><li>ניקוי קובץ סליקה מחברת האשראי והתאמתו לדוח המכירות.</li>
+    <li>ניקוי קובץ שכר מלשכת שירות לפני העמסה על מרכזי עלות.</li>
+    <li>איתור חשבוניות כפולות שנקלטו פעמיים בהנהלת החשבונות.</li>
+    <li>ניקוי דוח מכירות מ-ERP לפני ניתוח רווחיות לפי לקוח.</li></ul>
+  </div>
+
+  
+
+  <div class="selfcheck"><h4>בדיקה עצמית — סמנו כשהתוצאה אצלכם תואמת</h4><ul><li><label><input type="checkbox" data-lab="lab1"> בעמודה E מופיעים תאריכים ולא טקסט (הם מיושרים לימין בעצמם)</label></li><li><label><input type="checkbox" data-lab="lab1"> בעמודה F כל הסכומים מספרים, והתשלומים שליליים</label></li><li><label><input type="checkbox" data-lab="lab1"> ״שורות שלא סווגו״ מראה 0</label></li><li><label><input type="checkbox" data-lab="lab1"> ״שורות שסומנו ככפילות״ מראה 10 (חמישה זוגות)</label></li><li><label><input type="checkbox" data-lab="lab1"> ״סה"כ משיכות בעלים״ מראה סכום שלילי — זה הדגל של סעיף 3(ט1)</label></li></ul></div>
+</section>
+<section class="lab" id="lab2">
+  <div class="lab-head">
+    <div class="lab-badge">מעבדה 2</div>
+    <div class="lab-titles">
+      <h2>לוח בקרת ביצוע מול תקציב</h2>
+      <p class="lede">מנוע SUMIFS אחד שעונה על כל שאלה ניהולית: כמה, מתי, ובאיזו מחלקה.</p>
+    </div>
+    <div class="lab-meta"><span class="chip time">30 דקות</span><span class="chip sheet">גיליון 10_בקרה_תקציבית</span></div>
+  </div>
+
+  <div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>סטייה תקציבית</b> <span class=en>Variance</span></div><div class="term-b">ההפרש בין מה שתכננו לבין מה שקרה בפועל. מודדים אותה תמיד בשני אופנים יחד: <b>בשקלים</b>, כדי לדעת כמה כסף זה, ו<b>באחוזים</b>, כדי לדעת אם זה הרבה. חריגה של 50 אלף ש״ח היא אסון בסעיף שתוקצב ב-100 אלף, וזניחה בסעיף שתוקצב ב-5 מיליון. מי שמסתכל רק על אחד מהשניים מקבל החלטות שגויות.</div></div>
+
+  <div class="block logic">
+    <h4>הלוגיקה העסקית — מה אנחנו בעצם עושים ולמה</h4>
+    <p><b>SUMIFS</b> היא הפונקציה החשובה ביותר בבקרה תקציבית, והיא פשוטה ממה שהיא נראית. היא אומרת: ״תסכם לי את כל השורות שעונות בו-זמנית על התנאים הבאים״.</p>
+    <p>המבנה שלה תמיד זהה: קודם <b>מה לסכם</b>, ואחר כך זוגות של <b>איפה לבדוק</b> ו<b>מה צריך להיות שם</b>. למשל: ״סכם לי את עמודת הסכום, כאשר עמודת הסעיף היא ׳פרסום ושיווק׳, וכאשר עמודת החודש היא בין 1 ל-6, וכאשר עמודת המחלקה היא ׳ערוץ מפיצים׳״. זה בדיוק מה שמנהל שואל, רק בעברית של אקסל.</p>
+    <p>הכלל שנלמד כאן חשוב מהנוסחה עצמה: <b>אל תסננו נתונים ידנית</b>. סינון ידני נראה מהיר, אבל בחודש הבא אתם לא זוכרים מה סיננתם, אי אפשר לשחזר ואי אפשר לבקר. תנאי שיושב בתוך נוסחה מתעד את עצמו.</p>
+  </div>
+
+  <div class="block"><h4>איך המעבדה הזאת רצה בכיתה</h4><div class="stage demo"><span class="sl">הדגמה על המסך</span><span class="sx">בונים יחד את עמודה C, ומשם אתם ממשיכים לבד — כי כל השאר זו אותה נוסחה עם שינוי אחד.</span></div><div class="stage do"><span class="sl">עכשיו אתם</span><span class="sx">שש עמודות ושבע שורות מדדים.</span></div><div class="stage talk"><span class="sl">עצירה לדיון</span><span class="sx">הסתכלו על ארבעת הסעיפים שחורגים. שלושה מהם הופיעו במודול א׳ כמוקדי סיכון בשומה. מקרה?</span></div></div>
+
+  <div class="block"><h4>הנתונים שאיתם עובדים</h4><div class="tablewrap"><table class="dt"><thead><tr><th>תאריך</th><th>חודש</th><th>מחלקה</th><th>קבוצה</th><th>סעיף</th><th>סכום</th></tr></thead><tbody><tr><td>23/01/2026</td><td>1</td><td>מכירות ישירות</td><td>הכנסות</td><td>הכנסות ממכירות</td><td>506,397</td></tr><tr><td>24/01/2026</td><td>1</td><td>ערוץ מפיצים</td><td>הכנסות</td><td>הכנסות ממכירות</td><td>257,099</td></tr><tr><td>11/01/2026</td><td>1</td><td>שירות ותמיכה</td><td>הכנסות</td><td>הכנסות ממכירות</td><td>137,672</td></tr><tr><td>07/01/2026</td><td>1</td><td>מכירות ישירות</td><td>הכנסות</td><td>הכנסות משירות</td><td>4,448</td></tr><tr><td>10/01/2026</td><td>1</td><td>ערוץ מפיצים</td><td>הכנסות</td><td>הכנסות משירות</td><td>3,880</td></tr><tr><td>06/01/2026</td><td>1</td><td>שירות ותמיכה</td><td>הכנסות</td><td>הכנסות משירות</td><td>78,709</td></tr></tbody></table></div><div class="tnote">טבלת הביצוע בפועל. שימו לב שהיא ״שטוחה״: כל שורה היא תנועה אחת עם כל התכונות שלה. זה המבנה היחיד שמאפשר לסכם לפי כל חתך שתרצו. טבלה שבנויה כמטריצה של חודשים על פני עמודות היא מלכודת.</div></div>
+
+  <div class="block">
+    <h4>שלב אחר שלב</h4>
+    <ol class="steps"><li class="has-h"><div class="st-h"><span class="st-n">1</span>הגדירו את חלון הבקרה למעלה</div><div class="st-b">תא B3 הוא מחלקה (רשימה נפתחת), B4 ו-B5 הם חודש התחלה וחודש סיום. השאירו כרגע ״הכל״, מ-1 עד 6.</div></li><li class="has-h"><div class="st-h"><span class="st-n">2</span>עמודה C — משכו את התקציב לתקופה</div><div class="fcard"><div class="fmeta"><span class="cellref">C8</span><span class="fwhat">תקציב לתקופה ולמחלקה הנבחרת</span><button class="cp" data-f="=SUMIFS(תקציב[תקציב],תקציב[סעיף],$A8,תקציב[חודש_מספר],&quot;&gt;=&quot;&amp;$B$4,תקציב[חודש_מספר],&quot;&lt;=&quot;&amp;$B$5,תקציב[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3))">העתקה</button></div><code dir="ltr">=SUMIFS(תקציב[תקציב],תקציב[סעיף],$A8,תקציב[חודש_מספר],&quot;&gt;=&quot;&amp;$B$4,תקציב[חודש_מספר],&quot;&lt;=&quot;&amp;$B$5,תקציב[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3))</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">SUMIFS(תקציב[תקציב],</code></td><td class="pd">מה לסכם: עמודת התקציב.</td></tr><tr><td class="pc"><code dir="ltr">תקציב[סעיף],$A8</code></td><td class="pd">תנאי ראשון: שם הסעיף שווה למה שכתוב בעמודה A באותה שורה.</td></tr><tr><td class="pc"><code dir="ltr">תקציב[חודש_מספר],&quot;&gt;=&quot;&amp;$B$4</code></td><td class="pd">תנאי שני: מספר החודש גדול או שווה לחודש ההתחלה שבחרתם. הסימן & מדביק את סימן ההשוואה למספר, כי SUMIFS רוצה לקבל אותם כטקסט אחד.</td></tr><tr><td class="pc"><code dir="ltr">תקציב[חודש_מספר],&quot;&lt;=&quot;&amp;$B$5</code></td><td class="pd">תנאי שלישי: וקטן או שווה לחודש הסיום.</td></tr><tr><td class="pc"><code dir="ltr">תקציב[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3)</code></td><td class="pd">תנאי רביעי: אם בחרתם ״הכל״ שולחים כוכבית, שהיא תו כללי שמתאים לכל טקסט. אחרת שולחים את שם המחלקה. טריק קטן שחוסך בניית שתי נוסחאות.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">3</span>עמודה D — משכו את הביצוע בפועל</div><div class="st-b">אותה נוסחה בדיוק, רק מטבלה אחרת. זה הרעיון: מבנה זהה לשתי הטבלאות מאפשר להשוות אותן בלי מאמץ.</div><div class="fcard"><div class="fmeta"><span class="cellref">D8</span><span class="fwhat">ביצוע בפועל לאותה תקופה ומחלקה</span><button class="cp" data-f="=SUMIFS(הנהח[סכום],הנהח[סעיף],$A8,הנהח[חודש],&quot;&gt;=&quot;&amp;$B$4,הנהח[חודש],&quot;&lt;=&quot;&amp;$B$5,הנהח[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3))">העתקה</button></div><code dir="ltr">=SUMIFS(הנהח[סכום],הנהח[סעיף],$A8,הנהח[חודש],&quot;&gt;=&quot;&amp;$B$4,הנהח[חודש],&quot;&lt;=&quot;&amp;$B$5,הנהח[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3))</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">אותו מבנה בדיוק</code></td><td class="pd">שימו לב שזו אותה נוסחה, רק מטבלה אחרת. זה לא במקרה: כששתי הטבלאות בנויות באותו מבנה, ההשוואה ביניהן היא העתק-הדבק.</td></tr><tr><td class="pc"><code dir="ltr">הנהח[סכום]</code></td><td class="pd">מה לסכם: עמודת הסכום מטבלת הביצוע בפועל.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">4</span>עמודות E ו-F — הסטייה בשקלים ובאחוזים</div><div class="fcard"><div class="fmeta"><span class="cellref">E8</span><span class="fwhat">סטייה בשקלים</span><button class="cp" data-f="=D8-C8">העתקה</button></div><code dir="ltr">=D8-C8</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>פשוט: ביצוע פחות תקציב. חיובי אומר שהוצאנו או הכנסנו יותר מהתכנון.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">F8</span><span class="fwhat">סטייה באחוזים, מוגן מחלוקה באפס</span><button class="cp" data-f="=IFERROR(E8/C8,0)">העתקה</button></div><code dir="ltr">=IFERROR(E8/C8,0)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותה סטייה, מחולקת בתקציב, כדי לקבל אחוז. ה-IFERROR מטפל במקרה שהתקציב אפס.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IFERROR</code><span>אם יש שגיאה</span></div><div class="fn-d">מריצה נוסחה, ואם היא נכשלת מחזירה מה שתגידו לה במקום להציג שגיאה. שימושי כשחלוקה באפס או ערך חסר הם מצב לגיטימי ולא באג.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">5</span>עמודה G — התראה חכמה</div><div class="st-b">הנוסחה מבדילה בין הכנסות להוצאות: בהוצאה, חריגה מעל התקציב היא רעה. בהכנסה, מתחת לתקציב היא הרעה. התראה שלא מבדילה ביניהן מייצרת רעש ומאבדת אמון.</div><div class="fcard"><div class="fmeta"><span class="cellref">G8</span><span class="fwhat">התראה: חריגה מהותית מעל 10% לכל כיוון</span><button class="cp" data-f="=IF(ABS(F8)&gt;10%,IF(B8=&quot;הכנסות&quot;,IF(F8&lt;0,&quot;פספוס הכנסה&quot;,&quot;מעל היעד&quot;),IF(F8&gt;0,&quot;חריגה&quot;,&quot;חיסכון&quot;)),&quot;&quot;)">העתקה</button></div><code dir="ltr">=IF(ABS(F8)&gt;10%,IF(B8=&quot;הכנסות&quot;,IF(F8&lt;0,&quot;פספוס הכנסה&quot;,&quot;מעל היעד&quot;),IF(F8&gt;0,&quot;חריגה&quot;,&quot;חיסכון&quot;)),&quot;&quot;)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">ABS(F8)&gt;10%</code></td><td class="pd">קודם שואלים: האם גודל הסטייה, בלי קשר לכיוון, עולה על 10%. אם לא — מחזירים ריק, כי אין מה להתריע.</td></tr><tr><td class="pc"><code dir="ltr">IF(B8=&quot;הכנסות&quot;, ... )</code></td><td class="pd">ואם כן, שואלים איזה סוג סעיף זה. זה קריטי: בהוצאה, חריגה מעל התקציב היא הבעיה. בהכנסה, דווקא מתחת לתקציב היא הבעיה.</td></tr><tr><td class="pc"><code dir="ltr">IF(F8&lt;0,&quot;פספוס הכנסה&quot;,&quot;מעל היעד&quot;)</code></td><td class="pd">בהכנסות: סטייה שלילית היא פספוס, חיובית היא הצלחה.</td></tr><tr><td class="pc"><code dir="ltr">IF(F8&gt;0,&quot;חריגה&quot;,&quot;חיסכון&quot;)</code></td><td class="pd">בהוצאות: הפוך.</td></tr><tr><td class="pc"><code dir="ltr">למה זה חשוב</code></td><td class="pd">התראה שלא מבחינה בין השניים צובעת באדום גם חודש מצוין. אחרי שבועיים אף אחד לא מסתכל על הצבעים.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div><div class="fn"><div class="fn-h"><code>ABS</code><span>ערך מוחלט</span></div><div class="fn-d">מורידה את הסימן. מינוס 12 הופך ל-12. שימושי כשרוצים לבדוק ״גודל הסטייה״ בלי אכפת לנו לאיזה כיוון.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">6</span>עמודה H — משקל הסעיף מהמחזור</div><div class="st-b">חריגה של 40% בסעיף ששוקל 0.3% מהמחזור לא מעניינת אף אחד. העמודה הזאת היא מסנן החשיבות.</div><div class="fcard"><div class="fmeta"><span class="cellref">H8</span><span class="fwhat">משקל הסעיף מתוך המחזור בפועל</span><button class="cp" data-f="=IFERROR(D8/SUMIFS(הנהח[סכום],הנהח[קבוצה],&quot;הכנסות&quot;,הנהח[חודש],&quot;&gt;=&quot;&amp;$B$4,הנהח[חודש],&quot;&lt;=&quot;&amp;$B$5,הנהח[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3)),0)">העתקה</button></div><code dir="ltr">=IFERROR(D8/SUMIFS(הנהח[סכום],הנהח[קבוצה],&quot;הכנסות&quot;,הנהח[חודש],&quot;&gt;=&quot;&amp;$B$4,הנהח[חודש],&quot;&lt;=&quot;&amp;$B$5,הנהח[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3)),0)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">D8 חלקי סך ההכנסות בתקופה</code></td><td class="pd">מחשבים כמה אחוזים מהמחזור נבלעים בסעיף הזה.</td></tr><tr><td class="pc"><code dir="ltr">למה צריך את זה</code></td><td class="pd">חריגה של 40% בסעיף ששוקל שלושה עשיריות האחוז מהמחזור אינה מעניינת. העמודה הזאת היא מסנן החשיבות, והיא מה שמונע מהדוח להטביע את המנהל ברעש.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IFERROR</code><span>אם יש שגיאה</span></div><div class="fn-d">מריצה נוסחה, ואם היא נכשלת מחזירה מה שתגידו לה במקום להציג שגיאה. שימושי כשחלוקה באפס או ערך חסר הם מצב לגיטימי ולא באג.</div></div><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">7</span>מדדי המפתח בתחתית</div><div class="st-b">מלאו את שבע השורות לפי הסדר. הן בונות זו על זו.</div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B24</span><span class="fwhat">מחזור בפועל</span><button class="cp" data-f="=SUMIFS(הנהח[סכום],הנהח[קבוצה],&quot;הכנסות&quot;,הנהח[חודש],&quot;&gt;=&quot;&amp;$B$4,הנהח[חודש],&quot;&lt;=&quot;&amp;$B$5,הנהח[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3))">העתקה</button></div><code dir="ltr">=SUMIFS(הנהח[סכום],הנהח[קבוצה],&quot;הכנסות&quot;,הנהח[חודש],&quot;&gt;=&quot;&amp;$B$4,הנהח[חודש],&quot;&lt;=&quot;&amp;$B$5,הנהח[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3))</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותה SUMIFS מהעמודות למעלה, רק שהתנאי הוא על הקבוצה ולא על הסעיף: תסכם לי את כל מה שמסווג כהכנסות, בתקופה ובמחלקה שנבחרו.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B25</span><span class="fwhat">עלות המכר בפועל</span><button class="cp" data-f="=SUMIFS(הנהח[סכום],הנהח[קבוצה],&quot;עלות המכר&quot;,הנהח[חודש],&quot;&gt;=&quot;&amp;$B$4,הנהח[חודש],&quot;&lt;=&quot;&amp;$B$5,הנהח[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3))">העתקה</button></div><code dir="ltr">=SUMIFS(הנהח[סכום],הנהח[קבוצה],&quot;עלות המכר&quot;,הנהח[חודש],&quot;&gt;=&quot;&amp;$B$4,הנהח[חודש],&quot;&lt;=&quot;&amp;$B$5,הנהח[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3))</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותה נוסחה עם קבוצה ״עלות המכר״.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B26</span><span class="fwhat">רווח גולמי</span><button class="cp" data-f="=B24-B25">העתקה</button></div><code dir="ltr">=B24-B25</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>מחזור פחות עלות המכר. זה הרווח הגולמי — מה שנשאר מהמכירה לפני שנגענו בהוצאות התפעול.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B27</span><span class="fwhat">שיעור רווח גולמי</span><button class="cp" data-f="=IFERROR(B26/B24,0)">העתקה</button></div><code dir="ltr">=IFERROR(B26/B24,0)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>הרווח הגולמי כאחוז מהמחזור. זה המדד, לא הרווח עצמו: 3 מיליון רווח גולמי יכולים להיות מצוינים או גרועים, תלוי מאיזה מחזור.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IFERROR</code><span>אם יש שגיאה</span></div><div class="fn-d">מריצה נוסחה, ואם היא נכשלת מחזירה מה שתגידו לה במקום להציג שגיאה. שימושי כשחלוקה באפס או ערך חסר הם מצב לגיטימי ולא באג.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B28</span><span class="fwhat">שיעור רווח גולמי בתקציב</span><button class="cp" data-f="=IFERROR((SUMIFS(תקציב[תקציב],תקציב[קבוצה],&quot;הכנסות&quot;,תקציב[חודש_מספר],&quot;&gt;=&quot;&amp;$B$4,תקציב[חודש_מספר],&quot;&lt;=&quot;&amp;$B$5)-SUMIFS(תקציב[תקציב],תקציב[קבוצה],&quot;עלות המכר&quot;,תקציב[חודש_מספר],&quot;&gt;=&quot;&amp;$B$4,תקציב[חודש_מספר],&quot;&lt;=&quot;&amp;$B$5))/SUMIFS(תקציב[תקציב],תקציב[קבוצה],&quot;הכנסות&quot;,תקציב[חודש_מספר],&quot;&gt;=&quot;&amp;$B$4,תקציב[חודש_מספר],&quot;&lt;=&quot;&amp;$B$5),0)">העתקה</button></div><code dir="ltr">=IFERROR((SUMIFS(תקציב[תקציב],תקציב[קבוצה],&quot;הכנסות&quot;,תקציב[חודש_מספר],&quot;&gt;=&quot;&amp;$B$4,תקציב[חודש_מספר],&quot;&lt;=&quot;&amp;$B$5)-SUMIFS(תקציב[תקציב],תקציב[קבוצה],&quot;עלות המכר&quot;,תקציב[חודש_מספר],&quot;&gt;=&quot;&amp;$B$4,תקציב[חודש_מספר],&quot;&lt;=&quot;&amp;$B$5))/SUMIFS(תקציב[תקציב],תקציב[קבוצה],&quot;הכנסות&quot;,תקציב[חודש_מספר],&quot;&gt;=&quot;&amp;$B$4,תקציב[חודש_מספר],&quot;&lt;=&quot;&amp;$B$5),0)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותו חישוב בדיוק, אבל על מספרי התקציב במקום על הביצוע. זה מה שנשווה מולו.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IFERROR</code><span>אם יש שגיאה</span></div><div class="fn-d">מריצה נוסחה, ואם היא נכשלת מחזירה מה שתגידו לה במקום להציג שגיאה. שימושי כשחלוקה באפס או ערך חסר הם מצב לגיטימי ולא באג.</div></div><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B29</span><span class="fwhat">פער שיעור הרווח הגולמי (נקודות אחוז)</span><button class="cp" data-f="=B27-B28">העתקה</button></div><code dir="ltr">=B27-B28</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>ההפרש בין שני האחוזים. שימו לב שהיחידה כאן היא נקודות אחוז ולא אחוזים — ירידה מ-38% ל-36% היא שתי נקודות אחוז, לא שני אחוזים. זו הבחנה שחשוב לשמור עליה מול לקוח.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B30</span><span class="fwhat">רווח תפעולי בפועל</span><button class="cp" data-f="=B26-SUMIFS(הנהח[סכום],הנהח[קבוצה],&quot;הוצאות תפעול&quot;,הנהח[חודש],&quot;&gt;=&quot;&amp;$B$4,הנהח[חודש],&quot;&lt;=&quot;&amp;$B$5,הנהח[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3))">העתקה</button></div><code dir="ltr">=B26-SUMIFS(הנהח[סכום],הנהח[קבוצה],&quot;הוצאות תפעול&quot;,הנהח[חודש],&quot;&gt;=&quot;&amp;$B$4,הנהח[חודש],&quot;&lt;=&quot;&amp;$B$5,הנהח[מחלקה],IF($B$3=&quot;הכל&quot;,&quot;*&quot;,$B$3))</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>רווח גולמי פחות כל הוצאות התפעול בתקופה ובמחלקה שנבחרו. השורה התחתונה של הלוח.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">8</span>עיצוב מותנה — שיהיה אפשר לראות בלי לקרוא</div><div class="st-b">העיצוב המותנה כבר מוגדר בעמודה F: אדום מעל 10% חריגה, ירוק מתחת למינוס 10%. כדי לראות איך זה נבנה, סמנו את העמודה ולכו ל: <b>בית ← עיצוב מותנה ← ניהול כללים</b>. במק זה נמצא באותו מקום בדיוק.</div></li></ol>
+  </div>
+
+  <div class="note info"><div class="nt">מה עושה ה-IF בתוך התנאי של המחלקה</div><div class="nb">הביטוי <code>IF($B$3="הכל","*",$B$3)</code> אומר: אם המשתמש בחר ״הכל״, שים כתנאי כוכבית — שהיא תו כללי שמתאים לכל טקסט. אחרת שים את שם המחלקה שנבחר. זה טריק קטן שחוסך בניית שתי נוסחאות נפרדות.</div></div><div class="note mac"><div class="nt">תאימות מק ופיסי</div><div class="nb">כל הנוסחאות במעבדה הזאת — SUMIFS, IF, IFERROR, ABS — קיימות באקסל מאז 2007 ומתנהגות זהה במק ובווינדוס. גם העיצוב המותנה והרשימה הנפתחת זהים. אין כאן שום דבר שדורש בדיקת גרסה.</div></div>
+
+  <div class="block practice">
+    <h4>הקשר לפרקטיקה — מה עושים עם זה במשרד</h4>
+    <p>שורת <b>שיעור הרווח הגולמי</b> בתחתית הלוח היא לא עוד מדד. זה המדד שפקיד השומה בודק ראשון. סטייה של יותר מנקודת אחוז אחת מהשנה הקודמת או מהמקובל בענף היא הטריגר הנפוץ ביותר לשומה לפי מיטב השפיטה לפי סעיף 145. עדיף בהרבה שתגלו את הסטייה ברבעון, תבינו את מקורה, ותכינו הסבר מגובה — מאשר שתפגשו אותה לראשונה בדיון.</p>
+    <p>שימו לב לתוצאה בתרגיל: ארבעה סעיפים חורגים מעל 10% — רכב, פרסום, כיבודים וייעוץ מקצועי. שלושה מהם הם בדיוק סעיפי ההוצאה שמודול א׳ הגדיר כמוקדי סיכון בהתאמה למס (רכב לפי כלל 45%, כיבודים 80%, אירוח). חריגה תקציבית בסעיפים האלה היא גם בעיה ניהולית וגם חשיפה בשומה.</p>
+  </div>
+
+  <div class="block more">
+    <h4>איפה עוד משתמשים בזה</h4>
+    <ul><li>החלפת ״מחלקה״ ב״פרויקט״ נותנת דוח רווחיות לפי פרויקט.</li>
+    <li>החלפה ב״לקוח״ נותנת דוח רווחיות לפי לקוח, שהוא הדוח שרוב בעלי העסקים מעולם לא ראו.</li>
+    <li>מעקב אחר עמידה בתנאי קובננט בנקאי, שנבדק לפי יחסים שמחושבים בדיוק כך.</li>
+    <li>בקרת סניפים ברשת.</li></ul>
+  </div>
+
+  
+
+  <div class="selfcheck"><h4>בדיקה עצמית — סמנו כשהתוצאה אצלכם תואמת</h4><ul><li><label><input type="checkbox" data-lab="lab2"> הלוח מציג ארבעה סעיפים עם התראת ״חריגה״</label></li><li><label><input type="checkbox" data-lab="lab2"> שיעור הרווח הגולמי בפועל נמוך מזה שבתקציב</label></li><li><label><input type="checkbox" data-lab="lab2"> שינוי B5 מ-6 ל-12 משנה את כל המספרים בלוח</label></li><li><label><input type="checkbox" data-lab="lab2"> בחירת ״ערוץ מפיצים״ ב-B3 מסננת את הלוח כולו</label></li></ul></div>
+</section>
+<section class="lab" id="lab3">
+  <div class="lab-head">
+    <div class="lab-badge">מעבדה 3</div>
+    <div class="lab-titles">
+      <h2>פירוק הסטייה: מחיר, כמות ותמהיל</h2>
+      <p class="lede">״ההכנסות מתחת לתקציב״ היא לא תשובה. התשובה היא כמה מזה מחיר, כמה כמות, וכמה תמהיל.</p>
+    </div>
+    <div class="lab-meta"><span class="chip time">18 דקות</span><span class="chip sheet">גיליון 11_פער_מחיר_כמות</span></div>
+  </div>
+
+  <div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>פירוק סטיות</b> <span class=en>Variance decomposition</span></div><div class="term-b">לקחת פער אחד גדול ולשאול ממה בדיוק הוא מורכב. אותה ירידה של 200 אלף ש״ח בהכנסות יכולה לנבוע מכך שהורדנו מחירים, מכך שמכרנו פחות יחידות, או מכך שמכרנו את המוצרים הזולים במקום היקרים. שלוש סיבות שונות לגמרי, שדורשות שלוש פעולות ניהוליות שונות לגמרי.</div></div>
+
+  <div class="block logic">
+    <h4>הלוגיקה העסקית — מה אנחנו בעצם עושים ולמה</h4>
+    <p>נניח שההכנסות נמוכות ב-200 אלף ש״ח מהתקציב. זה יכול לנבוע משלוש סיבות שונות לגמרי, שכל אחת מהן דורשת פעולה ניהולית אחרת:</p>
+    <ul><li><b>פער מחיר.</b> מכרנו את אותה כמות, אבל בזול יותר. הסיבה היא כמעט תמיד הנחות. הפעולה: מדיניות הנחות.</li>
+    <li><b>פער כמות.</b> מכרנו פחות יחידות. הפעולה: שיווק, אנשי מכירות, ביקוש.</li>
+    <li><b>פער תמהיל.</b> מכרנו בדיוק את הכמות שתכננו, אבל מהמוצרים הלא נכונים — יותר מהזול, פחות מהיקר. הפעולה: הכוונת מכירות למוצרים הרווחיים.</li></ul>
+    <p>שלושת הפערים ביחד מסתכמים תמיד לסטייה הכוללת. זו בדיקת האמת של החישוב.</p>
+  </div>
+
+  <div class="block"><h4>איך המעבדה הזאת רצה בכיתה</h4><div class="stage demo"><span class="sl">הדגמה על המסך</span><span class="sx">מתחילים משאלה ולא מנוסחה: ההכנסות מתחת לתקציב — מה אתם אומרים ללקוח?</span></div><div class="stage do"><span class="sl">עכשיו אתם</span><span class="sx">שש עמודות, ארבע שורות. המעבדה הקצרה ביותר והתובנה החדה ביותר.</span></div><div class="stage talk"><span class="sl">עצירה לדיון</span><span class="sx">מכרנו 1,725 יחידות יותר מהתכנון והרווחנו פחות. איך מסבירים את זה בשתי דקות?</span></div></div>
+
+  <div class="block"><h4>הנתונים שאיתם עובדים</h4><div class="tablewrap"><table class="dt"><thead><tr><th>קבוצת מוצר</th><th>כמות תקציב</th><th>מחיר תקציב</th><th>כמות בפועל</th><th>מחיר בפועל</th></tr></thead><tbody><tr><td>מדפסות</td><td>1,180</td><td>3,250</td><td>1,042</td><td>3,095</td></tr><tr><td>מסכים</td><td>2,640</td><td>1,480</td><td>2,905</td><td>1,425</td></tr><tr><td>אביזרים</td><td>9,800</td><td>168</td><td>11,450</td><td>159</td></tr><tr><td>שירות ואחריות</td><td>640</td><td>1,800</td><td>588</td><td>1,955</td></tr></tbody></table></div><div class="tnote">הנתונים הגולמיים: כמות ומחיר, בתקציב ובפועל, לארבע קבוצות מוצר.</div></div>
+
+  <div class="block">
+    <h4>שלב אחר שלב</h4>
+    <ol class="steps"><li class="has-h"><div class="st-h"><span class="st-n">1</span>חשבו את ההכנסה המתוכננת ואת ההכנסה בפועל</div><div class="fcard"><div class="fmeta"><span class="cellref">D8</span><span class="fwhat">הכנסה מתוכננת</span><button class="cp" data-f="=B8*C8">העתקה</button></div><code dir="ltr">=B8*C8</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>כמות כפול מחיר. זו ההכנסה שתוכננה.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">G8</span><span class="fwhat">הכנסה בפועל</span><button class="cp" data-f="=E8*F8">העתקה</button></div><code dir="ltr">=E8*F8</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותו דבר עם המספרים בפועל.</p></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">2</span>סכמו את שורת הסה"כ</div><div class="st-b">חשוב לעשות את זה <b>לפני</b> חישוב פער התמהיל, כי הוא מסתמך על הכמות הכוללת.</div><div class="fcard"><div class="fmeta"><span class="cellref">B12</span><span class="fwhat">סכום עמודה</span><button class="cp" data-f="=SUM(B8:B11)">העתקה</button></div><code dir="ltr">=SUM(B8:B11)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>סכום הכמויות המתוכננות על פני כל קבוצות המוצר. הנוסחאות של פער הכמות ופער התמהיל מסתמכות עליו, ולכן הוא חייב להיות מחושב לפניהן.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUM</code><span>סכום</span></div><div class="fn-d">מחברת מספרים. זהו.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">E12</span><span class="fwhat">סכום עמודה</span><button class="cp" data-f="=SUM(E8:E11)">העתקה</button></div><code dir="ltr">=SUM(E8:E11)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותו דבר לכמויות בפועל.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUM</code><span>סכום</span></div><div class="fn-d">מחברת מספרים. זהו.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">3</span>עמודה H — הסטייה הכוללת</div><div class="fcard"><div class="fmeta"><span class="cellref">H8</span><span class="fwhat">סטייה כוללת</span><button class="cp" data-f="=G8-D8">העתקה</button></div><code dir="ltr">=G8-D8</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>ההפרש בין השניים. זה מה שנפרק עכשיו לשלושה גורמים.</p></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">4</span>עמודה I — פער המחיר</div><div class="st-b">כמה הרווחנו או הפסדנו רק מזה שהמחיר השתנה, על הכמות שבאמת מכרנו.</div><div class="fcard"><div class="fmeta"><span class="cellref">I8</span><span class="fwhat">פער מחיר = שינוי המחיר כפול הכמות בפועל</span><button class="cp" data-f="=(F8-C8)*E8">העתקה</button></div><code dir="ltr">=(F8-C8)*E8</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">(F8-C8)</code></td><td class="pd">כמה השתנה המחיר: מחיר בפועל פחות מחיר מתוכנן.</td></tr><tr><td class="pc"><code dir="ltr">* E8</code></td><td class="pd">כפול הכמות שבאמת מכרנו. למה בפועל ולא בתקציב? כי ההשפעה של שינוי מחיר מתממשת על כל יחידה שבאמת יצאה מהמחסן.</td></tr></tbody></table></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">5</span>עמודה J — פער הכמות הטהור</div><div class="st-b">כמה יחידות נוספות מכרנו סך הכול, מוערך לפי התמהיל והמחירים <b>שתוכננו</b>. כלומר: מה היה קורה אם היינו מוכרים יותר, אבל בדיוק באותו הרכב מוצרים.</div><div class="fcard"><div class="fmeta"><span class="cellref">J8</span><span class="fwhat">פער כמות טהור = גידול בכמות הכוללת, בתמהיל התקציבי המקורי</span><button class="cp" data-f="=($E$12-$B$12)*(B8/$B$12)*C8">העתקה</button></div><code dir="ltr">=($E$12-$B$12)*(B8/$B$12)*C8</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">($E$12-$B$12)</code></td><td class="pd">כמה יחידות סך הכול מכרנו יותר או פחות מהתכנון — על פני כל המוצרים יחד.</td></tr><tr><td class="pc"><code dir="ltr">(B8/$B$12)</code></td><td class="pd">איזה נתח מהכמות המתוכננת היה שייך למוצר הזה. זהו התמהיל שתכננו.</td></tr><tr><td class="pc"><code dir="ltr">* C8</code></td><td class="pd">כפול המחיר המתוכנן של המוצר.</td></tr><tr><td class="pc"><code dir="ltr">מה זה אומר</code></td><td class="pd">זו התשובה לשאלה: מה היה קורה אם היינו מוכרים יותר יחידות, אבל בדיוק באותו הרכב מוצרים ובאותם מחירים שתכננו.</td></tr></tbody></table></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">6</span>עמודה K — פער התמהיל</div><div class="st-b">כמה מהיחידות האלה היו מוצר אחר מזה שתוכנן. זה מה שנשאר אחרי שהסברנו מחיר וכמות.</div><div class="fcard"><div class="fmeta"><span class="cellref">K8</span><span class="fwhat">פער תמהיל = מכרנו יותר מהמוצר הזה על חשבון אחר, במחירי תקציב</span><button class="cp" data-f="=(E8-$E$12*(B8/$B$12))*C8">העתקה</button></div><code dir="ltr">=(E8-$E$12*(B8/$B$12))*C8</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">$E$12*(B8/$B$12)</code></td><td class="pd">כמה יחידות מהמוצר הזה היינו אמורים למכור, אילו הכמות הכוללת שנמכרה בפועל הייתה מתחלקת לפי התמהיל המתוכנן.</td></tr><tr><td class="pc"><code dir="ltr">(E8 - ... )</code></td><td class="pd">ההפרש בין מה שבאמת מכרנו מהמוצר הזה לבין המספר ההוא. הפרש חיובי אומר: המוצר הזה תפס נתח גדול מהמתוכנן.</td></tr><tr><td class="pc"><code dir="ltr">* C8</code></td><td class="pd">מתרגמים את ההפרש בכמויות לשקלים, לפי המחיר המתוכנן.</td></tr><tr><td class="pc"><code dir="ltr">בדיקת האמת</code></td><td class="pd">פער מחיר ועוד פער כמות ועוד פער תמהיל חייבים להסתכם בדיוק לסטייה הכוללת. אם לא — יש טעות באחד השלושה.</td></tr></tbody></table></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">7</span>סכמו את שאר שורת הסה"כ ובדקו את זהות הבקרה</div><div class="st-b">בשורת הסה"כ צריך להתקיים: פער מחיר ועוד פער כמות ועוד פער תמהיל שווה בדיוק לסטייה הכוללת. אם לא — יש טעות.</div></li></ol>
+  </div>
+
+  <div class="note warn"><div class="nt">האזהרה המקצועית — סכימת כמויות בין מוצרים שונים</div><div class="nb">החישוב מסכם יחידות של מדפסות יחד עם יחידות של אביזרים, למרות שהמחיר שלהן שונה פי עשרים. זה בדיוק מה שגורם לפער התמהיל לצאת גדול, וזו התובנה ולא תקלה. אבל כשתעשו את זה ללקוח אמיתי, ודאו שהוא מבין שהמספרים האלה הם <b>הסבר</b> ולא <b>מדידה</b>. אם קבוצות המוצר שונות מדי, עדיף לבצע את הפירוק בתוך כל קבוצה בנפרד.</div></div><div class="note mac"><div class="nt">תאימות מק ופיסי</div><div class="nb">המעבדה כולה בנויה מחיבור, חיסור, כפל וחילוק. אין כאן אף פונקציה. אין שום פער בין הפלטפורמות.</div></div>
+
+  <div class="block practice">
+    <h4>הקשר לפרקטיקה — מה עושים עם זה במשרד</h4>
+    <p>התוצאה בתרגיל היא סיפור אמיתי שקורה בעשרות SME: <b>מכרנו 1,725 יחידות יותר מהתקציב, והרווחנו פחות</b>. פער הכמות חיובי ומשמעותי, אבל פער התמהיל שלילי בסדר גודל דומה — כי כל הגידול הגיע מאביזרים במחיר 159 ש״ח, על חשבון מדפסות במחיר 3,095 ש״ח. ובנוסף נתנו הנחות, ולכן גם פער המחיר שלילי.</p>
+    <p>זה בדיוק המשפט שצריך להגיד ללקוח: ״המכירות שלך גדלו והרווח שלך ירד, וזו לא סתירה״. בלי הפירוק הזה, השיחה מסתיימת ב״כנראה שהשוק קשה״.</p>
+    <p>הקשר לשומה: ירידה בשיעור הרווח הגולמי היא הדגל האדום ממודול א׳. הפירוק כאן הוא ההסבר המגובה שתביאו לדיון — ״שיעור הרווח ירד כי התמהיל השתנה לטובת מוצרים בעלי מרווח נמוך, וכאן הנתונים״.</p>
+  </div>
+
+  <div class="block more">
+    <h4>איפה עוד משתמשים בזה</h4>
+    <ul><li>אותו פירוק על <b>עלויות</b>: תעריף לשעה מול מספר שעות בפרויקט.</li>
+    <li>על <b>שכר</b>: עלות ממוצעת לעובד מול מספר עובדים.</li>
+    <li>על <b>רכש</b>: מחיר ליחידה מול כמות שנרכשה, כולל השפעת שער חליפין ליבואן.</li></ul>
+  </div>
+
+  
+
+  <div class="selfcheck"><h4>בדיקה עצמית — סמנו כשהתוצאה אצלכם תואמת</h4><ul><li><label><input type="checkbox" data-lab="lab3"> הסטייה הכוללת בשורת הסה"כ היא כמינוס 206 אלף ש"ח</label></li><li><label><input type="checkbox" data-lab="lab3"> פער המחיר שלילי בכל ארבע הקבוצות חוץ מ״שירות ואחריות״</label></li><li><label><input type="checkbox" data-lab="lab3"> פער הכמות חיובי גדול, ופער התמהיל שלילי גדול</label></li><li><label><input type="checkbox" data-lab="lab3"> I + J + K שווה בדיוק ל-H בשורת הסה"כ</label></li></ul></div>
+</section>
+<section class="lab" id="lab4">
+  <div class="lab-head">
+    <div class="lab-badge">מעבדה 4</div>
+    <div class="lab-titles">
+      <h2>הון חוזר ומחזור המזומן</h2>
+      <p class="lede">שלושה מספרים שמסבירים למה חברה רווחית יכולה להיות בלי מזומן.</p>
+    </div>
+    <div class="lab-meta"><span class="chip time">22 דקות</span><span class="chip sheet">גיליון 20_הון_חוזר</span></div>
+  </div>
+
+  <div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>DSO</b> <span class=en>Days Sales Outstanding · ימי גבייה</span></div><div class="term-b">כמה ימים בממוצע עוברים מהרגע שהוצאנו חשבונית ועד שהכסף באמת נכנס לבנק. אם ה-DSO הוא 70, פירוש הדבר שכסף שהרווחתם היום יגיע אליכם רק בעוד יותר מחודשיים.</div></div><div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>DPO</b> <span class=en>Days Payable Outstanding · ימי אשראי ספקים</span></div><div class="term-b">אותו רעיון מהצד השני: כמה ימים לוקח <b>לנו</b> לשלם לספקים שלנו. שימו לב שכאן מספר גבוה הוא דווקא לטובתנו — הכסף נשאר אצלנו יותר זמן.</div></div><div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>DIO</b> <span class=en>Days Inventory Outstanding · ימי מלאי</span></div><div class="term-b">כמה ימים בממוצע סחורה יושבת אצלנו במחסן, מהרגע שקנינו אותה ועד שמכרנו אותה. כל יום כזה הוא כסף ששילמנו עליו ועדיין לא קיבלנו בחזרה.</div></div><div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>CCC</b> <span class=en>Cash Conversion Cycle · מחזור המזומן</span></div><div class="term-b">המספר שמאחד את שלושת הקודמים, והוא פשוט חיבור וחיסור: <b>DSO ועוד DIO פחות DPO</b>. במילים פשוטות — כמה ימים הכסף שלכם נמצא אצל מישהו אחר. אצל הלקוחות שעדיין לא שילמו, ובמחסן כסחורה שעדיין לא נמכרה, פחות מה שאתם עדיין חייבים לספקים. אם ה-CCC הוא 78, המשמעות היא שאתם מממנים את העסק שלכם במשך שני חודשים וחצי מהכיס או מהבנק. וזה נכון גם אם אתם רווחיים לגמרי.</div></div>
+
+  <div class="block logic">
+    <h4>הלוגיקה העסקית — מה אנחנו בעצם עושים ולמה</h4>
+    <p>רווח הוא דעה. מזומן הוא עובדה. שלושה מדדים מסבירים את הפער ביניהם, וכולם נמדדים ב<b>ימים</b>:</p>
+    <ul><li><b>DSO</b> — כמה ימים לוקח לגבות מלקוח אחרי שהוצאנו לו חשבונית. מחושב: יתרת הלקוחות חלקי המחזור, כפול מספר ימי התקופה.</li>
+    <li><b>DPO</b> — כמה ימים לוקח <b>לנו</b> לשלם לספק. מחושב אותו דבר, מול עלות המכר.</li>
+    <li><b>DIO</b> — כמה ימים סחורה יושבת אצלנו במחסן לפני שנמכרה.</li></ul>
+    <p>ואז המדד המסכם: <b>מחזור המזומן</b>, באנגלית CCC, שווה DSO ועוד DIO פחות DPO. זה מספר הימים שבהם הכסף שלכם נמצא אצל מישהו אחר. אם הוא 78 ימים, המשמעות היא שאתם מממנים את הלקוחות ואת המלאי במשך שני חודשים וחצי מהכיס שלכם — או מהאשראי הבנקאי.</p>
+    <p>ומכאן הצעד שהופך את זה מדוח לכלי: <b>כמה שווה יום אחד</b>. אם המחזור היומי הממוצע הוא 37 אלף ש״ח, אז קיצור של שבעה ימי גבייה משחרר מיד רבע מיליון ש״ח מזומן. זו לא הנחת עבודה, זה חשבון.</p>
+  </div>
+
+  <div class="block"><h4>איך המעבדה הזאת רצה בכיתה</h4><div class="stage demo"><span class="sl">הדגמה על המסך</span><span class="sx">מתחילים במחשבון החי שכאן בעמוד, לפני שנוגעים באקסל בכלל.</span></div><div class="stage do"><span class="sl">עכשיו אתם</span><span class="sx">ארבע עמודות ושש שורות סיכום.</span></div><div class="stage talk"><span class="sl">עצירה לדיון</span><span class="sx">השאלה ללקוח: אם נקצר שבעה ימי גבייה, האם המזומן שישתחרר מספיק כדי לסגור את יתרת הבעלים לפני מועד החיוב?</span></div></div>
+
+  <div class="block"><h4>הנתונים שאיתם עובדים</h4><div class="tablewrap"><table class="dt"><thead><tr><th>חודש</th><th>מחזור</th><th>עלות המכר</th><th>יתרת לקוחות</th><th>יתרת ספקים</th><th>יתרת מלאי</th></tr></thead><tbody><tr><td>ינואר</td><td>995,690</td><td>609,616</td><td>2,429,363</td><td>845,343</td><td>923,902</td></tr><tr><td>פברואר</td><td>973,572</td><td>595,321</td><td>1,948,805</td><td>945,172</td><td>1,065,890</td></tr><tr><td>מרץ</td><td>1,138,834</td><td>706,543</td><td>2,875,498</td><td>920,325</td><td>1,114,719</td></tr><tr><td>אפריל</td><td>1,095,267</td><td>670,115</td><td>2,438,505</td><td>1,137,220</td><td>1,171,620</td></tr><tr><td>מאי</td><td>1,071,387</td><td>667,954</td><td>2,423,375</td><td>971,389</td><td>1,109,696</td></tr></tbody></table></div><div class="tnote">יתרות סוף חודש מול הפעילות של אותו חודש.</div></div>
+
+  <div class="block">
+    <h4>שלב אחר שלב</h4>
+    <ol class="steps"><li class="has-h"><div class="st-h"><span class="st-n">1</span>עמודה G — DSO, ימי גבייה</div><div class="fcard"><div class="fmeta"><span class="cellref">G8</span><span class="fwhat">DSO — ימי גבייה מלקוחות (יתרת לקוחות חלקי מחזור, כפול ימי החודש)</span><button class="cp" data-f="=IFERROR(D8/B8*30,0)">העתקה</button></div><code dir="ltr">=IFERROR(D8/B8*30,0)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">D8/B8</code></td><td class="pd">יתרת הלקוחות מחולקת במחזור החודש. התוצאה היא שבר: איזה חלק מחודש שלם ״תקוע״ אצל הלקוחות.</td></tr><tr><td class="pc"><code dir="ltr">*30</code></td><td class="pd">מכפילים במספר ימי החודש כדי לתרגם את השבר לימים.</td></tr><tr><td class="pc"><code dir="ltr">IFERROR( ... ,0)</code></td><td class="pd">ואם המחזור הוא אפס, במקום שגיאת חלוקה מקבלים אפס.</td></tr><tr><td class="pc"><code dir="ltr">שימו לב</code></td><td class="pd">מספר הימים בנוסחה חייב להתאים לתקופה שבמכנה. חודש — 30. שנה שלמה — 365. זו טעות שגורמת למספר לצאת שגוי פי שנים עשר.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IFERROR</code><span>אם יש שגיאה</span></div><div class="fn-d">מריצה נוסחה, ואם היא נכשלת מחזירה מה שתגידו לה במקום להציג שגיאה. שימושי כשחלוקה באפס או ערך חסר הם מצב לגיטימי ולא באג.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">2</span>עמודה H — DPO, ימי אשראי ספקים</div><div class="st-b">שימו לב שהמכנה הוא עלות המכר ולא המחזור. ספקים משלמים לנו על סחורה, לא על מכירות.</div><div class="fcard"><div class="fmeta"><span class="cellref">H8</span><span class="fwhat">DPO — ימי אשראי ספקים</span><button class="cp" data-f="=IFERROR(E8/C8*30,0)">העתקה</button></div><code dir="ltr">=IFERROR(E8/C8*30,0)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">E8/C8*30</code></td><td class="pd">אותו רעיון, רק מול עלות המכר ולא מול המחזור.</td></tr><tr><td class="pc"><code dir="ltr">למה עלות המכר</code></td><td class="pd">כי הספקים לא מוכרים לנו במחיר שאנחנו מוכרים ללקוח. החוב לספקים נוצר מהסחורה שקנינו, ולכן מודדים אותו מול מה שהסחורה עלתה לנו.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IFERROR</code><span>אם יש שגיאה</span></div><div class="fn-d">מריצה נוסחה, ואם היא נכשלת מחזירה מה שתגידו לה במקום להציג שגיאה. שימושי כשחלוקה באפס או ערך חסר הם מצב לגיטימי ולא באג.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">3</span>עמודה I — DIO, ימי מלאי</div><div class="fcard"><div class="fmeta"><span class="cellref">I8</span><span class="fwhat">DIO — ימי מלאי</span><button class="cp" data-f="=IFERROR(F8/C8*30,0)">העתקה</button></div><code dir="ltr">=IFERROR(F8/C8*30,0)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>יתרת המלאי מחולקת בעלות המכר, כפול 30. כמה ימים סחורה יושבת אצלנו לפני שנמכרה.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IFERROR</code><span>אם יש שגיאה</span></div><div class="fn-d">מריצה נוסחה, ואם היא נכשלת מחזירה מה שתגידו לה במקום להציג שגיאה. שימושי כשחלוקה באפס או ערך חסר הם מצב לגיטימי ולא באג.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">4</span>עמודה J — מחזור המזומן</div><div class="fcard"><div class="fmeta"><span class="cellref">J8</span><span class="fwhat">מחזור המזומן</span><button class="cp" data-f="=G8+I8-H8">העתקה</button></div><code dir="ltr">=G8+I8-H8</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה כלפי מטה עד סוף הטבלה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">G8+I8</code></td><td class="pd">כמה ימים הכסף שלנו תקוע: אצל הלקוחות ועוד במחסן.</td></tr><tr><td class="pc"><code dir="ltr">-H8</code></td><td class="pd">פחות כמה ימים אנחנו מחזיקים את הכסף של הספקים אצלנו. זה החלק היחיד שעובד לטובתנו.</td></tr><tr><td class="pc"><code dir="ltr">התוצאה</code></td><td class="pd">מספר הימים שבהם הכסף שלכם נמצא אצל מישהו אחר, ואתם צריכים לממן את הפער.</td></tr></tbody></table></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">5</span>בלוק הלֶבֶר בתחתית — מכאן זה הופך לכלי</div><div class="st-b">מלאו את השורות לפי הסדר. שורת ״יעד קיצור DSO״ היא הקלט שלכם — שנו אותה וראו מה קורה.</div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B23</span><span class="fwhat">ממוצע DSO שנתי (ימים)</span><button class="cp" data-f="=AVERAGE(G8:G19)">העתקה</button></div><code dir="ltr">=AVERAGE(G8:G19)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>ממוצע פשוט של DSO על פני שנים עשר החודשים. אנחנו לוקחים ממוצע ולא את החודש האחרון, כי חודש בודד יכול להיות מוטה בגלל עונתיות או בגלל לקוח גדול אחד שאיחר.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>AVERAGE</code><span>ממוצע</span></div><div class="fn-d">מחשבת ממוצע.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B24</span><span class="fwhat">ממוצע CCC שנתי (ימים)</span><button class="cp" data-f="=AVERAGE(J8:J19)">העתקה</button></div><code dir="ltr">=AVERAGE(J8:J19)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותו דבר למחזור המזומן.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>AVERAGE</code><span>ממוצע</span></div><div class="fn-d">מחשבת ממוצע.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B25</span><span class="fwhat">מחזור יומי ממוצע</span><button class="cp" data-f="=SUM(B8:B19)/365">העתקה</button></div><code dir="ltr">=SUM(B8:B19)/365</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>סך המחזור השנתי מחולק ב-365. זה כמה כסף העסק מייצר ביום ממוצע — ומכאן ואילך אפשר לתרגם ימים לשקלים.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUM</code><span>סכום</span></div><div class="fn-d">מחברת מספרים. זהו.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B26</span><span class="fwhat">שווי קיצור יום גבייה אחד</span><button class="cp" data-f="=B25">העתקה</button></div><code dir="ltr">=B25</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>פשוט מפנה למחזור היומי. זה בדיוק שוויו של יום גבייה אחד: אם תקצרו את הגבייה ביום, זה הסכום שישתחרר.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B28</span><span class="fwhat">מזומן שישתחרר מיד</span><button class="cp" data-f="=B25*B27">העתקה</button></div><code dir="ltr">=B25*B27</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>המחזור היומי כפול מספר הימים שהחלטתם לקצר. זה סכום חד-פעמי שנכנס לבנק ולא חוזר על עצמו — חשוב להסביר את זה ללקוח.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B29</span><span class="fwhat">חיסכון ריבית שנתי בריבית 8%</span><button class="cp" data-f="=B28*8%">העתקה</button></div><code dir="ltr">=B28*8%</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>הסכום שהשתחרר, כפול ריבית האשראי. זה החיסכון שכן חוזר על עצמו כל שנה, כי הוא ריבית שלא תשלמו יותר.</p></div></div></li></ol>
+  </div>
+
+  <div class="note info"><div class="nt">למה כפול 30 ולא כפול 365</div><div class="nb">כי אנחנו מודדים חודש בודד מול היתרה בסופו. אם הייתם משתמשים בנתוני שנה שלמה, הייתם מכפילים ב-365. הכלל: מספר הימים בנוסחה חייב להתאים לתקופה שמופיעה במכנה. זו טעות נפוצה שגורמת למספרים לצאת גדולים פי שנים עשר.</div></div><div class="note mac"><div class="nt">תאימות מק ופיסי</div><div class="nb">IFERROR, AVERAGE וארבע פעולות חשבון. זהה לחלוטין בשתי הפלטפורמות. גם העיצוב המותנה מסוג סולם צבעים זהה.</div></div>
+
+  <div class="block practice">
+    <h4>הקשר לפרקטיקה — מה עושים עם זה במשרד</h4>
+    <p>שני שימושים מיידיים במשרד:</p>
+    <p><b>מול הבנק.</b> בקשת מסגרת אשראי שמלווה בחישוב CCC ובהסבר מה החברה עושה כדי לקצר אותו מתקבלת אחרת לגמרי מבקשה שמסתמכת על ״צריכים תזרים״. זה הטיעון הכי חזק שיש לעסק קטן.</p>
+    <p><b>הקשר למודול ב׳ — יתרת הבעלים.</b> בתחתית הגיליון יש שורה של יתרת בעלים. יתרת בעלים היא הון חוזר לכל דבר: זה כסף של החברה שיושב אצל מישהו אחר. ההבדל הוא שהוא גם מייצר חבות מס לפי סעיף 3(ט1). כשגם ה-CCC גבוה וגם יתרת הבעלים גבוהה, החברה מממנת במקביל את הלקוחות ואת הבעלים — וזו בדיוק הנקודה שבה נגמרת המסגרת בבנק. השאלה שצריך לשאול את הלקוח היא: אם נקצר שבעה ימי גבייה, האם המזומן שישתחרר מספיק כדי לסגור את יתרת הבעלים לפני מועד החיוב?</p>
+  </div>
+
+  <div class="block more">
+    <h4>איפה עוד משתמשים בזה</h4>
+    <ul><li>בדיקת נאותות לפני רכישת עסק: CCC הוא מהדברים הראשונים שקונה בודק.</li>
+    <li>תמחור תנאי אשראי ללקוח: כמה עולה לתת שוטף פלוס 90 במקום שוטף פלוס 30.</li>
+    <li>החלטה על מימון מלאי מול הזמנות קטנות ותכופות יותר.</li>
+    <li>השוואת החברה לענף: יבואן עם CCC של 90 יום מול מתחרה עם 55 מפסיד את ההפרש במימון.</li></ul>
+  </div>
+
+  <div class="calc">
+  <h4>מחשבון חי — כמה שווה יום גבייה אחד</h4>
+  <div class="sub">הזיזו את המחוונים וראו את התוצאה. זה בדיוק מה שהגיליון מחשב, ואפשר להריץ את זה מול לקוח בשיחת טלפון.</div>
+  <div class="crow"><label>מחזור שנתי</label><input type="range" id="q_rev" min="2000000" max="40000000" step="500000" value="13500000"><span class="cval" id="v_rev"></span></div>
+  <div class="crow"><label>ימי גבייה מלקוחות (DSO)</label><input type="range" id="q_dso" min="15" max="140" step="1" value="70"><span class="cval" id="v_dso"></span></div>
+  <div class="crow"><label>ימי מלאי (DIO)</label><input type="range" id="q_dio" min="0" max="140" step="1" value="54"><span class="cval" id="v_dio"></span></div>
+  <div class="crow"><label>ימי אשראי ספקים (DPO)</label><input type="range" id="q_dpo" min="0" max="140" step="1" value="45"><span class="cval" id="v_dpo"></span></div>
+  <div class="crow"><label>כמה ימי גבייה נקצר</label><input type="range" id="q_cut" min="0" max="45" step="1" value="7"><span class="cval" id="v_cut"></span></div>
+  <div class="crow"><label>ריבית אשראי שנתית</label><input type="range" id="q_int" min="0" max="18" step="0.5" value="8"><span class="cval" id="v_int"></span></div>
+  <div class="cout">
+    <div class="co" id="o_ccc"><span class="v">-</span><span class="l">מחזור מזומן (ימים)</span></div>
+    <div class="co"><span class="v" id="o_day">-</span><span class="l">מחזור יומי ממוצע</span></div>
+    <div class="co good"><span class="v" id="o_cash">-</span><span class="l">מזומן שישתחרר מיד</span></div>
+    <div class="co good"><span class="v" id="o_int">-</span><span class="l">חיסכון ריבית שנתי</span></div>
+  </div>
+  <div class="sub" id="o_msg" style="margin:12px 0 0"></div>
+</div>
+
+  <div class="selfcheck"><h4>בדיקה עצמית — סמנו כשהתוצאה אצלכם תואמת</h4><ul><li><label><input type="checkbox" data-lab="lab4"> ה-DSO נע סביב 60 עד 78 ימים</label></li><li><label><input type="checkbox" data-lab="lab4"> ה-CCC השנתי הממוצע הוא כ-78 ימים</label></li><li><label><input type="checkbox" data-lab="lab4"> העמודה J צבועה בהדרגה מירוק לאדום</label></li><li><label><input type="checkbox" data-lab="lab4"> שינוי יעד קיצור ה-DSO מ-7 ל-14 מכפיל את המזומן שישתחרר</label></li></ul></div>
+</section>
+<section class="lab" id="lab5">
+  <div class="lab-head">
+    <div class="lab-badge">מעבדה 5</div>
+    <div class="lab-titles">
+      <h2>תזרים מזומנים ל-13 שבועות</h2>
+      <p class="lede">דוח רווח והפסד אומר אם העסק רווחי. תזרים 13 שבועות אומר אם הוא ישרוד עד סוף הרבעון.</p>
+    </div>
+    <div class="lab-meta"><span class="chip time">30 דקות</span><span class="chip sheet">גיליון 30_תזרים_13</span></div>
+  </div>
+
+  <div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>תזרים מזומנים</b> <span class=en>Cash flow</span></div><div class="term-b">זה לא רווח, ולא כדאי להתבלבל. רווח נמדד לפי מתי המכירה נרשמה בספרים; תזרים נמדד לפי מתי הכסף באמת זז בחשבון הבנק. חברה יכולה להיות רווחית מאוד ובכל זאת לא להיות מסוגלת לשלם משכורת בשבוע מסוים. זה לא נדיר, זה קורה כל הזמן.</div></div><div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>תזרים 13 שבועות</b> <span class=en>13-week cash flow</span></div><div class="term-b">תחזית מזומנים שבועית לרבעון קדימה. שלושה עשר שבועות הם בדיוק רבעון. זה טווח שמספיק רחוק כדי שיהיה זמן לעשות משהו — לגייס אשראי, לדחות רכש, לזרז גבייה — ומספיק קרוב כדי שהמספרים עדיין יהיו אמיתיים ולא ניחוש.</div></div><div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>דירוג ודאות</b> <span class=en>Confidence rating</span></div><div class="term-b">ציון מ-1 עד 5 שאתם נותנים לכל שורה במודל. 5 פירושו כסף שכבר בדרך: הוראת קבע, חוזה חתום, שכר שישולם בכל מקרה. 1 פירושו הבטחה בטלפון. הדירוג הזה הוא מה שהופך טבלה למודל, כי הוא מאפשר לשאול את השאלה החשובה באמת: ומה אם רק הוודאי יתממש?</div></div>
+
+  <div class="block logic">
+    <h4>הלוגיקה העסקית — מה אנחנו בעצם עושים ולמה</h4>
+    <p>למה דווקא 13 שבועות? כי זה בדיוק רבעון. מספיק רחוק כדי שיהיה זמן לפעול — לגייס אשראי, לדחות רכש, לזרז גבייה — ומספיק קרוב כדי שהמספרים עדיין יהיו אמיתיים ולא ניחוש.</p>
+    <p>שני רכיבים הופכים את הטבלה למודל:</p>
+    <p><b>1. דירוג ודאות מ-1 עד 5.</b> לא כל שקל צפוי שווה. 5 זה כסף שכבר בדרך: הוראת קבע, חוזה חתום, שכר שנשלם בכל מקרה. 1 זה הבטחה בטלפון. התרחיש הפסימי מכבה את כל שורות ההכנסה שדירוגן נמוך מ-4, ומשאיר את כל התשלומים. כך רואים מה קורה אם רק הוודאי מתממש.</p>
+    <p><b>2. עמוד השדרה של תשלומי המס.</b> מע״מ, מקדמות מס הכנסה, ניכויים בטופס 102 וביטוח לאומי הם שורות קבועות במודל ולא ״הוצאות אחרות״. הסיבה: הם גדולים, המועד שלהם קבוע בחוק, והם לא ניתנים לדחייה. תזרים שלא מכיל אותם הוא לא תזרים אלא משאלה.</p>
+  </div>
+
+  <div class="block"><h4>איך המעבדה הזאת רצה בכיתה</h4><div class="stage demo"><span class="sl">הדגמה על המסך</span><span class="sx">עוברים יחד על מבנה השורות ועל דירוג הוודאות, לפני שמקלידים נוסחה אחת.</span></div><div class="stage do"><span class="sl">עכשיו אתם</span><span class="sx">שבע שורות סיכום, וגרירה ימינה על פני שלושה עשר שבועות.</span></div><div class="stage talk"><span class="sl">עצירה לדיון</span><span class="sx">בשבוע השמיני היתרה שלילית, והחברה רווחית לגמרי. מהי הפעולה הזולה ביותר שמונעת את זה?</span></div></div>
+
+  <div class="block"><h4>הנתונים שאיתם עובדים</h4><div class="tablewrap"><table class="dt"><thead><tr><th>שורה</th><th>ודאות</th><th>ש1
+05/07</th><th>ש2
+12/07</th><th>ש3
+19/07</th><th>ש4
+26/07</th><th>ש5
+02/08</th></tr></thead><tbody><tr><td>תקבולים מלקוחות — חוזים קבועים</td><td>5</td><td>180,000</td><td>180,000</td><td>180,000</td><td>180,000</td><td>180,000</td></tr><tr><td>תקבולים מלקוחות — הזמנות פתוחות</td><td>3</td><td>120,000</td><td>90,000</td><td>140,000</td><td>110,000</td><td>95,000</td></tr><tr><td>תקבולים מלקוחות — צנרת מכירות</td><td>1</td><td>0</td><td>60,000</td><td>0</td><td>75,000</td><td>0</td></tr><tr><td>החזר מע&quot;מ תשומות</td><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>תשלום לספקי יבוא</td><td>5</td><td>0</td><td>-430,000</td><td>0</td><td>0</td><td>-415,000</td></tr><tr><td>מכס ושחרור מטענים</td><td>5</td><td>0</td><td>-86,000</td><td>0</td><td>0</td><td>-83,000</td></tr><tr><td>רכישת מלאי לעונת סוף השנה</td><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>שכר ונלוות</td><td>5</td><td>0</td><td>0</td><td>0</td><td>-168,000</td><td>0</td></tr></tbody></table></div><div class="tnote">השורות והדירוג. עמודה ״ודאות״ היא קלט שלכם ואפשר לשנות אותה.</div></div>
+
+  <div class="block">
+    <h4>שלב אחר שלב</h4>
+    <ol class="steps"><li class="has-h"><div class="st-h"><span class="st-n">1</span>הגדירו את הפרמטרים למעלה</div><div class="st-b">תא B7 הוא התרחיש (רשימה נפתחת), B8 יתרת הפתיחה בבנק, B9 גובה המסגרת המאושרת.</div></li><li class="has-h"><div class="st-h"><span class="st-n">2</span>שורת סה"כ תקבולים</div><div class="st-b">הנוסחה נראית מורכבת אבל היא אומרת דבר פשוט: סכם רק את המספרים החיוביים בעמודה, ואם התרחיש פסימי — רק את אלה שדירוג הוודאות שלהם 4 ומעלה. ואז הכפל במקדם התרחיש.</div><div class="fcard"><div class="fmeta"><span class="cellref">C30</span><span class="fwhat">סה&quot;כ תקבולים בשבוע, כולל מתג התרחיש ומסנן הוודאות בתרחיש הפסימי</span><button class="cp" data-f="=SUMPRODUCT((C$12:C$29&gt;0)*C$12:C$29*IF($B$7=&quot;פסימי&quot;,($B$12:$B$29&gt;=4)*1,1))*IF($B$7=&quot;אופטימי&quot;,1.1,IF($B$7=&quot;פסימי&quot;,0.85,1))">העתקה</button></div><code dir="ltr">=SUMPRODUCT((C$12:C$29&gt;0)*C$12:C$29*IF($B$7=&quot;פסימי&quot;,($B$12:$B$29&gt;=4)*1,1))*IF($B$7=&quot;אופטימי&quot;,1.1,IF($B$7=&quot;פסימי&quot;,0.85,1))</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">(C$12:C$28&gt;0)</code></td><td class="pd">שאלה ראשונה על כל שורה: האם הסכום חיובי — כלומר האם זו הכנסה. התשובה היא רשימה של נכון ולא-נכון.</td></tr><tr><td class="pc"><code dir="ltr">* C$12:C$28</code></td><td class="pd">מכפילים ברשימת הסכומים. נכון שווה 1, לא-נכון שווה 0 — ולכן התשלומים מתאפסים ונשארות רק ההכנסות.</td></tr><tr><td class="pc"><code dir="ltr">IF($B$7=&quot;פסימי&quot;,($B$12:$B$28&gt;=4)*1,1)</code></td><td class="pd">מסנן הוודאות: בתרחיש הפסימי בלבד, השאירו רק שורות שדירוג הוודאות שלהן 4 ומעלה. בכל תרחיש אחר, הכפילו ב-1 כלומר אל תסננו כלום.</td></tr><tr><td class="pc"><code dir="ltr">SUMPRODUCT( ... )</code></td><td class="pd">מחברים את מה שנשאר.</td></tr><tr><td class="pc"><code dir="ltr">* IF($B$7=&quot;אופטימי&quot;,1.1, ... )</code></td><td class="pd">ולבסוף מכפילים במקדם התרחיש: 110% באופטימי, 100% בבסיס, 85% בפסימי.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMPRODUCT</code><span>סכום של מכפלות</span></div><div class="fn-d">מכפילה עמודות זו בזו שורה-שורה ואז מחברת. השימוש האמיתי שלה: לסכם עם תנאי מסובך שתלוי בכמה עמודות, מה ש-SUMIFS לא יודעת לעשות.</div></div><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">3</span>שורת סה"כ תשלומים</div><div class="st-b">כאן אין מסנן ודאות בכוונה. תשלומי מס ושכר משולמים בכל תרחיש. תזרים שמניח שגם ההוצאות יתכווצו בתרחיש גרוע הוא תזרים חסר תועלת.</div><div class="fcard"><div class="fmeta"><span class="cellref">C31</span><span class="fwhat">סה&quot;כ תשלומים בשבוע (מספר שלילי). תשלומי מס ושכר משולמים בכל תרחיש</span><button class="cp" data-f="=SUMPRODUCT((C$12:C$29&lt;0)*C$12:C$29)">העתקה</button></div><code dir="ltr">=SUMPRODUCT((C$12:C$29&lt;0)*C$12:C$29)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">(C$12:C$28&lt;0)</code></td><td class="pd">אותו רעיון הפוך: רק הסכומים השליליים, כלומר התשלומים.</td></tr><tr><td class="pc"><code dir="ltr">אין כאן מסנן ודאות, ובכוונה</code></td><td class="pd">מע״מ, שכר ומקדמות משולמים בכל תרחיש. מודל שמניח שגם ההוצאות יתכווצו בתרחיש גרוע הוא מודל שלא יזהיר אתכם אף פעם.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMPRODUCT</code><span>סכום של מכפלות</span></div><div class="fn-d">מכפילה עמודות זו בזו שורה-שורה ואז מחברת. השימוש האמיתי שלה: לסכם עם תנאי מסובך שתלוי בכמה עמודות, מה ש-SUMIFS לא יודעת לעשות.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">4</span>תזרים נטו לשבוע</div><div class="fcard"><div class="fmeta"><span class="cellref">C32</span><span class="fwhat">תזרים נטו</span><button class="cp" data-f="=C30+C31">העתקה</button></div><code dir="ltr">=C30+C31</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>תקבולים ועוד תשלומים. התשלומים כבר שליליים, ולכן זה חיבור ולא חיסור.</p></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">5</span>יתרת פתיחה שבועית — הטריק היחיד במודל</div><div class="st-b">בשבוע הראשון יתרת הפתיחה מגיעה מתא B8. בכל שבוע אחר, היא פשוט יתרת הסגירה של השבוע הקודם. הנוסחה בודקת באיזו עמודה היא נמצאת ומחליטה.</div><div class="fcard"><div class="fmeta"><span class="cellref">C33</span><span class="fwhat">יתרת פתיחה: בשבוע 1 מהתא B8, אחר כך הסגירה של השבוע הקודם</span><button class="cp" data-f="=IF(COLUMN()=3,$B$8,B34)">העתקה</button></div><code dir="ltr">=IF(COLUMN()=3,$B$8,B34)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">IF(COLUMN()=3</code></td><td class="pd">הנוסחה שואלת: באיזו עמודה אני יושבת. עמודה C היא מספר 3, כלומר השבוע הראשון.</td></tr><tr><td class="pc"><code dir="ltr">$B$8</code></td><td class="pd">אם כן — קח את יתרת הפתיחה שהזנתם למעלה.</td></tr><tr><td class="pc"><code dir="ltr">B34</code></td><td class="pd">אם לא — קח את יתרת הסגירה של השבוע הקודם, שנמצאת עמודה אחת שמאלה ושורה אחת למטה.</td></tr><tr><td class="pc"><code dir="ltr">למה זה עובד</code></td><td class="pd">כשגוררים ימינה, ההפניה זזה איתה מעצמה. שורה אחת מייצרת שרשרת של שלושה עשר שבועות.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div><div class="fn"><div class="fn-h"><code>COLUMN</code><span>באיזו עמודה אני</span></div><div class="fn-d">מחזירה את מספר העמודה שבה יושבת הנוסחה. עמודה A היא 1, B היא 2 וכן הלאה. זה מה שמאפשר לכתוב נוסחה אחת ולגרור אותה על פני כל השנה.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">6</span>יתרת סגירה</div><div class="fcard"><div class="fmeta"><span class="cellref">C34</span><span class="fwhat">יתרת סגירה</span><button class="cp" data-f="=C33+C32">העתקה</button></div><code dir="ltr">=C33+C32</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>יתרת פתיחה ועוד התזרים של השבוע.</p></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">7</span>ניצול מסגרת וסטטוס רמזור</div><div class="fcard"><div class="fmeta"><span class="cellref">C35</span><span class="fwhat">ניצול מסגרת: כמה מהמסגרת נאכל אם היתרה שלילית</span><button class="cp" data-f="=MAX(0,-C34)">העתקה</button></div><code dir="ltr">=MAX(0,-C34)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אם היתרה שלילית, כמה מהמסגרת נאכל. אם חיובית, אפס.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>MAX</code><span>הגדול מבין</span></div><div class="fn-d">מחזירה את המספר הגדול ביותר.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">C36</span><span class="fwhat">סטטוס רמזור</span><button class="cp" data-f="=IF(C34&gt;=0,&quot;תקין&quot;,IF(C35&lt;=$B$9,&quot;מסגרת&quot;,&quot;חריגה&quot;))">העתקה</button></div><code dir="ltr">=IF(C34&gt;=0,&quot;תקין&quot;,IF(C35&lt;=$B$9,&quot;מסגרת&quot;,&quot;חריגה&quot;))</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">IF(C34&gt;=0,&quot;תקין&quot;</code></td><td class="pd">אם יתרת הסגירה חיובית — הכול בסדר.</td></tr><tr><td class="pc"><code dir="ltr">IF(C35&lt;=$B$9,&quot;מסגרת&quot;</code></td><td class="pd">אם היא שלילית אבל בתוך המסגרת המאושרת — אתם משתמשים במסגרת. לא נעים, אבל חוקי ומתוכנן.</td></tr><tr><td class="pc"><code dir="ltr">&quot;חריגה&quot;</code></td><td class="pd">ואם היא חורגת גם מהמסגרת — זו שיחה עם הבנק, ועדיף שתהיה שבועיים מראש ולא ביום עצמו.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">8</span>עמודת הסיכום P</div><div class="st-b">מלאו את שבע שורות הסיכום לרבעון כולו.</div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">P30</span><span class="fwhat">סה&quot;כ תקבולים ל-13 שבועות</span><button class="cp" data-f="=SUM(C30:O30)">העתקה</button></div><code dir="ltr">=SUM(C30:O30)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>סכום שלושה עשר השבועות. סך התקבולים הצפויים לרבעון.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUM</code><span>סכום</span></div><div class="fn-d">מחברת מספרים. זהו.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">P31</span><span class="fwhat">סה&quot;כ תשלומים ל-13 שבועות</span><button class="cp" data-f="=SUM(C31:O31)">העתקה</button></div><code dir="ltr">=SUM(C31:O31)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותו דבר לתשלומים. המספר יוצא שלילי כי כל התשלומים שליליים.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUM</code><span>סכום</span></div><div class="fn-d">מחברת מספרים. זהו.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">P32</span><span class="fwhat">תזרים נטו לרבעון</span><button class="cp" data-f="=SUM(C32:O32)">העתקה</button></div><code dir="ltr">=SUM(C32:O32)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>התזרים נטו של הרבעון כולו. שימו לב שהוא יכול להיות חיובי גם כשיש שבוע שנשבר באמצע — וזו בדיוק הסיבה שמסתכלים שבוע-שבוע ולא רק על הסיכום.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUM</code><span>סכום</span></div><div class="fn-d">מחברת מספרים. זהו.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">P33</span><span class="fwhat">יתרת פתיחה לתקופה</span><button class="cp" data-f="=C33">העתקה</button></div><code dir="ltr">=C33</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>לא סכום. יתרת הפתיחה של התקופה היא פשוט יתרת הפתיחה של השבוע הראשון.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">P34</span><span class="fwhat">יתרת סגירה בסוף הרבעון</span><button class="cp" data-f="=O34">העתקה</button></div><code dir="ltr">=O34</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>גם כאן לא סכום, אלא יתרת הסגירה של השבוע האחרון.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">P35</span><span class="fwhat">ניצול המסגרת המרבי (השבוע הגרוע)</span><button class="cp" data-f="=MAX(C35:O35)">העתקה</button></div><code dir="ltr">=MAX(C35:O35)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>המקסימום מבין שלושה עשר השבועות. זה השבוע הגרוע ביותר, והמספר שהבנק ישאל עליו.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>MAX</code><span>הגדול מבין</span></div><div class="fn-d">מחזירה את המספר הגדול ביותר.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">P36</span><span class="fwhat">סטטוס הרבעון כולו</span><button class="cp" data-f="=IF(COUNTIF(C36:O36,&quot;חריגה&quot;)&gt;0,&quot;חריגה ממסגרת&quot;,IF(COUNTIF(C36:O36,&quot;מסגרת&quot;)&gt;0,&quot;שימוש במסגרת&quot;,&quot;תקין&quot;))">העתקה</button></div><code dir="ltr">=IF(COUNTIF(C36:O36,&quot;חריגה&quot;)&gt;0,&quot;חריגה ממסגרת&quot;,IF(COUNTIF(C36:O36,&quot;מסגרת&quot;)&gt;0,&quot;שימוש במסגרת&quot;,&quot;תקין&quot;))</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>בודקת אם מופיעה ולו פעם אחת ״חריגה״ בשלושה עשר השבועות, ואם לא — אם מופיעה ״מסגרת״. עדיף להציג את הסטטוס הגרוע ביותר של הרבעון ולא ממוצע, כי ממוצע מסתיר בדיוק את מה שחשוב.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div><div class="fn"><div class="fn-h"><code>COUNTIF</code><span>ספירה עם תנאי</span></div><div class="fn-d">סופרת כמה תאים עונים על תנאי אחד.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">9</span>התרגיל האמיתי — עברו לתרחיש פסימי</div><div class="st-b">שנו את B7 ל״פסימי״. באיזה שבוע היתרה נשברת מתחת למסגרת? ועכשיו השאלה שבגללה בנינו את הכלי: <b>מהי הפעולה הזולה ביותר שמונעת את זה?</b> נסו לדחות את משיכת הבעלים, או להעלות את דירוג הוודאות של שורה אחת בעקבות שיחה עם לקוח.</div></li></ol>
+  </div>
+
+  <div class="note info"><div class="nt">מה זה SUMPRODUCT ולמה השתמשנו בו</div><div class="nb">SUMPRODUCT מאפשרת לסכם עם תנאי שמחושב על כל שורה בנפרד. בניגוד ל-SUMIFS, היא יודעת לעבוד עם תנאי מורכב שתלוי בכמה עמודות. היא קיימת באקסל מאז שנות התשעים ועובדת זהה בכל גרסה ובכל פלטפורמה — ולכן היא הבחירה הבטוחה כאן.</div></div><div class="note mac"><div class="nt">תאימות מק ופיסי</div><div class="nb">SUMPRODUCT, MAX, COUNTIF, IF, COLUMN. כולן זהות במק ובווינדוס בכל גרסה מאקסל 2007.</div></div>
+
+  <div class="block practice">
+    <h4>הקשר לפרקטיקה — מה עושים עם זה במשרד</h4>
+    <p>הריצו את התרגיל וראו מה קורה בשבוע 8: <b>היתרה יורדת למינוס 90 אלף ש״ח</b>. וזה בתרחיש הבסיס, בחברה רווחית לגמרי. הסיבה היא שבאותו שבוע נופלים יחד תשלום לספק יבוא, מכס, שכר והחזר הלוואה. זו החוויה שכל בעל עסק מכיר ולא יודע לחזות.</p>
+    <p><b>הקשר למודול א׳:</b> שימו לב שבשבוע 6 נופלים באותו שבוע גם מע״מ וגם מקדמות מס הכנסה. זה לא מקרה, זה לוח הזמנים החוקי. ידיעה של זה מראש מאפשרת לתזמן רכש ותשלומים סביבו.</p>
+    <p><b>הקשר למודול ב׳:</b> שורת ״משיכת בעלים״ מדורגת בוודאות 2, כלומר היא הידית הגמישה ביותר במודל. דחיית משיכה בחודשיים היא לרוב ההבדל בין חריגה לבין שימוש רגיל במסגרת — ובמקביל היא משנה את חשיפת סעיף 3(ט1). זו נקודה שבה תכנון מס ותכנון תזרים הם אותה החלטה.</p>
+  </div>
+
+  <div class="block more">
+    <h4>איפה עוד משתמשים בזה</h4>
+    <ul><li>הצגת יכולת החזר מול הבנק בבקשת הלוואה או הגדלת מסגרת.</li>
+    <li>תזמון רכישת ציוד — גם מבחינת מזומן וגם מבחינת מועד תחילת הפחת.</li>
+    <li>החלטה אם לחלק דיבידנד השנה או בשנה הבאה, בשילוב עם האופטימייזר ממודול ב׳.</li>
+    <li>ניהול משא ומתן עם ספק על פריסת תשלום, כשיש מספר מדויק לכמה זה שווה.</li></ul>
+  </div>
+
+  
+
+  <div class="selfcheck"><h4>בדיקה עצמית — סמנו כשהתוצאה אצלכם תואמת</h4><ul><li><label><input type="checkbox" data-lab="lab5"> בתרחיש הבסיס, יתרת הסגירה בשבוע 8 שלילית (כמינוס 90 אלף)</label></li><li><label><input type="checkbox" data-lab="lab5"> הסטטוס בשבוע 8 מציג ״מסגרת״</label></li><li><label><input type="checkbox" data-lab="lab5"> עמודת הסיכום מציגה ״שימוש במסגרת״ לרבעון</label></li><li><label><input type="checkbox" data-lab="lab5"> מעבר לתרחיש פסימי מייצר סטטוס ״חריגה״ בכמה שבועות</label></li></ul></div>
+</section>
+<section class="lab" id="lab6">
+  <div class="lab-head">
+    <div class="lab-badge">מעבדה 6</div>
+    <div class="lab-titles">
+      <h2>תחזית מתגלגלת 3+9 / 4+8</h2>
+      <p class="lede">תקציב שנקבע בדצמבר מתיישן אחרי רבעון. תחזית מתגלגלת מחליפה תקציב באקטואל ככל שהשנה מתקדמת.</p>
+    </div>
+    <div class="lab-meta"><span class="chip time">18 דקות</span><span class="chip sheet">גיליון 40_רולינג</span></div>
+  </div>
+
+  <div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>תחזית מתגלגלת</b> <span class=en>Rolling forecast</span></div><div class="term-b">במקום תקציב אחד שנקבע בדצמבר ונשאר קפוא כל השנה, בונים תחזית שמתעדכנת בסוף כל רבעון. החודשים שכבר קרו מוחלפים במה שבאמת קרה, והחודשים שנותרו נשארים הערכה. השם <b>3+9</b> פירושו שלושה חודשי ביצוע ותשעה חודשי תחזית. אחרי רבעון נוסף זה הופך ל-6+6, ואחר כך ל-9+3.</div></div><div class="term"><div class="term-h"><span class="term-tag">מונח חדש</span><b>קו בסיס</b> <span class=en>Baseline</span></div><div class="term-b">התקציב המקורי, שנשאר נעול ולא משתנה לעולם. הוא קיים בשביל דבר אחד: כדי שאפשר יהיה לענות על השאלה ״האם השתפרנו״. בלי קו בסיס, אפשר להוריד ציפיות, לעמוד בהן, ולחגוג. זו הטעות הנפוצה ביותר בתחזית מתגלגלת.</div></div>
+
+  <div class="block logic">
+    <h4>הלוגיקה העסקית — מה אנחנו בעצם עושים ולמה</h4>
+    <p><b>3+9</b> פירושו: שלושה חודשי ביצוע בפועל, ותשעה חודשי תחזית. בסוף הרבעון הבא זה הופך ל-<b>6+6</b>, ואחר כך ל-<b>9+3</b>. בכל נקודת זמן, התחזית השנתית מבוססת על מה שבאמת קרה עד היום ועל הערכה מעודכנת להמשך — ולא על מה שקיווינו בדצמבר.</p>
+    <p>שני דברים חייבים להיות במודל כזה:</p>
+    <p><b>1. קו בסיס נעול.</b> שורת התקציב המקורי לא משתנה לעולם. בלעדיה אי אפשר לדעת אם השתפרנו או רק הורדנו ציפיות. זו הטעות הנפוצה ביותר בתחזית מתגלגלת: מעדכנים את התחזית כלפי מטה, עומדים בה, וחוגגים.</p>
+    <p><b>2. החלטה ניהולית מפורשת אחת.</b> מקדם התיקון ליתרת השנה. 1.00 אומר ״ממשיכים לפי התקציב״. 0.95 אומר ״מורידים חמישה אחוזים לחודשים שנותרו״. זו החלטה, ולכן היא צריכה להיות תא גלוי שמישהו חתום עליו — ולא הנחה מוסתרת בתוך נוסחה.</p>
+  </div>
+
+  <div class="block"><h4>איך המעבדה הזאת רצה בכיתה</h4><div class="stage demo"><span class="sl">הדגמה על המסך</span><span class="sx">משנים את מספר החודשים הסגורים מ-3 ל-6 ל-9, ורואים את התחזית השנתית זזה בזמן אמת.</span></div><div class="stage do"><span class="sl">עכשיו אתם</span><span class="sx">חמש שורות, גרירה ימינה, ועמודת סיכום שנתית.</span></div><div class="stage talk"><span class="sl">עצירה לדיון</span><span class="sx">התחזית נמוכה מהמחזור שעליו נקבעו המקדמות. מה עושים עם זה מחר בבוקר?</span></div></div>
+
+  
+
+  <div class="block">
+    <h4>שלב אחר שלב</h4>
+    <ol class="steps"><li class="has-h"><div class="st-h"><span class="st-n">1</span>הגדירו כמה חודשים נסגרו</div><div class="st-b">תא C7. התחילו ב-6 — כלומר חצי שנה סגורה. C8 הוא מקדם התיקון, השאירו 1.00 בשלב הזה.</div></li><li class="has-h"><div class="st-h"><span class="st-n">2</span>שורה 11 — התקציב המקורי הנעול</div><div class="fcard"><div class="fmeta"><span class="cellref">B11</span><span class="fwhat">תקציב מקורי — סך ההכנסות המתוקצבות לאותו חודש</span><button class="cp" data-f="=SUMIFS(תקציב[תקציב],תקציב[קבוצה],&quot;הכנסות&quot;,תקציב[חודש_מספר],COLUMN()-1)">העתקה</button></div><code dir="ltr">=SUMIFS(תקציב[תקציב],תקציב[קבוצה],&quot;הכנסות&quot;,תקציב[חודש_מספר],COLUMN()-1)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>סכום התקציב לאותו חודש. השורה הזאת לא משתנה לעולם — היא קו הבסיס הנעול.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div><div class="fn"><div class="fn-h"><code>COLUMN</code><span>באיזו עמודה אני</span></div><div class="fn-d">מחזירה את מספר העמודה שבה יושבת הנוסחה. עמודה A היא 1, B היא 2 וכן הלאה. זה מה שמאפשר לכתוב נוסחה אחת ולגרור אותה על פני כל השנה.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">3</span>שורה 12 — הביצוע בפועל</div><div class="st-b">הנוסחה מציגה ביצוע רק לחודשים שכבר נסגרו, ומשאירה ריק את השאר. זה חשוב ויזואלית: מה שריק הוא מה שעוד לא קרה.</div><div class="fcard"><div class="fmeta"><span class="cellref">B12</span><span class="fwhat">ביצוע בפועל — מוצג רק לחודשים שנסגרו</span><button class="cp" data-f="=IF(COLUMN()-1&lt;=$C$7,SUMIFS(הנהח[סכום],הנהח[קבוצה],&quot;הכנסות&quot;,הנהח[חודש],COLUMN()-1),&quot;&quot;)">העתקה</button></div><code dir="ltr">=IF(COLUMN()-1&lt;=$C$7,SUMIFS(הנהח[סכום],הנהח[קבוצה],&quot;הכנסות&quot;,הנהח[חודש],COLUMN()-1),&quot;&quot;)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">IF(COLUMN()-1&lt;=$C$7</code></td><td class="pd">עמודה B היא מספר 2, ולכן COLUMN()-1 נותן 1 = ינואר. השאלה היא: האם החודש הזה כבר נסגר.</td></tr><tr><td class="pc"><code dir="ltr">SUMIFS(...)</code></td><td class="pd">אם כן — הביאו את הביצוע בפועל מטבלת ההנהלת חשבונות.</td></tr><tr><td class="pc"><code dir="ltr">&quot;&quot;</code></td><td class="pd">ואם לא — השאירו ריק. זה חשוב ויזואלית: מה שריק הוא מה שעוד לא קרה, ואסור להציג לו מספר.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div><div class="fn"><div class="fn-h"><code>COLUMN</code><span>באיזו עמודה אני</span></div><div class="fn-d">מחזירה את מספר העמודה שבה יושבת הנוסחה. עמודה A היא 1, B היא 2 וכן הלאה. זה מה שמאפשר לכתוב נוסחה אחת ולגרור אותה על פני כל השנה.</div></div><div class="fn"><div class="fn-h"><code>SUMIFS</code><span>סכום עם תנאים</span></div><div class="fn-d">מחברת רק את השורות שעונות על כל התנאים שנתתם, בבת אחת. קודם אומרים לה מה לסכם, ואחר כך זוגות של ״באיזו עמודה לבדוק״ ו״מה צריך להיות שם״.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">4</span>שורה 13 — התחזית המתגלגלת. זה לב המודל</div><div class="st-b">לחודש סגור, קח את הביצוע. לחודש שלא נסגר, קח את התקציב מוכפל במקדם התיקון. שורה אחת, וזה כל הרעיון.</div><div class="fcard"><div class="fmeta"><span class="cellref">B13</span><span class="fwhat">התחזית המתגלגלת: אקטואל לחודשים סגורים, תקציב מתוקן להמשך</span><button class="cp" data-f="=IF(COLUMN()-1&lt;=$C$7,B12,B11*$C$8)">העתקה</button></div><code dir="ltr">=IF(COLUMN()-1&lt;=$C$7,B12,B11*$C$8)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd"><div class="mini-h">פירוק הנוסחה — מה כל חלק עושה</div><table class="bdt"><tbody><tr><td class="pc"><code dir="ltr">IF(COLUMN()-1&lt;=$C$7,B12,B11*$C$8)</code></td><td class="pd">זו כל התחזית המתגלגלת, בשורה אחת.</td></tr><tr><td class="pc"><code dir="ltr">B12 לחודש סגור</code></td><td class="pd">לחודש שכבר קרה — קח את מה שבאמת קרה.</td></tr><tr><td class="pc"><code dir="ltr">B11*$C$8 לחודש עתידי</code></td><td class="pd">לחודש שעוד לא קרה — קח את התקציב, מוכפל במקדם התיקון שאתם קובעים.</td></tr><tr><td class="pc"><code dir="ltr">למה המקדם בתא נפרד</code></td><td class="pd">כי זו החלטה ניהולית ולא חישוב. החלטה צריכה להיות תא גלוי שמישהו חתום עליו, לא הנחה מוסתרת בתוך נוסחה.</td></tr></tbody></table></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div><div class="fn"><div class="fn-h"><code>COLUMN</code><span>באיזו עמודה אני</span></div><div class="fn-d">מחזירה את מספר העמודה שבה יושבת הנוסחה. עמודה A היא 1, B היא 2 וכן הלאה. זה מה שמאפשר לכתוב נוסחה אחת ולגרור אותה על פני כל השנה.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">5</span>שורות 14 ו-15 — הפער מול קו הבסיס</div><div class="fcard"><div class="fmeta"><span class="cellref">B14</span><span class="fwhat">פער התחזית מול קו הבסיס הנעול</span><button class="cp" data-f="=B13-B11">העתקה</button></div><code dir="ltr">=B13-B11</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>תחזית פחות קו בסיס. זה הפער שצריך להסביר להנהלה.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">B15</span><span class="fwhat">אותו פער באחוזים</span><button class="cp" data-f="=IFERROR(B14/B11,0)">העתקה</button></div><code dir="ltr">=IFERROR(B14/B11,0)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותו פער באחוזים.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IFERROR</code><span>אם יש שגיאה</span></div><div class="fn-d">מריצה נוסחה, ואם היא נכשלת מחזירה מה שתגידו לה במקום להציג שגיאה. שימושי כשחלוקה באפס או ערך חסר הם מצב לגיטימי ולא באג.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">6</span>עמודה N — הסיכומים השנתיים</div><div class="fcard"><div class="fmeta"><span class="cellref">N11</span><span class="fwhat">קו בסיס שנתי (סכום התקציב)</span><button class="cp" data-f="=SUM(B11:M11)">העתקה</button></div><code dir="ltr">=SUM(B11:M11)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>סכום שנים עשר החודשים בשורת התקציב. זה קו הבסיס השנתי, והוא לא זז.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUM</code><span>סכום</span></div><div class="fn-d">מחברת מספרים. זהו.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">N12</span><span class="fwhat">ביצוע מצטבר מתחילת השנה</span><button class="cp" data-f="=SUM(B12:M12)">העתקה</button></div><code dir="ltr">=SUM(B12:M12)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>סכום שורת הביצוע. החודשים הריקים פשוט לא נספרים, ולכן זה הביצוע המצטבר מתחילת השנה.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUM</code><span>סכום</span></div><div class="fn-d">מחברת מספרים. זהו.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">N13</span><span class="fwhat">התחזית השנתית המעודכנת</span><button class="cp" data-f="=SUM(B13:M13)">העתקה</button></div><code dir="ltr">=SUM(B13:M13)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>סכום שורת התחזית: ביצוע בפועל לחודשים שנסגרו, ותקציב מתוקן לחודשים שנותרו. זה המספר שמעניין את ההנהלה.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>SUM</code><span>סכום</span></div><div class="fn-d">מחברת מספרים. זהו.</div></div></div></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">N14</span><span class="fwhat">פער שנתי בשקלים</span><button class="cp" data-f="=N13-N11">העתקה</button></div><code dir="ltr">=N13-N11</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>התחזית פחות קו הבסיס. זה הפער השנתי הצפוי, וזה המספר שהופך לבקשה להקטנת מקדמות.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">N15</span><span class="fwhat">פער שנתי באחוזים</span><button class="cp" data-f="=IFERROR(N14/N11,0)">העתקה</button></div><code dir="ltr">=IFERROR(N14/N11,0)</code><div class="drag">אחרי שהנוסחה עובדת בתא הראשון, גררו אותה ימינה עד סוף השורה</div><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>אותו פער כאחוז מקו הבסיס.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IFERROR</code><span>אם יש שגיאה</span></div><div class="fn-d">מריצה נוסחה, ואם היא נכשלת מחזירה מה שתגידו לה במקום להציג שגיאה. שימושי כשחלוקה באפס או ערך חסר הם מצב לגיטימי ולא באג.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">7</span>בלוק ״מה זה אומר לניהול״</div><div class="fcard"><div class="fmeta"><span class="cellref">C19</span><span class="fwhat">תחזית שנתית מעודכנת</span><button class="cp" data-f="=N13">העתקה</button></div><code dir="ltr">=N13</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>מפנה לתא N13. הבלוק הזה הוא סיכום מנהלים: אותם מספרים, מוצגים במקום אחד שאפשר לצלם ולשלוח.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">C20</span><span class="fwhat">קו בסיס שנתי מקורי</span><button class="cp" data-f="=N11">העתקה</button></div><code dir="ltr">=N11</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>מפנה ל-N11, קו הבסיס.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">C21</span><span class="fwhat">פער שנתי צפוי</span><button class="cp" data-f="=N13-N11">העתקה</button></div><code dir="ltr">=N13-N11</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>ההפרש ביניהם.</p></div></div></li><li class="cont"><div class="fcard"><div class="fmeta"><span class="cellref">C22</span><span class="fwhat">האם צפויה עמידה ביעד</span><button class="cp" data-f="=IF(N13&gt;=N11,&quot;כן&quot;,&quot;לא — נדרשת פעולה&quot;)">העתקה</button></div><code dir="ltr">=IF(N13&gt;=N11,&quot;כן&quot;,&quot;לא — נדרשת פעולה&quot;)</code><div class="bd simple"><div class="mini-h">איך קוראים את זה</div><p>משפט אחד במקום מספר. אם התחזית מתחת לקו הבסיס — כתוב במפורש שנדרשת פעולה. דוח שדורש מהקורא לחשב בעצמו אם המצב טוב, לא ייקרא.</p></div><div class="fn-wrap"><div class="mini-h">הפונקציות שמופיעות כאן, ומה כל אחת עושה</div><div class="fn-grid"><div class="fn"><div class="fn-h"><code>IF</code><span>אם</span></div><div class="fn-d">בודקת תנאי. אם הוא מתקיים מחזירה דבר אחד, אם לא מחזירה דבר אחר. שלושה חלקים: התנאי, מה אם כן, מה אם לא.</div></div></div></div></div></li><li class="has-h"><div class="st-h"><span class="st-n">8</span>התרגיל — הזיזו את הזמן</div><div class="st-b">שנו את C7 ל-3, ואז ל-6, ואז ל-9. איך משתנה התחזית השנתית בכל פעם? ועכשיו שנו את מקדם התיקון ל-0.95. מה זה עושה למסקנה? זו בדיוק השיחה הרבעונית שצריך לנהל עם הלקוח.</div></li></ol>
+  </div>
+
+  <div class="note info"><div class="nt">מה עושה COLUMN() בנוסחה</div><div class="nb">COLUMN() מחזירה את מספר העמודה שבה נמצאת הנוסחה. עמודה B היא 2, ולכן COLUMN()-1 נותן 1 = ינואר. כשגוררים ימינה, המספר עולה מעצמו. זה מה שמאפשר לכתוב נוסחה אחת ולגרור אותה על פני כל השנה.</div></div><div class="note mac"><div class="nt">תאימות מק ופיסי</div><div class="nb">SUMIFS, IF, IFERROR, SUM, COLUMN. אין כאן שום פער בין הפלטפורמות.</div></div>
+
+  <div class="block practice">
+    <h4>הקשר לפרקטיקה — מה עושים עם זה במשרד</h4>
+    <p>זו המעבדה עם ההחזר הכספי הישיר ביותר. ברגע שיש תחזית שנתית מעודכנת, אפשר לחשב את המקדמות הנכונות ולהגיש <b>בקשה להקטנת מקדמות לפי סעיף 175</b> אם התחזית נמוכה מהמחזור שלפיו נקבע המקדם. זה הכסף הכי זול שמשרד רואה חשבון יכול לחסוך ללקוח — הוא לא דורש תכנון מס, הוא לא בשטח אפור, והוא זמין רק למי שיש לו תחזית. בתרגיל, התחזית המעודכנת נמוכה ב-141 אלף ש״ח מקו הבסיס.</p>
+    <p><b>הקשר למודול ב׳:</b> תחזית רווח שנתית מעודכנת היא גם הקלט להחלטת דיבידנד מול שכר, ולתכנון מול רפורמת הרווחים הלא מחולקים. בלי תחזית, ההחלטה הזאת מתקבלת במרץ שאחרי סוף השנה — כלומר מאוחר מדי כדי לעשות איתה משהו.</p>
+  </div>
+
+  <div class="block more">
+    <h4>איפה עוד משתמשים בזה</h4>
+    <ul><li>תחזית גיוס עובדים ועלות שכר לרבעונים הבאים.</li>
+    <li>תחזית רכש ומלאי לקראת עונה, ליבואן.</li>
+    <li>הצגת תחזית מעודכנת למשקיע או לבנק באמצע שנה, במקום להסביר סטייה מתקציב ישן.</li>
+    <li>בסיס לתמחור מחדש: אם התחזית נמוכה, מתי בדיוק צריך להעלות מחירים.</li></ul>
+  </div>
+
+  
+
+  <div class="selfcheck"><h4>בדיקה עצמית — סמנו כשהתוצאה אצלכם תואמת</h4><ul><li><label><input type="checkbox" data-lab="lab6"> התחזית השנתית המעודכנת נמוכה מקו הבסיס בכ-141 אלף ש"ח</label></li><li><label><input type="checkbox" data-lab="lab6"> השורה ״האם צפויה עמידה ביעד״ מציגה ״לא — נדרשת פעולה״</label></li><li><label><input type="checkbox" data-lab="lab6"> שינוי C7 מ-6 ל-3 משנה את התחזית השנתית</label></li><li><label><input type="checkbox" data-lab="lab6"> שינוי המקדם ל-0.95 מגדיל את הפער השלילי</label></li></ul></div>
+</section>
+
+<h2 class="sec-title" id="after">מה לוקחים למשרד ביום שני</h2>
+
+<div class="card">
+  <h3>ארבעת המשפטים שאפשר להגיד ללקוח כבר מחר</h3>
+  <ol>
+    <li><b>״שיעור הרווח הגולמי שלך ירד ב-X נקודות אחוז, וזה מה שפקיד השומה יבדוק ראשון.״</b> — ממעבדה 2, עם ההסבר המפורק ממעבדה 3.</li>
+    <li><b>״הכסף שלך יושב אצל הלקוחות 78 יום. כל יום שנקצר שווה לך 37 אלף ש״ח מזומן.״</b> — ממעבדה 4.</li>
+    <li><b>״בשבוע השמיני אתה נכנס למסגרת, וזה למרות שאתה רווחי. הנה מה אפשר להזיז.״</b> — ממעבדה 5.</li>
+    <li><b>״התחזית המעודכנת שלך נמוכה מהמחזור שעליו נקבעו המקדמות. אפשר להגיש בקשה להקטנה לפי סעיף 175.״</b> — ממעבדה 6. זה החזר כספי מיידי ללקוח.</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h3>איך מעבירים את זה ללקוח אמיתי</h3>
+  <ol>
+    <li>החליפו את גיליון 02 בייצוא הנהלת החשבונות של הלקוח. שמרו על אותם שמות עמודות — כל השאר ימשיך לעבוד.</li>
+    <li>עדכנו את טבלת המיפוי בגיליון 03 למונחים של הלקוח. זו עבודה של שעה, פעם אחת.</li>
+    <li>הריצו את בקרת האיכות. כל עוד ״שורות שלא סווגו״ גדול מאפס, אל תשלחו דוח.</li>
+    <li>קבעו פגישת בקרה רבעונית קבועה. בלי פגישה קבועה, הקובץ הכי טוב בעולם נפתח פעם אחת ונסגר.</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h3>מגבלות והבהרות</h3>
+  <ul>
+    <li>החוברת נבנתה סביב אילוץ אחד: <b>כל נוסחה מתנהגת זהה באקסל למק ובאקסל לווינדוס</b>. לכן נמנעו כאן Power Query, מודל נתונים ו-Power Pivot (שאינם קיימים או מוגבלים במק), מאקרו VBA, והפונקציה CHAR שמחזירה תווים שונים בין המערכות.</li>
+    <li>מגבלת הגרסה היחידה: הפונקציה <b>LET</b>, שמופיעה בשתי נוסחאות במעבדה 1, דורשת אקסל 2021 או מנוי 365. באקסל 2019 ומטה הן יחזירו ‎#NAME?. שאר המעבדות עובדות בכל גרסה מאקסל 2013 ומעלה.</li>
+    <li>שיעורי המס, הספים והתקרות המוזכרים כאן הם להמחשה בלבד. החומר המחייב הוא הטבלאות וחוזרי רשות המסים והביטוח הלאומי המעודכנים ליום הסמינר. אין באמור ייעוץ מס פרטני.</li>
+    <li>הנתונים בחוברת מלאכותיים לחלוטין ואינם מתייחסים לחברה קיימת.</li>
+  </ul>
+</div>
+
+</div>
+
+<footer>
+  <div class="fn2">ד״ר שי צבאן</div>
+  <div>מודול ג׳ · הפרקטיקה הפיננסית והמיסויית ב-SME · יום עיון לרואי חשבון, חשבים ומנהלי כספים</div>
+</footer>
+
+<script>
+// copy buttons
+document.querySelectorAll('.cp').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.dataset.f;
+    var done=function(){b.textContent='הועתק';b.classList.add('done');
+      setTimeout(function(){b.textContent='העתקה';b.classList.remove('done')},1400)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done).catch(fb)}else{fb()}
+    function fb(){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity=0;
+      document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(a)}
+  });
+});
+
+// checkbox persistence + progress bar
+var boxes=document.querySelectorAll('.selfcheck input');
+boxes.forEach(function(c,i){
+  var k='biuC_'+i;
+  if(localStorage.getItem(k)==='1'){c.checked=true}
+  c.addEventListener('change',function(){localStorage.setItem(k,c.checked?'1':'0');upd()});
+});
+function upd(){
+  var n=0;boxes.forEach(function(c){if(c.checked)n++});
+  document.getElementById('prog').style.width=(boxes.length?100*n/boxes.length:0)+'%';
+}
+upd();
+
+// live CCC calculator
+(function(){
+  var ids=['rev','dso','dio','dpo','cut','int'],el={};
+  ids.forEach(function(i){el[i]=document.getElementById('q_'+i)});
+  if(!el.rev)return;
+  var nis=function(n){return new Intl.NumberFormat('he-IL',{maximumFractionDigits:0}).format(Math.round(n))+' ₪'};
+  function calc(){
+    var rev=+el.rev.value,dso=+el.dso.value,dio=+el.dio.value,dpo=+el.dpo.value,cut=+el.cut.value,ir=+el.int.value;
+    if(cut>dso){cut=dso;el.cut.value=dso}
+    document.getElementById('v_rev').textContent=nis(rev);
+    document.getElementById('v_dso').textContent=dso;
+    document.getElementById('v_dio').textContent=dio;
+    document.getElementById('v_dpo').textContent=dpo;
+    document.getElementById('v_cut').textContent=cut;
+    document.getElementById('v_int').textContent=ir.toFixed(1)+'%';
+    var ccc=dso+dio-dpo, day=rev/365, cash=day*cut, save=cash*ir/100;
+    var box=document.getElementById('o_ccc');
+    box.querySelector('.v').textContent=Math.round(ccc);
+    box.className='co '+(ccc<=45?'good':ccc<=80?'':'bad');
+    document.getElementById('o_day').textContent=nis(day);
+    document.getElementById('o_cash').textContent=nis(cash);
+    document.getElementById('o_int').textContent=nis(save);
+    document.getElementById('o_msg').textContent=
+      'הכסף של החברה יושב אצל מישהו אחר '+Math.round(ccc)+' ימים. קיצור של '+cut+
+      ' ימי גבייה משחרר '+nis(cash)+' מזומן באופן חד-פעמי, וחוסך '+nis(save)+' ריבית בכל שנה.';
+  }
+  ids.forEach(function(i){el[i].addEventListener('input',calc)});
+  calc();
+})();
+
+// active nav link
+var links=[].slice.call(document.querySelectorAll('nav.sticky a'));
+var targets=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+window.addEventListener('scroll',function(){
+  var y=window.scrollY+140,cur=0;
+  targets.forEach(function(t,i){if(t&&t.offsetTop<=y)cur=i});
+  links.forEach(function(a,i){a.classList.toggle('active',i===cur)});
+},{passive:true});
+</script>
+</body>
+</html>
